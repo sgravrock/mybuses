@@ -1,0 +1,61 @@
+Source: 47.663667, -122.376109
+Destination: 47.609776, -122.337830
+
+1. Stops near departure: http://api.pugetsound.onebusaway.org/api/where/stops-for-location.json?key=TEST&lat=47.663667&lon=-122.376109
+	Time: 1494865594648
+	Relevant stoopids:
+		* 1_13760 15th Ave NW & NW Leary Way southbound
+		* 1_18165 NW Leary Way & 15th Ave NW eastbound
+
+2. Stops near arrival: http://api.pugetsound.onebusaway.org/api/where/stops-for-location.json?key=TEST&lat=47.609776&lon=-122.337830
+	Time: 1494866903016
+	Possibly relevant stoopids:
+		* 1_1130 2nd & Pine southbound
+		* 1_300 2nd & Pike southbound
+		* 1_430 3rd & Pine southbound
+		* 1_431 3rd & Pike southbound
+		* 1_433 also ^^^
+		* 1_450 3rd & Union
+	
+3. Arrivals & departures for southbound:
+	http://api.pugetsound.onebusaway.org/api/where/arrivals-and-departures-for-stop/1_13760.json?key=TEST
+	Time: 1494865738637
+	Relevant routes:
+		* 1_100062 17x
+		* 1_100071 18x
+		* 1_102572 29
+		* 1_102581 D
+		* 1_102574 40
+	Relevant departures by trip ID:
+		* 1_33359653 D line 1494866019000
+		* (2 more D line)
+		* 1_33350306 29 1494867786000 
+
+4. Arrivals & departures for eastbound: 
+	http://api.pugetsound.onebusaway.org/api/where/arrivals-and-departures-for-stop/1_18165.json?key=TEST&time=1494865738637
+	Relevant routes: 
+		* 1_102574 40
+	Relevant departures by trip ID:
+		* 1_33359163 40 1494865686000
+		* (all other departures are the same route)
+
+4. Details for trip 1_33359653:
+	http://api.pugetsound.onebusaway.org/api/where/trip-details/1_33359653.json?key=TEST
+	Time: 1494866777061
+	Service date: 1494831600000
+	Relevant stops:
+		* 1_431 arrive 35937 -> 9:58 AM
+
+5. Details for trip 1_33350306:
+	http://api.pugetsound.onebusaway.org/api/where/trip-details/1_33350306.json?key=TEST
+	Time: 1494866810613
+	Service date: 1494831600000
+	Relevant stops: 
+		* 1_300 arrive 37882 (seconds since start of service date)
+
+6. Details for trip 1_33359163:
+	http://api.pugetsound.onebusaway.org/api/where/trip-details/1_33359163.json?key=TEST&time=1494866810613
+	Service date: 1494831600000
+	Relevant stops:
+		* 1_430 arrive 35736
+		* 1_450 arrive 35846
