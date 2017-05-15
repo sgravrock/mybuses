@@ -78,12 +78,13 @@ Player.prototype.strip = function(re) {
 
 Player.prototype.get = function(options, callback) {
 	var filename = filePath(this._dir, options.path, this._stripRe);
+	var that = this;
 
 	fs.readFile(filename, "utf8", function(err, contents) {
 		var response = new Response();
 
 		if (err) {
-			console.error(err)
+			that.logError(err);
 			setTimeout(function() {
 				response._trigger("aborted");
 			});
@@ -97,6 +98,10 @@ Player.prototype.get = function(options, callback) {
 
 		callback(response);
 	});
+};
+
+Player.prototype.logError = function(error) {
+	console.error(error);
 };
 
 function playback(dir) {

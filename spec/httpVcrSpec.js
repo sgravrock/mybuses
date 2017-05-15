@@ -166,8 +166,12 @@ describe("http-vcr", function() {
 				port: 80,
 				path: "/whatever"
 			};
+			spyOn(subject, "logError");
 			subject.get(options, function(response) {
-				response.on("aborted", done);
+				response.on("aborted", function() {
+					expect(subject.logError).toHaveBeenCalled();
+					done();
+				});
 			});
 		});
 	});
