@@ -1,17 +1,28 @@
-var http = require("http");
-var path = require("path");
-var fs = require("fs");
-var mkdirp = require("mkdirp");
+const http = require("http");
+const path = require("path");
+const fs = require("fs");
+const mkdirp = require("mkdirp");
+const parseUrl = require("url").parse;
+const stripParam = require("./stripParam");
 
-function filePath(dir, requestPath, stripRe) {
+
+function filePath(dir, requestPath, paramToStrip) {
 	var base = requestPath || '/';
 
-	if (stripRe) {
-		base = base.replace(stripRe, '');
+	if (paramToStrip) {
+		base = stripParam(base, paramToStrip);
 	}
 
 	return path.join(dir, base);
-};
+}
+
+function pathAndQueryFromUrl(urlOrOptions) {
+	if (urlOrOptions.path) {
+		return urlOrOptions.path;
+	} else {
+		return parseUrl(urlOrOptions).path;
+	}
+}
 
 function Response() {
 	this._handlers = {};
@@ -33,8 +44,8 @@ function Recorder(dir) {
 	this._dir = dir;
 };
 
-Recorder.prototype.strip = function(re) {
-	this._stripRe = re;
+Recorder.prototype.stripParam = function(k) {
+	this._paramToStrip = k;
 };
 
 Recorder.prototype.get = function(options, callback) {
@@ -50,7 +61,7 @@ Recorder.prototype.get = function(options, callback) {
 		});
 
 		response.on("end", function() {
-			var filename = filePath(that._dir, options.path, that._stripRe);
+			var filename = filePath(that._dir, options.path, that._paramToStrip);
 			// TODO: How should we report errors saving the file?
 			mkdirp(path.dirname(filename), function() {
 				fs.writeFile(filename, body, "utf8", function() {
@@ -72,12 +83,13 @@ function Player(dir) {
 	this._dir = dir;
 }
 
-Player.prototype.strip = function(re) {
-	this._stripRe = re;
+Player.prototype.stripParam = function(k) {
+	this._paramToStrip = k;
 };
 
-Player.prototype.get = function(options, callback) {
-	var filename = filePath(this._dir, options.path, this._stripRe);
+Player.prototype.get = function(urlOrOptions, callback) {
+	var path = pathAndQueryFromUrl(urlOrOptions);
+	var filename = filePath(this._dir, path, this._paramToStrip);
 	var that = this;
 
 	fs.readFile(filename, "utf8", function(err, contents) {

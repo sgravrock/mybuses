@@ -91,7 +91,7 @@ describe("http-vcr", function() {
 				 verifyWrite(filePath, body, done));
 		});
 
-		it("removes specified path components", function(done) {
+		it("removes the specified query parameter", function(done) {
 			var body = "stripped";
 			var requestPath = "/foo/bar?baz=qux&key=asdf&grault=fred";
 			var filePath = path.join(this.tempDir, "/foo/bar?baz=qux&grault=fred");
@@ -100,7 +100,7 @@ describe("http-vcr", function() {
 				response.end(body, "utf8");
 			};
 
-			subject.strip(/&key=[^&]+/);
+			subject.stripParam("key");
 			subject.get({host: "localhost", port: port, path: requestPath},
 				 verifyWrite(filePath, body, done));
 		});
@@ -138,12 +138,28 @@ describe("http-vcr", function() {
 			});
 		});
 
+		it("accepts a URL as well as an options hash", function(done) {
+			var body = "some contents";
+			var requestPath = "foo/bar?baz=qux";
+			var filePath = path.join(this.tempDir, requestPath);
+			var subject = httpVcr.playback(this.tempDir);
+
+			saveFile(filePath, body, function(err) {
+				if (err) {
+					done.fail(err);
+				} else {
+					var url = "http://localhost/" + requestPath;
+					subject.get(url, verifyResponse(body, done));
+				}
+			});
+		});
+
 		it("removes specified path components", function(done) {
 			var body = "stripped";
 			var requestPath = "/foo/bar?baz=qux&key=asdf&grault=fred";
 			var filePath = path.join(this.tempDir, "/foo/bar?baz=qux&grault=fred");
 			var subject = httpVcr.playback(this.tempDir);
-			subject.strip(/&key=[^&]+/);
+			subject.stripParam("key");
 
 			saveFile(filePath, body, function(err) {
 				if (err) {
