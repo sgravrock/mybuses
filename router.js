@@ -38,12 +38,8 @@ class Router {
 	}
 
 	_tripsBetweenStopSets(srcStopIds, destStopIds) {
-		const srcTripIdsPromise = this._arrivalsAndDeparturesForStops(srcStopIds)
-			.then(flatten)
-			.then((arrDeps) => arrDeps.map((arrDep) => arrDep.tripId));
-		const destTripIdsPromise = this._arrivalsAndDeparturesForStops(destStopIds)
-			.then(flatten)
-			.then((arrDeps) => arrDeps.map((arrDep) => arrDep.tripId));
+		const srcTripIdsPromise = this._tripIdsForStops(srcStopIds);
+		const destTripIdsPromise = this._tripIdsForStops(destStopIds)
 		
 		return Promise.all([srcTripIdsPromise, destTripIdsPromise])
 			.then(([srcTripIds, destTripIds]) => {
@@ -55,17 +51,11 @@ class Router {
 			});
 	}
 
-	/*
-	_tripsForStops(stopIds) {
+	_tripIdsForStops(stopIds) {
 		return this._arrivalsAndDeparturesForStops(stopIds)
-				.then((arrDeps) => {
-					const promises = arrDeps.map((arrDep) => {
-						return this._obaClient.tripDetails(arrDep.tripId);
-					});
-					return Promise.all(promises);
-				});
+			.then(flatten)
+			.then((arrDeps) => arrDeps.map((arrDep) => arrDep.tripId));
 	}
-	*/
 
 	_arrivalsAndDeparturesForStops(stopIds) {
 		const promises = stopIds.map((id) => {
