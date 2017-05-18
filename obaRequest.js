@@ -20,16 +20,16 @@ class ObaRequest {
 		this._key = deps.key;
 	}
 
-	get(path, params) {
-		return this._getOnce(path, params)
-			.then((body) => {
-				if (body.code === 429) {
-					// Rate limited
-					return delay(500).then(() => this.get(path, params));
-				}
+	async get(path, params) {
+		const body = await this._getOnce(path, params)
 
-				return body;
-			});
+		if (body.code === 429) {
+			// Rate limited
+			await delay(500);
+			return this.get(path, params);
+		}
+
+		return body;
 	}
 
 	_getOnce(path, params) {

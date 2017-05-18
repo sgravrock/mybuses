@@ -22,39 +22,38 @@ function makeObaClient(deps) {
 	return new ObaClient({ obaRequest: obaRequest });
 }
 
+
 class Router {
 	constructor(deps) {
 		this._obaClient = deps.obaClient || makeObaClient(deps);
 	}
 
-	findTrips(src, dest) {
-		const srcStopsPromise = this._obaClient.stopsForLocation(src);
-		const destStopsPromise = this._obaClient.stopsForLocation(dest);
+	async findTrips(src, dest) {
+		const [srcStops, destStops] = await Promise.all([
+			this._obaClient.stopsForLocation(src),
+			this._obaClient.stopsForLocation(dest),
+		]);
 
-		return Promise.all([srcStopsPromise, destStopsPromise])
-				.then(([srcStops, destStops]) => {
-					return this._tripsBetweenStopSets(srcStops, destStops);
-				});
+		return this._tripsBetweenStopSets(srcStops, destStops);
 	}
 
-	_tripsBetweenStopSets(srcStopIds, destStopIds) {
-		const srcTripIdsPromise = this._tripIdsForStops(srcStopIds);
-		const destTripIdsPromise = this._tripIdsForStops(destStopIds)
+	async _tripsBetweenStopSets(srcStopIds, destStopIds) {
+		const [srcTripIds, destTripIds] = await Promise.all([
+			this._tripIdsForStops(srcStopIds),
+			this._tripIdsForStops(destStopIds)
+		]);
 		
-		return Promise.all([srcTripIdsPromise, destTripIdsPromise])
-			.then(([srcTripIds, destTripIds]) => {
-				const tripIds = unique(intersection(srcTripIds, destTripIds));
-				const promises = tripIds.map((tripId) => {
-					return this._obaClient.tripDetails(tripId);
-				});
-				return Promise.all(promises);
-			});
+		const tripIds = unique(intersection(srcTripIds, destTripIds));
+		const promises = tripIds.map((tripId) => {
+			return this._obaClient.tripDetails(tripId);
+		});
+		return Promise.all(promises);
 	}
 
-	_tripIdsForStops(stopIds) {
-		return this._arrivalsAndDeparturesForStops(stopIds)
-			.then(flatten)
-			.then((arrDeps) => arrDeps.map((arrDep) => arrDep.tripId));
+	async _tripIdsForStops(stopIds) {
+		const arrDeps = await this._arrivalsAndDeparturesForStops(stopIds);
+		return flatten(arrDeps)
+			.map((arrDep) => arrDep.tripId);
 	}
 
 	_arrivalsAndDeparturesForStops(stopIds) {
