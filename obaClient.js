@@ -29,9 +29,6 @@ class ObaClient {
 		const entry = response.data.entry;
 		return {
 			tripId: entry.tripId,
-			stops: entry.schedule.stopTimes.map(function(s) {
-				return { stopId: s.stopId };
-			})
 		};
 	}
 }

@@ -72,17 +72,11 @@ describe("ObaClient", function() {
 	});
 
 	describe("tripDetails", function() {
-		function makePayload(tripId, stopIds) {
+		function makePayload(tripId) {
 			return {
 				data: {
 					entry: {
-						tripId: tripId,
-						schedule: {
-							stopTimes: stopIds.map((stopId) => ({
-								stopId: stopId,
-								other: "sure"
-							}))
-						}
+						tripId: tripId
 					}
 				}
 			};
@@ -90,7 +84,7 @@ describe("ObaClient", function() {
 
 		it("gets the correct URL", async function() {
 			this.get.and.returnValue(Promise.resolve(
-				makePayload("abc", [])));
+				makePayload("abc")));
 
 			const result = await this.subject.tripDetails("abc")
 
@@ -100,15 +94,11 @@ describe("ObaClient", function() {
 
 		it("resolves to a trip details structure", async function() {
 			this.get.and.returnValue(Promise.resolve(
-				makePayload("abc", ["1_2", "1_34"])));
+				makePayload("abc")));
 
 			const result = await this.subject.tripDetails("abc");
 			expect(result).toEqual({
 				tripId: "abc",
-				stops: [
-					{ stopId: "1_2" },
-					{ stopId: "1_34" },
-				]
 			});
 		});
 	});
