@@ -21,20 +21,20 @@ describe("ObaClient", function() {
 			};
 		}
 
-		it("gets the correct URL", function() {
+		it("gets the correct URL", async function() {
 			const point = { lat: 47.635398, lon: -122.276930 };
 			this.get.and.returnValue(Promise.resolve(makePayload([])));
-			return this.subject.stopsForLocation(point)
-				.then((result) => {
-					expect(this.get).toHaveBeenCalledWith(
-						"/api/where/stops-for-location.json", point);
-				});
+
+			await this.subject.stopsForLocation(point);
+
+			expect(this.get).toHaveBeenCalledWith(
+				"/api/where/stops-for-location.json", point);
 		});
 
-		it("resolves to the stop IDs", function() {
+		it("resolves to the stop IDs", async function() {
 			this.get.and.returnValue(Promise.resolve(makePayload(["1", "2"])));
-			return this.subject.stopsForLocation({})
-				.then((result) => expect(result).toEqual(["1", "2"]));
+			const result = await this.subject.stopsForLocation({});
+			expect(result).toEqual(["1", "2"]);
 		});
 	});
 
@@ -52,26 +52,22 @@ describe("ObaClient", function() {
 			}
 		}
 
-		it("gets the correct URL", function() {
+		it("gets the correct URL", async function() {
 			this.get.and.returnValue(Promise.resolve(makePayload([])));
-			return this.subject.arrivalsAndDeparturesForStop("1_234")
-				.then((result) => {
-					expect(this.get).toHaveBeenCalledWith(
-						"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
-				});
+			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
+			expect(this.get).toHaveBeenCalledWith(
+				"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
 		});
 
-		it("resolves to a list of trips", function() {
+		it("resolves to a list of trips", async function() {
 			this.get.and.returnValue(Promise.resolve(makePayload(["a", "b"])));
-			return this.subject.arrivalsAndDeparturesForStop("1_234")
-				.then((result) => {
-					expect(result).toEqual([
-						{ tripId: "a" },
-						{ tripId: "b" },
-					]);
-					expect(this.get).toHaveBeenCalledWith(
-						"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
-				});
+			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
+			expect(result).toEqual([
+				{ tripId: "a" },
+				{ tripId: "b" },
+			]);
+			expect(this.get).toHaveBeenCalledWith(
+				"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
 		});
 	});
 
@@ -92,31 +88,28 @@ describe("ObaClient", function() {
 			};
 		}
 
-		it("gets the correct URL", function() {
+		it("gets the correct URL", async function() {
 			this.get.and.returnValue(Promise.resolve(
 				makePayload("abc", [])));
 
-			return this.subject.tripDetails("abc")
-				.then((result) => {
-					expect(this.get).toHaveBeenCalledWith(
-						"/api/where/trip-details/abc.json", {});
-				});
+			const result = await this.subject.tripDetails("abc")
+
+			expect(this.get).toHaveBeenCalledWith(
+				"/api/where/trip-details/abc.json", {});
 		});
 
-		it("resolves to a trip details structure", function() {
+		it("resolves to a trip details structure", async function() {
 			this.get.and.returnValue(Promise.resolve(
 				makePayload("abc", ["1_2", "1_34"])));
 
-			return this.subject.tripDetails("abc")
-				.then((result) => {
-					expect(result).toEqual({
-						tripId: "abc",
-						stops: [
-							{ stopId: "1_2" },
-							{ stopId: "1_34" },
-						]
-					});
-				});
+			const result = await this.subject.tripDetails("abc");
+			expect(result).toEqual({
+				tripId: "abc",
+				stops: [
+					{ stopId: "1_2" },
+					{ stopId: "1_34" },
+				]
+			});
 		});
 	});
 });

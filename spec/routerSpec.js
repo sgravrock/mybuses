@@ -66,7 +66,7 @@ describe("Router", function() {
 			return verifyFails(this.subject.findTrips(src, dest), error);
 		});
 
-		it("fetches arrivals and departures for each source stop", function() {
+		it("fetches arrivals and departures for each source stop", async function() {
 			const payload = makeStopsForLocationResponse(["1_13760", "1_18165"]);
 			const src = {}, dest = {};
 			this.obaClient.stopsForLocation.and.callFake(function(point) {
@@ -77,13 +77,12 @@ describe("Router", function() {
 			this.obaClient.arrivalsAndDeparturesForStop.and.returnValue(
 				Promise.resolve([]));
 
-			return this.subject.findTrips(src, dest)
-				.then(() => {
-					expect(this.obaClient.arrivalsAndDeparturesForStop)
-							.toHaveBeenCalledWith("1_13760");
-					expect(this.obaClient.arrivalsAndDeparturesForStop)
-							.toHaveBeenCalledWith("1_18165");
-				});
+			await this.subject.findTrips(src, dest);
+
+			expect(this.obaClient.arrivalsAndDeparturesForStop)
+					.toHaveBeenCalledWith("1_13760");
+			expect(this.obaClient.arrivalsAndDeparturesForStop)
+					.toHaveBeenCalledWith("1_18165");
 		});
 
 		it("fails when an arrival and departure fetch fails", function() {
@@ -97,7 +96,7 @@ describe("Router", function() {
 			return verifyFails(this.subject.findTrips({}, {}), error);
 		});
 
-		it("fetches trip details", function() {
+		it("fetches trip details", async function() {
 			const stopsPayload = makeStopsForLocationResponse(["1_13760"]);
 			const arrDepPayload = makeArrDepResponse(["12345", "67890"]);
 			this.obaClient.stopsForLocation.and.returnValue(
@@ -107,14 +106,13 @@ describe("Router", function() {
 			this.obaClient.tripDetails.and.returnValue(
 				Promise.resolve({ stops: [] }));
 
-			return this.subject.findTrips({}, {})
-				.then(() => {
-					expect(this.obaClient.tripDetails).toHaveBeenCalledWith("12345");
-					expect(this.obaClient.tripDetails).toHaveBeenCalledWith("67890");
-				});
+			await this.subject.findTrips({}, {});
+
+			expect(this.obaClient.tripDetails).toHaveBeenCalledWith("12345");
+			expect(this.obaClient.tripDetails).toHaveBeenCalledWith("67890");
 		});
 
-		it("does not fetch trips that only reach a stop on one end", function() {
+		it("does not fetch trips that only reach a stop on one end", async function() {
 			const src = {}, dest = {};
 			const srcStopsPayload = makeStopsForLocationResponse(["src sid"]);
 			const destStopsPayload = makeStopsForLocationResponse(["dest sid"]);
@@ -140,16 +138,13 @@ describe("Router", function() {
 			this.obaClient.tripDetails.and.returnValue(
 				Promise.resolve({ stops: [] }));
 
-			return this.subject.findTrips(src, dest)
-				.then(() => {
-					expect(this.obaClient.tripDetails)
-						.not.toHaveBeenCalledWith("67890");
-					expect(this.obaClient.tripDetails)
-					.not.toHaveBeenCalledWith("xyz");
-				});
+			await this.subject.findTrips(src, dest);
+
+			expect(this.obaClient.tripDetails).not.toHaveBeenCalledWith("67890");
+			expect(this.obaClient.tripDetails).not.toHaveBeenCalledWith("xyz");
 		});
 
-		it("provides trips that stop near both points", function() {
+		it("provides trips that stop near both points", async function() {
 			const src = {}, dest = {};
 			const srcStopsPayload = makeStopsForLocationResponse(["src sid"]);
 			const destStopsPayload = makeStopsForLocationResponse(["dest sid"]);
@@ -181,16 +176,14 @@ describe("Router", function() {
 				}
 			});
 
-			return this.subject.findTrips(src, dest)
-				.then(function(trips) {
-					expect(trips).toEqual([{
-						tripId: "12345",
-						stops: [
-							{ stopId: "src sid" },
-							{ stopId: "dest sid" }
-						]
-					}]);
-				});
+			const result = await this.subject.findTrips(src, dest)
+			expect(result).toEqual([{
+				tripId: "12345",
+				stops: [
+					{ stopId: "src sid" },
+					{ stopId: "dest sid" }
+				]
+			}]);
 		});
 	});
 
@@ -205,7 +198,7 @@ describe("Router", function() {
 		});
 	
 		describe("findTrips", function() {
-			it("finds trips between the two locations", function() {
+			it("finds trips between the two locations", async function() {
 				const expected = [
 					"1_33350305",
 					"1_33359811",
@@ -215,13 +208,14 @@ describe("Router", function() {
 					"1_33359101",
 					"1_33359872",
 				].sort();
-				return this.subject.findTrips(
+
+				const trips = await this.subject.findTrips(
 					{lat: 47.663667, lon: -122.376109},
 					{lat: 47.609776, lon: -122.337830}
-				).then(function(trips) {
-					const tripIds = trips.map((t) => t.tripId).sort();
-					expect(tripIds).toEqual(expected);
-				});
+				)
+
+				const tripIds = trips.map((t) => t.tripId).sort();
+				expect(tripIds).toEqual(expected);
 			});
 		});
 	});

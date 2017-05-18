@@ -100,7 +100,7 @@ describe("ObaRequest", function() {
 		});
 
 		describe("When the request succeeds", function() {
-			it("resolves to the parsed JSON", function() {
+			it("resolves to the parsed JSON", async function() {
 				const response = new MockResponse();
 				response.statusCode = 200;
 				this.get.and.callFake(function(url, callback) {
@@ -113,10 +113,9 @@ describe("ObaRequest", function() {
 					callback(response);
 				});
 
-				return this.subject.get("/whatever", {})
-					.then(function(result) {
-						expect(result).toEqual({some: "json"});
-					});
+				const result = await this.subject.get("/whatever", {});
+
+				expect(result).toEqual({some: "json"});
 			});
 
 			describe("With code 429 in the payload", function() {
