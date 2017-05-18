@@ -1,4 +1,5 @@
 const ObaRequest = require("./obaRequest");
+const find = require("lodash.find");
 
 class ObaClient {
 	constructor(deps) {
@@ -27,8 +28,16 @@ class ObaClient {
 		const path = "/api/where/trip-details/" + tripId + ".json";
 		const response = await this._obaRequest.get(path, {});
 		const entry = response.data.entry;
+		const refs = response.data.references;
+		const trip = find(refs.trips, (t) => t.id === tripId);
+		const route = find(refs.routes, (r) => r.id === trip.routeId);
+
 		return {
 			tripId: entry.tripId,
+			route: {
+				id: route.id,
+				shortName: route.shortName
+			}
 		};
 	}
 }

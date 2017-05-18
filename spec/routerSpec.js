@@ -25,6 +25,18 @@ function verifyFails(promise, error) {
 	});
 }
 
+function compareProperty(propname) {
+	return function(a, b) {
+		if (a[propname] < b[propname]) {
+			return -1;
+		} else if (a[propname] > b[propname]) {
+			return 1;
+		} else {
+			return 0;
+		}
+	};
+}
+
 describe("Router", function() {
 	describe("findTrips", function() {
 		beforeEach(function() {
@@ -200,22 +212,63 @@ describe("Router", function() {
 		describe("findTrips", function() {
 			it("finds trips between the two locations", async function() {
 				const expected = [
-					"1_33350305",
-					"1_33359811",
-					"1_33359163",
-					"1_33359653",
-					"1_33359714",
-					"1_33359101",
-					"1_33359872",
-				].sort();
+					{
+						tripId: "1_33350305", 
+						route: {
+							id: "1_102572",
+							shortName: "29"
+						}
+					},
+					{
+						tripId: "1_33359811",
+						route: {
+							id: "1_102581",
+							shortName: "D Line"
+						}
+					},
+					{
+						tripId: "1_33359163",
+						route: {
+							id: "1_102574",
+							shortName: "40"
+						}
+					},
+					{
+						tripId: "1_33359653",
+						route: {
+							id: "1_102581",
+							shortName: "D Line"
+						},
+					},
+					{
+						tripId: "1_33359714",
+						route: {
+							id: "1_102581",
+							shortName: "D Line"
+						}
+					},
+					{
+						tripId: "1_33359101",
+						route: {
+							id: "1_102574",
+							shortName: "40"
+						}
+					},
+					{
+						tripId: "1_33359872",
+						route: {
+							id: "1_102581",
+							shortName: "D Line"
+						}
+					}
+				].sort(compareProperty("tripId"));
 
 				const trips = await this.subject.findTrips(
 					{lat: 47.663667, lon: -122.376109},
 					{lat: 47.609776, lon: -122.337830}
 				)
-
-				const tripIds = trips.map((t) => t.tripId).sort();
-				expect(tripIds).toEqual(expected);
+				trips.sort(compareProperty("tripId"));
+				expect(trips).toEqual(expected);
 			});
 		});
 	});

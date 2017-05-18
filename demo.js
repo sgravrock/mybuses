@@ -18,5 +18,7 @@ const dest = {
 const router = new Router({key: "test"});
 router.findTrips(src, dest).then(function(trips) {
 	console.log("Found", trips.length, "trips:");
-	trips.forEach((t) => console.log(t.tripId));
+	trips.forEach((t) => {
+		console.log("Trip", t.tripId, ": route", t.route.shortName);
+	});
 });
