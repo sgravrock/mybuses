@@ -1,5 +1,5 @@
 "use strict";
-const ObaRequest = require("../obaRequest");
+const ObaRequest = require("../lib/obaRequest");
 const parseUrl = require("url").parse;
 
 class MockResponse {
