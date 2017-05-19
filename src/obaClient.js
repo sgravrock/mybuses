@@ -1,18 +1,23 @@
+// @flow
+import type {TripStub, TripDetails, Point} from "./types";
 const ObaRequest = require("./obaRequest");
 const find = require("lodash.find");
 
+
 class ObaClient {
-	constructor(deps) {
+	_obaRequest: ObaRequest;
+
+	constructor(deps: {}) {
 		this._obaRequest = deps.obaRequest || new ObaRequest(deps);
 	}
 
-	async stopsForLocation({lat, lon}) {
+	async stopsForLocation(loc: Point) {
 		const response = await this._obaRequest.get(
-			"/api/where/stops-for-location.json", {lat, lon})
+			"/api/where/stops-for-location.json", loc);
 		return response.data.list.map((stop) => stop.id);
 	}
 
-	async arrivalsAndDeparturesForStop(stopId) {
+	async arrivalsAndDeparturesForStop(stopId: string): Promise<[TripStub]> {
 		if (!stopId) {
 			return Promise.reject("arrivalsAndDeparturesForStop requires a stop ID");
 		}
@@ -24,7 +29,7 @@ class ObaClient {
 		return arrDeps.map((arrDep) => ({ tripId: arrDep.tripId }));
 	}
 
-	async tripDetails(tripId) {
+	async tripDetails(tripId: string): Promise<TripDetails> {
 		const path = "/api/where/trip-details/" + tripId + ".json";
 		const response = await this._obaRequest.get(path, {});
 		const entry = response.data.entry;
