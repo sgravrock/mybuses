@@ -4,9 +4,9 @@
   "description": "",
   "main": "lib/server.js",
   "scripts": {
-    "build": "./node_modules/.bin/flow-remove-types src/ -d lib/",
+    "build": "flow-remove-types src/ -d lib/",
     "flow": "flow",
-    "test": "jasmine"
+    "test": "npm run build && flow && jasmine"
   },
   "author": "",
   "license": "MIT",
