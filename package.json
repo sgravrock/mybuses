@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/flow-remove-types src/ -d lib/",
-	 "flow": "flow",
+    "flow": "flow",
     "test": "jasmine"
   },
   "author": "",
@@ -18,6 +18,7 @@
     "tmp": "0.0.31"
   },
   "dependencies": {
+    "express": "^4.15.3",
     "lodash.find": "^4.6.0"
   }
 }
