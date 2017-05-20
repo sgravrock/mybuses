@@ -2,7 +2,7 @@
   "name": "mybuses3",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib/server.js",
   "scripts": {
     "build": "./node_modules/.bin/flow-remove-types src/ -d lib/",
     "flow": "flow",

@@ -1,6 +1,7 @@
+// @flow
 const express = require('express');
 const app = express();
-const Router = require("./lib/router");
+const Router = require("./router");
 
 function require_env(name) {
 	const value = process.env[name];
