@@ -39,14 +39,11 @@ describe("ObaClient", function() {
 	});
 
 	describe("arrivalsAndDeparturesForStop", function() {
-		function makePayload(tripIds) {
+		function makePayload(arrDeps) {
 			return {
 				data: {
 					entry: {
-						arrivalsAndDepartures: tripIds.map((tripId) => ({
-							tripId: tripId,
-							otherFields: "probably"
-						}))
+						arrivalsAndDepartures: arrDeps
 					}
 				}
 			}
@@ -60,12 +57,19 @@ describe("ObaClient", function() {
 		});
 
 		it("resolves to a list of trips", async function() {
-			this.get.and.returnValue(Promise.resolve(makePayload(["a", "b"])));
+			const arrDeps = [
+				{
+					tripId: "a",
+					stopSequence: 3
+				},
+				{
+					tripId: "a",
+					stopSequence: 1
+				},
+			];
+			this.get.and.returnValue(Promise.resolve(makePayload(arrDeps)));
 			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
-			expect(result).toEqual([
-				{ tripId: "a" },
-				{ tripId: "b" },
-			]);
+			expect(result).toEqual(arrDeps);
 			expect(this.get).toHaveBeenCalledWith(
 				"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
 		});

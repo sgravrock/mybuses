@@ -1,5 +1,5 @@
 // @flow
-import type {TripStub, TripDetails, Point} from "./types";
+import type {ArrivalAndDeparture, TripDetails, Point} from "./types";
 const ObaRequest = require("./obaRequest");
 const find = require("lodash.find");
 
@@ -17,7 +17,7 @@ class ObaClient {
 		return response.data.list.map((stop) => stop.id);
 	}
 
-	async arrivalsAndDeparturesForStop(stopId: string): Promise<[TripStub]> {
+	async arrivalsAndDeparturesForStop(stopId: string): Promise<Array<ArrivalAndDeparture>> {
 		if (!stopId) {
 			return Promise.reject("arrivalsAndDeparturesForStop requires a stop ID");
 		}
@@ -25,8 +25,7 @@ class ObaClient {
 		const path = "/api/where/arrivals-and-departures-for-stop/" + stopId +
 			".json";
 		const response = await this._obaRequest.get(path, {});
-		const arrDeps = response.data.entry.arrivalsAndDepartures;
-		return arrDeps.map((arrDep) => ({ tripId: arrDep.tripId }));
+		return response.data.entry.arrivalsAndDepartures;
 	}
 
 	async tripDetails(tripId: string): Promise<TripDetails> {

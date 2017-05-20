@@ -1,5 +1,7 @@
-export type TripStub = {
-	tripId: string
+// @flow
+export type ArrivalAndDeparture = {
+	tripId: string,
+	stopSequence: number
 };
 
 export type TripDetails = {

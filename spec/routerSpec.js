@@ -109,27 +109,17 @@ describe("Router", function() {
 		});
 
 		it("fetches trip details", async function() {
-			const stopsPayload = makeStopsForLocationResponse(["1_13760"]);
-			const arrDepPayload = makeArrDepResponse(["12345", "67890"]);
-			this.obaClient.stopsForLocation.and.returnValue(
-				Promise.resolve(stopsPayload));
-			this.obaClient.arrivalsAndDeparturesForStop.and.returnValue(
-				Promise.resolve(arrDepPayload));
-			this.obaClient.tripDetails.and.returnValue(
-				Promise.resolve({ stops: [] }));
-
-			await this.subject.findTrips({}, {});
-
-			expect(this.obaClient.tripDetails).toHaveBeenCalledWith("12345");
-			expect(this.obaClient.tripDetails).toHaveBeenCalledWith("67890");
-		});
-
-		it("does not fetch trips that only reach a stop on one end", async function() {
 			const src = {}, dest = {};
 			const srcStopsPayload = makeStopsForLocationResponse(["src sid"]);
 			const destStopsPayload = makeStopsForLocationResponse(["dest sid"]);
-			const srcArrDepPayload = makeArrDepResponse(["12345", "xyz"]);
-			const destArrDepPayload = makeArrDepResponse(["12345", "67890"]);
+			const srcArrDepPayload = [
+				{ tripId: "12345", stopSequence: 1 },
+				{ tripId: "67890", stopSequence: 1 },
+			];
+			const destArrDepPayload = [
+				{ tripId: "12345", stopSequence: 2 },
+				{ tripId: "67890", stopSequence: 2 },
+			];
 
 			this.obaClient.stopsForLocation.and.callFake(function(point) {
 				if (point === src) {
@@ -152,16 +142,22 @@ describe("Router", function() {
 
 			await this.subject.findTrips(src, dest);
 
-			expect(this.obaClient.tripDetails).not.toHaveBeenCalledWith("67890");
-			expect(this.obaClient.tripDetails).not.toHaveBeenCalledWith("xyz");
+			expect(this.obaClient.tripDetails).toHaveBeenCalledWith("12345");
+			expect(this.obaClient.tripDetails).toHaveBeenCalledWith("67890");
 		});
 
 		it("provides trips that stop near both points", async function() {
 			const src = {}, dest = {};
 			const srcStopsPayload = makeStopsForLocationResponse(["src sid"]);
 			const destStopsPayload = makeStopsForLocationResponse(["dest sid"]);
-			const srcArrDepPayload = makeArrDepResponse(["12345", "xyz"]);
-			const destArrDepPayload = makeArrDepResponse(["12345", "67890"]);
+			const srcArrDepPayload = [
+				{ tripId: "12345", stopSequence: 1 },
+				{ tripId: "xyz", stopSequence: 1 },
+			];
+			const destArrDepPayload = [
+				{ tripId: "12345", stopSequence: 2 },
+				{ tripId: "67890", stopSequence: 2 },
+			];
 
 			this.obaClient.stopsForLocation.and.callFake(function(point) {
 				if (point === src) {
@@ -235,27 +231,6 @@ describe("Router", function() {
 					},
 					{
 						tripId: "1_33359653",
-						route: {
-							id: "1_102581",
-							shortName: "D Line"
-						},
-					},
-					{
-						tripId: "1_33359714",
-						route: {
-							id: "1_102581",
-							shortName: "D Line"
-						}
-					},
-					{
-						tripId: "1_33359101",
-						route: {
-							id: "1_102574",
-							shortName: "40"
-						}
-					},
-					{
-						tripId: "1_33359872",
 						route: {
 							id: "1_102581",
 							shortName: "D Line"

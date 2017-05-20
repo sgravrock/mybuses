@@ -1,15 +1,12 @@
 // @flow
-import type {Point} from "./types";
+import type {Point, ArrivalAndDeparture, TripDetails} from "./types";
 const http = require("http");
 const ObaClient = require("./obaClient");
 const ObaRequest = require("./obaRequest");
+const filters = require("./filters");
 
 function flatten(arrays) {
 	return arrays.reduce((a, b) => a.concat(b), []);
-}
-
-function intersection(a1, a2) {
-	return a1.filter((x) => a2.indexOf(x) !== -1);
 }
 
 function unique(a) {
@@ -41,26 +38,24 @@ class Router {
 		return this._tripsBetweenStopSets(srcStops, destStops);
 	}
 
+	// TODO: returns promise of array of TripDetails
 	async _tripsBetweenStopSets(srcStopIds: [string], destStopIds: [string]) {
-		const [srcTripIds, destTripIds] = await Promise.all([
-			this._tripIdsForStops(srcStopIds),
-			this._tripIdsForStops(destStopIds)
+		const [srcArrDeps, destArrDeps] = await Promise.all([
+			this._arrivalsAndDeparturesForStops(srcStopIds),
+			this._arrivalsAndDeparturesForStops(destStopIds)
 		]);
 		
-		const tripIds = unique(intersection(srcTripIds, destTripIds));
+		const trips = filters.excludeWrongWay(
+			filters.groupEndpoints(srcArrDeps, destArrDeps));
+		
+		const tripIds = unique(trips.map(([s, e]) => s.tripId));
 		const promises = tripIds.map((tripId) => {
 			return this._obaClient.tripDetails(tripId);
 		});
 		return Promise.all(promises);
 	}
 
-	async _tripIdsForStops(stopIds: [string]) {
-		const arrDeps = await this._arrivalsAndDeparturesForStops(stopIds);
-		return flatten(arrDeps)
-			.map((arrDep) => arrDep.tripId);
-	}
-
-	_arrivalsAndDeparturesForStops(stopIds: [string]) {
+	_arrivalsAndDeparturesForStops(stopIds: [string]) : Promise<Array<ArrivalAndDeparture>> {
 		const promises = stopIds.map((id) => {
 			return this._obaClient.arrivalsAndDeparturesForStop(id);
 		});
