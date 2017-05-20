@@ -1,1 +1,269 @@
-{"code":200,"currentTime":1494882997664,"data":{"entry":{"arrivalsAndDepartures":[{"arrivalEnabled":true,"blockTripSequence":7,"departureEnabled":true,"distanceFromStop":236.33710344778592,"frequency":null,"lastUpdateTime":0,"numberOfStopsAway":0,"predicted":false,"predictedArrivalInterval":null,"predictedArrivalTime":0,"predictedDepartureInterval":null,"predictedDepartureTime":0,"routeId":"1_100348","routeLongName":"","routeShortName":"99","scheduledArrivalInterval":null,"scheduledArrivalTime":1494865654000,"scheduledDepartureInterval":null,"scheduledDepartureTime":1494865654000,"serviceDate":1494831600000,"situationIds":[],"status":"default","stopId":"1_20","stopSequence":2,"totalStopsInTrip":10,"tripHeadsign":"International District Chinatown Station Pioneer Square","tripId":"1_33349997","tripStatus":{"activeTripId":"1_33349997","blockTripSequence":7,"closestStop":"1_20","closestStopTimeOffset":60,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_20","nextStopTimeOffset":60,"orientation":329.6892874966182,"phase":"","position":{"lat":47.6130824262328,"lon":-122.34602195595494},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":842.8818269374642,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":3668.9343083368713,"vehicleId":""},"vehicleId":""}],"nearbyStopIds":["1_220","1_260"],"situationIds":[],"stopId":"1_20"},"references":{"agencies":[{"disclaimer":"","email":"","fareUrl":"","id":"1","lang":"EN","name":"Metro Transit","phone":"206-553-3000","privateService":false,"timezone":"America/Los_Angeles","url":"http://metro.kingcounty.gov"}],"routes":[{"agencyId":"1","color":"","description":"International District to Pioneer Sq to Belltown","id":"1_100348","longName":"","shortName":"99","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/099/n0.html"},{"agencyId":"1","color":"","description":"Black Diamond to Downtown Seattle","id":"1_100041","longName":"","shortName":"143","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/143/n0.html"},{"agencyId":"1","color":"","description":"Lake Meridian P&R to Downtown Seattle","id":"1_100475","longName":"","shortName":"157","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/157/n0.html"},{"agencyId":"1","color":"","description":"Kent East Hill to Downtown Seattle","id":"1_100051","longName":"","shortName":"158","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/158/n0.html"},{"agencyId":"1","color":"","description":"Timberlane/Lake Mer P&R/Kent Rail Sta/DT Seattle","id":"1_100052","longName":"","shortName":"159","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/159/n0.html"},{"agencyId":"1","color":"","description":"Federal Way P&R Via I-5","id":"1_100068","longName":"","shortName":"177","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/177/n0.html"},{"agencyId":"1","color":"","description":"Federal Way P&R/Federal Way TC/Downtown Seattle","id":"1_100069","longName":"","shortName":"178","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/178/n0.html"},{"agencyId":"1","color":"","description":"Twin Lakes P&R to Downtown Seattle","id":"1_100070","longName":"","shortName":"179","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/179/n0.html"},{"agencyId":"1","color":"","description":"Redondo Heights P&R/Star Lake/Downtown Seattle","id":"1_100082","longName":"","shortName":"190","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/190/n0.html"},{"agencyId":"1","color":"","description":"Star Lake to Downtown Seattle","id":"1_100084","longName":"","shortName":"192","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/192/n0.html"}],"situations":[],"stops":[{"code":"20","direction":"SE","id":"1_20","lat":47.611629,"locationType":0,"lon":-122.343719,"name":"1st Ave & Lenora St","routeIds":["1_100348"],"wheelchairBoarding":"UNKNOWN"},{"code":"220","direction":"NW","id":"1_220","lat":47.612099,"locationType":0,"lon":-122.3442,"name":"1st Ave & Lenora St","routeIds":["1_100348"],"wheelchairBoarding":"UNKNOWN"},{"code":"260","direction":"SE","id":"1_260","lat":47.612164,"locationType":0,"lon":-122.342628,"name":"2nd Ave & Lenora St","routeIds":["1_100041","1_100475","1_100051","1_100052","1_100068","1_100069","1_100070","1_100082","1_100084"],"wheelchairBoarding":"UNKNOWN"}],"trips":[{"blockId":"1_4459817","directionId":"1","id":"1_33349997","routeId":"1_100348","routeShortName":"","serviceId":"1_38494","shapeId":"1_20099012","timeZone":"","tripHeadsign":"International District Chinatown Station Pioneer Square","tripShortName":"LOCAL"}]}},"text":"OK","version":2}
+{
+  "code": 200,
+  "currentTime": 1494882997664,
+  "data": {
+    "entry": {
+      "arrivalsAndDepartures": [
+        {
+          "arrivalEnabled": true,
+          "blockTripSequence": 7,
+          "departureEnabled": true,
+          "distanceFromStop": 236.33710344778592,
+          "frequency": null,
+          "lastUpdateTime": 0,
+          "numberOfStopsAway": 0,
+          "predicted": false,
+          "predictedArrivalInterval": null,
+          "predictedArrivalTime": 0,
+          "predictedDepartureInterval": null,
+          "predictedDepartureTime": 0,
+          "routeId": "1_100348",
+          "routeLongName": "",
+          "routeShortName": "99",
+          "scheduledArrivalInterval": null,
+          "scheduledArrivalTime": 1494865654000,
+          "scheduledDepartureInterval": null,
+          "scheduledDepartureTime": 1494865654000,
+          "serviceDate": 1494831600000,
+          "situationIds": [],
+          "status": "default",
+          "stopId": "1_20",
+          "stopSequence": 2,
+          "totalStopsInTrip": 10,
+          "tripHeadsign": "International District Chinatown Station Pioneer Square",
+          "tripId": "1_33349997",
+          "tripStatus": {
+            "activeTripId": "1_33349997",
+            "blockTripSequence": 7,
+            "closestStop": "1_20",
+            "closestStopTimeOffset": 60,
+            "distanceAlongTrip": 0,
+            "frequency": null,
+            "lastKnownDistanceAlongTrip": 0,
+            "lastKnownLocation": null,
+            "lastKnownOrientation": 0,
+            "lastLocationUpdateTime": 0,
+            "lastUpdateTime": 0,
+            "nextStop": "1_20",
+            "nextStopTimeOffset": 60,
+            "orientation": 329.6892874966182,
+            "phase": "",
+            "position": {
+              "lat": 47.6130824262328,
+              "lon": -122.34602195595494
+            },
+            "predicted": false,
+            "scheduleDeviation": 0,
+            "scheduledDistanceAlongTrip": 842.8818269374642,
+            "serviceDate": 1494831600000,
+            "situationIds": [],
+            "status": "default",
+            "totalDistanceAlongTrip": 3668.9343083368713,
+            "vehicleId": ""
+          },
+          "vehicleId": ""
+        }
+      ],
+      "nearbyStopIds": [
+        "1_220",
+        "1_260"
+      ],
+      "situationIds": [],
+      "stopId": "1_20"
+    },
+    "references": {
+      "agencies": [
+        {
+          "disclaimer": "",
+          "email": "",
+          "fareUrl": "",
+          "id": "1",
+          "lang": "EN",
+          "name": "Metro Transit",
+          "phone": "206-553-3000",
+          "privateService": false,
+          "timezone": "America/Los_Angeles",
+          "url": "http://metro.kingcounty.gov"
+        }
+      ],
+      "routes": [
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "International District to Pioneer Sq to Belltown",
+          "id": "1_100348",
+          "longName": "",
+          "shortName": "99",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/099/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Black Diamond to Downtown Seattle",
+          "id": "1_100041",
+          "longName": "",
+          "shortName": "143",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/143/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Lake Meridian P&R to Downtown Seattle",
+          "id": "1_100475",
+          "longName": "",
+          "shortName": "157",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/157/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Kent East Hill to Downtown Seattle",
+          "id": "1_100051",
+          "longName": "",
+          "shortName": "158",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/158/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Timberlane/Lake Mer P&R/Kent Rail Sta/DT Seattle",
+          "id": "1_100052",
+          "longName": "",
+          "shortName": "159",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/159/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Federal Way P&R Via I-5",
+          "id": "1_100068",
+          "longName": "",
+          "shortName": "177",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/177/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Federal Way P&R/Federal Way TC/Downtown Seattle",
+          "id": "1_100069",
+          "longName": "",
+          "shortName": "178",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/178/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Twin Lakes P&R to Downtown Seattle",
+          "id": "1_100070",
+          "longName": "",
+          "shortName": "179",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/179/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Redondo Heights P&R/Star Lake/Downtown Seattle",
+          "id": "1_100082",
+          "longName": "",
+          "shortName": "190",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/190/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Star Lake to Downtown Seattle",
+          "id": "1_100084",
+          "longName": "",
+          "shortName": "192",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/192/n0.html"
+        }
+      ],
+      "situations": [],
+      "stops": [
+        {
+          "code": "20",
+          "direction": "SE",
+          "id": "1_20",
+          "lat": 47.611629,
+          "locationType": 0,
+          "lon": -122.343719,
+          "name": "1st Ave & Lenora St",
+          "routeIds": [
+            "1_100348"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "220",
+          "direction": "NW",
+          "id": "1_220",
+          "lat": 47.612099,
+          "locationType": 0,
+          "lon": -122.3442,
+          "name": "1st Ave & Lenora St",
+          "routeIds": [
+            "1_100348"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "260",
+          "direction": "SE",
+          "id": "1_260",
+          "lat": 47.612164,
+          "locationType": 0,
+          "lon": -122.342628,
+          "name": "2nd Ave & Lenora St",
+          "routeIds": [
+            "1_100041",
+            "1_100475",
+            "1_100051",
+            "1_100052",
+            "1_100068",
+            "1_100069",
+            "1_100070",
+            "1_100082",
+            "1_100084"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        }
+      ],
+      "trips": [
+        {
+          "blockId": "1_4459817",
+          "directionId": "1",
+          "id": "1_33349997",
+          "routeId": "1_100348",
+          "routeShortName": "",
+          "serviceId": "1_38494",
+          "shapeId": "1_20099012",
+          "timeZone": "",
+          "tripHeadsign": "International District Chinatown Station Pioneer Square",
+          "tripShortName": "LOCAL"
+        }
+      ]
+    }
+  },
+  "text": "OK",
+  "version": 2
+}

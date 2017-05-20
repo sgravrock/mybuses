@@ -1,1 +1,380 @@
-{"code":200,"currentTime":1494882996042,"data":{"entry":{"arrivalsAndDepartures":[{"arrivalEnabled":true,"blockTripSequence":4,"departureEnabled":true,"distanceFromStop":70.57933317714196,"frequency":null,"lastUpdateTime":0,"numberOfStopsAway":0,"predicted":false,"predictedArrivalInterval":null,"predictedArrivalTime":0,"predictedDepartureInterval":null,"predictedDepartureTime":0,"routeId":"1_100028","routeLongName":"","routeShortName":"13","scheduledArrivalInterval":null,"scheduledArrivalTime":1494865626000,"scheduledDepartureInterval":null,"scheduledDepartureTime":1494865626000,"serviceDate":1494831600000,"situationIds":[],"status":"default","stopId":"1_1260","stopSequence":1,"totalStopsInTrip":24,"tripHeadsign":"Seattle Pacific University Seattle Center W","tripId":"1_33547489","tripStatus":{"activeTripId":"1_33547489","blockTripSequence":4,"closestStop":"1_3037","closestStopTimeOffset":-20,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_1260","nextStopTimeOffset":32,"orientation":203.13142081503307,"phase":"","position":{"lat":47.60902010784963,"lon":-122.33063283844291},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":75.13134334748247,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":7215.876936030731,"vehicleId":""},"vehicleId":""},{"arrivalEnabled":true,"blockTripSequence":4,"departureEnabled":true,"distanceFromStop":2692.366238719522,"frequency":null,"lastUpdateTime":0,"numberOfStopsAway":13,"predicted":false,"predictedArrivalInterval":null,"predictedArrivalTime":0,"predictedDepartureInterval":null,"predictedDepartureTime":0,"routeId":"1_100089","routeLongName":"","routeShortName":"2","scheduledArrivalInterval":null,"scheduledArrivalTime":1494866487000,"scheduledDepartureInterval":null,"scheduledDepartureTime":1494866487000,"serviceDate":1494831600000,"situationIds":[],"status":"default","stopId":"1_1260","stopSequence":27,"totalStopsInTrip":51,"tripHeadsign":"W Queen Anne Seattle Center W","tripId":"1_33547668","tripStatus":{"activeTripId":"1_33547668","blockTripSequence":4,"closestStop":"1_2970","closestStopTimeOffset":-9,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_2980","nextStopTimeOffset":42,"orientation":180.23290839015738,"phase":"","position":{"lat":47.612932105283164,"lon":-122.29828710034155},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":2312.4769945854277,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":11140.202796358657,"vehicleId":""},"vehicleId":""},{"arrivalEnabled":true,"blockTripSequence":8,"departureEnabled":true,"distanceFromStop":6282.12874259716,"frequency":null,"lastUpdateTime":0,"numberOfStopsAway":34,"predicted":false,"predictedArrivalInterval":null,"predictedArrivalTime":0,"predictedDepartureInterval":null,"predictedDepartureTime":0,"routeId":"1_100028","routeLongName":"","routeShortName":"13","scheduledArrivalInterval":null,"scheduledArrivalTime":1494867546000,"scheduledDepartureInterval":null,"scheduledDepartureTime":1494867546000,"serviceDate":1494831600000,"situationIds":[],"status":"default","stopId":"1_1260","stopSequence":1,"totalStopsInTrip":24,"tripHeadsign":"Seattle Pacific University Seattle Center W","tripId":"1_33547490","tripStatus":{"activeTripId":"1_33547569","blockTripSequence":6,"closestStop":"1_3271","closestStopTimeOffset":-7,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_3280","nextStopTimeOffset":18,"orientation":88.47158894237842,"phase":"","position":{"lat":47.616934019317526,"lon":-122.2891936224544},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":5888.59163275412,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":7098.130107206053,"vehicleId":""},"vehicleId":""}],"nearbyStopIds":["1_3037"],"situationIds":[],"stopId":"1_1260"},"references":{"agencies":[{"disclaimer":"","email":"","fareUrl":"","id":"1","lang":"EN","name":"Metro Transit","phone":"206-553-3000","privateService":false,"timezone":"America/Los_Angeles","url":"http://metro.kingcounty.gov"}],"routes":[{"agencyId":"1","color":"","description":"W QA - Downtown - Madrona Pk","id":"1_100089","longName":"","shortName":"2","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/002/n0.html"},{"agencyId":"1","color":"","description":"Seattle Pacific - Downtown Seattle","id":"1_100028","longName":"","shortName":"13","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/013/n0.html"},{"agencyId":"1","color":"","description":"Mercer Island First Hill Downtown","id":"1_102634","longName":"","shortName":"630","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/630/n0.html"}],"situations":[],"stops":[{"code":"1260","direction":"W","id":"1_1260","lat":47.608742,"locationType":0,"lon":-122.331482,"name":"Seneca St & 6th Ave","routeIds":["1_100089","1_100028","1_102634"],"wheelchairBoarding":"UNKNOWN"},{"code":"3037","direction":"W","id":"1_3037","lat":47.609291,"locationType":0,"lon":-122.330185,"name":"Seneca St & 8th Ave","routeIds":["1_100089","1_100028","1_102634"],"wheelchairBoarding":"UNKNOWN"},{"code":"2970","direction":"W","id":"1_2970","lat":47.613003,"locationType":0,"lon":-122.297821,"name":"E Union St & 27th Ave","routeIds":["1_100089"],"wheelchairBoarding":"UNKNOWN"},{"code":"2980","direction":"W","id":"1_2980","lat":47.613007,"locationType":0,"lon":-122.300461,"name":"E Union St & 25th Ave","routeIds":["1_100089"],"wheelchairBoarding":"UNKNOWN"},{"code":"3271","direction":"N","id":"1_3271","lat":47.616692,"locationType":0,"lon":-122.289108,"name":"34th Ave & E Olive St","routeIds":["1_100089"],"wheelchairBoarding":"UNKNOWN"},{"code":"3280","direction":"N","id":"1_3280","lat":47.617557,"locationType":0,"lon":-122.289078,"name":"34th Ave & E Howell St","routeIds":["1_100089"],"wheelchairBoarding":"UNKNOWN"}],"trips":[{"blockId":"1_4476021","directionId":"0","id":"1_33547489","routeId":"1_100028","routeShortName":"","serviceId":"1_110802","shapeId":"1_11013005","timeZone":"","tripHeadsign":"Seattle Pacific University Seattle Center W","tripShortName":"LOCAL"},{"blockId":"1_4476006","directionId":"1","id":"1_33547668","routeId":"1_100089","routeShortName":"","serviceId":"1_110802","shapeId":"1_10002005","timeZone":"","tripHeadsign":"Downtown Seattle","tripShortName":"LOCAL"},{"blockId":"1_4476007","directionId":"0","id":"1_33547490","routeId":"1_100028","routeShortName":"","serviceId":"1_110802","shapeId":"1_11013005","timeZone":"","tripHeadsign":"Seattle Pacific University Seattle Center W","tripShortName":"LOCAL"},{"blockId":"1_4476007","directionId":"0","id":"1_33547569","routeId":"1_100089","routeShortName":"","serviceId":"1_110802","shapeId":"1_21002010","timeZone":"","tripHeadsign":"Madrona Park Via E Union St","tripShortName":"LOCAL"}]}},"text":"OK","version":2}
+{
+  "code": 200,
+  "currentTime": 1494882996042,
+  "data": {
+    "entry": {
+      "arrivalsAndDepartures": [
+        {
+          "arrivalEnabled": true,
+          "blockTripSequence": 4,
+          "departureEnabled": true,
+          "distanceFromStop": 70.57933317714196,
+          "frequency": null,
+          "lastUpdateTime": 0,
+          "numberOfStopsAway": 0,
+          "predicted": false,
+          "predictedArrivalInterval": null,
+          "predictedArrivalTime": 0,
+          "predictedDepartureInterval": null,
+          "predictedDepartureTime": 0,
+          "routeId": "1_100028",
+          "routeLongName": "",
+          "routeShortName": "13",
+          "scheduledArrivalInterval": null,
+          "scheduledArrivalTime": 1494865626000,
+          "scheduledDepartureInterval": null,
+          "scheduledDepartureTime": 1494865626000,
+          "serviceDate": 1494831600000,
+          "situationIds": [],
+          "status": "default",
+          "stopId": "1_1260",
+          "stopSequence": 1,
+          "totalStopsInTrip": 24,
+          "tripHeadsign": "Seattle Pacific University Seattle Center W",
+          "tripId": "1_33547489",
+          "tripStatus": {
+            "activeTripId": "1_33547489",
+            "blockTripSequence": 4,
+            "closestStop": "1_3037",
+            "closestStopTimeOffset": -20,
+            "distanceAlongTrip": 0,
+            "frequency": null,
+            "lastKnownDistanceAlongTrip": 0,
+            "lastKnownLocation": null,
+            "lastKnownOrientation": 0,
+            "lastLocationUpdateTime": 0,
+            "lastUpdateTime": 0,
+            "nextStop": "1_1260",
+            "nextStopTimeOffset": 32,
+            "orientation": 203.13142081503307,
+            "phase": "",
+            "position": {
+              "lat": 47.60902010784963,
+              "lon": -122.33063283844291
+            },
+            "predicted": false,
+            "scheduleDeviation": 0,
+            "scheduledDistanceAlongTrip": 75.13134334748247,
+            "serviceDate": 1494831600000,
+            "situationIds": [],
+            "status": "default",
+            "totalDistanceAlongTrip": 7215.876936030731,
+            "vehicleId": ""
+          },
+          "vehicleId": ""
+        },
+        {
+          "arrivalEnabled": true,
+          "blockTripSequence": 4,
+          "departureEnabled": true,
+          "distanceFromStop": 2692.366238719522,
+          "frequency": null,
+          "lastUpdateTime": 0,
+          "numberOfStopsAway": 13,
+          "predicted": false,
+          "predictedArrivalInterval": null,
+          "predictedArrivalTime": 0,
+          "predictedDepartureInterval": null,
+          "predictedDepartureTime": 0,
+          "routeId": "1_100089",
+          "routeLongName": "",
+          "routeShortName": "2",
+          "scheduledArrivalInterval": null,
+          "scheduledArrivalTime": 1494866487000,
+          "scheduledDepartureInterval": null,
+          "scheduledDepartureTime": 1494866487000,
+          "serviceDate": 1494831600000,
+          "situationIds": [],
+          "status": "default",
+          "stopId": "1_1260",
+          "stopSequence": 27,
+          "totalStopsInTrip": 51,
+          "tripHeadsign": "W Queen Anne Seattle Center W",
+          "tripId": "1_33547668",
+          "tripStatus": {
+            "activeTripId": "1_33547668",
+            "blockTripSequence": 4,
+            "closestStop": "1_2970",
+            "closestStopTimeOffset": -9,
+            "distanceAlongTrip": 0,
+            "frequency": null,
+            "lastKnownDistanceAlongTrip": 0,
+            "lastKnownLocation": null,
+            "lastKnownOrientation": 0,
+            "lastLocationUpdateTime": 0,
+            "lastUpdateTime": 0,
+            "nextStop": "1_2980",
+            "nextStopTimeOffset": 42,
+            "orientation": 180.23290839015738,
+            "phase": "",
+            "position": {
+              "lat": 47.612932105283164,
+              "lon": -122.29828710034155
+            },
+            "predicted": false,
+            "scheduleDeviation": 0,
+            "scheduledDistanceAlongTrip": 2312.4769945854277,
+            "serviceDate": 1494831600000,
+            "situationIds": [],
+            "status": "default",
+            "totalDistanceAlongTrip": 11140.202796358657,
+            "vehicleId": ""
+          },
+          "vehicleId": ""
+        },
+        {
+          "arrivalEnabled": true,
+          "blockTripSequence": 8,
+          "departureEnabled": true,
+          "distanceFromStop": 6282.12874259716,
+          "frequency": null,
+          "lastUpdateTime": 0,
+          "numberOfStopsAway": 34,
+          "predicted": false,
+          "predictedArrivalInterval": null,
+          "predictedArrivalTime": 0,
+          "predictedDepartureInterval": null,
+          "predictedDepartureTime": 0,
+          "routeId": "1_100028",
+          "routeLongName": "",
+          "routeShortName": "13",
+          "scheduledArrivalInterval": null,
+          "scheduledArrivalTime": 1494867546000,
+          "scheduledDepartureInterval": null,
+          "scheduledDepartureTime": 1494867546000,
+          "serviceDate": 1494831600000,
+          "situationIds": [],
+          "status": "default",
+          "stopId": "1_1260",
+          "stopSequence": 1,
+          "totalStopsInTrip": 24,
+          "tripHeadsign": "Seattle Pacific University Seattle Center W",
+          "tripId": "1_33547490",
+          "tripStatus": {
+            "activeTripId": "1_33547569",
+            "blockTripSequence": 6,
+            "closestStop": "1_3271",
+            "closestStopTimeOffset": -7,
+            "distanceAlongTrip": 0,
+            "frequency": null,
+            "lastKnownDistanceAlongTrip": 0,
+            "lastKnownLocation": null,
+            "lastKnownOrientation": 0,
+            "lastLocationUpdateTime": 0,
+            "lastUpdateTime": 0,
+            "nextStop": "1_3280",
+            "nextStopTimeOffset": 18,
+            "orientation": 88.47158894237842,
+            "phase": "",
+            "position": {
+              "lat": 47.616934019317526,
+              "lon": -122.2891936224544
+            },
+            "predicted": false,
+            "scheduleDeviation": 0,
+            "scheduledDistanceAlongTrip": 5888.59163275412,
+            "serviceDate": 1494831600000,
+            "situationIds": [],
+            "status": "default",
+            "totalDistanceAlongTrip": 7098.130107206053,
+            "vehicleId": ""
+          },
+          "vehicleId": ""
+        }
+      ],
+      "nearbyStopIds": [
+        "1_3037"
+      ],
+      "situationIds": [],
+      "stopId": "1_1260"
+    },
+    "references": {
+      "agencies": [
+        {
+          "disclaimer": "",
+          "email": "",
+          "fareUrl": "",
+          "id": "1",
+          "lang": "EN",
+          "name": "Metro Transit",
+          "phone": "206-553-3000",
+          "privateService": false,
+          "timezone": "America/Los_Angeles",
+          "url": "http://metro.kingcounty.gov"
+        }
+      ],
+      "routes": [
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "W QA - Downtown - Madrona Pk",
+          "id": "1_100089",
+          "longName": "",
+          "shortName": "2",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/002/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Seattle Pacific - Downtown Seattle",
+          "id": "1_100028",
+          "longName": "",
+          "shortName": "13",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/013/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Mercer Island First Hill Downtown",
+          "id": "1_102634",
+          "longName": "",
+          "shortName": "630",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/630/n0.html"
+        }
+      ],
+      "situations": [],
+      "stops": [
+        {
+          "code": "1260",
+          "direction": "W",
+          "id": "1_1260",
+          "lat": 47.608742,
+          "locationType": 0,
+          "lon": -122.331482,
+          "name": "Seneca St & 6th Ave",
+          "routeIds": [
+            "1_100089",
+            "1_100028",
+            "1_102634"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "3037",
+          "direction": "W",
+          "id": "1_3037",
+          "lat": 47.609291,
+          "locationType": 0,
+          "lon": -122.330185,
+          "name": "Seneca St & 8th Ave",
+          "routeIds": [
+            "1_100089",
+            "1_100028",
+            "1_102634"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "2970",
+          "direction": "W",
+          "id": "1_2970",
+          "lat": 47.613003,
+          "locationType": 0,
+          "lon": -122.297821,
+          "name": "E Union St & 27th Ave",
+          "routeIds": [
+            "1_100089"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "2980",
+          "direction": "W",
+          "id": "1_2980",
+          "lat": 47.613007,
+          "locationType": 0,
+          "lon": -122.300461,
+          "name": "E Union St & 25th Ave",
+          "routeIds": [
+            "1_100089"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "3271",
+          "direction": "N",
+          "id": "1_3271",
+          "lat": 47.616692,
+          "locationType": 0,
+          "lon": -122.289108,
+          "name": "34th Ave & E Olive St",
+          "routeIds": [
+            "1_100089"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "3280",
+          "direction": "N",
+          "id": "1_3280",
+          "lat": 47.617557,
+          "locationType": 0,
+          "lon": -122.289078,
+          "name": "34th Ave & E Howell St",
+          "routeIds": [
+            "1_100089"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        }
+      ],
+      "trips": [
+        {
+          "blockId": "1_4476021",
+          "directionId": "0",
+          "id": "1_33547489",
+          "routeId": "1_100028",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_11013005",
+          "timeZone": "",
+          "tripHeadsign": "Seattle Pacific University Seattle Center W",
+          "tripShortName": "LOCAL"
+        },
+        {
+          "blockId": "1_4476006",
+          "directionId": "1",
+          "id": "1_33547668",
+          "routeId": "1_100089",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_10002005",
+          "timeZone": "",
+          "tripHeadsign": "Downtown Seattle",
+          "tripShortName": "LOCAL"
+        },
+        {
+          "blockId": "1_4476007",
+          "directionId": "0",
+          "id": "1_33547490",
+          "routeId": "1_100028",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_11013005",
+          "timeZone": "",
+          "tripHeadsign": "Seattle Pacific University Seattle Center W",
+          "tripShortName": "LOCAL"
+        },
+        {
+          "blockId": "1_4476007",
+          "directionId": "0",
+          "id": "1_33547569",
+          "routeId": "1_100089",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_21002010",
+          "timeZone": "",
+          "tripHeadsign": "Madrona Park Via E Union St",
+          "tripShortName": "LOCAL"
+        }
+      ]
+    }
+  },
+  "text": "OK",
+  "version": 2
+}

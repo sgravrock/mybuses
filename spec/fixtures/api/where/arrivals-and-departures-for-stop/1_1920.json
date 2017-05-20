@@ -1,1 +1,364 @@
-{"code":200,"currentTime":1494882997521,"data":{"entry":{"arrivalsAndDepartures":[{"arrivalEnabled":false,"blockTripSequence":2,"departureEnabled":true,"distanceFromStop":122.52400774007401,"frequency":null,"lastUpdateTime":0,"numberOfStopsAway":0,"predicted":false,"predictedArrivalInterval":null,"predictedArrivalTime":0,"predictedDepartureInterval":null,"predictedDepartureTime":0,"routeId":"40_100240","routeLongName":"Issaquah - Seattle","routeShortName":"554E","scheduledArrivalInterval":null,"scheduledArrivalTime":1494865737000,"scheduledDepartureInterval":null,"scheduledDepartureTime":1494865737000,"serviceDate":1494831600000,"situationIds":[],"status":"default","stopId":"1_1920","stopSequence":0,"totalStopsInTrip":13,"tripHeadsign":"Issaquah","tripId":"40_32884910","tripStatus":{"activeTripId":"40_32884910","blockTripSequence":2,"closestStop":"1_1920","closestStopTimeOffset":143,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_1920","nextStopTimeOffset":143,"orientation":216.67975748280904,"phase":"","position":{"lat":47.61475264957911,"lon":-122.34013785010212},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":483.62493445594737,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":32631.943132788834,"vehicleId":""},"vehicleId":""},{"arrivalEnabled":false,"blockTripSequence":3,"departureEnabled":true,"distanceFromStop":987.1757687891222,"frequency":null,"lastUpdateTime":0,"numberOfStopsAway":0,"predicted":false,"predictedArrivalInterval":null,"predictedArrivalTime":0,"predictedDepartureInterval":null,"predictedDepartureTime":0,"routeId":"40_100240","routeLongName":"Issaquah - Seattle","routeShortName":"554E","scheduledArrivalInterval":null,"scheduledArrivalTime":1494866937000,"scheduledDepartureInterval":null,"scheduledDepartureTime":1494866937000,"serviceDate":1494831600000,"situationIds":[],"status":"default","stopId":"1_1920","stopSequence":0,"totalStopsInTrip":13,"tripHeadsign":"Issaquah","tripId":"40_32884909","tripStatus":{"activeTripId":"40_32884923","blockTripSequence":2,"closestStop":"1_720","closestStopTimeOffset":-482,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_1920","nextStopTimeOffset":1343,"orientation":38.01151026889467,"phase":"","position":{"lat":47.61467652337479,"lon":-122.34254225685874},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":32286.753280904828,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":32667.78010749794,"vehicleId":""},"vehicleId":""}],"nearbyStopIds":["1_98797","1_259"],"situationIds":[],"stopId":"1_1920"},"references":{"agencies":[{"disclaimer":"","email":"","fareUrl":"","id":"1","lang":"EN","name":"Metro Transit","phone":"206-553-3000","privateService":false,"timezone":"America/Los_Angeles","url":"http://metro.kingcounty.gov"},{"disclaimer":"","email":"","fareUrl":"","id":"40","lang":"EN","name":"Sound Transit","phone":"1-888-889-6368","privateService":false,"timezone":"America/Los_Angeles","url":"http://www.soundtransit.org"}],"routes":[{"agencyId":"1","color":"","description":"Black Diamond to Downtown Seattle","id":"1_100041","longName":"","shortName":"143","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/143/n0.html"},{"agencyId":"1","color":"","description":"Issaquah to Downtown Seattle","id":"1_100106","longName":"","shortName":"214","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/214/n0.html"},{"agencyId":"40","color":"","description":"Issaquah Seattle","id":"40_100240","longName":"Issaquah - Seattle","shortName":"554","textColor":"","type":3,"url":"http://www.soundtransit.org/Schedules/ST-Express-Bus/554"},{"agencyId":"1","color":"","description":"Eastgate P&R to Downtown Seattle","id":"1_100104","longName":"","shortName":"212","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/212/n0.html"},{"agencyId":"1","color":"","description":"Downtown Seattle to North Issaquah","id":"1_100109","longName":"","shortName":"217","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/217/n0.html"},{"agencyId":"1","color":"","description":"Colman Park to Downtown Seattle","id":"1_100161","longName":"","shortName":"27","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/027/n0.html"},{"agencyId":"1","color":"","description":"Alaska Junction to Alki to Downtown Seattle","id":"1_100212","longName":"","shortName":"37","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/037/n0.html"},{"agencyId":"1","color":"","description":"Northgate TC to Ballard to Fremont to Westlake","id":"1_102574","longName":"","shortName":"40","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/040/n0.html"},{"agencyId":"1","color":"","description":"CBD-Sand Point","id":"1_100252","longName":"","shortName":"62","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/062/n0.html"}],"situations":[],"stops":[{"code":"1920","direction":"SW","id":"1_1920","lat":47.613972,"locationType":0,"lon":-122.341293,"name":"Lenora St & 4th Ave","routeIds":["1_100041","1_100106","40_100240"],"wheelchairBoarding":"UNKNOWN"},{"code":"720","direction":"NW","id":"1_720","lat":47.612621,"locationType":0,"lon":-122.339134,"name":"4th Ave & Stewart St","routeIds":["1_100104","1_100109","40_100240"],"wheelchairBoarding":"UNKNOWN"},{"code":"98797","direction":"SW","id":"1_98797","lat":47.61372,"locationType":0,"lon":-122.341621,"name":"Lenora St & 4th Ave","routeIds":["1_100161","1_100212"],"wheelchairBoarding":"UNKNOWN"},{"code":"259","direction":"NE","id":"1_259","lat":47.614525,"locationType":0,"lon":-122.342598,"name":"Blanchard St & 4th Ave","routeIds":["1_102574","1_100252"],"wheelchairBoarding":"UNKNOWN"}],"trips":[{"blockId":"40_4449960","directionId":"0","id":"40_32884910","routeId":"40_100240","routeShortName":"554E","serviceId":"1_110802","shapeId":"1_41554543","timeZone":"","tripHeadsign":"Issaquah","tripShortName":"EXPRESS"},{"blockId":"40_4449955","directionId":"0","id":"40_32884909","routeId":"40_100240","routeShortName":"554E","serviceId":"1_110802","shapeId":"1_41554543","timeZone":"","tripHeadsign":"Issaquah","tripShortName":"EXPRESS"},{"blockId":"40_4449955","directionId":"1","id":"40_32884923","routeId":"40_100240","routeShortName":"554E","serviceId":"1_110802","shapeId":"1_30554553","timeZone":"","tripHeadsign":"Downtown Seattle","tripShortName":"EXPRESS"}]}},"text":"OK","version":2}
+{
+  "code": 200,
+  "currentTime": 1494882997521,
+  "data": {
+    "entry": {
+      "arrivalsAndDepartures": [
+        {
+          "arrivalEnabled": false,
+          "blockTripSequence": 2,
+          "departureEnabled": true,
+          "distanceFromStop": 122.52400774007401,
+          "frequency": null,
+          "lastUpdateTime": 0,
+          "numberOfStopsAway": 0,
+          "predicted": false,
+          "predictedArrivalInterval": null,
+          "predictedArrivalTime": 0,
+          "predictedDepartureInterval": null,
+          "predictedDepartureTime": 0,
+          "routeId": "40_100240",
+          "routeLongName": "Issaquah - Seattle",
+          "routeShortName": "554E",
+          "scheduledArrivalInterval": null,
+          "scheduledArrivalTime": 1494865737000,
+          "scheduledDepartureInterval": null,
+          "scheduledDepartureTime": 1494865737000,
+          "serviceDate": 1494831600000,
+          "situationIds": [],
+          "status": "default",
+          "stopId": "1_1920",
+          "stopSequence": 0,
+          "totalStopsInTrip": 13,
+          "tripHeadsign": "Issaquah",
+          "tripId": "40_32884910",
+          "tripStatus": {
+            "activeTripId": "40_32884910",
+            "blockTripSequence": 2,
+            "closestStop": "1_1920",
+            "closestStopTimeOffset": 143,
+            "distanceAlongTrip": 0,
+            "frequency": null,
+            "lastKnownDistanceAlongTrip": 0,
+            "lastKnownLocation": null,
+            "lastKnownOrientation": 0,
+            "lastLocationUpdateTime": 0,
+            "lastUpdateTime": 0,
+            "nextStop": "1_1920",
+            "nextStopTimeOffset": 143,
+            "orientation": 216.67975748280904,
+            "phase": "",
+            "position": {
+              "lat": 47.61475264957911,
+              "lon": -122.34013785010212
+            },
+            "predicted": false,
+            "scheduleDeviation": 0,
+            "scheduledDistanceAlongTrip": 483.62493445594737,
+            "serviceDate": 1494831600000,
+            "situationIds": [],
+            "status": "default",
+            "totalDistanceAlongTrip": 32631.943132788834,
+            "vehicleId": ""
+          },
+          "vehicleId": ""
+        },
+        {
+          "arrivalEnabled": false,
+          "blockTripSequence": 3,
+          "departureEnabled": true,
+          "distanceFromStop": 987.1757687891222,
+          "frequency": null,
+          "lastUpdateTime": 0,
+          "numberOfStopsAway": 0,
+          "predicted": false,
+          "predictedArrivalInterval": null,
+          "predictedArrivalTime": 0,
+          "predictedDepartureInterval": null,
+          "predictedDepartureTime": 0,
+          "routeId": "40_100240",
+          "routeLongName": "Issaquah - Seattle",
+          "routeShortName": "554E",
+          "scheduledArrivalInterval": null,
+          "scheduledArrivalTime": 1494866937000,
+          "scheduledDepartureInterval": null,
+          "scheduledDepartureTime": 1494866937000,
+          "serviceDate": 1494831600000,
+          "situationIds": [],
+          "status": "default",
+          "stopId": "1_1920",
+          "stopSequence": 0,
+          "totalStopsInTrip": 13,
+          "tripHeadsign": "Issaquah",
+          "tripId": "40_32884909",
+          "tripStatus": {
+            "activeTripId": "40_32884923",
+            "blockTripSequence": 2,
+            "closestStop": "1_720",
+            "closestStopTimeOffset": -482,
+            "distanceAlongTrip": 0,
+            "frequency": null,
+            "lastKnownDistanceAlongTrip": 0,
+            "lastKnownLocation": null,
+            "lastKnownOrientation": 0,
+            "lastLocationUpdateTime": 0,
+            "lastUpdateTime": 0,
+            "nextStop": "1_1920",
+            "nextStopTimeOffset": 1343,
+            "orientation": 38.01151026889467,
+            "phase": "",
+            "position": {
+              "lat": 47.61467652337479,
+              "lon": -122.34254225685874
+            },
+            "predicted": false,
+            "scheduleDeviation": 0,
+            "scheduledDistanceAlongTrip": 32286.753280904828,
+            "serviceDate": 1494831600000,
+            "situationIds": [],
+            "status": "default",
+            "totalDistanceAlongTrip": 32667.78010749794,
+            "vehicleId": ""
+          },
+          "vehicleId": ""
+        }
+      ],
+      "nearbyStopIds": [
+        "1_98797",
+        "1_259"
+      ],
+      "situationIds": [],
+      "stopId": "1_1920"
+    },
+    "references": {
+      "agencies": [
+        {
+          "disclaimer": "",
+          "email": "",
+          "fareUrl": "",
+          "id": "1",
+          "lang": "EN",
+          "name": "Metro Transit",
+          "phone": "206-553-3000",
+          "privateService": false,
+          "timezone": "America/Los_Angeles",
+          "url": "http://metro.kingcounty.gov"
+        },
+        {
+          "disclaimer": "",
+          "email": "",
+          "fareUrl": "",
+          "id": "40",
+          "lang": "EN",
+          "name": "Sound Transit",
+          "phone": "1-888-889-6368",
+          "privateService": false,
+          "timezone": "America/Los_Angeles",
+          "url": "http://www.soundtransit.org"
+        }
+      ],
+      "routes": [
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Black Diamond to Downtown Seattle",
+          "id": "1_100041",
+          "longName": "",
+          "shortName": "143",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/143/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Issaquah to Downtown Seattle",
+          "id": "1_100106",
+          "longName": "",
+          "shortName": "214",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/214/n0.html"
+        },
+        {
+          "agencyId": "40",
+          "color": "",
+          "description": "Issaquah Seattle",
+          "id": "40_100240",
+          "longName": "Issaquah - Seattle",
+          "shortName": "554",
+          "textColor": "",
+          "type": 3,
+          "url": "http://www.soundtransit.org/Schedules/ST-Express-Bus/554"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Eastgate P&R to Downtown Seattle",
+          "id": "1_100104",
+          "longName": "",
+          "shortName": "212",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/212/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Downtown Seattle to North Issaquah",
+          "id": "1_100109",
+          "longName": "",
+          "shortName": "217",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/217/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Colman Park to Downtown Seattle",
+          "id": "1_100161",
+          "longName": "",
+          "shortName": "27",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/027/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Alaska Junction to Alki to Downtown Seattle",
+          "id": "1_100212",
+          "longName": "",
+          "shortName": "37",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/037/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Northgate TC to Ballard to Fremont to Westlake",
+          "id": "1_102574",
+          "longName": "",
+          "shortName": "40",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/040/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "CBD-Sand Point",
+          "id": "1_100252",
+          "longName": "",
+          "shortName": "62",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/062/n0.html"
+        }
+      ],
+      "situations": [],
+      "stops": [
+        {
+          "code": "1920",
+          "direction": "SW",
+          "id": "1_1920",
+          "lat": 47.613972,
+          "locationType": 0,
+          "lon": -122.341293,
+          "name": "Lenora St & 4th Ave",
+          "routeIds": [
+            "1_100041",
+            "1_100106",
+            "40_100240"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "720",
+          "direction": "NW",
+          "id": "1_720",
+          "lat": 47.612621,
+          "locationType": 0,
+          "lon": -122.339134,
+          "name": "4th Ave & Stewart St",
+          "routeIds": [
+            "1_100104",
+            "1_100109",
+            "40_100240"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "98797",
+          "direction": "SW",
+          "id": "1_98797",
+          "lat": 47.61372,
+          "locationType": 0,
+          "lon": -122.341621,
+          "name": "Lenora St & 4th Ave",
+          "routeIds": [
+            "1_100161",
+            "1_100212"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "259",
+          "direction": "NE",
+          "id": "1_259",
+          "lat": 47.614525,
+          "locationType": 0,
+          "lon": -122.342598,
+          "name": "Blanchard St & 4th Ave",
+          "routeIds": [
+            "1_102574",
+            "1_100252"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        }
+      ],
+      "trips": [
+        {
+          "blockId": "40_4449960",
+          "directionId": "0",
+          "id": "40_32884910",
+          "routeId": "40_100240",
+          "routeShortName": "554E",
+          "serviceId": "1_110802",
+          "shapeId": "1_41554543",
+          "timeZone": "",
+          "tripHeadsign": "Issaquah",
+          "tripShortName": "EXPRESS"
+        },
+        {
+          "blockId": "40_4449955",
+          "directionId": "0",
+          "id": "40_32884909",
+          "routeId": "40_100240",
+          "routeShortName": "554E",
+          "serviceId": "1_110802",
+          "shapeId": "1_41554543",
+          "timeZone": "",
+          "tripHeadsign": "Issaquah",
+          "tripShortName": "EXPRESS"
+        },
+        {
+          "blockId": "40_4449955",
+          "directionId": "1",
+          "id": "40_32884923",
+          "routeId": "40_100240",
+          "routeShortName": "554E",
+          "serviceId": "1_110802",
+          "shapeId": "1_30554553",
+          "timeZone": "",
+          "tripHeadsign": "Downtown Seattle",
+          "tripShortName": "EXPRESS"
+        }
+      ]
+    }
+  },
+  "text": "OK",
+  "version": 2
+}

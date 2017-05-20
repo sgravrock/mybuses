@@ -1,1 +1,214 @@
-{"code":200,"currentTime":1494882980930,"data":{"limitExceeded":false,"list":[{"code":"13760","direction":"S","id":"1_13760","lat":47.663143,"locationType":0,"lon":-122.37648,"name":"15th Ave NW & NW Leary Way","routeIds":["1_100062","1_100071","1_102572","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14200","direction":"N","id":"1_14200","lat":47.663437,"locationType":0,"lon":-122.375977,"name":"15th Ave NW & NW Leary Way","routeIds":["1_100062","1_100071","1_102572","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"18150","direction":"SE","id":"1_18150","lat":47.665367,"locationType":0,"lon":-122.380714,"name":"Leary Ave NW & NW Ione Pl","routeIds":["1_102572","1_102574"],"wheelchairBoarding":"UNKNOWN"},{"code":"18165","direction":"E","id":"1_18165","lat":47.663593,"locationType":0,"lon":-122.375587,"name":"NW Leary Way & 15th Ave NW","routeIds":["1_102574"],"wheelchairBoarding":"UNKNOWN"},{"code":"18696","direction":"W","id":"1_18696","lat":47.663731,"locationType":0,"lon":-122.37709,"name":"NW Leary Way & 15th Ave NW","routeIds":["1_102574"],"wheelchairBoarding":"UNKNOWN"},{"code":"18706","direction":"NW","id":"1_18706","lat":47.665527,"locationType":0,"lon":-122.380646,"name":"Leary Ave NW & NW Ione Pl","routeIds":["1_102572","1_102574"],"wheelchairBoarding":"UNKNOWN"},{"code":"18720","direction":"NW","id":"1_18720","lat":47.66721,"locationType":0,"lon":-122.382629,"name":"Leary Ave NW & NW Vernon Pl","routeIds":["1_102572","1_102574"],"wheelchairBoarding":"UNKNOWN"},{"code":"28255","direction":"E","id":"1_28255","lat":47.66359,"locationType":0,"lon":-122.371025,"name":"NW Leary Way & 11th Ave NW","routeIds":["1_102574"],"wheelchairBoarding":"UNKNOWN"},{"code":"28416","direction":"W","id":"1_28416","lat":47.663727,"locationType":0,"lon":-122.371246,"name":"NW Leary Way & 11th Ave NW","routeIds":["1_102574"],"wheelchairBoarding":"UNKNOWN"}],"outOfRange":false,"references":{"agencies":[{"disclaimer":"","email":"","fareUrl":"","id":"1","lang":"EN","name":"Metro Transit","phone":"206-553-3000","privateService":false,"timezone":"America/Los_Angeles","url":"http://metro.kingcounty.gov"}],"routes":[{"agencyId":"1","color":"","description":"Loyal Heights to Sunset Hill to Ballard to Downtow","id":"1_100062","longName":"","shortName":"17","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/017/n0.html"},{"agencyId":"1","color":"","description":"North Beach to Ballard to Downtown Seattle","id":"1_100071","longName":"","shortName":"18","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/018/n0.html"},{"agencyId":"1","color":"","description":"Ballard to SPU to Queen Anne to Downtown Seattle","id":"1_102572","longName":"","shortName":"29","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/029/n0.html"},{"agencyId":"1","color":"","description":"Seattle Blue Ridge to Crown Hill to Ballard to Sea","id":"1_102581","longName":"D-Line Rapid Ride","shortName":"D Line","textColor":"","type":3,"url":"http://metro.kingcounty.gov/travel-options/bus/rapidride/d-line/"},{"agencyId":"1","color":"","description":"Northgate TC to Ballard to Fremont to Westlake","id":"1_102574","longName":"","shortName":"40","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/040/n0.html"}],"situations":[],"stops":[],"trips":[]}},"text":"OK","version":2}
+{
+  "code": 200,
+  "currentTime": 1494882980930,
+  "data": {
+    "limitExceeded": false,
+    "list": [
+      {
+        "code": "13760",
+        "direction": "S",
+        "id": "1_13760",
+        "lat": 47.663143,
+        "locationType": 0,
+        "lon": -122.37648,
+        "name": "15th Ave NW & NW Leary Way",
+        "routeIds": [
+          "1_100062",
+          "1_100071",
+          "1_102572",
+          "1_102581"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "14200",
+        "direction": "N",
+        "id": "1_14200",
+        "lat": 47.663437,
+        "locationType": 0,
+        "lon": -122.375977,
+        "name": "15th Ave NW & NW Leary Way",
+        "routeIds": [
+          "1_100062",
+          "1_100071",
+          "1_102572",
+          "1_102581"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "18150",
+        "direction": "SE",
+        "id": "1_18150",
+        "lat": 47.665367,
+        "locationType": 0,
+        "lon": -122.380714,
+        "name": "Leary Ave NW & NW Ione Pl",
+        "routeIds": [
+          "1_102572",
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "18165",
+        "direction": "E",
+        "id": "1_18165",
+        "lat": 47.663593,
+        "locationType": 0,
+        "lon": -122.375587,
+        "name": "NW Leary Way & 15th Ave NW",
+        "routeIds": [
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "18696",
+        "direction": "W",
+        "id": "1_18696",
+        "lat": 47.663731,
+        "locationType": 0,
+        "lon": -122.37709,
+        "name": "NW Leary Way & 15th Ave NW",
+        "routeIds": [
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "18706",
+        "direction": "NW",
+        "id": "1_18706",
+        "lat": 47.665527,
+        "locationType": 0,
+        "lon": -122.380646,
+        "name": "Leary Ave NW & NW Ione Pl",
+        "routeIds": [
+          "1_102572",
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "18720",
+        "direction": "NW",
+        "id": "1_18720",
+        "lat": 47.66721,
+        "locationType": 0,
+        "lon": -122.382629,
+        "name": "Leary Ave NW & NW Vernon Pl",
+        "routeIds": [
+          "1_102572",
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "28255",
+        "direction": "E",
+        "id": "1_28255",
+        "lat": 47.66359,
+        "locationType": 0,
+        "lon": -122.371025,
+        "name": "NW Leary Way & 11th Ave NW",
+        "routeIds": [
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      },
+      {
+        "code": "28416",
+        "direction": "W",
+        "id": "1_28416",
+        "lat": 47.663727,
+        "locationType": 0,
+        "lon": -122.371246,
+        "name": "NW Leary Way & 11th Ave NW",
+        "routeIds": [
+          "1_102574"
+        ],
+        "wheelchairBoarding": "UNKNOWN"
+      }
+    ],
+    "outOfRange": false,
+    "references": {
+      "agencies": [
+        {
+          "disclaimer": "",
+          "email": "",
+          "fareUrl": "",
+          "id": "1",
+          "lang": "EN",
+          "name": "Metro Transit",
+          "phone": "206-553-3000",
+          "privateService": false,
+          "timezone": "America/Los_Angeles",
+          "url": "http://metro.kingcounty.gov"
+        }
+      ],
+      "routes": [
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Loyal Heights to Sunset Hill to Ballard to Downtow",
+          "id": "1_100062",
+          "longName": "",
+          "shortName": "17",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/017/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "North Beach to Ballard to Downtown Seattle",
+          "id": "1_100071",
+          "longName": "",
+          "shortName": "18",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/018/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Ballard to SPU to Queen Anne to Downtown Seattle",
+          "id": "1_102572",
+          "longName": "",
+          "shortName": "29",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/029/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Seattle Blue Ridge to Crown Hill to Ballard to Sea",
+          "id": "1_102581",
+          "longName": "D-Line Rapid Ride",
+          "shortName": "D Line",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/travel-options/bus/rapidride/d-line/"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Northgate TC to Ballard to Fremont to Westlake",
+          "id": "1_102574",
+          "longName": "",
+          "shortName": "40",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/040/n0.html"
+        }
+      ],
+      "situations": [],
+      "stops": [],
+      "trips": []
+    }
+  },
+  "text": "OK",
+  "version": 2
+}

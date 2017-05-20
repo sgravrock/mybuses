@@ -1,1 +1,1226 @@
-{"code":200,"currentTime":1494883018658,"data":{"entry":{"frequency":null,"schedule":{"frequency":null,"nextTripId":"1_33359657","previousTripId":"1_33359648","stopTimes":[{"arrivalTime":33837,"departureTime":33837,"distanceAlongTrip":413.6022512159728,"stopHeadsign":"","stopId":"1_1610"},{"arrivalTime":33949,"departureTime":33949,"distanceAlongTrip":749.599030627519,"stopHeadsign":"","stopId":"1_538"},{"arrivalTime":34074,"departureTime":34074,"distanceAlongTrip":1124.8898713221288,"stopHeadsign":"","stopId":"1_558"},{"arrivalTime":34225,"departureTime":34225,"distanceAlongTrip":1572.5954895162831,"stopHeadsign":"","stopId":"1_578"},{"arrivalTime":34320,"departureTime":34320,"distanceAlongTrip":1920.318077760065,"stopHeadsign":"","stopId":"1_600"},{"arrivalTime":34424,"departureTime":34424,"distanceAlongTrip":2295.6690918724985,"stopHeadsign":"","stopId":"1_605"},{"arrivalTime":34509,"departureTime":34509,"distanceAlongTrip":2604.760209256822,"stopHeadsign":"","stopId":"1_1690"},{"arrivalTime":34719,"departureTime":34719,"distanceAlongTrip":3364.4653850627324,"stopHeadsign":"","stopId":"1_2330"},{"arrivalTime":34850,"departureTime":34850,"distanceAlongTrip":3840.6870862080486,"stopHeadsign":"","stopId":"1_2360"},{"arrivalTime":34917,"departureTime":34917,"distanceAlongTrip":4081.6361817064603,"stopHeadsign":"","stopId":"1_2370"},{"arrivalTime":34963,"departureTime":34963,"distanceAlongTrip":4426.4033299646735,"stopHeadsign":"","stopId":"1_14038"},{"arrivalTime":35088,"departureTime":35088,"distanceAlongTrip":5357.51028284567,"stopHeadsign":"","stopId":"1_14070"},{"arrivalTime":35155,"departureTime":35155,"distanceAlongTrip":5864.448026245792,"stopHeadsign":"","stopId":"1_14090"},{"arrivalTime":35227,"departureTime":35227,"distanceAlongTrip":6403.161403035829,"stopHeadsign":"","stopId":"1_14110"},{"arrivalTime":35286,"departureTime":35286,"distanceAlongTrip":6843.17830602153,"stopHeadsign":"","stopId":"1_14130"},{"arrivalTime":35346,"departureTime":35346,"distanceAlongTrip":7289.793265061329,"stopHeadsign":"","stopId":"1_14150"},{"arrivalTime":35408,"departureTime":35408,"distanceAlongTrip":7754.0299173478115,"stopHeadsign":"","stopId":"1_14170"},{"arrivalTime":35480,"departureTime":35480,"distanceAlongTrip":8293.631711846172,"stopHeadsign":"","stopId":"1_14190"},{"arrivalTime":35621,"departureTime":35621,"distanceAlongTrip":9350.509930467995,"stopHeadsign":"","stopId":"1_14200"},{"arrivalTime":35697,"departureTime":35697,"distanceAlongTrip":9911.383371689531,"stopHeadsign":"","stopId":"1_14230"},{"arrivalTime":35759,"departureTime":35759,"distanceAlongTrip":10336.0679842159,"stopHeadsign":"","stopId":"1_14250"},{"arrivalTime":35834,"departureTime":35834,"distanceAlongTrip":10837.777750712748,"stopHeadsign":"","stopId":"1_14280"},{"arrivalTime":35883,"departureTime":35883,"distanceAlongTrip":11170.394786456038,"stopHeadsign":"","stopId":"1_14300"},{"arrivalTime":35944,"departureTime":35944,"distanceAlongTrip":11581.81589286972,"stopHeadsign":"","stopId":"1_14320"},{"arrivalTime":36005,"departureTime":36005,"distanceAlongTrip":11994.127991078954,"stopHeadsign":"","stopId":"1_14340"},{"arrivalTime":36072,"departureTime":36072,"distanceAlongTrip":12444.121611254777,"stopHeadsign":"","stopId":"1_14360"},{"arrivalTime":36154,"departureTime":36154,"distanceAlongTrip":12862.969808720934,"stopHeadsign":"","stopId":"1_40050"},{"arrivalTime":36421,"departureTime":37330,"distanceAlongTrip":14220.90527174814,"stopHeadsign":"","stopId":"1_28680"}],"timeZone":"America/Los_Angeles"},"serviceDate":1494831600000,"situationIds":[],"status":{"activeTripId":"1_33359714","blockTripSequence":2,"closestStop":"1_538","closestStopTimeOffset":-45,"distanceAlongTrip":0,"frequency":null,"lastKnownDistanceAlongTrip":0,"lastKnownLocation":null,"lastKnownOrientation":0,"lastLocationUpdateTime":0,"lastUpdateTime":0,"nextStop":"1_558","nextStopTimeOffset":80,"orientation":132.6592858080064,"phase":"","position":{"lat":47.605189025174504,"lon":-122.33362126723654},"predicted":false,"scheduleDeviation":0,"scheduledDistanceAlongTrip":884.7037332775799,"serviceDate":1494831600000,"situationIds":[],"status":"default","totalDistanceAlongTrip":14221.034709725463,"vehicleId":""},"tripId":"1_33359714"},"references":{"agencies":[{"disclaimer":"","email":"","fareUrl":"","id":"1","lang":"EN","name":"Metro Transit","phone":"206-553-3000","privateService":false,"timezone":"America/Los_Angeles","url":"http://metro.kingcounty.gov"}],"routes":[{"agencyId":"1","color":"","description":"Seattle Blue Ridge to Crown Hill to Ballard to Sea","id":"1_102581","longName":"D-Line Rapid Ride","shortName":"D Line","textColor":"","type":3,"url":"http://metro.kingcounty.gov/travel-options/bus/rapidride/d-line/"},{"agencyId":"1","color":"","description":"Kinnear - Downtown Seattle","id":"1_100001","longName":"","shortName":"1","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/001/n0.html"},{"agencyId":"1","color":"","description":"W QA - Downtown - Madrona Pk","id":"1_100089","longName":"","shortName":"2","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/002/n0.html"},{"agencyId":"1","color":"","description":"SPU - CBD - Madrona","id":"1_100173","longName":"","shortName":"3","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/003/n0.html"},{"agencyId":"1","color":"","description":"SPU - CBD - Judkins Pk","id":"1_100219","longName":"","shortName":"4","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/004/n0.html"},{"agencyId":"1","color":"","description":"Prentice St - Rainier Bch - Downtown Sea","id":"1_100263","longName":"","shortName":"7","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/007/n0.html"},{"agencyId":"1","color":"","description":"Seattle Pacific - Downtown Seattle","id":"1_100028","longName":"","shortName":"13","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/013/n0.html"},{"agencyId":"1","color":"","description":"Mt Baker - Downtown Seattle","id":"1_100039","longName":"","shortName":"14","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/014/n0.html"},{"agencyId":"1","color":"","description":"Blue Ridge to Crown Hill to Downtown Seattle","id":"1_100044","longName":"","shortName":"15","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/015/n0.html"},{"agencyId":"1","color":"","description":"Ballard to SPU to Queen Anne to Downtown Seattle","id":"1_102572","longName":"","shortName":"29","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/029/n0.html"},{"agencyId":"1","color":"","description":"Othello Stn - Beacon Hill - Downtown Sea","id":"1_100210","longName":"","shortName":"36","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/036/n0.html"},{"agencyId":"1","color":"","description":"U Dist - Broadway - Downtown Sea","id":"1_100447","longName":"","shortName":"49","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/049/n0.html"},{"agencyId":"1","color":"","description":"University District to Eastlake to CBD","id":"1_100264","longName":"","shortName":"70","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/070/n0.html"},{"agencyId":"1","color":"","description":"Downtown Seattle to Queen Anne to Green Lake to Gr","id":"1_100277","longName":"","shortName":"82","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/082/n0.html"},{"agencyId":"1","color":"","description":"Downtown Seattle to University District to Maple L","id":"1_100278","longName":"","shortName":"83","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/083/n0.html"},{"agencyId":"1","color":"","description":"Downtown Seattle to Madison Park to Madrona","id":"1_100279","longName":"","shortName":"84","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/084/n0.html"},{"agencyId":"1","color":"","description":"Aurora Village to Downtown Seattle","id":"1_102615","longName":"E-Line Rapid Ride","shortName":"E Line","textColor":"","type":3,"url":"http://metro.kingcounty.gov/travel-options/bus/rapidride/e-line/"},{"agencyId":"1","color":"","description":"Westwood Village to Fauntleroy Ferry to Alaska Jun","id":"1_102576","longName":"C-Line Rapid Ride","shortName":"C Line","textColor":"","type":3,"url":"http://metro.kingcounty.gov/travel-options/bus/rapidride/c-line/"},{"agencyId":"1","color":"","description":"Shoreline CC to Greenwood to Downtown Seattle","id":"1_100229","longName":"","shortName":"5","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/005/n0.html"},{"agencyId":"1","color":"","description":"Loyal Heights to Sunset Hill to Ballard to Downtow","id":"1_100062","longName":"","shortName":"17","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/017/n0.html"},{"agencyId":"1","color":"","description":"North Beach to Ballard to Downtown Seattle","id":"1_100071","longName":"","shortName":"18","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/018/n0.html"},{"agencyId":"1","color":"","description":"Magnolia","id":"1_100081","longName":"","shortName":"19","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/019/n0.html"},{"agencyId":"1","color":"","description":"Arbor Heights Westwood Village to Downtown Seattle","id":"1_100101","longName":"","shortName":"21","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/021/n0.html"},{"agencyId":"1","color":"","description":"West Magnolia to Downtown Seattle","id":"1_100132","longName":"","shortName":"24","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/024/n0.html"},{"agencyId":"1","color":"","description":"East Green Lake to Downtown Seattle","id":"1_100151","longName":"","shortName":"26","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/026/n0.html"},{"agencyId":"1","color":"","description":"Whittier Heights to Fremont to Downtown Seattle","id":"1_100169","longName":"","shortName":"28","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/028/n0.html"},{"agencyId":"1","color":"","description":"Discovery Park to Downtown Seattle","id":"1_100194","longName":"","shortName":"33","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/033/n0.html"},{"agencyId":"1","color":"","description":"Northgate TC to Ballard to Fremont to Westlake","id":"1_102574","longName":"","shortName":"40","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/040/n0.html"},{"agencyId":"1","color":"","description":"CBD-Sand Point","id":"1_100252","longName":"","shortName":"62","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/062/n0.html"},{"agencyId":"1","color":"","description":"Fauntleroy Ferry to Downtown Seattle","id":"1_100014","longName":"","shortName":"116","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/116/n0.html"},{"agencyId":"1","color":"","description":"Tahlequah to Vashon to Downtown Seattle","id":"1_100016","longName":"","shortName":"118","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/118/n0.html"},{"agencyId":"1","color":"","description":"Dockton to Vashon to Downtown Seattle","id":"1_100017","longName":"","shortName":"119","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/119/n0.html"},{"agencyId":"1","color":"","description":"Burien TC - Westwood Village - Downtown Sea","id":"1_100019","longName":"","shortName":"120","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/120/n0.html"},{"agencyId":"1","color":"","description":"Tukwila International Blvd Sta to Downtown Seattle","id":"1_100023","longName":"","shortName":"124","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/124/n0.html"},{"agencyId":"1","color":"","description":"Downtown Seattle to Lakeside School","id":"1_100350","longName":"","shortName":"994","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/994/n0.html"},{"agencyId":"1","color":"","description":"Seattle Center to Capitol Hill to Rainier Beach","id":"1_100275","longName":"","shortName":"8","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/008/n0.html"},{"agencyId":"1","color":"","description":"U-District to Fremont to Interbay to Sea Center W","id":"1_100193","longName":"","shortName":"32","textColor":"","type":3,"url":"http://metro.kingcounty.gov/schedules/032/n0.html"}],"situations":[],"stops":[{"code":"1610","direction":"NW","id":"1_1610","lat":47.60173,"locationType":0,"lon":-122.330116,"name":"Prefontaine Pl S & Yesler Way","routeIds":["1_100001","1_100089","1_100173","1_100219","1_100263","1_100028","1_100039","1_100044","1_102572","1_100210","1_100447","1_100264","1_100277","1_100278","1_100279","1_102581","1_102615"],"wheelchairBoarding":"UNKNOWN"},{"code":"538","direction":"NW","id":"1_538","lat":47.604191,"locationType":0,"lon":-122.332588,"name":"3rd Ave & Columbia St","routeIds":["1_100001","1_100089","1_100173","1_100219","1_100263","1_100028","1_100039","1_100044","1_102572","1_100210","1_100447","1_100264","1_100277","1_100278","1_100279","1_102581","1_102615"],"wheelchairBoarding":"UNKNOWN"},{"code":"558","direction":"NW","id":"1_558","lat":47.607052,"locationType":0,"lon":-122.335213,"name":"3rd Ave & Seneca St","routeIds":["1_100001","1_100089","1_100173","1_100219","1_100263","1_100028","1_100039","1_100044","1_102572","1_100210","1_100447","1_100264","1_100277","1_100278","1_100279","1_102581","1_102615"],"wheelchairBoarding":"UNKNOWN"},{"code":"578","direction":"NW","id":"1_578","lat":47.610485,"locationType":0,"lon":-122.338356,"name":"3rd Ave & Pike St","routeIds":["1_100044","1_100277","1_100278","1_102576","1_102581","1_102615"],"wheelchairBoarding":"UNKNOWN"},{"code":"600","direction":"NW","id":"1_600","lat":47.612808,"locationType":0,"lon":-122.341438,"name":"3rd Ave & Virginia St","routeIds":["1_100001","1_100089","1_100173","1_100219","1_100229","1_100028","1_100039","1_100044","1_100062","1_100071","1_100081","1_100101","1_100132","1_100151","1_100169","1_102572","1_100194","1_102574","1_100252","1_100277","1_100014","1_100016","1_100017","1_100019","1_100023","1_100350","1_102576","1_102581","1_102615"],"wheelchairBoarding":"UNKNOWN"},{"code":"605","direction":"NW","id":"1_605","lat":47.615036,"locationType":0,"lon":-122.3452,"name":"3rd Ave & Bell St","routeIds":["1_100001","1_100089","1_100173","1_100219","1_100229","1_100028","1_100044","1_100062","1_100071","1_100081","1_100132","1_100151","1_100169","1_100194","1_100277","1_100014","1_100016","1_100017","1_100023","1_102581","1_102615"],"wheelchairBoarding":"UNKNOWN"},{"code":"1690","direction":"NW","id":"1_1690","lat":47.616871,"locationType":0,"lon":-122.348297,"name":"3rd Ave & Vine St","routeIds":["1_100001","1_100089","1_100173","1_100219","1_100028","1_100081","1_100132","1_100194","1_100277","1_100014","1_100016","1_100017","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"2330","direction":"N","id":"1_2330","lat":47.618904,"locationType":0,"lon":-122.355347,"name":"1st Ave N & Denny Way","routeIds":["1_100001","1_100089","1_100275","1_100028","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"2360","direction":"N","id":"1_2360","lat":47.623188,"locationType":0,"lon":-122.355316,"name":"1st Ave N & Republican St","routeIds":["1_100001","1_100089","1_100275","1_100028","1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"2370","direction":"W","id":"1_2370","lat":47.624649,"locationType":0,"lon":-122.356552,"name":"Mercer St & Queen Anne Ave N","routeIds":["1_100001","1_100275","1_100193","1_100350","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14038","direction":"W","id":"1_14038","lat":47.624668,"locationType":0,"lon":-122.361153,"name":"W Mercer St & 3rd Ave W","routeIds":["1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14070","direction":"NW","id":"1_14070","lat":47.628788,"locationType":0,"lon":-122.371124,"name":"Elliott Ave W & W Prospect St","routeIds":["1_100081","1_100132","1_100193","1_100194","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14090","direction":"NW","id":"1_14090","lat":47.632252,"locationType":0,"lon":-122.375481,"name":"Elliott Ave W & W Galer St","routeIds":["1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14110","direction":"N","id":"1_14110","lat":47.636963,"locationType":0,"lon":-122.376099,"name":"15th Ave W & W Newton St","routeIds":["1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14130","direction":"N","id":"1_14130","lat":47.640923,"locationType":0,"lon":-122.376114,"name":"15th Ave W & W Wheeler St","routeIds":["1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14150","direction":"N","id":"1_14150","lat":47.644936,"locationType":0,"lon":-122.376122,"name":"15th Ave W & W Armour St","routeIds":["1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14170","direction":"N","id":"1_14170","lat":47.649097,"locationType":0,"lon":-122.376045,"name":"15th Ave W & W Dravus St","routeIds":["1_100193","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14190","direction":"N","id":"1_14190","lat":47.653942,"locationType":0,"lon":-122.376122,"name":"15th Ave W & W Emerson St","routeIds":["1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14200","direction":"N","id":"1_14200","lat":47.663437,"locationType":0,"lon":-122.375977,"name":"15th Ave NW & NW Leary Way","routeIds":["1_100062","1_100071","1_102572","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14230","direction":"N","id":"1_14230","lat":47.668472,"locationType":0,"lon":-122.376114,"name":"15th Ave NW & NW Market St","routeIds":["1_100044","1_100350","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14250","direction":"N","id":"1_14250","lat":47.672291,"locationType":0,"lon":-122.376114,"name":"15th Ave NW & NW 60th St","routeIds":["1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14280","direction":"N","id":"1_14280","lat":47.676731,"locationType":0,"lon":-122.376671,"name":"15th Ave NW & NW 65th St","routeIds":["1_100044","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14300","direction":"N","id":"1_14300","lat":47.679726,"locationType":0,"lon":-122.376671,"name":"15th Ave NW & NW 70th St","routeIds":["1_100044","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14320","direction":"N","id":"1_14320","lat":47.683422,"locationType":0,"lon":-122.376686,"name":"15th Ave NW & NW 75th St","routeIds":["1_100044","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14340","direction":"N","id":"1_14340","lat":47.68713,"locationType":0,"lon":-122.376701,"name":"15th Ave NW & NW 80th St","routeIds":["1_100044","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"14360","direction":"N","id":"1_14360","lat":47.691177,"locationType":0,"lon":-122.376709,"name":"15th Ave NW & NW 85th St","routeIds":["1_100044","1_102574","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"40050","direction":"NE","id":"1_40050","lat":47.694698,"locationType":0,"lon":-122.375343,"name":"Holman Rd NW & Mary Ave NW","routeIds":["1_102574","1_102581"],"wheelchairBoarding":"UNKNOWN"},{"code":"28680","direction":"NE","id":"1_28680","lat":47.702484,"locationType":0,"lon":-122.363708,"name":"NW 100th Pl & 7th Ave NW","routeIds":["1_100169","1_102581"],"wheelchairBoarding":"UNKNOWN"}],"trips":[{"blockId":"1_4448308","directionId":"0","id":"1_33359714","routeId":"1_102581","routeShortName":"","serviceId":"1_110802","shapeId":"1_11674036","timeZone":"","tripHeadsign":"Ballard Uptown","tripShortName":"LOCAL"},{"blockId":"1_4448308","directionId":"1","id":"1_33359657","routeId":"1_102581","routeShortName":"","serviceId":"1_110802","shapeId":"1_20674043","timeZone":"","tripHeadsign":"Downtown Seattle Uptown","tripShortName":"LOCAL"},{"blockId":"1_4448308","directionId":"1","id":"1_33359648","routeId":"1_102581","routeShortName":"","serviceId":"1_110802","shapeId":"1_20674043","timeZone":"","tripHeadsign":"Downtown Seattle Uptown","tripShortName":"LOCAL"}]}},"text":"OK","version":2}
+{
+  "code": 200,
+  "currentTime": 1494883018658,
+  "data": {
+    "entry": {
+      "frequency": null,
+      "schedule": {
+        "frequency": null,
+        "nextTripId": "1_33359657",
+        "previousTripId": "1_33359648",
+        "stopTimes": [
+          {
+            "arrivalTime": 33837,
+            "departureTime": 33837,
+            "distanceAlongTrip": 413.6022512159728,
+            "stopHeadsign": "",
+            "stopId": "1_1610"
+          },
+          {
+            "arrivalTime": 33949,
+            "departureTime": 33949,
+            "distanceAlongTrip": 749.599030627519,
+            "stopHeadsign": "",
+            "stopId": "1_538"
+          },
+          {
+            "arrivalTime": 34074,
+            "departureTime": 34074,
+            "distanceAlongTrip": 1124.8898713221288,
+            "stopHeadsign": "",
+            "stopId": "1_558"
+          },
+          {
+            "arrivalTime": 34225,
+            "departureTime": 34225,
+            "distanceAlongTrip": 1572.5954895162831,
+            "stopHeadsign": "",
+            "stopId": "1_578"
+          },
+          {
+            "arrivalTime": 34320,
+            "departureTime": 34320,
+            "distanceAlongTrip": 1920.318077760065,
+            "stopHeadsign": "",
+            "stopId": "1_600"
+          },
+          {
+            "arrivalTime": 34424,
+            "departureTime": 34424,
+            "distanceAlongTrip": 2295.6690918724985,
+            "stopHeadsign": "",
+            "stopId": "1_605"
+          },
+          {
+            "arrivalTime": 34509,
+            "departureTime": 34509,
+            "distanceAlongTrip": 2604.760209256822,
+            "stopHeadsign": "",
+            "stopId": "1_1690"
+          },
+          {
+            "arrivalTime": 34719,
+            "departureTime": 34719,
+            "distanceAlongTrip": 3364.4653850627324,
+            "stopHeadsign": "",
+            "stopId": "1_2330"
+          },
+          {
+            "arrivalTime": 34850,
+            "departureTime": 34850,
+            "distanceAlongTrip": 3840.6870862080486,
+            "stopHeadsign": "",
+            "stopId": "1_2360"
+          },
+          {
+            "arrivalTime": 34917,
+            "departureTime": 34917,
+            "distanceAlongTrip": 4081.6361817064603,
+            "stopHeadsign": "",
+            "stopId": "1_2370"
+          },
+          {
+            "arrivalTime": 34963,
+            "departureTime": 34963,
+            "distanceAlongTrip": 4426.4033299646735,
+            "stopHeadsign": "",
+            "stopId": "1_14038"
+          },
+          {
+            "arrivalTime": 35088,
+            "departureTime": 35088,
+            "distanceAlongTrip": 5357.51028284567,
+            "stopHeadsign": "",
+            "stopId": "1_14070"
+          },
+          {
+            "arrivalTime": 35155,
+            "departureTime": 35155,
+            "distanceAlongTrip": 5864.448026245792,
+            "stopHeadsign": "",
+            "stopId": "1_14090"
+          },
+          {
+            "arrivalTime": 35227,
+            "departureTime": 35227,
+            "distanceAlongTrip": 6403.161403035829,
+            "stopHeadsign": "",
+            "stopId": "1_14110"
+          },
+          {
+            "arrivalTime": 35286,
+            "departureTime": 35286,
+            "distanceAlongTrip": 6843.17830602153,
+            "stopHeadsign": "",
+            "stopId": "1_14130"
+          },
+          {
+            "arrivalTime": 35346,
+            "departureTime": 35346,
+            "distanceAlongTrip": 7289.793265061329,
+            "stopHeadsign": "",
+            "stopId": "1_14150"
+          },
+          {
+            "arrivalTime": 35408,
+            "departureTime": 35408,
+            "distanceAlongTrip": 7754.0299173478115,
+            "stopHeadsign": "",
+            "stopId": "1_14170"
+          },
+          {
+            "arrivalTime": 35480,
+            "departureTime": 35480,
+            "distanceAlongTrip": 8293.631711846172,
+            "stopHeadsign": "",
+            "stopId": "1_14190"
+          },
+          {
+            "arrivalTime": 35621,
+            "departureTime": 35621,
+            "distanceAlongTrip": 9350.509930467995,
+            "stopHeadsign": "",
+            "stopId": "1_14200"
+          },
+          {
+            "arrivalTime": 35697,
+            "departureTime": 35697,
+            "distanceAlongTrip": 9911.383371689531,
+            "stopHeadsign": "",
+            "stopId": "1_14230"
+          },
+          {
+            "arrivalTime": 35759,
+            "departureTime": 35759,
+            "distanceAlongTrip": 10336.0679842159,
+            "stopHeadsign": "",
+            "stopId": "1_14250"
+          },
+          {
+            "arrivalTime": 35834,
+            "departureTime": 35834,
+            "distanceAlongTrip": 10837.777750712748,
+            "stopHeadsign": "",
+            "stopId": "1_14280"
+          },
+          {
+            "arrivalTime": 35883,
+            "departureTime": 35883,
+            "distanceAlongTrip": 11170.394786456038,
+            "stopHeadsign": "",
+            "stopId": "1_14300"
+          },
+          {
+            "arrivalTime": 35944,
+            "departureTime": 35944,
+            "distanceAlongTrip": 11581.81589286972,
+            "stopHeadsign": "",
+            "stopId": "1_14320"
+          },
+          {
+            "arrivalTime": 36005,
+            "departureTime": 36005,
+            "distanceAlongTrip": 11994.127991078954,
+            "stopHeadsign": "",
+            "stopId": "1_14340"
+          },
+          {
+            "arrivalTime": 36072,
+            "departureTime": 36072,
+            "distanceAlongTrip": 12444.121611254777,
+            "stopHeadsign": "",
+            "stopId": "1_14360"
+          },
+          {
+            "arrivalTime": 36154,
+            "departureTime": 36154,
+            "distanceAlongTrip": 12862.969808720934,
+            "stopHeadsign": "",
+            "stopId": "1_40050"
+          },
+          {
+            "arrivalTime": 36421,
+            "departureTime": 37330,
+            "distanceAlongTrip": 14220.90527174814,
+            "stopHeadsign": "",
+            "stopId": "1_28680"
+          }
+        ],
+        "timeZone": "America/Los_Angeles"
+      },
+      "serviceDate": 1494831600000,
+      "situationIds": [],
+      "status": {
+        "activeTripId": "1_33359714",
+        "blockTripSequence": 2,
+        "closestStop": "1_538",
+        "closestStopTimeOffset": -45,
+        "distanceAlongTrip": 0,
+        "frequency": null,
+        "lastKnownDistanceAlongTrip": 0,
+        "lastKnownLocation": null,
+        "lastKnownOrientation": 0,
+        "lastLocationUpdateTime": 0,
+        "lastUpdateTime": 0,
+        "nextStop": "1_558",
+        "nextStopTimeOffset": 80,
+        "orientation": 132.6592858080064,
+        "phase": "",
+        "position": {
+          "lat": 47.605189025174504,
+          "lon": -122.33362126723654
+        },
+        "predicted": false,
+        "scheduleDeviation": 0,
+        "scheduledDistanceAlongTrip": 884.7037332775799,
+        "serviceDate": 1494831600000,
+        "situationIds": [],
+        "status": "default",
+        "totalDistanceAlongTrip": 14221.034709725463,
+        "vehicleId": ""
+      },
+      "tripId": "1_33359714"
+    },
+    "references": {
+      "agencies": [
+        {
+          "disclaimer": "",
+          "email": "",
+          "fareUrl": "",
+          "id": "1",
+          "lang": "EN",
+          "name": "Metro Transit",
+          "phone": "206-553-3000",
+          "privateService": false,
+          "timezone": "America/Los_Angeles",
+          "url": "http://metro.kingcounty.gov"
+        }
+      ],
+      "routes": [
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Seattle Blue Ridge to Crown Hill to Ballard to Sea",
+          "id": "1_102581",
+          "longName": "D-Line Rapid Ride",
+          "shortName": "D Line",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/travel-options/bus/rapidride/d-line/"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Kinnear - Downtown Seattle",
+          "id": "1_100001",
+          "longName": "",
+          "shortName": "1",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/001/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "W QA - Downtown - Madrona Pk",
+          "id": "1_100089",
+          "longName": "",
+          "shortName": "2",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/002/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "SPU - CBD - Madrona",
+          "id": "1_100173",
+          "longName": "",
+          "shortName": "3",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/003/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "SPU - CBD - Judkins Pk",
+          "id": "1_100219",
+          "longName": "",
+          "shortName": "4",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/004/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Prentice St - Rainier Bch - Downtown Sea",
+          "id": "1_100263",
+          "longName": "",
+          "shortName": "7",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/007/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Seattle Pacific - Downtown Seattle",
+          "id": "1_100028",
+          "longName": "",
+          "shortName": "13",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/013/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Mt Baker - Downtown Seattle",
+          "id": "1_100039",
+          "longName": "",
+          "shortName": "14",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/014/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Blue Ridge to Crown Hill to Downtown Seattle",
+          "id": "1_100044",
+          "longName": "",
+          "shortName": "15",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/015/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Ballard to SPU to Queen Anne to Downtown Seattle",
+          "id": "1_102572",
+          "longName": "",
+          "shortName": "29",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/029/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Othello Stn - Beacon Hill - Downtown Sea",
+          "id": "1_100210",
+          "longName": "",
+          "shortName": "36",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/036/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "U Dist - Broadway - Downtown Sea",
+          "id": "1_100447",
+          "longName": "",
+          "shortName": "49",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/049/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "University District to Eastlake to CBD",
+          "id": "1_100264",
+          "longName": "",
+          "shortName": "70",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/070/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Downtown Seattle to Queen Anne to Green Lake to Gr",
+          "id": "1_100277",
+          "longName": "",
+          "shortName": "82",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/082/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Downtown Seattle to University District to Maple L",
+          "id": "1_100278",
+          "longName": "",
+          "shortName": "83",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/083/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Downtown Seattle to Madison Park to Madrona",
+          "id": "1_100279",
+          "longName": "",
+          "shortName": "84",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/084/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Aurora Village to Downtown Seattle",
+          "id": "1_102615",
+          "longName": "E-Line Rapid Ride",
+          "shortName": "E Line",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/travel-options/bus/rapidride/e-line/"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Westwood Village to Fauntleroy Ferry to Alaska Jun",
+          "id": "1_102576",
+          "longName": "C-Line Rapid Ride",
+          "shortName": "C Line",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/travel-options/bus/rapidride/c-line/"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Shoreline CC to Greenwood to Downtown Seattle",
+          "id": "1_100229",
+          "longName": "",
+          "shortName": "5",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/005/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Loyal Heights to Sunset Hill to Ballard to Downtow",
+          "id": "1_100062",
+          "longName": "",
+          "shortName": "17",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/017/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "North Beach to Ballard to Downtown Seattle",
+          "id": "1_100071",
+          "longName": "",
+          "shortName": "18",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/018/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Magnolia",
+          "id": "1_100081",
+          "longName": "",
+          "shortName": "19",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/019/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Arbor Heights Westwood Village to Downtown Seattle",
+          "id": "1_100101",
+          "longName": "",
+          "shortName": "21",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/021/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "West Magnolia to Downtown Seattle",
+          "id": "1_100132",
+          "longName": "",
+          "shortName": "24",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/024/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "East Green Lake to Downtown Seattle",
+          "id": "1_100151",
+          "longName": "",
+          "shortName": "26",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/026/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Whittier Heights to Fremont to Downtown Seattle",
+          "id": "1_100169",
+          "longName": "",
+          "shortName": "28",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/028/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Discovery Park to Downtown Seattle",
+          "id": "1_100194",
+          "longName": "",
+          "shortName": "33",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/033/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Northgate TC to Ballard to Fremont to Westlake",
+          "id": "1_102574",
+          "longName": "",
+          "shortName": "40",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/040/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "CBD-Sand Point",
+          "id": "1_100252",
+          "longName": "",
+          "shortName": "62",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/062/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Fauntleroy Ferry to Downtown Seattle",
+          "id": "1_100014",
+          "longName": "",
+          "shortName": "116",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/116/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Tahlequah to Vashon to Downtown Seattle",
+          "id": "1_100016",
+          "longName": "",
+          "shortName": "118",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/118/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Dockton to Vashon to Downtown Seattle",
+          "id": "1_100017",
+          "longName": "",
+          "shortName": "119",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/119/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Burien TC - Westwood Village - Downtown Sea",
+          "id": "1_100019",
+          "longName": "",
+          "shortName": "120",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/120/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Tukwila International Blvd Sta to Downtown Seattle",
+          "id": "1_100023",
+          "longName": "",
+          "shortName": "124",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/124/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Downtown Seattle to Lakeside School",
+          "id": "1_100350",
+          "longName": "",
+          "shortName": "994",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/994/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "Seattle Center to Capitol Hill to Rainier Beach",
+          "id": "1_100275",
+          "longName": "",
+          "shortName": "8",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/008/n0.html"
+        },
+        {
+          "agencyId": "1",
+          "color": "",
+          "description": "U-District to Fremont to Interbay to Sea Center W",
+          "id": "1_100193",
+          "longName": "",
+          "shortName": "32",
+          "textColor": "",
+          "type": 3,
+          "url": "http://metro.kingcounty.gov/schedules/032/n0.html"
+        }
+      ],
+      "situations": [],
+      "stops": [
+        {
+          "code": "1610",
+          "direction": "NW",
+          "id": "1_1610",
+          "lat": 47.60173,
+          "locationType": 0,
+          "lon": -122.330116,
+          "name": "Prefontaine Pl S & Yesler Way",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100173",
+            "1_100219",
+            "1_100263",
+            "1_100028",
+            "1_100039",
+            "1_100044",
+            "1_102572",
+            "1_100210",
+            "1_100447",
+            "1_100264",
+            "1_100277",
+            "1_100278",
+            "1_100279",
+            "1_102581",
+            "1_102615"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "538",
+          "direction": "NW",
+          "id": "1_538",
+          "lat": 47.604191,
+          "locationType": 0,
+          "lon": -122.332588,
+          "name": "3rd Ave & Columbia St",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100173",
+            "1_100219",
+            "1_100263",
+            "1_100028",
+            "1_100039",
+            "1_100044",
+            "1_102572",
+            "1_100210",
+            "1_100447",
+            "1_100264",
+            "1_100277",
+            "1_100278",
+            "1_100279",
+            "1_102581",
+            "1_102615"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "558",
+          "direction": "NW",
+          "id": "1_558",
+          "lat": 47.607052,
+          "locationType": 0,
+          "lon": -122.335213,
+          "name": "3rd Ave & Seneca St",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100173",
+            "1_100219",
+            "1_100263",
+            "1_100028",
+            "1_100039",
+            "1_100044",
+            "1_102572",
+            "1_100210",
+            "1_100447",
+            "1_100264",
+            "1_100277",
+            "1_100278",
+            "1_100279",
+            "1_102581",
+            "1_102615"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "578",
+          "direction": "NW",
+          "id": "1_578",
+          "lat": 47.610485,
+          "locationType": 0,
+          "lon": -122.338356,
+          "name": "3rd Ave & Pike St",
+          "routeIds": [
+            "1_100044",
+            "1_100277",
+            "1_100278",
+            "1_102576",
+            "1_102581",
+            "1_102615"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "600",
+          "direction": "NW",
+          "id": "1_600",
+          "lat": 47.612808,
+          "locationType": 0,
+          "lon": -122.341438,
+          "name": "3rd Ave & Virginia St",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100173",
+            "1_100219",
+            "1_100229",
+            "1_100028",
+            "1_100039",
+            "1_100044",
+            "1_100062",
+            "1_100071",
+            "1_100081",
+            "1_100101",
+            "1_100132",
+            "1_100151",
+            "1_100169",
+            "1_102572",
+            "1_100194",
+            "1_102574",
+            "1_100252",
+            "1_100277",
+            "1_100014",
+            "1_100016",
+            "1_100017",
+            "1_100019",
+            "1_100023",
+            "1_100350",
+            "1_102576",
+            "1_102581",
+            "1_102615"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "605",
+          "direction": "NW",
+          "id": "1_605",
+          "lat": 47.615036,
+          "locationType": 0,
+          "lon": -122.3452,
+          "name": "3rd Ave & Bell St",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100173",
+            "1_100219",
+            "1_100229",
+            "1_100028",
+            "1_100044",
+            "1_100062",
+            "1_100071",
+            "1_100081",
+            "1_100132",
+            "1_100151",
+            "1_100169",
+            "1_100194",
+            "1_100277",
+            "1_100014",
+            "1_100016",
+            "1_100017",
+            "1_100023",
+            "1_102581",
+            "1_102615"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "1690",
+          "direction": "NW",
+          "id": "1_1690",
+          "lat": 47.616871,
+          "locationType": 0,
+          "lon": -122.348297,
+          "name": "3rd Ave & Vine St",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100173",
+            "1_100219",
+            "1_100028",
+            "1_100081",
+            "1_100132",
+            "1_100194",
+            "1_100277",
+            "1_100014",
+            "1_100016",
+            "1_100017",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "2330",
+          "direction": "N",
+          "id": "1_2330",
+          "lat": 47.618904,
+          "locationType": 0,
+          "lon": -122.355347,
+          "name": "1st Ave N & Denny Way",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100275",
+            "1_100028",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "2360",
+          "direction": "N",
+          "id": "1_2360",
+          "lat": 47.623188,
+          "locationType": 0,
+          "lon": -122.355316,
+          "name": "1st Ave N & Republican St",
+          "routeIds": [
+            "1_100001",
+            "1_100089",
+            "1_100275",
+            "1_100028",
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "2370",
+          "direction": "W",
+          "id": "1_2370",
+          "lat": 47.624649,
+          "locationType": 0,
+          "lon": -122.356552,
+          "name": "Mercer St & Queen Anne Ave N",
+          "routeIds": [
+            "1_100001",
+            "1_100275",
+            "1_100193",
+            "1_100350",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14038",
+          "direction": "W",
+          "id": "1_14038",
+          "lat": 47.624668,
+          "locationType": 0,
+          "lon": -122.361153,
+          "name": "W Mercer St & 3rd Ave W",
+          "routeIds": [
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14070",
+          "direction": "NW",
+          "id": "1_14070",
+          "lat": 47.628788,
+          "locationType": 0,
+          "lon": -122.371124,
+          "name": "Elliott Ave W & W Prospect St",
+          "routeIds": [
+            "1_100081",
+            "1_100132",
+            "1_100193",
+            "1_100194",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14090",
+          "direction": "NW",
+          "id": "1_14090",
+          "lat": 47.632252,
+          "locationType": 0,
+          "lon": -122.375481,
+          "name": "Elliott Ave W & W Galer St",
+          "routeIds": [
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14110",
+          "direction": "N",
+          "id": "1_14110",
+          "lat": 47.636963,
+          "locationType": 0,
+          "lon": -122.376099,
+          "name": "15th Ave W & W Newton St",
+          "routeIds": [
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14130",
+          "direction": "N",
+          "id": "1_14130",
+          "lat": 47.640923,
+          "locationType": 0,
+          "lon": -122.376114,
+          "name": "15th Ave W & W Wheeler St",
+          "routeIds": [
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14150",
+          "direction": "N",
+          "id": "1_14150",
+          "lat": 47.644936,
+          "locationType": 0,
+          "lon": -122.376122,
+          "name": "15th Ave W & W Armour St",
+          "routeIds": [
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14170",
+          "direction": "N",
+          "id": "1_14170",
+          "lat": 47.649097,
+          "locationType": 0,
+          "lon": -122.376045,
+          "name": "15th Ave W & W Dravus St",
+          "routeIds": [
+            "1_100193",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14190",
+          "direction": "N",
+          "id": "1_14190",
+          "lat": 47.653942,
+          "locationType": 0,
+          "lon": -122.376122,
+          "name": "15th Ave W & W Emerson St",
+          "routeIds": [
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14200",
+          "direction": "N",
+          "id": "1_14200",
+          "lat": 47.663437,
+          "locationType": 0,
+          "lon": -122.375977,
+          "name": "15th Ave NW & NW Leary Way",
+          "routeIds": [
+            "1_100062",
+            "1_100071",
+            "1_102572",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14230",
+          "direction": "N",
+          "id": "1_14230",
+          "lat": 47.668472,
+          "locationType": 0,
+          "lon": -122.376114,
+          "name": "15th Ave NW & NW Market St",
+          "routeIds": [
+            "1_100044",
+            "1_100350",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14250",
+          "direction": "N",
+          "id": "1_14250",
+          "lat": 47.672291,
+          "locationType": 0,
+          "lon": -122.376114,
+          "name": "15th Ave NW & NW 60th St",
+          "routeIds": [
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14280",
+          "direction": "N",
+          "id": "1_14280",
+          "lat": 47.676731,
+          "locationType": 0,
+          "lon": -122.376671,
+          "name": "15th Ave NW & NW 65th St",
+          "routeIds": [
+            "1_100044",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14300",
+          "direction": "N",
+          "id": "1_14300",
+          "lat": 47.679726,
+          "locationType": 0,
+          "lon": -122.376671,
+          "name": "15th Ave NW & NW 70th St",
+          "routeIds": [
+            "1_100044",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14320",
+          "direction": "N",
+          "id": "1_14320",
+          "lat": 47.683422,
+          "locationType": 0,
+          "lon": -122.376686,
+          "name": "15th Ave NW & NW 75th St",
+          "routeIds": [
+            "1_100044",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14340",
+          "direction": "N",
+          "id": "1_14340",
+          "lat": 47.68713,
+          "locationType": 0,
+          "lon": -122.376701,
+          "name": "15th Ave NW & NW 80th St",
+          "routeIds": [
+            "1_100044",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "14360",
+          "direction": "N",
+          "id": "1_14360",
+          "lat": 47.691177,
+          "locationType": 0,
+          "lon": -122.376709,
+          "name": "15th Ave NW & NW 85th St",
+          "routeIds": [
+            "1_100044",
+            "1_102574",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "40050",
+          "direction": "NE",
+          "id": "1_40050",
+          "lat": 47.694698,
+          "locationType": 0,
+          "lon": -122.375343,
+          "name": "Holman Rd NW & Mary Ave NW",
+          "routeIds": [
+            "1_102574",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        },
+        {
+          "code": "28680",
+          "direction": "NE",
+          "id": "1_28680",
+          "lat": 47.702484,
+          "locationType": 0,
+          "lon": -122.363708,
+          "name": "NW 100th Pl & 7th Ave NW",
+          "routeIds": [
+            "1_100169",
+            "1_102581"
+          ],
+          "wheelchairBoarding": "UNKNOWN"
+        }
+      ],
+      "trips": [
+        {
+          "blockId": "1_4448308",
+          "directionId": "0",
+          "id": "1_33359714",
+          "routeId": "1_102581",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_11674036",
+          "timeZone": "",
+          "tripHeadsign": "Ballard Uptown",
+          "tripShortName": "LOCAL"
+        },
+        {
+          "blockId": "1_4448308",
+          "directionId": "1",
+          "id": "1_33359657",
+          "routeId": "1_102581",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_20674043",
+          "timeZone": "",
+          "tripHeadsign": "Downtown Seattle Uptown",
+          "tripShortName": "LOCAL"
+        },
+        {
+          "blockId": "1_4448308",
+          "directionId": "1",
+          "id": "1_33359648",
+          "routeId": "1_102581",
+          "routeShortName": "",
+          "serviceId": "1_110802",
+          "shapeId": "1_20674043",
+          "timeZone": "",
+          "tripHeadsign": "Downtown Seattle Uptown",
+          "tripShortName": "LOCAL"
+        }
+      ]
+    }
+  },
+  "text": "OK",
+  "version": 2
+}
