@@ -37,57 +37,61 @@ function compareProperty(propname) {
 	};
 }
 
+class StubObaClient {
+	constructor() {
+		this.stops = {};
+		this.arrDeps = {};
+		this.trips = {};
+	}
+
+	stopsForLocation(loc) {
+		return this._result("stopsForLocation", this.stops, JSON.stringify(loc));
+	}
+
+	arrivalsAndDeparturesForStop(stopId) {
+		return this._result("arrivalsAndDeparturesForStop", this.arrDeps, stopId);
+	}
+
+	tripDetails(tripId) {
+		return this._result("tripDetails", this.trips, tripId);
+	}
+
+	_result(methodName, dict, param) {
+		if (dict[param]) {
+			return dict[param];
+		} else if (dict.any) {
+			return dict.any;
+		} else {
+			return Promise.reject("No " + methodName + " for " + param);
+		}
+	}
+}
+
 describe("Router", function() {
 	describe("findTrips", function() {
 		beforeEach(function() {
-			this.obaClient = jasmine.createSpyObj("obaClient", [
-				"stopsForLocation",
-				"arrivalsAndDeparturesForStop",
-				"tripDetails",
-			]);
+			this.obaClient = new StubObaClient();
 			this.subject = new Router({ obaClient: this.obaClient });
-		});
-
-		it("fetches stops near the endpoints", function() {
-			const src = {lat: 47.663667, lon: -122.376109};
-			const dest = {lat: 47.609776, lon: -122.337830};
-			this.obaClient.stopsForLocation.and.callFake(function(point) {
-				return new Promise(function(resolve, reject) {});
-			});
-			
-			this.subject.findTrips(src, dest)
-
-			expect(this.obaClient.stopsForLocation).toHaveBeenCalledWith(src);
-			expect(this.obaClient.stopsForLocation).toHaveBeenCalledWith(dest);
 		});
 
 		it("fails when either stopsForLocation call fails", function() {
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
 			const error = new Error("nope");
-			this.obaClient.stopsForLocation.and.callFake(function(point) {
-				return new Promise(function(resolve, reject) {
-					if (point === src) {
-						resolve({});
-					} else {
-						reject(error);
-					}
-				});
-			});
+			this.obaClient.stops[JSON.stringify(src)] = Promise.resolve({});
+			this.obaClient.stops[JSON.stringify(dest)] = Promise.reject(error);
 
 			return verifyFails(this.subject.findTrips(src, dest), error);
 		});
 
 		it("fetches arrivals and departures for each source stop", async function() {
 			const payload = makeStopsForLocationResponse(["1_13760", "1_18165"]);
-			const src = {}, dest = {};
-			this.obaClient.stopsForLocation.and.callFake(function(point) {
-				return new Promise(function(resolve, reject) {
-					resolve(point === src ? payload : []);
-				});
-			});
-			this.obaClient.arrivalsAndDeparturesForStop.and.returnValue(
-				Promise.resolve([]));
+			const src = {lat: 47.663667, lon: -122.376109};
+			const dest = {lat: 47.609776, lon: -122.337830};
+			this.obaClient.stops[JSON.stringify(src)] = Promise.resolve(payload);
+			this.obaClient.stops[JSON.stringify(dest)] = Promise.resolve([]);
+			this.obaClient.arrDeps.any = Promise.resolve([]);
+			spyOn(this.obaClient, "arrivalsAndDeparturesForStop");
 
 			await this.subject.findTrips(src, dest);
 
@@ -100,45 +104,31 @@ describe("Router", function() {
 		it("fails when an arrival and departure fetch fails", function() {
 			const payload = makeStopsForLocationResponse(["1_13760"]);
 			const error = new Error("nope");
-			this.obaClient.stopsForLocation.and.returnValue(
-				Promise.resolve(payload));
-			this.obaClient.arrivalsAndDeparturesForStop.and.returnValue(
-				Promise.reject(error));
+			this.obaClient.stops.any = Promise.resolve(payload);
+			this.obaClient.arrDeps.any = Promise.reject(error);
 
 			return verifyFails(this.subject.findTrips({}, {}), error);
 		});
 
 		it("fetches trip details", async function() {
-			const src = {}, dest = {};
-			const srcStopsPayload = makeStopsForLocationResponse(["src sid"]);
-			const destStopsPayload = makeStopsForLocationResponse(["dest sid"]);
-			const srcArrDepPayload = [
+			const src = {lat: 47.663667, lon: -122.376109};
+			const dest = {lat: 47.609776, lon: -122.337830};
+			this.obaClient.stops[JSON.stringify(src)] = Promise.resolve(
+				makeStopsForLocationResponse(["src sid"]));
+			this.obaClient.stops[JSON.stringify(dest)] = Promise.resolve(
+				makeStopsForLocationResponse(["dest sid"]));
+
+			this.obaClient.arrDeps["src sid"] = Promise.resolve([
 				{ tripId: "12345", stopSequence: 1 },
 				{ tripId: "67890", stopSequence: 1 },
-			];
-			const destArrDepPayload = [
+			]);
+			this.obaClient.arrDeps["dest sid"] = Promise.resolve([
 				{ tripId: "12345", stopSequence: 2 },
 				{ tripId: "67890", stopSequence: 2 },
-			];
+			]);
 
-			this.obaClient.stopsForLocation.and.callFake(function(point) {
-				if (point === src) {
-					return Promise.resolve(srcStopsPayload);
-				} else {
-					return Promise.resolve(destStopsPayload);
-				}
-			});
-
-			this.obaClient.arrivalsAndDeparturesForStop.and.callFake(function(sid) {
-				if (sid === "src sid") {
-					return Promise.resolve(srcArrDepPayload);
-				} else {
-					return Promise.resolve(destArrDepPayload);
-				}
-			});
-
-			this.obaClient.tripDetails.and.returnValue(
-				Promise.resolve({ stops: [] }));
+			this.obaClient.trips.any = Promise.resolve({ stops: [] });
+			spyOn(this.obaClient, "tripDetails");
 
 			await this.subject.findTrips(src, dest);
 
@@ -147,42 +137,24 @@ describe("Router", function() {
 		});
 
 		it("provides trips that stop near both points", async function() {
-			const src = {}, dest = {};
-			const srcStopsPayload = makeStopsForLocationResponse(["src sid"]);
-			const destStopsPayload = makeStopsForLocationResponse(["dest sid"]);
-			const srcArrDepPayload = [
+			const src = {lat: 47.663667, lon: -122.376109};
+			const dest = {lat: 47.609776, lon: -122.337830};
+			this.obaClient.stops[JSON.stringify(src)] = Promise.resolve(
+				makeStopsForLocationResponse(["src sid"]));
+			this.obaClient.stops[JSON.stringify(dest)] = Promise.resolve(
+				makeStopsForLocationResponse(["dest sid"]));
+
+			this.obaClient.arrDeps["src sid"] = Promise.resolve([
 				{ tripId: "12345", stopSequence: 1 },
 				{ tripId: "xyz", stopSequence: 1 },
-			];
-			const destArrDepPayload = [
+			]);
+			this.obaClient.arrDeps["dest sid"] = Promise.resolve([
 				{ tripId: "12345", stopSequence: 2 },
 				{ tripId: "67890", stopSequence: 2 },
-			];
+			]);
 
-			this.obaClient.stopsForLocation.and.callFake(function(point) {
-				if (point === src) {
-					return Promise.resolve(srcStopsPayload);
-				} else {
-					return Promise.resolve(destStopsPayload);
-				}
-			});
-
-			this.obaClient.arrivalsAndDeparturesForStop.and.callFake(function(sid) {
-				if (sid === "src sid") {
-					return Promise.resolve(srcArrDepPayload);
-				} else {
-					return Promise.resolve(destArrDepPayload);
-				}
-			});
-
-			const trip = makeTripDetailsResponse("12345", ["src sid", "dest sid"]);
-			this.obaClient.tripDetails.and.callFake(function(tripId) {
-				if (tripId === "12345") {
-					return Promise.resolve(trip);
-				} else {
-					return Promise.reject("Wrong trip ID");
-				}
-			});
+			this.obaClient.trips["12345"] = Promise.resolve(
+				makeTripDetailsResponse("12345", ["src sid", "dest sid"]));
 
 			const result = await this.subject.findTrips(src, dest)
 			expect(result).toEqual([{
