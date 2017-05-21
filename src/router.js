@@ -29,7 +29,7 @@ class Router {
 		this._obaClient = deps.obaClient || makeObaClient(deps);
 	}
 
-	async findTrips(src: Point, dest: Point) {
+	async findTrips(src: Point, dest: Point): Promise<Array<TripDetails>> {
 		const [srcStops, destStops] = await Promise.all([
 			this._obaClient.stopsForLocation(src),
 			this._obaClient.stopsForLocation(dest),
@@ -38,8 +38,7 @@ class Router {
 		return this._tripsBetweenStopSets(srcStops, destStops);
 	}
 
-	// TODO: returns promise of array of TripDetails
-	async _tripsBetweenStopSets(srcStopIds: [string], destStopIds: [string]) {
+	async _tripsBetweenStopSets(srcStopIds: [string], destStopIds: [string]): Promise<Array<TripDetails>> {
 		const [srcArrDeps, destArrDeps] = await Promise.all([
 			this._arrivalsAndDeparturesForStops(srcStopIds),
 			this._arrivalsAndDeparturesForStops(destStopIds)
