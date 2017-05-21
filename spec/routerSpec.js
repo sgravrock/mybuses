@@ -1,6 +1,6 @@
 "use strict";
 const vcr = require("./helpers/http-vcr");
-const Router = require("../lib/router");
+const Router = require("../lib/router").Router;
 
 function makeStopsForLocationResponse(stopIds) {
 	return stopIds;

@@ -1,7 +1,7 @@
 const http = require("http");
 const { URL, URLSearchParams } = require("url");
 
-function delay(millis) {
+function delay(millis: number) {
 	return new Promise(function(resolve) {
 		setTimeout(function() {
 			resolve();
@@ -9,8 +9,11 @@ function delay(millis) {
 	});
 }
 
-class ObaRequest {
-	constructor(deps) {
+export class ObaRequest {
+	_http: any;
+	_key: string;
+
+	constructor(deps: any) {
 		this._http = deps.http || http;
 
 		if (!deps.key) {
@@ -20,7 +23,7 @@ class ObaRequest {
 		this._key = deps.key;
 	}
 
-	async get(path, params) {
+	async get(path: string, params: any): Promise<string> {
 		const body = await this._getOnce(path, params)
 
 		if (body.code === 429) {
@@ -32,19 +35,19 @@ class ObaRequest {
 		return body;
 	}
 
-	_getOnce(path, params) {
+	_getOnce(path: string, params: any): any {
 		return new Promise((resolve, reject) => {
 			const url = this._buildUrl(path, params);
-			this._http.get(url, function(response) {
+			this._http.get(url, function(response: any) {
 				var body = '';
 
-				response.on("data", (chunk) => body += chunk);
+				response.on("data", (chunk: string) => body += chunk);
 				response.on("end", () => resolve(JSON.parse(body)));
 			});
 		});
 	}
 
-	_buildUrl(path, params) {
+	_buildUrl(path: string, params: any) {
 		const url = new URL("http://api.pugetsound.onebusaway.org");
 		url.pathname = path;
 		url.searchParams.append("key", this._key);
@@ -55,5 +58,3 @@ class ObaRequest {
 		return url.toString();
 	}
 }
-
-module.exports = ObaRequest;

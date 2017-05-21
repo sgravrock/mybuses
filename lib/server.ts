@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const Router = require("./router");
+import { Router } from "./router";
 
-function require_env(name) {
+function require_env(name: string) {
 	const value = process.env[name];
 
 	if (!value) {
@@ -22,7 +22,7 @@ const dest = {
 };
 const key = require_env("OBA_API_KEY");
 
-app.get('/', function (req, res) {
+app.get('/', function (req: any, res: any) {
 	new Router({key: key}).findTrips(src, dest).then(function(trips) {
 		res.send(JSON.stringify(trips));
 	});

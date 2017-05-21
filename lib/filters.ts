@@ -1,7 +1,7 @@
 "use strict";
 
-function groupEndpoints(srcArrDeps, destArrDeps) {
-	let result = [];
+function groupEndpoints(srcArrDeps: any[], destArrDeps: any[]): any[][] {
+	let result: any[][] = [];
 
 	srcArrDeps.forEach(function(src) {
 		destArrDeps.forEach(function(dest) {
@@ -14,7 +14,7 @@ function groupEndpoints(srcArrDeps, destArrDeps) {
 	return result;
 }
 
-function excludeWrongWay(trips) {
+function excludeWrongWay(trips: any[]): any[] {
 	return trips.filter(function([start, end]) {
 		return start.stopSequence < end.stopSequence;
 	});

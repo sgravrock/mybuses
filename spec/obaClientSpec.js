@@ -1,5 +1,5 @@
 "use strict";
-const ObaClient = require("../lib/obaClient");
+const ObaClient = require("../lib/obaClient").ObaClient;
 
 describe("ObaClient", function() {
 	beforeEach(function() {
