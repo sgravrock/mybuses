@@ -1,3 +1,4 @@
+// @flow
 "use strict";
 const vcr = require("../helpers/http-vcr");
 const Router = require("../../lib/router");
@@ -38,6 +39,10 @@ function compareProperty(propname) {
 }
 
 class StubObaClient {
+	stops: { [string] : any };
+	arrDeps: { [string] : any };
+	trips: { [string] : any };
+
 	constructor() {
 		this.stops = {};
 		this.arrDeps = {};

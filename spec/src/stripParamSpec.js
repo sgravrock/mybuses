@@ -1,3 +1,4 @@
+// @flow
 "use strict";
 const stripParam = require("../../lib/stripParam");
 
