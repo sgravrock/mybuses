@@ -1,6 +1,10 @@
 "use strict";
 
-function groupEndpoints(srcArrDeps: any[], destArrDeps: any[]): any[][] {
+import { ArrivalAndDeparture } from "./obaClient";
+
+function groupEndpoints(srcArrDeps: ArrivalAndDeparture[],
+		destArrDeps: ArrivalAndDeparture[]):
+		ArrivalAndDeparture[][] {
 	let result: any[][] = [];
 
 	srcArrDeps.forEach(function(src) {
@@ -14,7 +18,7 @@ function groupEndpoints(srcArrDeps: any[], destArrDeps: any[]): any[][] {
 	return result;
 }
 
-function excludeWrongWay(trips: any[]): any[] {
+function excludeWrongWay(trips: [ArrivalAndDeparture, ArrivalAndDeparture][]): [ArrivalAndDeparture, ArrivalAndDeparture][] {
 	return trips.filter(function([start, end]) {
 		return start.stopSequence < end.stopSequence;
 	});
