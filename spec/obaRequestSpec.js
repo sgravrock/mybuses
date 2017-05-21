@@ -1,12 +1,8 @@
-// @flow
 "use strict";
-const ObaRequest = require("../../lib/obaRequest");
+const ObaRequest = require("../lib/obaRequest");
 const parseUrl = require("url").parse;
 
 class MockResponse {
-	statusCode: number;
-	_handlers: { [string]: any };
-
 	constructor() {
 		this._handlers = {};
 	}

@@ -1,6 +1,6 @@
 "use strict";
 var http = require("http");
-var httpVcr = require("../helpers/http-vcr");
+var httpVcr = require("./helpers/http-vcr");
 var tmp = require("tmp");
 var fs = require("fs");
 var path = require("path");
