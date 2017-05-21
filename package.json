@@ -10,6 +10,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.21",
     "jasmine": "file:../../../../var/folders/pd/sm1x57vx63lbvbskm6ntkk1r0000gn/T/npm-12911-559d4d4b/git-cache-1ad30cd0667e/f0fd9176bc7cf44894287bc9202e1d8e5ec4e360",
     "mkdirp": "^0.5.1",
