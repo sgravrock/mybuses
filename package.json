@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/server.js",
   "scripts": {
-    "build": "flow-remove-types src/ -d lib/",
+    "build": "flow-remove-types src/ -d lib/ && flow-remove-types spec/src/ -d spec/lib/",
     "flow": "flow",
     "test": "npm run build && flow && jasmine"
   },

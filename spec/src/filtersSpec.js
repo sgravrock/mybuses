@@ -1,5 +1,5 @@
 "use strict";
-const filters = require("../lib/filters");
+const filters = require("../../lib/filters");
 
 describe("filters", function() {
 	describe("groupEndpoints", function() {
