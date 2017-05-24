@@ -31,15 +31,39 @@ function compareProperty(propname: string) {
 	};
 }
 
-class StubObaClient implements IObaClient {
-	stops: Map<string, Promise<string[]>>;
-	arrDeps: Map<string, Promise<ArrivalAndDeparture[]>>;
-	trips: Map<string, Promise<TripDetails>>;
+// Works around an unfortunate type checking hole. TypeScript accepts this:
+// const p: Promise<T> = Promise.resolve("totally not a T")
+// By passing the payload through a typed interface before it gets to 
+// Promise.resolve, we ensure that payloads get type checked.
+class PromiseMap<T> {
+	_map: Map<string, Promise<T>>;
 
 	constructor() {
-		this.stops = new Map();
-		this.arrDeps = new Map();
-		this.trips = new Map();
+		this._map = new Map();
+	}
+
+	resolve(key: string, payload: T) {
+		this._map.set(key, Promise.resolve(payload));
+	}
+
+	reject(key: string, error: any) {
+		this._map.set(key, Promise.reject(error));
+	}
+
+	get(key: string): Promise<T> | undefined {
+		return this._map.get(key);
+	}
+}
+
+class StubObaClient implements IObaClient {
+	stops: PromiseMap<string[]>;
+	arrDeps: PromiseMap<ArrivalAndDeparture[]>;
+	trips: PromiseMap<TripDetails>;
+
+	constructor() {
+		this.stops = new PromiseMap();
+		this.arrDeps = new PromiseMap();
+		this.trips = new PromiseMap();
 	}
 
 	stopsForLocation(loc: Point): Promise<string[]> {
@@ -54,7 +78,7 @@ class StubObaClient implements IObaClient {
 		return this._result("tripDetails", this.trips, tripId);
 	}
 
-	_result<T>(methodName: string, dict: Map<string, Promise<T>>, param: string): Promise<T> {
+	_result<T>(methodName: string, dict: PromiseMap<T>, param: string): Promise<T> {
 		const value = dict.get(param) || dict.get("any");
 
 		if (value) {
@@ -81,8 +105,8 @@ describe("Router", function() {
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
 			const error = new Error("nope");
-			this.obaClient.stops.set(JSON.stringify(src), Promise.resolve({}));
-			this.obaClient.stops.set(JSON.stringify(dest), Promise.reject(error));
+			this.obaClient.stops.resolve(JSON.stringify(src), []);
+			this.obaClient.stops.reject(JSON.stringify(dest), error);
 
 			return verifyFails(this.subject.findTrips(src, dest), error);
 		});
@@ -91,9 +115,9 @@ describe("Router", function() {
 			const payload = makeStopsForLocationResponse(["1_13760", "1_18165"]);
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
-			this.obaClient.stops.set(JSON.stringify(src), Promise.resolve(payload));
-			this.obaClient.stops.set(JSON.stringify(dest), Promise.resolve([]));
-			this.obaClient.arrDeps.set("any", Promise.resolve([]));
+			this.obaClient.stops.resolve(JSON.stringify(src), payload);
+			this.obaClient.stops.resolve(JSON.stringify(dest), []);
+			this.obaClient.arrDeps.resolve("any", []);
 			spyOn(this.obaClient, "arrivalsAndDeparturesForStop");
 
 			await this.subject.findTrips(src, dest);
@@ -109,8 +133,8 @@ describe("Router", function() {
 			const dest = {lat: 47.609776, lon: -122.337830};
 			const payload = makeStopsForLocationResponse(["1_13760"]);
 			const error = new Error("nope");
-			this.obaClient.stops.set("any", Promise.resolve(payload));
-			this.obaClient.arrDeps.set("any", Promise.reject(error));
+			this.obaClient.stops.resolve("any", payload);
+			this.obaClient.arrDeps.reject("any", error);
 
 			return verifyFails(this.subject.findTrips(src, dest), error);
 		});
@@ -118,27 +142,27 @@ describe("Router", function() {
 		it("fetches trip details", async function(this: RouterSpecContext) {
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
-			this.obaClient.stops.set(JSON.stringify(src), Promise.resolve(
-				makeStopsForLocationResponse(["src sid"])));
-			this.obaClient.stops.set(JSON.stringify(dest), Promise.resolve(
-				makeStopsForLocationResponse(["dest sid"])));
+			this.obaClient.stops.resolve(JSON.stringify(src),
+				makeStopsForLocationResponse(["src sid"]));
+			this.obaClient.stops.resolve(JSON.stringify(dest),
+				makeStopsForLocationResponse(["dest sid"]));
 
-			this.obaClient.arrDeps.set("src sid", Promise.resolve([
-				{ tripId: "12345", stopSequence: 1 },
-				{ tripId: "67890", stopSequence: 1 },
-			]));
-			this.obaClient.arrDeps.set("dest sid", Promise.resolve([
-				{ tripId: "12345", stopSequence: 2 },
-				{ tripId: "67890", stopSequence: 2 },
-			]));
+			this.obaClient.arrDeps.resolve("src sid", [
+				{ tripId: "12345", stopId: "src sid", stopSequence: 1 },
+				{ tripId: "67890", stopId: "src sid", stopSequence: 1 },
+			]);
+			this.obaClient.arrDeps.resolve("dest sid", [
+				{ tripId: "12345", stopId: "dest sid", stopSequence: 2 },
+				{ tripId: "67890", stopId: "dest sid", stopSequence: 2 },
+			]);
 
-			this.obaClient.trips.set("any", Promise.resolve({
+			this.obaClient.trips.resolve("any", {
 				tripId: "any",
 				route: {
 					id: "any",
 					shortName: "any"
 				}
-			}));
+			});
 			spyOn(this.obaClient, "tripDetails").and.callThrough();
 
 			await this.subject.findTrips(src, dest);
@@ -150,25 +174,25 @@ describe("Router", function() {
 		it("provides trips that stop near both points", async function(this: RouterSpecContext) {
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
-			this.obaClient.stops.set(JSON.stringify(src), Promise.resolve(
-				makeStopsForLocationResponse(["src sid", "src sid 2"])));
-			this.obaClient.stops.set(JSON.stringify(dest), Promise.resolve(
-				makeStopsForLocationResponse(["dest sid", "dest sid 2"])));
+			this.obaClient.stops.resolve(JSON.stringify(src),
+				makeStopsForLocationResponse(["src sid", "src sid 2"]));
+			this.obaClient.stops.resolve(JSON.stringify(dest),
+				makeStopsForLocationResponse(["dest sid", "dest sid 2"]));
 
-			this.obaClient.arrDeps.set("src sid", Promise.resolve([
+			this.obaClient.arrDeps.resolve("src sid", [
 				{ tripId: "12345", stopId: "src sid", stopSequence: 1 },
 				{ tripId: "xyz", stopId: "src sid", stopSequence: 1 },
-			]));
-			this.obaClient.arrDeps.set("src sid 2", Promise.resolve([
+			]);
+			this.obaClient.arrDeps.resolve("src sid 2", [
 				{ tripId: "12345", stopId: "src sid 2", stopSequence: 2 },
-			]));
-			this.obaClient.arrDeps.set("dest sid", Promise.resolve([
+			]);
+			this.obaClient.arrDeps.resolve("dest sid", [
 				{ tripId: "12345", stopId: "dest sid", stopSequence: 3 },
 				{ tripId: "67890", stopId: "dest sid", stopSequence: 2 },
-			]));
-			this.obaClient.arrDeps.set("dest sid 2", Promise.resolve([
+			]);
+			this.obaClient.arrDeps.resolve("dest sid 2", [
 				{ tripId: "12345", stopId: "dest sid 2", stopSequence: 4 },
-			]));
+			]);
 
 			const tripDetails = {
 				tripId: "12345",
@@ -177,7 +201,7 @@ describe("Router", function() {
 					shortName: "Some route"
 				}
 			};
-			this.obaClient.trips.set("12345", Promise.resolve(tripDetails));
+			this.obaClient.trips.resolve("12345", tripDetails);
 
 			const result = await this.subject.findTrips(src, dest)
 			expect(result).toEqual([{
