@@ -1,5 +1,4 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
-"use strict";
 const vcr = require("./helpers/http-vcr");
 import { Router } from "../lib/router";
 import { Point, ArrivalAndDeparture, TripDetails, IObaClient } from "../lib/obaClient";
