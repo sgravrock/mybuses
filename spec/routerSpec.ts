@@ -140,7 +140,7 @@ describe("Router", function() {
 					shortName: "any"
 				}
 			}));
-			spyOn(this.obaClient, "tripDetails");
+			spyOn(this.obaClient, "tripDetails").and.callThrough();
 
 			await this.subject.findTrips(src, dest);
 
@@ -152,17 +152,23 @@ describe("Router", function() {
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
 			this.obaClient.stops.set(JSON.stringify(src), Promise.resolve(
-				makeStopsForLocationResponse(["src sid"])));
+				makeStopsForLocationResponse(["src sid", "src sid 2"])));
 			this.obaClient.stops.set(JSON.stringify(dest), Promise.resolve(
-				makeStopsForLocationResponse(["dest sid"])));
+				makeStopsForLocationResponse(["dest sid", "dest sid 2"])));
 
 			this.obaClient.arrDeps.set("src sid", Promise.resolve([
-				{ tripId: "12345", stopSequence: 1 },
-				{ tripId: "xyz", stopSequence: 1 },
+				{ tripId: "12345", stopId: "src sid", stopSequence: 1 },
+				{ tripId: "xyz", stopId: "src sid", stopSequence: 1 },
+			]));
+			this.obaClient.arrDeps.set("src sid 2", Promise.resolve([
+				{ tripId: "12345", stopId: "src sid 2", stopSequence: 2 },
 			]));
 			this.obaClient.arrDeps.set("dest sid", Promise.resolve([
-				{ tripId: "12345", stopSequence: 2 },
-				{ tripId: "67890", stopSequence: 2 },
+				{ tripId: "12345", stopId: "dest sid", stopSequence: 3 },
+				{ tripId: "67890", stopId: "dest sid", stopSequence: 2 },
+			]));
+			this.obaClient.arrDeps.set("dest sid 2", Promise.resolve([
+				{ tripId: "12345", stopId: "dest sid 2", stopSequence: 4 },
 			]));
 
 			const tripDetails = {
@@ -175,7 +181,15 @@ describe("Router", function() {
 			this.obaClient.trips.set("12345", Promise.resolve(tripDetails));
 
 			const result = await this.subject.findTrips(src, dest)
-			expect(result).toEqual([tripDetails]);
+			expect(result).toEqual([{
+				tripId: "12345",
+				route: {
+					id: "5679",
+					shortName: "Some route"
+				},
+				srcStopIds: ["src sid", "src sid 2"],
+				destStopIds: ["dest sid", "dest sid 2"],
+			}]);
 		});
 	});
 
@@ -197,28 +211,36 @@ describe("Router", function() {
 						route: {
 							id: "1_102572",
 							shortName: "29"
-						}
+						},
+						srcStopIds: ["1_13760", "1_18150"],
+						destStopIds: ["1_265", "1_300"],
 					},
 					{
 						tripId: "1_33359811",
 						route: {
 							id: "1_102581",
 							shortName: "D Line"
-						}
+						},
+						srcStopIds: ["1_13760"],
+						destStopIds: ["1_420", "1_431", "1_468"],
 					},
 					{
 						tripId: "1_33359163",
 						route: {
 							id: "1_102574",
 							shortName: "40"
-						}
+						},
+						srcStopIds: ["1_18150", "1_18165", "1_28255"],
+						destStopIds: ["1_420", "1_430", "1_450"],
 					},
 					{
 						tripId: "1_33359653",
 						route: {
 							id: "1_102581",
 							shortName: "D Line"
-						}
+						},
+						srcStopIds: ["1_13760"],
+						destStopIds: ["1_420", "1_431", "1_468"]
 					}
 				].sort(compareProperty("tripId"));
 

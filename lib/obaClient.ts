@@ -8,6 +8,7 @@ export type Point = {
 
 export type ArrivalAndDeparture = {
 	tripId: string,
+	stopId: string,
 	stopSequence: number
 };
 
