@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const Router = require("./lib/router");
+const Router = require("./lib/router").Router;
 
 if (process.argv.length !== 6) {
 	console.error("Usage: ", process.argv0, process.argv[1], "srcLat srcLon destLat destLon");
