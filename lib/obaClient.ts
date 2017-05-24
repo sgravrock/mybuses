@@ -11,7 +11,7 @@ export type ArrivalAndDeparture = {
 	stopSequence: number
 };
 
-export type TripDetails = {
+export interface TripDetails {
 	tripId: string,
 	route: {
 		id: string,
@@ -20,8 +20,14 @@ export type TripDetails = {
 };
 
 
+export interface IObaClient {
+	stopsForLocation(loc: Point): Promise<string[]>;
+	arrivalsAndDeparturesForStop(stopId: string): Promise<ArrivalAndDeparture[]>;
+	tripDetails(tripId: string): Promise<TripDetails>;
+}
 
-export class ObaClient {
+
+export class ObaClient implements IObaClient {
 	_obaRequest: any;
 
 	constructor(deps: any) {
