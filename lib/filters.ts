@@ -1,13 +1,13 @@
 "use strict";
 
-import { ArrivalAndDeparture, TripDetails, Point } from "./obaClient";
+import { ArrDep, TripDetails, Point } from "./obaClient";
 
-type EndpointPair = [ArrivalAndDeparture, ArrivalAndDeparture];
+type EndpointPair = [ArrDep, ArrDep];
 type Indexer<T> = (thing: T) => any;
 
 
-export function groupEndpoints(srcArrDeps: ArrivalAndDeparture[],
-		destArrDeps: ArrivalAndDeparture[]): EndpointPair[] {
+export function groupEndpoints(srcArrDeps: ArrDep[],
+		destArrDeps: ArrDep[]): EndpointPair[] {
 	let result: EndpointPair[] = [];
 
 	srcArrDeps.forEach(function(src) {

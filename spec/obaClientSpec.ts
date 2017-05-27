@@ -1,5 +1,5 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
-import { ObaClient, ArrivalAndDeparture } from "../lib/obaClient";
+import { ObaClient, ArrDep } from "../lib/obaClient";
 
 interface SpecContext {
 	get: jasmine.Spy,
@@ -44,7 +44,7 @@ describe("ObaClient", function() {
 	});
 
 	describe("arrivalsAndDeparturesForStop", function(this: SpecContext) {
-		function makePayload(stopId: string, lat: number, lon: number, arrDeps: ArrivalAndDeparture[]) {
+		function makePayload(stopId: string, lat: number, lon: number, arrDeps: ArrDep[]) {
 			const stops = [
 				{ id: "_", lat: -1, lon: -1, },
 				{ id: stopId, lat: lat, lon: lon }

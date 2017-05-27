@@ -1,7 +1,7 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 const vcr = require("./helpers/http-vcr");
 import { Router, Routing } from "../lib/router";
-import { Point, ArrivalAndDeparture, TripDetails, IObaClient } from "../lib/obaClient";
+import { Point, ArrDep, TripDetails, IObaClient } from "../lib/obaClient";
 
 function makeStopsForLocationResponse(stopIds: string[]): string[] {
 	return stopIds;
@@ -57,7 +57,7 @@ class PromiseMap<T> {
 
 class StubObaClient implements IObaClient {
 	stops: PromiseMap<string[]>;
-	arrDeps: PromiseMap<ArrivalAndDeparture[]>;
+	arrDeps: PromiseMap<ArrDep[]>;
 	trips: PromiseMap<TripDetails>;
 
 	constructor() {
@@ -70,7 +70,7 @@ class StubObaClient implements IObaClient {
 		return this._result("stopsForLocation", this.stops, JSON.stringify(loc));
 	}
 
-	arrivalsAndDeparturesForStop(stopId: string): Promise<ArrivalAndDeparture[]> {
+	arrivalsAndDeparturesForStop(stopId: string): Promise<ArrDep[]> {
 		return this._result("arrivalsAndDeparturesForStop", this.arrDeps, stopId);
 	}
 

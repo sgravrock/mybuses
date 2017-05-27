@@ -1,5 +1,5 @@
 const http = require("http");
-import { ObaClient, ArrivalAndDeparture, TripDetails, Point } from "./obaClient";
+import { ObaClient, ArrDep, TripDetails, Point } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
 import * as filters from "./filters";
 
@@ -99,7 +99,7 @@ export class Router {
 		return Promise.all(promises);
 	}
 
-	_arrivalsAndDeparturesForStops(stopIds: string[]): Promise<ArrivalAndDeparture[]> {
+	_arrivalsAndDeparturesForStops(stopIds: string[]): Promise<ArrDep[]> {
 		const promises = stopIds.map((id) => {
 			return this._obaClient.arrivalsAndDeparturesForStop(id);
 		});
@@ -107,7 +107,7 @@ export class Router {
 	}
 }
 
-function makeStop(arrDep: ArrivalAndDeparture): Stop {
+function makeStop(arrDep: ArrDep): Stop {
 	return {
 		stopId: arrDep.stopId,
 		location: { lat: arrDep.lat, lon: arrDep.lon }

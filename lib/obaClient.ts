@@ -6,7 +6,7 @@ export type Point = {
 	lon: number
 };
 
-export type ArrivalAndDeparture = {
+export type ArrDep = {
 	tripId: string,
 	stopId: string,
 	stopSequence: number,
@@ -25,7 +25,7 @@ export interface TripDetails {
 
 export interface IObaClient {
 	stopsForLocation(loc: Point): Promise<string[]>;
-	arrivalsAndDeparturesForStop(stopId: string): Promise<ArrivalAndDeparture[]>;
+	arrivalsAndDeparturesForStop(stopId: string): Promise<ArrDep[]>;
 	tripDetails(tripId: string): Promise<TripDetails>;
 }
 
@@ -43,7 +43,7 @@ export class ObaClient implements IObaClient {
 		return response.data.list.map((stop: any) => stop.id);
 	}
 
-	async arrivalsAndDeparturesForStop(stopId: string): Promise<ArrivalAndDeparture[]> {
+	async arrivalsAndDeparturesForStop(stopId: string): Promise<ArrDep[]> {
 		if (!stopId) {
 			return Promise.reject("arrivalsAndDeparturesForStop requires a stop ID");
 		}

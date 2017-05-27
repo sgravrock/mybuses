@@ -1,11 +1,11 @@
 "use strict";
 import * as filters from "../lib/filters";
-import { ArrivalAndDeparture } from "../lib/obaClient";
+import { ArrDep } from "../lib/obaClient";
 
 describe("filters", function() {
 	describe("groupEndpoints", function() {
 		it("returns all same-trip endpoint pairs", function() {
-			function makeArrDep(input: {tripId: string, stopSequence: number}): ArrivalAndDeparture {
+			function makeArrDep(input: {tripId: string, stopSequence: number}): ArrDep {
 				return {
 					tripId: input.tripId,
 					stopId: "",
@@ -23,7 +23,7 @@ describe("filters", function() {
 				makeArrDep({ tripId: "1", stopSequence: 1, }),
 				makeArrDep({ tripId: "1", stopSequence: 5, }),
 			];
-			const expected: [ArrivalAndDeparture, ArrivalAndDeparture][] = [
+			const expected: [ArrDep, ArrDep][] = [
 				[
 					makeArrDep({ tripId: "1", stopSequence: 2, }),
 					makeArrDep({ tripId: "1", stopSequence: 1, }),
@@ -49,7 +49,7 @@ describe("filters", function() {
 
 	describe("excludeWrongWay", function() {
 		it("excludes pairs that end before they start", function() {
-			function makeArrDep(input: {tripId: string, stopSequence: number}): ArrivalAndDeparture {
+			function makeArrDep(input: {tripId: string, stopSequence: number}): ArrDep {
 				return {
 					tripId: input.tripId,
 					stopId: "",
@@ -59,7 +59,7 @@ describe("filters", function() {
 				};
 			}
 
-			const trips: [ArrivalAndDeparture, ArrivalAndDeparture][]  = [
+			const trips: [ArrDep, ArrDep][]  = [
 				[
 					makeArrDep({ tripId: "1", stopSequence: 1 }),
 					makeArrDep({ tripId: "1", stopSequence: 2 }),
@@ -69,7 +69,7 @@ describe("filters", function() {
 					makeArrDep({ tripId: "2", stopSequence: 1 }),
 				]
 			];
-			const expected: [ArrivalAndDeparture, ArrivalAndDeparture][]  = [
+			const expected: [ArrDep, ArrDep][]  = [
 				[
 					makeArrDep({ tripId: "1", stopSequence: 1 }),
 					makeArrDep({ tripId: "1", stopSequence: 2 }),
@@ -81,7 +81,7 @@ describe("filters", function() {
 
 	describe("groupEndpointPairsByTrip", function() {
 		it("groups same-trip endpoints into trips", function() {
-			function makeArrDep(input: {tripId: string, stopId: string}): ArrivalAndDeparture {
+			function makeArrDep(input: {tripId: string, stopId: string}): ArrDep {
 				return {
 					tripId: input.tripId,
 					stopId: input.stopId,
@@ -91,7 +91,7 @@ describe("filters", function() {
 				};
 			}
 
-			const pairs: [ArrivalAndDeparture, ArrivalAndDeparture][] = [
+			const pairs: [ArrDep, ArrDep][] = [
 				[
 					makeArrDep({ tripId: "1", stopId: "1" }),
 					makeArrDep({ tripId: "1", stopId: "2" }),
