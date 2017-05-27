@@ -9,7 +9,9 @@ export type Point = {
 export type ArrivalAndDeparture = {
 	tripId: string,
 	stopId: string,
-	stopSequence: number
+	stopSequence: number,
+	lat: number,
+	lon: number
 };
 
 export interface TripDetails {
@@ -49,7 +51,18 @@ export class ObaClient implements IObaClient {
 		const path = "/api/where/arrivals-and-departures-for-stop/" + stopId +
 			".json";
 		const response = await this._obaRequest.get(path, {});
-		return response.data.entry.arrivalsAndDepartures;
+		const stop = find(response.data.references.stops,
+			(s: any) => s.id === stopId);
+
+		return response.data.entry.arrivalsAndDepartures.map((arrDep: any) => {
+			return {
+				tripId: arrDep.tripId,
+				stopSequence: arrDep.stopSequence,
+				stopId: stopId,
+				lat: stop.lat,
+				lon: stop.lon,
+			};
+		});
 	}
 
 	async tripDetails(tripId: string): Promise<TripDetails> {

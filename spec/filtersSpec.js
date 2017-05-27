@@ -55,8 +55,46 @@ describe("filters", function() {
 					{ tripId: "1", stopSequence: 2 },
 				]
 			];
-
 			expect(filters.excludeWrongWay(trips)).toEqual(expected);
+		});
+	});
+
+	describe("groupEndpointPairsByTrip", function() {
+		it("groups same-trip endpoints into trips", function() {
+			const pairs = [
+				[
+					{ tripId: "1", stopId: "1" },
+					{ tripId: "1", stopId: "2" },
+				],
+				[
+					{ tripId: "1", stopId: "3" },
+					{ tripId: "1", stopId: "4" },
+				],
+				[
+					{ tripId: "2", stopId: "1" },
+					{ tripId: "2", stopId: "4" },
+				],
+			];
+			const expected = new Map();
+				expected.set("1", [
+					[
+						{ tripId: "1", stopId: "1" },
+						{ tripId: "1", stopId: "2" },
+						],
+					[
+						{ tripId: "1", stopId: "3" },
+						{ tripId: "1", stopId: "4" },
+					],
+				]);
+				expected.set("2", [
+					[
+						[
+							{ tripId: "2", stopId: "1" },
+							{ tripId: "2", stopId: "4" },
+						],
+					]
+				]);;
+			expect(filters.groupEndpointPairsByTrip(pairs)).toEqual(expected);
 		});
 	});
 });

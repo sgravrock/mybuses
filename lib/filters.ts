@@ -1,11 +1,13 @@
 "use strict";
 
-import { ArrivalAndDeparture } from "./obaClient";
+import { ArrivalAndDeparture, TripDetails, Point } from "./obaClient";
 
-function groupEndpoints(srcArrDeps: ArrivalAndDeparture[],
-		destArrDeps: ArrivalAndDeparture[]):
-		ArrivalAndDeparture[][] {
-	let result: any[][] = [];
+type EndpointPair = [ArrivalAndDeparture, ArrivalAndDeparture];
+
+
+export function groupEndpoints(srcArrDeps: ArrivalAndDeparture[],
+		destArrDeps: ArrivalAndDeparture[]): EndpointPair[] {
+	let result: EndpointPair[] = [];
 
 	srcArrDeps.forEach(function(src) {
 		destArrDeps.forEach(function(dest) {
@@ -18,13 +20,23 @@ function groupEndpoints(srcArrDeps: ArrivalAndDeparture[],
 	return result;
 }
 
-function excludeWrongWay(trips: [ArrivalAndDeparture, ArrivalAndDeparture][]): [ArrivalAndDeparture, ArrivalAndDeparture][] {
+export function excludeWrongWay(trips: EndpointPair[]): EndpointPair[] {
 	return trips.filter(function([start, end]) {
 		return start.stopSequence < end.stopSequence;
 	});
 }
 
-module.exports = {
-	groupEndpoints: groupEndpoints,
-	excludeWrongWay: excludeWrongWay
-};
+export function groupEndpointPairsByTrip(pairs: EndpointPair[]): Map<string, EndpointPair[]> {
+	const trips: Map<string, EndpointPair[]> = new Map();
+	pairs.forEach((pair) => {
+		const trip = trips.get(pair[0].tripId);
+
+		if (trip) {
+			trip.push(pair);
+		} else {
+			trips.set(pair[0].tripId, [pair]);
+		}
+	});
+
+	return trips;
+}

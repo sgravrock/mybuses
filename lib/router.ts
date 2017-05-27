@@ -1,7 +1,8 @@
 const http = require("http");
 import { ObaClient, ArrivalAndDeparture, TripDetails, Point } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
-const filters = require("./filters");
+import { excludeWrongWay, groupEndpoints, groupEndpointPairsByTrip } from "./filters";
+import { uniqueBy } from "./unique";
 
 function flatten<T>(arrays: T[][]): T[] {
 	return arrays.reduce((a, b) => a.concat(b), []);
@@ -25,14 +26,19 @@ export interface Routing {
 		id: string,
 		shortName: string
 	},
-	srcStopIds: string[],
-	destStopIds: string[],
+	srcStops: Stop[],
+	destStops: Stop[],
 }
 
-interface TripWithStops {
+export interface Stop {
+	stopId: string,
+	location: Point,
+}
+
+export interface TripWithStops {
 	trip: TripDetails,
-	srcStopIds: string[],
-	destStopIds: string[],
+	srcStops: Stop[],
+	destStops: Stop[],
 }
 
 
@@ -55,8 +61,8 @@ export class Router {
 					return {
 						tripId: t.trip.tripId,
 						route: t.trip.route,
-						srcStopIds: t.srcStopIds,
-						destStopIds: t.destStopIds,
+						srcStops: t.srcStops,
+						destStops: t.destStops,
 					};
 				});
 			});
@@ -68,38 +74,25 @@ export class Router {
 			this._arrivalsAndDeparturesForStops(destStopIds)
 		]);
 
-		const trips = filters.excludeWrongWay(
-			filters.groupEndpoints(srcArrDeps, destArrDeps));
-		const stopsByTrip: Map<string, {s: string[], e: string[]}> = new Map();
-		const tripIds: Set<string> = new Set();
-
-		trips.forEach(([s, e]: [ArrivalAndDeparture, ArrivalAndDeparture]) => {
-			const stops = stopsByTrip.get(s.tripId);
-
-			function insert(a: string[], e: string) {
-				if (a.indexOf(e) === -1) {
-					a.push(e);
-				}
-			}
-
-			if (stops) {
-				insert(stops.s, s.stopId);
-				insert(stops.e, e.stopId);
-			} else {
-				stopsByTrip.set(s.tripId, { s: [s.stopId], e: [e.stopId] });
-			}
-		});
-
+		const trips = groupEndpointPairsByTrip(
+			excludeWrongWay(groupEndpoints(srcArrDeps, destArrDeps)));
 		const promises: Promise<TripWithStops>[] = [];
-		stopsByTrip.forEach((stops, tripId) => {
+
+		trips.forEach((endpointPairs, tripId) => {
 			const p = this._obaClient.tripDetails(tripId)
 				.then(trip => {
+					const srcStops = uniqueBy(endpointPairs, (p) => p[0].stopId)
+						.map((p) => makeStop(p[0]));
+					const destStops = uniqueBy(endpointPairs, (p) => p[1].stopId)
+						.map((p) => makeStop(p[1]));
+
 					return {
 						trip: trip,
-						srcStopIds: stops.s.sort(),
-						destStopIds: stops.e.sort()
+						srcStops: srcStops,
+						destStops: destStops,
 					};
 				});
+
 			promises.push(p);
 		});
 
@@ -111,5 +104,12 @@ export class Router {
 			return this._obaClient.arrivalsAndDeparturesForStop(id);
 		});
 		return Promise.all(promises).then(flatten);
+	}
+}
+
+function makeStop(arrDep: ArrivalAndDeparture): Stop {
+	return {
+		stopId: arrDep.stopId,
+		location: { lat: arrDep.lat, lon: arrDep.lon }
 	}
 }

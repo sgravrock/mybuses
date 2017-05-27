@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 const vcr = require("./helpers/http-vcr");
-import { Router } from "../lib/router";
+import { Router, Routing } from "../lib/router";
 import { Point, ArrivalAndDeparture, TripDetails, IObaClient } from "../lib/obaClient";
 
 function makeStopsForLocationResponse(stopIds: string[]): string[] {
@@ -148,12 +148,12 @@ describe("Router", function() {
 				makeStopsForLocationResponse(["dest sid"]));
 
 			this.obaClient.arrDeps.resolve("src sid", [
-				{ tripId: "12345", stopId: "src sid", stopSequence: 1 },
-				{ tripId: "67890", stopId: "src sid", stopSequence: 1 },
+				{ tripId: "12345", stopId: "src sid", stopSequence: 1, lat: 0, lon: 0 },
+				{ tripId: "67890", stopId: "src sid", stopSequence: 1, lat: 0, lon: 0 },
 			]);
 			this.obaClient.arrDeps.resolve("dest sid", [
-				{ tripId: "12345", stopId: "dest sid", stopSequence: 2 },
-				{ tripId: "67890", stopId: "dest sid", stopSequence: 2 },
+				{ tripId: "12345", stopId: "dest sid", stopSequence: 2, lat: 0, lon: 0 },
+				{ tripId: "67890", stopId: "dest sid", stopSequence: 2, lat: 0, lon: 0 },
 			]);
 
 			this.obaClient.trips.resolve("any", {
@@ -180,18 +180,18 @@ describe("Router", function() {
 				makeStopsForLocationResponse(["dest sid", "dest sid 2"]));
 
 			this.obaClient.arrDeps.resolve("src sid", [
-				{ tripId: "12345", stopId: "src sid", stopSequence: 1 },
-				{ tripId: "xyz", stopId: "src sid", stopSequence: 1 },
+				{ tripId: "12345", stopId: "src sid", stopSequence: 1, lat: 0, lon: 1 },
+				{ tripId: "xyz", stopId: "src sid", stopSequence: 1, lat: 0, lon: 1 },
 			]);
 			this.obaClient.arrDeps.resolve("src sid 2", [
-				{ tripId: "12345", stopId: "src sid 2", stopSequence: 2 },
+				{ tripId: "12345", stopId: "src sid 2", stopSequence: 2, lat: 1, lon: 2 },
 			]);
 			this.obaClient.arrDeps.resolve("dest sid", [
-				{ tripId: "12345", stopId: "dest sid", stopSequence: 3 },
-				{ tripId: "67890", stopId: "dest sid", stopSequence: 2 },
+				{ tripId: "12345", stopId: "dest sid", stopSequence: 3, lat: 3, lon: 4 },
+				{ tripId: "67890", stopId: "dest sid", stopSequence: 2, lat: 3, lon: 4 },
 			]);
 			this.obaClient.arrDeps.resolve("dest sid 2", [
-				{ tripId: "12345", stopId: "dest sid 2", stopSequence: 4 },
+				{ tripId: "12345", stopId: "dest sid 2", stopSequence: 4, lat: 5, lon: 6 },
 			]);
 
 			const tripDetails = {
@@ -210,8 +210,14 @@ describe("Router", function() {
 					id: "5679",
 					shortName: "Some route"
 				},
-				srcStopIds: ["src sid", "src sid 2"],
-				destStopIds: ["dest sid", "dest sid 2"],
+				srcStops: [
+					{ stopId: "src sid", location: { lat: 0, lon: 1 } },
+					{ stopId: "src sid 2", location: { lat: 1, lon: 2 } },
+				],
+				destStops: [
+					{ stopId: "dest sid", location: { lat: 3, lon: 4 } },
+					{ stopId: "dest sid 2", location: { lat: 5, lon: 6 } },
+				],
 			}]);
 		});
 	});
@@ -228,15 +234,33 @@ describe("Router", function() {
 	
 		describe("findTrips", function() {
 			it("finds trips between the two locations", async function(this: RouterSpecContext) {
-				const expected = [
+				const expected: Routing[] = [
 					{
 						tripId: "1_33350305", 
 						route: {
 							id: "1_102572",
 							shortName: "29"
 						},
-						srcStopIds: ["1_13760", "1_18150"],
-						destStopIds: ["1_265", "1_300"],
+						srcStops: [
+							{
+								stopId: "1_13760",
+								location: { lat: 47.663143, lon: -122.37648 },
+							},
+							{
+								stopId: "1_18150",
+								location: { lat: 47.665367, lon: -122.380714 },
+							},
+						],
+						destStops: [
+							{
+								stopId: "1_265",
+								location: { lat: 47.611023, lon: -122.340706 },
+							},
+							{
+								stopId: "1_300",
+								location: { lat: 47.608646, lon: -122.338432 },
+							},
+						],
 					},
 					{
 						tripId: "1_33359811",
@@ -244,8 +268,26 @@ describe("Router", function() {
 							id: "1_102581",
 							shortName: "D Line"
 						},
-						srcStopIds: ["1_13760"],
-						destStopIds: ["1_420", "1_431", "1_468"],
+						srcStops: [
+							{
+								stopId: "1_13760",
+								location: { lat: 47.663143, lon: -122.37648 },
+							},
+						],
+						destStops: [
+							{
+								stopId: "1_420",
+								location: { lat: 47.612373, lon: -122.341019 },
+							},
+							{
+								stopId: "1_431",
+								location: { lat: 47.609791, lon: -122.337959 },
+							},
+							{
+								stopId: "1_468",
+								location: { lat: 47.606502, lon: -122.334938 },
+							},
+						],
 					},
 					{
 						tripId: "1_33359163",
@@ -253,8 +295,34 @@ describe("Router", function() {
 							id: "1_102574",
 							shortName: "40"
 						},
-						srcStopIds: ["1_18150", "1_18165", "1_28255"],
-						destStopIds: ["1_420", "1_430", "1_450"],
+						srcStops: [
+							{
+								stopId: "1_18150",
+								location: { lat: 47.665367, lon: -122.380714 },
+							},
+							{
+								stopId: "1_18165",
+								location: { lat: 47.663593, lon: -122.375587 },
+							},
+							{
+								stopId: "1_28255",
+								location: { lat: 47.66359, lon: -122.371025 },
+							}
+						],
+						destStops: [
+							{
+								stopId: "1_420",
+								location: { lat: 47.612373, lon: -122.341019 },
+							},
+							{
+								stopId: '1_430',
+								location: { lat: 47.61079, lon: -122.338875 },
+							},
+							{
+								stopId: '1_450',
+								location: { lat: 47.60825, lon: -122.336548 }
+							},
+						],
 					},
 					{
 						tripId: "1_33359653",
@@ -262,8 +330,26 @@ describe("Router", function() {
 							id: "1_102581",
 							shortName: "D Line"
 						},
-						srcStopIds: ["1_13760"],
-						destStopIds: ["1_420", "1_431", "1_468"]
+						srcStops: [
+							{
+								stopId: "1_13760",
+								location: { lat: 47.663143, lon: -122.37648 },
+							},
+						],
+						destStops: [
+							{
+								stopId: "1_420",
+								location: { lat: 47.612373, lon: -122.341019 },
+							},
+							{
+								stopId: "1_431",
+								location: { lat: 47.609791, lon: -122.337959 },
+							},
+							{
+								stopId: "1_468",
+								location: { lat: 47.606502, lon: -122.334938 },
+							},
+						],
 					}
 				].sort(compareProperty("tripId"));
 
