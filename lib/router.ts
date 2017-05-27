@@ -1,8 +1,7 @@
 const http = require("http");
 import { ObaClient, ArrivalAndDeparture, TripDetails, Point } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
-import { excludeWrongWay, groupEndpoints, groupEndpointPairsByTrip } from "./filters";
-import { uniqueBy } from "./unique";
+import * as filters from "./filters";
 
 function flatten<T>(arrays: T[][]): T[] {
 	return arrays.reduce((a, b) => a.concat(b), []);
@@ -74,16 +73,17 @@ export class Router {
 			this._arrivalsAndDeparturesForStops(destStopIds)
 		]);
 
-		const trips = groupEndpointPairsByTrip(
-			excludeWrongWay(groupEndpoints(srcArrDeps, destArrDeps)));
+		const trips = filters.groupEndpointPairsByTrip(
+			filters.excludeWrongWay(
+				filters.groupEndpoints(srcArrDeps, destArrDeps)));
 		const promises: Promise<TripWithStops>[] = [];
 
 		trips.forEach((endpointPairs, tripId) => {
 			const p = this._obaClient.tripDetails(tripId)
 				.then(trip => {
-					const srcStops = uniqueBy(endpointPairs, (p) => p[0].stopId)
+					const srcStops = filters.uniqueBy(endpointPairs, (p) => p[0].stopId)
 						.map((p) => makeStop(p[0]));
-					const destStops = uniqueBy(endpointPairs, (p) => p[1].stopId)
+					const destStops = filters.uniqueBy(endpointPairs, (p) => p[1].stopId)
 						.map((p) => makeStop(p[1]));
 
 					return {

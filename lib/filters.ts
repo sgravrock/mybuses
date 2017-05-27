@@ -3,6 +3,7 @@
 import { ArrivalAndDeparture, TripDetails, Point } from "./obaClient";
 
 type EndpointPair = [ArrivalAndDeparture, ArrivalAndDeparture];
+type Indexer<T> = (thing: T) => any;
 
 
 export function groupEndpoints(srcArrDeps: ArrivalAndDeparture[],
@@ -39,4 +40,14 @@ export function groupEndpointPairsByTrip(pairs: EndpointPair[]): Map<string, End
 	});
 
 	return trips;
+}
+
+export function uniqueBy<T>(input: T[], indexer: Indexer<T>): T[] {
+	const indices: any[] = [];
+	return input.filter(x => {
+		const ix = indexer(x);
+		const include = indices.indexOf(ix) === -1;
+		indices.push(ix);
+		return include;
+	});
 }

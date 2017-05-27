@@ -127,4 +127,19 @@ describe("filters", function() {
 			expect(filters.groupEndpointPairsByTrip(pairs)).toEqual(expected);
 		});
 	});
+
+	describe("uniqueBy", function() {
+		it("eliminates duplicates as indicated by the indexer", function() {
+			const inputs = [
+				{ foo: 1 },
+				{ foo: 2 },
+				{ foo: 1 }
+			];
+			const expected = [
+				{ foo: 1 },
+				{ foo: 2 },
+			];
+			expect(filters.uniqueBy(inputs, (x) => x.foo)).toEqual(expected);
+		});
+	});
 });
