@@ -2,6 +2,8 @@ const http = require("http");
 import { ObaClient, ArrDep, TripDetails, Point } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
 import * as filters from "./filters";
+import { distanceInMeters } from "../lib/distance";
+
 
 function flatten<T>(arrays: T[][]): T[] {
 	return arrays.reduce((a, b) => a.concat(b), []);
@@ -32,6 +34,7 @@ export interface Routing {
 export interface Stop {
 	stopId: string,
 	location: Point,
+	metersFromEndpoint: number,
 }
 
 export interface TripWithStops {
@@ -54,7 +57,7 @@ export class Router {
 			this._obaClient.stopsForLocation(dest),
 		]);
 
-		return this._tripsBetweenStopSets(srcStops, destStops)
+		return this._tripsBetweenStopSets(src, dest, srcStops, destStops)
 			.then((trips) => {
 				return trips.map((t) => {
 					return {
@@ -67,7 +70,8 @@ export class Router {
 			});
 	}
 
-	async _tripsBetweenStopSets(srcStopIds: string[], destStopIds: string[]): Promise<TripWithStops[]> {
+	async _tripsBetweenStopSets(src: Point, dest: Point, srcStopIds: string[], destStopIds: string[]): Promise<TripWithStops[]> {
+
 		const [srcArrDeps, destArrDeps] = await Promise.all([
 			this._arrivalsAndDeparturesForStops(srcStopIds),
 			this._arrivalsAndDeparturesForStops(destStopIds)
@@ -82,9 +86,9 @@ export class Router {
 			const p = this._obaClient.tripDetails(tripId)
 				.then(trip => {
 					const srcStops = filters.uniqueBy(endpointPairs, (p) => p[0].stopId)
-						.map((p) => makeStop(p[0]));
+						.map((p) => makeStop(p[0], src));
 					const destStops = filters.uniqueBy(endpointPairs, (p) => p[1].stopId)
-						.map((p) => makeStop(p[1]));
+						.map((p) => makeStop(p[1], dest));
 
 					return {
 						trip: trip,
@@ -107,9 +111,12 @@ export class Router {
 	}
 }
 
-function makeStop(arrDep: ArrDep): Stop {
+function makeStop(arrDep: ArrDep, endpoint: Point): Stop {
+	const distance = Math.round(distanceInMeters(arrDep, endpoint));
+
 	return {
 		stopId: arrDep.stopId,
-		location: { lat: arrDep.lat, lon: arrDep.lon }
+		location: { lat: arrDep.lat, lon: arrDep.lon },
+		metersFromEndpoint: distance,
 	}
 }
