@@ -95,6 +95,14 @@ interface RouterSpecContext {
 }
 
 describe("Router", function() {
+	beforeEach(function() {
+		jasmine.clock().install();
+	});
+
+	afterEach(function() {
+		jasmine.clock().uninstall();
+	});
+
 	describe("findTrips", function() {
 		beforeEach(function(this: RouterSpecContext) {
 			this.obaClient = new StubObaClient();
@@ -172,6 +180,7 @@ describe("Router", function() {
 		});
 
 		it("provides trips that stop near both points", async function(this: RouterSpecContext) {
+			jasmine.clock().mockDate(new Date(0));
 			const src = {lat: 47.663667, lon: -122.376109};
 			const dest = {lat: 47.609776, lon: -122.337830};
 			this.obaClient.stops.resolve(JSON.stringify(src),
@@ -210,7 +219,7 @@ describe("Router", function() {
 					id: "5679",
 					shortName: "Some route"
 				},
-				srcStop: { stopId: "src sid 2", name: "src stop 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734, scheduledArrivalTime: new Date(0), },
+				srcStop: { stopId: "src sid 2", name: "src stop 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734, minutesUntil: 0, },
 				destStop: { stopId: "dest sid 2", name: "dest stop 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786, scheduledArrivalTime: new Date(0), },
 			}]);
 		});
@@ -224,6 +233,8 @@ describe("Router", function() {
 				http: http,
 				key: "somekey"
 			});
+
+			jasmine.clock().mockDate(new Date(1494865686000));
 		});
 	
 		describe("findTrips", function() {
@@ -240,7 +251,7 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							scheduledArrivalTime: new Date(1494865506000),
+							minutesUntil: -3,
 						},
 						destStop: {
 							stopId: "1_300",
@@ -261,7 +272,7 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							scheduledArrivalTime: new Date(1494865419000),
+							minutesUntil: -4.4,
 						},
 						destStop: {
 							stopId: "1_431",
@@ -282,7 +293,7 @@ describe("Router", function() {
 							name: "NW Leary Way & 15th Ave NW",
 							location: { lat: 47.663593, lon: -122.375587 },
 							metersFromEndpoint: 40,
-							scheduledArrivalTime: new Date(1494865686000),
+							minutesUntil: 0,
 						},
 						destStop: {
 							stopId: '1_430',
@@ -303,7 +314,7 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							scheduledArrivalTime: new Date(1494866019000),
+							minutesUntil: 5.6,
 						},
 						destStop: {
 							stopId: "1_431",
@@ -318,7 +329,7 @@ describe("Router", function() {
 				const trips = await this.subject.findTrips(
 					{lat: 47.663667, lon: -122.376109},
 					{lat: 47.609776, lon: -122.337830}
-				)
+				);
 				trips.sort(compareProperty("tripId"));
 				expect(trips).toEqual(expected);
 			});

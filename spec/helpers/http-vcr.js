@@ -97,12 +97,12 @@ Player.prototype.get = function(urlOrOptions, callback) {
 
 		if (err) {
 			that.logError(err);
-			setTimeout(function() {
+			setImmediate(function() {
 				response._trigger("aborted");
 			});
 		} else {
 			response.statusCode = 200;
-			setTimeout(function() {
+			setImmediate(function() {
 				response._trigger("data", contents);
 				response._trigger("end");
 			});

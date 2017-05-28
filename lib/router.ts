@@ -27,11 +27,19 @@ export interface Routing {
 		id: string,
 		shortName: string
 	},
-	srcStop: Stop,
-	destStop: Stop,
+	srcStop: SourceStop,
+	destStop: DestStop,
 }
 
-export interface Stop {
+export interface SourceStop {
+	stopId: string,
+	name: string,
+	location: Point,
+	metersFromEndpoint: number,
+	minutesUntil: number,
+}
+
+export interface DestStop {
 	stopId: string,
 	name: string,
 	location: Point,
@@ -41,8 +49,8 @@ export interface Stop {
 
 export interface TripWithStops {
 	trip: TripDetails,
-	srcStop: Stop,
-	destStop: Stop,
+	srcStop: SourceStop,
+	destStop: DestStop,
 }
 
 
@@ -88,9 +96,9 @@ export class Router {
 			const p = this._obaClient.tripDetails(tripId)
 				.then(trip => {
 					const srcStops = filters.uniqueBy(endpointPairs, (p) => p[0].stopId)
-						.map((p) => makeStop(p[0], src));
+						.map((p) => makeSourceStop(p[0], src));
 					const destStops = filters.uniqueBy(endpointPairs, (p) => p[1].stopId)
-						.map((p) => makeStop(p[1], dest));
+						.map((p) => makeDestStop(p[1], dest));
 
 					return {
 						trip: trip,
@@ -113,7 +121,25 @@ export class Router {
 	}
 }
 
-function makeStop(arrDep: ArrDep, endpoint: Point): Stop {
+function makeSourceStop(arrDep: ArrDep, endpoint: Point): SourceStop {
+	const distance = Math.round(distanceInMeters(arrDep, endpoint));
+	// This assumes that buses arrive and depart at the same time,
+	// which is true with the rare exception of layover stops
+	// (e.g. 1_18085 on the 44).
+	const now = new Date().getTime();
+	const millisUntil = arrDep.scheduledArrivalTime.getTime() - now;
+	const minutesUntil = Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
+
+	return {
+		stopId: arrDep.stopId,
+		name: arrDep.stopName,
+		location: { lat: arrDep.lat, lon: arrDep.lon },
+		metersFromEndpoint: distance,
+		minutesUntil: minutesUntil,
+	};
+}
+
+function makeDestStop(arrDep: ArrDep, endpoint: Point): DestStop {
 	const distance = Math.round(distanceInMeters(arrDep, endpoint));
 
 	return {

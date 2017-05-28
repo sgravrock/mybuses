@@ -5,7 +5,7 @@
 		{{ #trips }}
 			<li>
 				{{ route.shortName }} from {{ srcStop.name }}
-				at {{ srcStop.scheduledArrivalTime }}
+				in {{ srcStop.minutesUntil }} minutes
 			</li>
 		{{ /trips }}
 	</ol>
