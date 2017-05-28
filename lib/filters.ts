@@ -51,3 +51,19 @@ export function uniqueBy<T>(input: T[], indexer: Indexer<T>): T[] {
 		return include;
 	});
 }
+
+interface HasDistance {
+	metersFromEndpoint: number
+};
+
+export function nearest<T extends  HasDistance>(points: T[]): T {
+	let result = points[0];
+
+	for (let i = 1; i < points.length; i++) {
+		if (points[i].metersFromEndpoint < result.metersFromEndpoint) {
+			result = points[i];
+		}
+	}
+
+	return result;
+}

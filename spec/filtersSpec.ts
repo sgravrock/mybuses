@@ -142,4 +142,15 @@ describe("filters", function() {
 			expect(filters.uniqueBy(inputs, (x) => x.foo)).toEqual(expected);
 		});
 	});
+
+	describe("nearest", function() {
+		it("returns the stop closest to the endpoint", function() {
+			const inputs = [
+				{ metersFromEndpoint: 3 },
+				{ metersFromEndpoint: 1 },
+				{ metersFromEndpoint: 2 },
+			];
+			expect(filters.nearest(inputs)).toEqual({ metersFromEndpoint: 1});
+		});
+	});
 });

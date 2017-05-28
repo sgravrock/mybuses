@@ -92,8 +92,8 @@ export class Router {
 
 					return {
 						trip: trip,
-						srcStops: srcStops,
-						destStops: destStops,
+						srcStops: [filters.nearest(srcStops)],
+						destStops: [filters.nearest(destStops)],
 					};
 				});
 

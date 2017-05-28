@@ -211,11 +211,9 @@ describe("Router", function() {
 					shortName: "Some route"
 				},
 				srcStops: [
-					{ stopId: "src sid", location: { lat: 0, lon: 1 }, metersFromEndpoint: 12425667 },
 					{ stopId: "src sid 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734 },
 				],
 				destStops: [
-					{ stopId: "dest sid", location: { lat: 3, lon: 4 }, metersFromEndpoint: 12355681 },
 					{ stopId: "dest sid 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786 },
 				],
 			}]);
@@ -246,19 +244,9 @@ describe("Router", function() {
 								stopId: "1_13760",
 								location: { lat: 47.663143, lon: -122.37648 },
 								metersFromEndpoint: 65,
-							},
-							{
-								stopId: "1_18150",
-								location: { lat: 47.665367, lon: -122.380714 },
-								metersFromEndpoint: 393,
-							},
+							}
 						],
 						destStops: [
-							{
-								stopId: "1_265",
-								location: { lat: 47.611023, lon: -122.340706 },
-								metersFromEndpoint: 256,
-							},
 							{
 								stopId: "1_300",
 								location: { lat: 47.608646, lon: -122.338432 },
@@ -281,19 +269,9 @@ describe("Router", function() {
 						],
 						destStops: [
 							{
-								stopId: "1_420",
-								location: { lat: 47.612373, lon: -122.341019 },
-								metersFromEndpoint: 375,
-							},
-							{
 								stopId: "1_431",
 								location: { lat: 47.609791, lon: -122.337959 },
 								metersFromEndpoint: 10,
-							},
-							{
-								stopId: "1_468",
-								location: { lat: 47.606502, lon: -122.334938 },
-								metersFromEndpoint: 424,
 							},
 						],
 					},
@@ -305,36 +283,16 @@ describe("Router", function() {
 						},
 						srcStops: [
 							{
-								stopId: "1_18150",
-								location: { lat: 47.665367, lon: -122.380714 },
-								metersFromEndpoint: 393,
-							},
-							{
 								stopId: "1_18165",
 								location: { lat: 47.663593, lon: -122.375587 },
 								metersFromEndpoint: 40,
 							},
-							{
-								stopId: "1_28255",
-								location: { lat: 47.66359, lon: -122.371025 },
-								metersFromEndpoint: 381,
-							}
 						],
 						destStops: [
-							{
-								stopId: "1_420",
-								location: { lat: 47.612373, lon: -122.341019 },
-								metersFromEndpoint: 375,
-							},
 							{
 								stopId: '1_430',
 								location: { lat: 47.61079, lon: -122.338875 },
 								metersFromEndpoint: 137,
-							},
-							{
-								stopId: '1_450',
-								location: { lat: 47.60825, lon: -122.336548 },
-								metersFromEndpoint: 195,
 							},
 						],
 					},
@@ -353,19 +311,9 @@ describe("Router", function() {
 						],
 						destStops: [
 							{
-								stopId: "1_420",
-								location: { lat: 47.612373, lon: -122.341019 },
-								metersFromEndpoint: 375,
-							},
-							{
 								stopId: "1_431",
 								location: { lat: 47.609791, lon: -122.337959 },
 								metersFromEndpoint: 10,
-							},
-							{
-								stopId: "1_468",
-								location: { lat: 47.606502, lon: -122.334938 },
-								metersFromEndpoint: 424,
 							},
 						],
 					}
