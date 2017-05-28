@@ -73,7 +73,10 @@ describe("ObaClient", function() {
 			this.get.and.returnValue(Promise.resolve(makePayload("1_234", "", 0, 0, [])));
 			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
 			expect(this.get).toHaveBeenCalledWith(
-				"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
+				"/api/where/arrivals-and-departures-for-stop/1_234.json", {
+					minutesBefore: 2,
+					minutesAfter: 60
+				});
 		});
 
 		it("resolves to a list of arrivals/departures", async function(this: SpecContext) {
@@ -100,8 +103,6 @@ describe("ObaClient", function() {
 			this.get.and.returnValue(Promise.resolve(makePayload("1_234", "The Stop", 0, 1, arrDeps)));
 			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
 			expect(result).toEqual(arrDeps);
-			expect(this.get).toHaveBeenCalledWith(
-				"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
 		});
 	});
 

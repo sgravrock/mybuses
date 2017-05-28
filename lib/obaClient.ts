@@ -52,7 +52,10 @@ export class ObaClient implements IObaClient {
 
 		const path = "/api/where/arrivals-and-departures-for-stop/" + stopId +
 			".json";
-		const response = await this._obaRequest.get(path, {});
+		const response = await this._obaRequest.get(path, {
+			minutesBefore: 2,
+			minutesAfter: 60
+		});
 		const stop = find(response.data.references.stops,
 			(s: any) => s.id === stopId);
 
