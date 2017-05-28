@@ -35,7 +35,7 @@ export interface Stop {
 	stopId: string,
 	location: Point,
 	metersFromEndpoint: number,
-	scheduledArrivalTime: number,
+	scheduledArrivalTime: Date,
 }
 
 export interface TripWithStops {

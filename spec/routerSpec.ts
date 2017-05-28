@@ -148,12 +148,12 @@ describe("Router", function() {
 				makeStopsForLocationResponse(["dest sid"]));
 
 			this.obaClient.arrDeps.resolve("src sid", [
-				{ tripId: "12345", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: 0, lat: 0, lon: 0 },
-				{ tripId: "67890", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: 0, lat: 0, lon: 0 },
+				{ tripId: "12345", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: new Date(0), lat: 0, lon: 0 },
+				{ tripId: "67890", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: new Date(0), lat: 0, lon: 0 },
 			]);
 			this.obaClient.arrDeps.resolve("dest sid", [
-				{ tripId: "12345", stopId: "dest sid", stopSequence: 2, scheduledArrivalTime: 0, lat: 0, lon: 0 },
-				{ tripId: "67890", stopId: "dest sid", stopSequence: 2, scheduledArrivalTime: 0, lat: 0, lon: 0 },
+				{ tripId: "12345", stopId: "dest sid", stopSequence: 2, scheduledArrivalTime: new Date(0), lat: 0, lon: 0 },
+				{ tripId: "67890", stopId: "dest sid", stopSequence: 2, scheduledArrivalTime: new Date(0), lat: 0, lon: 0 },
 			]);
 
 			this.obaClient.trips.resolve("any", {
@@ -180,18 +180,18 @@ describe("Router", function() {
 				makeStopsForLocationResponse(["dest sid", "dest sid 2"]));
 
 			this.obaClient.arrDeps.resolve("src sid", [
-				{ tripId: "12345", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: 0, lat: 0, lon: 1 },
-				{ tripId: "xyz", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: 0, lat: 0, lon: 1 },
+				{ tripId: "12345", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: new Date(0), lat: 0, lon: 1 },
+				{ tripId: "xyz", stopId: "src sid", stopSequence: 1, scheduledArrivalTime: new Date(0), lat: 0, lon: 1 },
 			]);
 			this.obaClient.arrDeps.resolve("src sid 2", [
-				{ tripId: "12345", stopId: "src sid 2", stopSequence: 2, scheduledArrivalTime: 0, lat: 1, lon: 2 },
+				{ tripId: "12345", stopId: "src sid 2", stopSequence: 2, scheduledArrivalTime: new Date(0), lat: 1, lon: 2 },
 			]);
 			this.obaClient.arrDeps.resolve("dest sid", [
-				{ tripId: "12345", stopId: "dest sid", stopSequence: 3, scheduledArrivalTime: 0, lat: 3, lon: 4 },
-				{ tripId: "67890", stopId: "dest sid", stopSequence: 2, scheduledArrivalTime: 0, lat: 3, lon: 4 },
+				{ tripId: "12345", stopId: "dest sid", stopSequence: 3, scheduledArrivalTime: new Date(0), lat: 3, lon: 4 },
+				{ tripId: "67890", stopId: "dest sid", stopSequence: 2, scheduledArrivalTime: new Date(0), lat: 3, lon: 4 },
 			]);
 			this.obaClient.arrDeps.resolve("dest sid 2", [
-				{ tripId: "12345", stopId: "dest sid 2", stopSequence: 4, scheduledArrivalTime: 0, lat: 5, lon: 6 },
+				{ tripId: "12345", stopId: "dest sid 2", stopSequence: 4, scheduledArrivalTime: new Date(0), lat: 5, lon: 6 },
 			]);
 
 			const tripDetails = {
@@ -210,8 +210,8 @@ describe("Router", function() {
 					id: "5679",
 					shortName: "Some route"
 				},
-				srcStop: { stopId: "src sid 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734, scheduledArrivalTime: 0, },
-				destStop: { stopId: "dest sid 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786, scheduledArrivalTime: 0, },
+				srcStop: { stopId: "src sid 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734, scheduledArrivalTime: new Date(0), },
+				destStop: { stopId: "dest sid 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786, scheduledArrivalTime: new Date(0), },
 			}]);
 		});
 	});
@@ -239,13 +239,13 @@ describe("Router", function() {
 							stopId: "1_13760",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							scheduledArrivalTime: 1494865506000,
+							scheduledArrivalTime: new Date(1494865506000),
 						},
 						destStop: {
 							stopId: "1_300",
 							location: { lat: 47.608646, lon: -122.338432 },
 							metersFromEndpoint: 134,
-							scheduledArrivalTime: 1494867202000,
+							scheduledArrivalTime: new Date(1494867202000),
 						},
 					},
 					{
@@ -258,13 +258,13 @@ describe("Router", function() {
 							stopId: "1_13760",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							scheduledArrivalTime: 1494865419000,
+							scheduledArrivalTime: new Date(1494865419000),
 						},
 						destStop: {
 							stopId: "1_431",
 							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
-							scheduledArrivalTime: 1494866937000,
+							scheduledArrivalTime: new Date(1494866937000),
 						},
 					},
 					{
@@ -277,13 +277,13 @@ describe("Router", function() {
 							stopId: "1_18165",
 							location: { lat: 47.663593, lon: -122.375587 },
 							metersFromEndpoint: 40,
-							scheduledArrivalTime: 1494865686000,
+							scheduledArrivalTime: new Date(1494865686000),
 						},
 						destStop: {
 							stopId: '1_430',
 							location: { lat: 47.61079, lon: -122.338875 },
 							metersFromEndpoint: 137,
-							scheduledArrivalTime: 1494867336000,
+							scheduledArrivalTime: new Date(1494867336000),
 						},
 					},
 					{
@@ -296,13 +296,13 @@ describe("Router", function() {
 							stopId: "1_13760",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							scheduledArrivalTime: 1494866019000,
+							scheduledArrivalTime: new Date(1494866019000),
 						},
 						destStop: {
 							stopId: "1_431",
 							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
-							scheduledArrivalTime: 1494867537000,
+							scheduledArrivalTime: new Date(1494867537000),
 						},
 					}
 				].sort(compareProperty("tripId"));

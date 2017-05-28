@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+import Mustache = require("mustache");
+import * as fs from "fs";
 import { Router } from "./router";
 
 function require_env(name: string) {
@@ -24,7 +26,15 @@ const key = require_env("OBA_API_KEY");
 
 app.get('/', function (req: any, res: any) {
 	new Router({key: key}).findTrips(src, dest).then(function(trips) {
-		res.send(JSON.stringify(trips));
+		fs.readFile("./lib/index.mst", "utf8", function(err, template) {
+			if (err) {
+				console.error(err);
+				res.status(500).send(err);
+			} else {
+    			var rendered = Mustache.render(template, {trips: trips});
+				res.send(rendered);
+			}
+		});
 	});
 });
 

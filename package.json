@@ -11,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^2.5.47",
+    "@types/mustache": "^0.8.29",
     "@types/node": "^7.0.21",
     "jasmine": "git+https://github.com/sgravrock/jasmine-npm.git#promises-temp",
     "mkdirp": "^0.5.1",
@@ -19,7 +20,8 @@
   },
   "dependencies": {
     "express": "^4.15.3",
-    "lodash.find": "^4.6.0"
+    "lodash.find": "^4.6.0",
+    "mustache": "^2.3.0"
   },
   "engines": {
     "node": "7.10.0"

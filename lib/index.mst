@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+	<ol>
+		{{ #trips }}
+			<li>
+				{{ route.shortName }} from {{ srcStop.stopId }}
+				at {{ srcStop.scheduledArrivalTime }}
+			</li>
+		{{ /trips }}
+	</ol>
+</body>
+</htm>
