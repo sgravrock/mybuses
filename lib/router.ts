@@ -27,8 +27,8 @@ export interface Routing {
 		id: string,
 		shortName: string
 	},
-	srcStops: Stop[],
-	destStops: Stop[],
+	srcStop: Stop,
+	destStop: Stop,
 }
 
 export interface Stop {
@@ -39,8 +39,8 @@ export interface Stop {
 
 export interface TripWithStops {
 	trip: TripDetails,
-	srcStops: Stop[],
-	destStops: Stop[],
+	srcStop: Stop,
+	destStop: Stop,
 }
 
 
@@ -63,8 +63,8 @@ export class Router {
 					return {
 						tripId: t.trip.tripId,
 						route: t.trip.route,
-						srcStops: t.srcStops,
-						destStops: t.destStops,
+						srcStop: t.srcStop,
+						destStop: t.destStop,
 					};
 				});
 			});
@@ -92,8 +92,8 @@ export class Router {
 
 					return {
 						trip: trip,
-						srcStops: [filters.nearest(srcStops)],
-						destStops: [filters.nearest(destStops)],
+						srcStop: filters.nearest(srcStops),
+						destStop: filters.nearest(destStops),
 					};
 				});
 

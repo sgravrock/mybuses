@@ -210,12 +210,8 @@ describe("Router", function() {
 					id: "5679",
 					shortName: "Some route"
 				},
-				srcStops: [
-					{ stopId: "src sid 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734 },
-				],
-				destStops: [
-					{ stopId: "dest sid 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786 },
-				],
+				srcStop: { stopId: "src sid 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734 },
+				destStop: { stopId: "dest sid 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786 },
 			}]);
 		});
 	});
@@ -239,20 +235,16 @@ describe("Router", function() {
 							id: "1_102572",
 							shortName: "29"
 						},
-						srcStops: [
-							{
-								stopId: "1_13760",
-								location: { lat: 47.663143, lon: -122.37648 },
-								metersFromEndpoint: 65,
-							}
-						],
-						destStops: [
-							{
-								stopId: "1_300",
-								location: { lat: 47.608646, lon: -122.338432 },
-								metersFromEndpoint: 134,
-							},
-						],
+						srcStop: {
+							stopId: "1_13760",
+							location: { lat: 47.663143, lon: -122.37648 },
+							metersFromEndpoint: 65,
+						},
+						destStop: {
+							stopId: "1_300",
+							location: { lat: 47.608646, lon: -122.338432 },
+							metersFromEndpoint: 134,
+						},
 					},
 					{
 						tripId: "1_33359811",
@@ -260,20 +252,16 @@ describe("Router", function() {
 							id: "1_102581",
 							shortName: "D Line"
 						},
-						srcStops: [
-							{
-								stopId: "1_13760",
-								location: { lat: 47.663143, lon: -122.37648 },
-								metersFromEndpoint: 65,
-							},
-						],
-						destStops: [
-							{
-								stopId: "1_431",
-								location: { lat: 47.609791, lon: -122.337959 },
-								metersFromEndpoint: 10,
-							},
-						],
+						srcStop: {
+							stopId: "1_13760",
+							location: { lat: 47.663143, lon: -122.37648 },
+							metersFromEndpoint: 65,
+						},
+						destStop: {
+							stopId: "1_431",
+							location: { lat: 47.609791, lon: -122.337959 },
+							metersFromEndpoint: 10,
+						},
 					},
 					{
 						tripId: "1_33359163",
@@ -281,20 +269,16 @@ describe("Router", function() {
 							id: "1_102574",
 							shortName: "40"
 						},
-						srcStops: [
-							{
-								stopId: "1_18165",
-								location: { lat: 47.663593, lon: -122.375587 },
-								metersFromEndpoint: 40,
-							},
-						],
-						destStops: [
-							{
-								stopId: '1_430',
-								location: { lat: 47.61079, lon: -122.338875 },
-								metersFromEndpoint: 137,
-							},
-						],
+						srcStop: {
+							stopId: "1_18165",
+							location: { lat: 47.663593, lon: -122.375587 },
+							metersFromEndpoint: 40,
+						},
+						destStop: {
+							stopId: '1_430',
+							location: { lat: 47.61079, lon: -122.338875 },
+							metersFromEndpoint: 137,
+						},
 					},
 					{
 						tripId: "1_33359653",
@@ -302,20 +286,16 @@ describe("Router", function() {
 							id: "1_102581",
 							shortName: "D Line"
 						},
-						srcStops: [
-							{
-								stopId: "1_13760",
-								location: { lat: 47.663143, lon: -122.37648 },
-								metersFromEndpoint: 65,
-							},
-						],
-						destStops: [
-							{
-								stopId: "1_431",
-								location: { lat: 47.609791, lon: -122.337959 },
-								metersFromEndpoint: 10,
-							},
-						],
+						srcStop: {
+							stopId: "1_13760",
+							location: { lat: 47.663143, lon: -122.37648 },
+							metersFromEndpoint: 65,
+						},
+						destStop: {
+							stopId: "1_431",
+							location: { lat: 47.609791, lon: -122.337959 },
+							metersFromEndpoint: 10,
+						},
 					}
 				].sort(compareProperty("tripId"));
 
