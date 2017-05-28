@@ -9,6 +9,7 @@ describe("filters", function() {
 				return {
 					tripId: input.tripId,
 					stopId: "",
+					stopName: "",
 					stopSequence: input.stopSequence,
 					scheduledArrivalTime: new Date(0),
 					lat: 0,
@@ -54,6 +55,7 @@ describe("filters", function() {
 				return {
 					tripId: input.tripId,
 					stopId: "",
+					stopName: "",
 					stopSequence: input.stopSequence,
 					scheduledArrivalTime: new Date(0),
 					lat: 0,
@@ -87,6 +89,7 @@ describe("filters", function() {
 				return {
 					tripId: input.tripId,
 					stopId: input.stopId,
+					stopName: "",
 					stopSequence: 0,
 					scheduledArrivalTime: new Date(0),
 					lat: 0,

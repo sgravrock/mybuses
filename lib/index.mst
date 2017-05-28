@@ -4,7 +4,7 @@
 	<ol>
 		{{ #trips }}
 			<li>
-				{{ route.shortName }} from {{ srcStop.stopId }}
+				{{ route.shortName }} from {{ srcStop.name }}
 				at {{ srcStop.scheduledArrivalTime }}
 			</li>
 		{{ /trips }}

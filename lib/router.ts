@@ -33,6 +33,7 @@ export interface Routing {
 
 export interface Stop {
 	stopId: string,
+	name: string,
 	location: Point,
 	metersFromEndpoint: number,
 	scheduledArrivalTime: Date,
@@ -117,6 +118,7 @@ function makeStop(arrDep: ArrDep, endpoint: Point): Stop {
 
 	return {
 		stopId: arrDep.stopId,
+		name: arrDep.stopName,
 		location: { lat: arrDep.lat, lon: arrDep.lon },
 		metersFromEndpoint: distance,
 		scheduledArrivalTime: arrDep.scheduledArrivalTime

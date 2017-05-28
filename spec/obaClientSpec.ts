@@ -44,10 +44,10 @@ describe("ObaClient", function() {
 	});
 
 	describe("arrivalsAndDeparturesForStop", function(this: SpecContext) {
-		function makePayload(stopId: string, lat: number, lon: number, arrDeps: ArrDep[]) {
+		function makePayload(stopId: string, stopName: string, lat: number, lon: number, arrDeps: ArrDep[]) {
 			const stops = [
-				{ id: "_", lat: -1, lon: -1, },
-				{ id: stopId, lat: lat, lon: lon }
+				{ id: "_", name: "", lat: -1, lon: -1, },
+				{ id: stopId, name: stopName, lat: lat, lon: lon }
 			];
 
 			return {
@@ -70,17 +70,18 @@ describe("ObaClient", function() {
 		}
 
 		it("gets the correct URL", async function(this: SpecContext) {
-			this.get.and.returnValue(Promise.resolve(makePayload("1_234", 0, 0, [])));
+			this.get.and.returnValue(Promise.resolve(makePayload("1_234", "", 0, 0, [])));
 			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
 			expect(this.get).toHaveBeenCalledWith(
 				"/api/where/arrivals-and-departures-for-stop/1_234.json", {});
 		});
 
-		it("resolves to a list of trips", async function(this: SpecContext) {
+		it("resolves to a list of arrivals/departures", async function(this: SpecContext) {
 			const arrDeps = [
 				{
 					tripId: "a",
 					stopId: "1_234",
+					stopName: "The Stop",
 					stopSequence: 3,
 					scheduledArrivalTime: new Date(1),
 					lat: 0,
@@ -89,13 +90,14 @@ describe("ObaClient", function() {
 				{
 					tripId: "a",
 					stopId: "1_234",
+					stopName: "The Stop",
 					stopSequence: 1,
 					scheduledArrivalTime: new Date(2),
 					lat: 0,
 					lon: 1,
 				},
 			];
-			this.get.and.returnValue(Promise.resolve(makePayload("1_234", 0, 1, arrDeps)));
+			this.get.and.returnValue(Promise.resolve(makePayload("1_234", "The Stop", 0, 1, arrDeps)));
 			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
 			expect(result).toEqual(arrDeps);
 			expect(this.get).toHaveBeenCalledWith(
