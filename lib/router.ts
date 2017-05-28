@@ -35,6 +35,7 @@ export interface Stop {
 	stopId: string,
 	location: Point,
 	metersFromEndpoint: number,
+	scheduledArrivalTime: number,
 }
 
 export interface TripWithStops {
@@ -118,5 +119,6 @@ function makeStop(arrDep: ArrDep, endpoint: Point): Stop {
 		stopId: arrDep.stopId,
 		location: { lat: arrDep.lat, lon: arrDep.lon },
 		metersFromEndpoint: distance,
-	}
+		scheduledArrivalTime: arrDep.scheduledArrivalTime
+	};
 }

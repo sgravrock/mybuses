@@ -10,6 +10,7 @@ describe("filters", function() {
 					tripId: input.tripId,
 					stopId: "",
 					stopSequence: input.stopSequence,
+					scheduledArrivalTime: 0,
 					lat: 0,
 					lon: 0,
 				};
@@ -54,6 +55,7 @@ describe("filters", function() {
 					tripId: input.tripId,
 					stopId: "",
 					stopSequence: input.stopSequence,
+					scheduledArrivalTime: 0,
 					lat: 0,
 					lon: 0,
 				};
@@ -86,6 +88,7 @@ describe("filters", function() {
 					tripId: input.tripId,
 					stopId: input.stopId,
 					stopSequence: 0,
+					scheduledArrivalTime: 0,
 					lat: 0,
 					lon: 0,
 				};

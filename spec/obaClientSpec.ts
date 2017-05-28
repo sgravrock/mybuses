@@ -58,6 +58,7 @@ describe("ObaClient", function() {
 								tripId: arrDep.tripId,
 								stopId: arrDep.stopId,
 								stopSequence: arrDep.stopSequence,
+								scheduledArrivalTime: arrDep.scheduledArrivalTime,
 							};
 						}),
 					},
@@ -81,6 +82,7 @@ describe("ObaClient", function() {
 					tripId: "a",
 					stopId: "1_234",
 					stopSequence: 3,
+					scheduledArrivalTime: 1,
 					lat: 0,
 					lon: 1,
 				},
@@ -88,6 +90,7 @@ describe("ObaClient", function() {
 					tripId: "a",
 					stopId: "1_234",
 					stopSequence: 1,
+					scheduledArrivalTime: 2,
 					lat: 0,
 					lon: 1,
 				},

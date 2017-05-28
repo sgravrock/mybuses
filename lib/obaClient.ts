@@ -10,6 +10,7 @@ export type ArrDep = {
 	tripId: string,
 	stopId: string,
 	stopSequence: number,
+	scheduledArrivalTime: number,
 	lat: number,
 	lon: number
 };
@@ -58,6 +59,7 @@ export class ObaClient implements IObaClient {
 			return {
 				tripId: arrDep.tripId,
 				stopSequence: arrDep.stopSequence,
+				scheduledArrivalTime: arrDep.scheduledArrivalTime,
 				stopId: stopId,
 				lat: stop.lat,
 				lon: stop.lon,
