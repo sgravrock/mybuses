@@ -2,7 +2,8 @@ const http = require("http");
 import { ObaClient, ArrDep, TripDetails, Point } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
 import * as filters from "./filters";
-import { distanceInMeters } from "../lib/distance";
+import { distanceInMeters } from "./distance";
+import { sortBy } from "./sort";
 
 
 function flatten<T>(arrays: T[][]): T[] {
@@ -69,7 +70,7 @@ export class Router {
 
 		return this._tripsBetweenStopSets(src, dest, srcStops, destStops)
 			.then((trips) => {
-				return trips.map((t) => {
+				const result = trips.map((t) => {
 					return {
 						tripId: t.trip.tripId,
 						route: t.trip.route,
@@ -77,6 +78,8 @@ export class Router {
 						destStop: t.destStop,
 					};
 				});
+				sortBy(result, r => r.srcStop.minutesUntil);
+				return result;
 			});
 	}
 

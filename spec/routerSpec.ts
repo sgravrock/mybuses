@@ -19,18 +19,6 @@ function verifyFails(promise: Promise<any>, error: any): Promise<void> {
 	});
 }
 
-function compareProperty(propname: string) {
-	return function(a: any, b: any): number {
-		if (a[propname] < b[propname]) {
-			return -1;
-		} else if (a[propname] > b[propname]) {
-			return 1;
-		} else {
-			return 0;
-		}
-	};
-}
-
 // Works around an unfortunate type checking hole. TypeScript accepts this:
 // const p: Promise<T> = Promise.resolve("totally not a T")
 // By passing the payload through a typed interface before it gets to 
@@ -241,27 +229,6 @@ describe("Router", function() {
 			it("finds trips between the two locations", async function(this: RouterSpecContext) {
 				const expected: Routing[] = [
 					{
-						tripId: "1_33350305", 
-						route: {
-							id: "1_102572",
-							shortName: "29"
-						},
-						srcStop: {
-							stopId: "1_13760",
-							name: "15th Ave NW & NW Leary Way",
-							location: { lat: 47.663143, lon: -122.37648 },
-							metersFromEndpoint: 65,
-							minutesUntil: -3,
-						},
-						destStop: {
-							stopId: "1_300",
-							name: "2nd Ave & Pike St",
-							location: { lat: 47.608646, lon: -122.338432 },
-							metersFromEndpoint: 134,
-							scheduledArrivalTime: new Date(1494867202000),
-						},
-					},
-					{
 						tripId: "1_33359811",
 						route: {
 							id: "1_102581",
@@ -280,6 +247,27 @@ describe("Router", function() {
 							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
 							scheduledArrivalTime: new Date(1494866937000),
+						},
+					},
+					{
+						tripId: "1_33350305", 
+						route: {
+							id: "1_102572",
+							shortName: "29"
+						},
+						srcStop: {
+							stopId: "1_13760",
+							name: "15th Ave NW & NW Leary Way",
+							location: { lat: 47.663143, lon: -122.37648 },
+							metersFromEndpoint: 65,
+							minutesUntil: -3,
+						},
+						destStop: {
+							stopId: "1_300",
+							name: "2nd Ave & Pike St",
+							location: { lat: 47.608646, lon: -122.338432 },
+							metersFromEndpoint: 134,
+							scheduledArrivalTime: new Date(1494867202000),
 						},
 					},
 					{
@@ -324,13 +312,12 @@ describe("Router", function() {
 							scheduledArrivalTime: new Date(1494867537000),
 						},
 					}
-				].sort(compareProperty("tripId"));
+				];
 
 				const trips = await this.subject.findTrips(
 					{lat: 47.663667, lon: -122.376109},
 					{lat: 47.609776, lon: -122.337830}
 				);
-				trips.sort(compareProperty("tripId"));
 				expect(trips).toEqual(expected);
 			});
 		});
