@@ -31,16 +31,64 @@ describe("Server", function() {
 		expect(this.app.listen).toHaveBeenCalledWith(1234, jasmine.any(Function));
 	});
 
-	it("asks the router for trips", function(this: Context, done) {
-		const response = jasmine.createSpyObj("response", ["status", "send"]);
-		response.send.and.callFake(() => {
-			expect(this.router.findTrips).toHaveBeenCalledWith(
-				{ lat: 42, lon: -122 },
-				{ lat: 41, lon: -123 }
-			);
-			done();
+	describe("When there are no query parameters", function() {
+		it("uses the configured endpoints", function(this: Context, done) {
+			const response = jasmine.createSpyObj("response", ["status", "send"]);
+			response.send.and.callFake(() => {
+				expect(this.router.findTrips).toHaveBeenCalledWith(
+					{ lat: 42, lon: -122 },
+					{ lat: 41, lon: -123 }
+				);
+				done();
+			});
+			this.router.findTrips.and.returnValue(Promise.resolve([]));
+			this.app.get.calls.argsFor(0)[1]({ query: {} }, response);
 		});
-		this.router.findTrips.and.returnValue(Promise.resolve([]));
-		this.app.get.calls.argsFor(0)[1](null, response);
+	});
+
+	describe("When source parameters are specified", function() {
+		it("uses the specified source", function(this: Context, done) {
+			const request = {
+				query: {
+					srclat: "42.345",
+					srclon: "-122.1"
+				}
+			};
+
+			const response = jasmine.createSpyObj("response", ["status", "send"]);
+			response.send.and.callFake(() => {
+				expect(this.router.findTrips).toHaveBeenCalledWith(
+					{ lat: 42.345, lon: -122.1 },
+					{ lat: 41, lon: -123 }
+				);
+				done();
+			});
+
+			this.router.findTrips.and.returnValue(Promise.resolve([]));
+			this.app.get.calls.argsFor(0)[1](request, response);
+		});
+	});
+
+	describe("When destination parameters are specified", function() {
+		it("uses the specified destination", function(this: Context, done) {
+			const request = {
+				query: {
+					destlat: "42.345",
+					destlon: "-122.1"
+				}
+			};
+
+			const response = jasmine.createSpyObj("response", ["status", "send"]);
+			response.send.and.callFake(() => {
+				expect(this.router.findTrips).toHaveBeenCalledWith(
+					{ lat: 42, lon: -122 },
+					{ lat: 42.345, lon: -122.1 }
+				);
+				done();
+			});
+
+			this.router.findTrips.and.returnValue(Promise.resolve([]));
+			this.app.get.calls.argsFor(0)[1](request, response);
+		});
 	});
 });

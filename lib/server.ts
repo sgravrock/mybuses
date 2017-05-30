@@ -14,6 +14,20 @@ function require_env(env: any, name: string) {
 	return value;
 }
 
+function pointFromQuery(query: any, prefix: string, fallback: Point): Point {
+	const point = {
+		lat: parseFloat(query[prefix + 'lat']),
+		lon: parseFloat(query[prefix + 'lon']),
+	};
+
+	if (isNaN(point.lat) || isNaN(point.lon)) {
+		point.lat = fallback.lat;
+		point.lon = fallback.lon;
+	}
+
+	return point;
+}
+
 interface ServerDeps {
 	env: any;
 	app: express.Application;
@@ -28,11 +42,11 @@ export class Server {
 		this._app = deps ? deps.app : express();
 		const env = deps ? deps.env : process.env;
 
-		const src = {
+		const defaultSrc = {
 			lat: parseFloat(require_env(env, "SRC_LAT")),
 			lon: parseFloat(require_env(env, "SRC_LON")),
 		};
-		const dest = {
+		const defaultDest = {
 			lat: parseFloat(require_env(env, "DEST_LAT")),
 			lon: parseFloat(require_env(env, "DEST_LON")),
 		};
@@ -41,6 +55,9 @@ export class Server {
 		const router = deps ? deps.router : new Router({key: key});
 
 		this._app.get('/', function (req: any, res: any) {
+			const src = pointFromQuery(req.query, "src", defaultSrc);
+			const dest = pointFromQuery(req.query, "dest", defaultDest);
+
 			router.findTrips(src, dest).then(function(trips) {
 				fs.readFile("./lib/index.mst", "utf8", function(err, template) {
 					if (err) {
