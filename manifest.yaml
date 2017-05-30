@@ -1,6 +1,6 @@
 ---
 applications:
 - name: mybuses
-  command: node lib/server.js
+  command: node lib/main.js
   memory: 128M
   instances: 1

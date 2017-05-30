@@ -2,7 +2,7 @@
   "name": "mybuses3",
   "version": "0.0.1",
   "description": "",
-  "main": "lib/server.js",
+  "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "test": "tsc && jasmine"
@@ -10,6 +10,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/express": "^4.0.35",
     "@types/jasmine": "^2.5.47",
     "@types/mustache": "^0.8.29",
     "@types/node": "^7.0.21",

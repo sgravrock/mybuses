@@ -3,3 +3,4 @@ obaClientSpec.js
 filtersSpec.js
 distanceSpec.js
 sortSpec.js
+serverSpec.js
