@@ -16,10 +16,24 @@
 					in {{ srcStop.minutesUntil }} minutes
 				</div>
 				<div class="time">
-					Arrive at {{ destStop.formattedArrivalTime }}
+					Arrive at <span class="timestamp">{{ destStop.arrivalTimestamp }}</span>
 				</div>
 			</li>
 		{{ /trips }}
 	</ol>
+	<script>
+		Array.prototype.forEach.call(document.querySelectorAll(".timestamp"),
+			function(node) {
+				// Convert to browser local time and format
+				var d = new Date(parseInt(node.textContent, 10));
+				var minutes = d.getMinutes() + "";
+
+				if (minutes.length === 1) {
+					minutes += "0";
+				}
+
+				node.textContent = d.getHours() + ":" + minutes;
+			});
+	</script>
 </body>
 </htm>
