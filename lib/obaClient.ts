@@ -54,7 +54,7 @@ export class ObaClient implements IObaClient {
 			".json";
 		const response = await this._obaRequest.get(path, {
 			minutesBefore: 2,
-			minutesAfter: 60
+			minutesAfter: 120
 		});
 		const stop = find(response.data.references.stops,
 			(s: any) => s.id === stopId);

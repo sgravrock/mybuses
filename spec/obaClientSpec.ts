@@ -75,7 +75,7 @@ describe("ObaClient", function() {
 			expect(this.get).toHaveBeenCalledWith(
 				"/api/where/arrivals-and-departures-for-stop/1_234.json", {
 					minutesBefore: 2,
-					minutesAfter: 60
+					minutesAfter: 120
 				});
 		});
 
