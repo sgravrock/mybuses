@@ -2,13 +2,22 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		li { margin-bottom: 1em; }
+		.time { font-weight: bold }
+	</style>
 </head>
 <body>
 	<ol>
 		{{ #trips }}
 			<li>
 				{{ route.shortName }} from {{ srcStop.name }}
-				in {{ srcStop.minutesUntil }} minutes
+				<div class="time">
+					in {{ srcStop.minutesUntil }} minutes
+				</div>
+				<div class="time">
+					Arrive at {{ destStop.formattedArrivalTime }}
+				</div>
 			</li>
 		{{ /trips }}
 	</ol>

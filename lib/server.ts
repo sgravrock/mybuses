@@ -28,6 +28,10 @@ function pointFromQuery(query: any, prefix: string, fallback: Point): Point {
 	return point;
 }
 
+function formatTime(time: Date): string {
+	return time.getHours() + ":" + time.getMinutes();
+}
+
 interface ServerDeps {
 	env: any;
 	app: express.Application;
@@ -64,6 +68,9 @@ export class Server {
 						console.error(err);
 						res.status(500).send(err);
 					} else {
+						trips.forEach(t => {
+							(t.destStop as any).formattedArrivalTime = formatTime(t.destStop.scheduledArrivalTime);
+						});
 		    			var rendered = Mustache.render(template, {trips: trips});
 						res.send(rendered);
 					}
