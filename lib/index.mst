@@ -25,7 +25,7 @@
 					Arrive at <span class="timestamp">{{ destStop.arrivalTimestamp }}</span>
 				</div>
 				{{ #trace }}
-					Trip ID: {{ tripId }}
+					Trip ID: <a href="http://api.pugetsound.onebusaway.org/api/where/trip-details/{{ tripId }}.xml?key=TEST">{{ tripId }}</a>
 				{{ /trace }}
 			</li>
 		{{ /trips }}
