@@ -8,6 +8,12 @@
 	</style>
 </head>
 <body>
+	{{ #trace }}
+		From 
+		<a href="https://www.google.com/maps/place/{{ src.lat }},{{ src.lon }}">{{ src.lat }} {{ src.lon }}</a>
+		to
+		<a href="https://www.google.com/maps/place/{{ dest.lat }},{{ dest.lon }}">{{ dest.lat }} {{ dest.lon }}</a>
+	{{ /trace }}
 	<ol>
 		{{ #trips }}
 			<li>
@@ -18,6 +24,9 @@
 				<div class="time">
 					Arrive at <span class="timestamp">{{ destStop.arrivalTimestamp }}</span>
 				</div>
+				{{ #trace }}
+					Trip ID: {{ tripId }}
+				{{ /trace }}
 			</li>
 		{{ /trips }}
 	</ol>
@@ -36,4 +45,4 @@
 			});
 	</script>
 </body>
-</htm>
+</html>

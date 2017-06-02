@@ -67,7 +67,12 @@ export class Server {
 						trips.forEach(t => {
 							(t.destStop as any).arrivalTimestamp = t.destStop.scheduledArrivalTime.getTime();
 						});
-		    			var rendered = Mustache.render(template, {trips: trips});
+		    			var rendered = Mustache.render(template, {
+							src: src,
+							dest: dest,
+							trips: trips,
+							trace: req.query.trace,
+						});
 						res.send(rendered);
 					}
 				});
