@@ -31,6 +31,31 @@ describe("Server", function() {
 		expect(this.app.listen).toHaveBeenCalledWith(1234, jasmine.any(Function));
 	});
 
+	it("renders the correct template", function(this: Context) {
+		this.router.findTrips.and.returnValue(Promise.resolve([]));
+		return this.subject.tripsBetweenPoints({})
+			.then(result => {
+				expect(result.template).toEqual("./lib/index.mst");
+			});
+	});
+
+	it("adds arrival timestamps", function(this: Context) {
+		const trips = [
+			{
+				destStop: {
+					scheduledArrivalTime: new Date(12345)
+				}
+			}
+		];
+		this.router.findTrips.and.returnValue(Promise.resolve(trips));
+		return this.subject.tripsBetweenPoints({})
+			.then(result => {
+				expect(result.object.trips[0].destStop.arrivalTimestamp)
+					.toEqual(12345);
+			});
+				
+	});
+
 	describe("When there are no query parameters", function() {
 		it("uses the configured endpoints", function(this: Context, done) {
 			const response = jasmine.createSpyObj("response", ["status", "send"]);
