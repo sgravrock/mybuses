@@ -118,4 +118,14 @@ describe("Server", function() {
 			});
 		});
 	});
+
+	describe("/where", function(this: Context) {
+		it("renders the where template with no data", function(this: Context) {
+			const result = this.subject.where();
+			expect(result).toEqual({
+				template: "./lib/where.mst",
+				object: null
+			});
+		});
+	});
 });

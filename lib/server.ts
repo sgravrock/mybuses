@@ -34,7 +34,7 @@ interface ServerDeps {
 	router: Router;
 }
 
-interface JsonResult {
+interface PageResult {
 	template: string;
 	object: any;
 }
@@ -56,6 +56,10 @@ export class Server {
 			this.tripsBetweenPoints(req.query)
 				.then(result => this._render(resp, result));
 		});
+
+		this._app.get('/where', (req: any, resp: any) => {
+			this._render(resp, this.where());
+		});
 	}
 
 	start() { 
@@ -64,7 +68,7 @@ export class Server {
 		});
 	}
 
-	tripsBetweenPoints(query: any): Promise<JsonResult> {
+	tripsBetweenPoints(query: any): Promise<PageResult> {
 		const defaultSrc = {
 			lat: parseFloat(require_env(this._env, "SRC_LAT")),
 			lon: parseFloat(require_env(this._env, "SRC_LON")),
@@ -93,7 +97,14 @@ export class Server {
 		});
 	}
 
-	_render(response: any, result: JsonResult) {
+	where(): PageResult {
+		return {
+			template: "./lib/where.mst",
+			object: null
+		};
+	}
+
+	_render(response: any, result: PageResult) {
 		fs.readFile(result.template, "utf8", function(err, template) {
 			if (err) {
 				console.error(err);

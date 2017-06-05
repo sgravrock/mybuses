@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		fieldset {
+			margin: 1em 1em 2em 1em;
+			padding: 0;
+			border: none;
+		}
+
+		legend {
+			border-bottom: 1px solid black;
+			margin-bottom: 1em;
+		}
+
+		label { display: block; }
+
+		input {
+			display: block;
+			margin-bottom: 1em;
+		}
+
+		input, legend {
+			width: 100%;
+			max-width: 20em;
+		}
+
+		.submit { margin: 0 1em; }
+	</style>
+</head>
+<body>
+	<form method="get" action="/">
+		<fieldset>
+			<legend>Source</legend>
+			<label>
+				Latitude:
+				<input type="text" name="srclat">
+			</label>
+			<label>
+				Longitude:
+				<input type="text" name="srclon">
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>Destination</legend>
+			<label>
+				Latitude:
+				<input type="text" name="destlat">
+			</label>
+			<label>
+				Longitude:
+				<input type="text" name="destlon">
+			</label>
+		</fieldset>
+
+		<div class="submit"><input type="submit" value="Find routes"></div>
+	</form>
+</body>
+</html>
