@@ -1,4 +1,4 @@
-/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
+/// <reference path="../../node_modules/@types/jasmine/index.d.ts" />
 const vcr = require("./helpers/http-vcr");
 import { Router, Routing } from "../lib/router";
 import { Point, ArrDep, TripDetails, IObaClient } from "../lib/obaClient";

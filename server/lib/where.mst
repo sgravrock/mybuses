@@ -56,5 +56,11 @@
 
 		<div class="submit"><input type="submit" value="Find routes"></div>
 	</form>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
+	<script>
+		require(["/static/wherePage.js"], function(wherePage) {
+			wherePage.init(document.body, navigator.geolocation);
+		});
+	</script>
 </body>
 </html>

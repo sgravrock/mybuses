@@ -63,6 +63,7 @@ export class Server {
 	}
 
 	start() { 
+		this._app.use("/static", express.static("../client/public"));
 		this._app.listen(this._port, () => {
 			console.log('Listening on port ' + this._port);
 		});

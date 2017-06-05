@@ -9,7 +9,7 @@ interface Context {
 
 describe("Server", function() {
 	beforeEach(function(this: Context) {
-		this.app = jasmine.createSpyObj("app", ["get", "listen"]);
+		this.app = jasmine.createSpyObj("app", ["get", "listen", "use"]);
 		this.env = {
 			PORT: "1234",
 			SRC_LAT: "42",
