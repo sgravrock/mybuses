@@ -33,6 +33,7 @@
 	<form method="get" action="/">
 		<fieldset>
 			<legend>Source</legend>
+			<button class="use-current">Use my location</button>
 			<label>
 				Latitude:
 				<input type="text" name="srclat">
