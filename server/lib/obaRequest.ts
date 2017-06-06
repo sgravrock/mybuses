@@ -9,21 +9,20 @@ function delay(millis: number) {
 	});
 }
 
-export class ObaRequest {
+export interface IObaRequest {
+	get(path: string, params: any): Promise<any>;
+}
+
+export class ObaRequest implements IObaRequest {
 	_http: any;
 	_key: string;
 
-	constructor(deps: any) {
-		this._http = deps.http || http;
-
-		if (!deps.key) {
-			throw new Error("ObaRequest requires a key");
-		}
-
-		this._key = deps.key;
+	constructor(http: any, apiKey: string) {
+		this._http = http;
+		this._key = apiKey;
 	}
 
-	async get(path: string, params: any): Promise<string> {
+	async get(path: string, params: any): Promise<any> {
 		const body = await this._getOnce(path, params)
 
 		if (body.code === 429) {

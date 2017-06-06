@@ -1,5 +1,6 @@
 /// <reference path="../../node_modules/@types/jasmine/index.d.ts" />
 import { ObaClient, ArrDep } from "../lib/obaClient";
+import { IObaRequest } from "../lib/obaRequest";
 
 interface SpecContext {
 	get: jasmine.Spy,
@@ -9,7 +10,7 @@ interface SpecContext {
 describe("ObaClient", function() {
 	beforeEach(function(this: SpecContext) {
 		this.get = jasmine.createSpy("obaGet");
-		this.subject = new ObaClient({ obaRequest: { get: this.get } });
+		this.subject = new ObaClient({ get: this.get } as IObaRequest);
 	});
 
 	describe("stopsForLocation", function() {

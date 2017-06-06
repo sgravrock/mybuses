@@ -1,6 +1,8 @@
 /// <reference path="../../node_modules/@types/jasmine/index.d.ts" />
 const vcr = require("./helpers/http-vcr");
 import { Router, Routing } from "../lib/router";
+import { ObaClient } from "../lib/obaClient";
+import { ObaRequest } from "../lib/obaRequest";
 import { Point, ArrDep, TripDetails, IObaClient } from "../lib/obaClient";
 
 function makeStopsForLocationResponse(stopIds: string[]): string[] {
@@ -94,7 +96,7 @@ describe("Router", function() {
 	describe("findTrips", function() {
 		beforeEach(function(this: RouterSpecContext) {
 			this.obaClient = new StubObaClient();
-			this.subject = new Router({ obaClient: this.obaClient });
+			this.subject = new Router(this.obaClient);
 		});
 
 		it("fails when either stopsForLocation call fails", function(this: RouterSpecContext) {
@@ -217,10 +219,8 @@ describe("Router", function() {
 		beforeEach(function(this: RouterSpecContext) {
 			const http = vcr.playback("spec/fixtures");
 			http.stripParam("key");
-			this.subject = new Router({
-				http: http,
-				key: "somekey"
-			});
+			const obaClient = new ObaClient(new ObaRequest(http, "somekey"));
+			this.subject = new Router(obaClient);
 
 			jasmine.clock().mockDate(new Date(1494865686000));
 		});

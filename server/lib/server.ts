@@ -28,12 +28,6 @@ function pointFromQuery(query: any, prefix: string, fallback: Point): Point {
 	return point;
 }
 
-interface ServerDeps {
-	env: any;
-	app: express.Application;
-	router: Router;
-}
-
 interface PageResult {
 	template: string;
 	object: any;
@@ -45,12 +39,11 @@ export class Server {
 	_env: any;
 	_router: Router;
 
-	constructor(deps?: ServerDeps) {
-		this._app = deps ? deps.app : express();
-		this._env = deps ? deps.env : process.env;
-		const key = require_env(this._env, "OBA_API_KEY");
+	constructor(app: express.Application, router: Router, env: any) {
+		this._app = app;
+		this._env = env;
 		this._port = parseInt(this._env.PORT || "80", 10);
-		this._router = deps ? deps.router : new Router({key: key});
+		this._router = router;
 
 		this._app.get('/', (req: any, resp: any) => {
 			this.tripsBetweenPoints(req.query)

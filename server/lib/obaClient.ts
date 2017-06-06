@@ -1,4 +1,4 @@
-import { ObaRequest } from "./obaRequest";
+import { IObaRequest } from "./obaRequest";
 const find = require("lodash.find");
 
 export type Point = {
@@ -33,10 +33,10 @@ export interface IObaClient {
 
 
 export class ObaClient implements IObaClient {
-	_obaRequest: any;
+	_obaRequest: IObaRequest;
 
-	constructor(deps: any) {
-		this._obaRequest = deps.obaRequest || new ObaRequest(deps);
+	constructor(obaRequest: IObaRequest) {
+		this._obaRequest = obaRequest;
 	}
 
 	async stopsForLocation(loc: Point): Promise<string[]> {

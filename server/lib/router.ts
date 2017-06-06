@@ -1,5 +1,4 @@
-const http = require("http");
-import { ObaClient, ArrDep, TripDetails, Point } from "./obaClient";
+import { IObaClient, ArrDep, TripDetails, Point } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
 import * as filters from "./filters";
 import { distanceInMeters } from "./distance";
@@ -12,14 +11,6 @@ function flatten<T>(arrays: T[][]): T[] {
 
 function unique(a: any[]): any[] {
 	return Array.from(new Set(a));
-}
-
-function makeObaClient(deps: any) {
-	const obaRequest = deps.obaRequest || new ObaRequest({
-		http: deps.http || http,
-		key: deps.key
-	});
-	return new ObaClient({ obaRequest: obaRequest });
 }
 
 export interface Routing {
@@ -56,10 +47,10 @@ export interface TripWithStops {
 
 
 export class Router {
-	_obaClient: ObaClient;
+	_obaClient: IObaClient;
 
-	constructor(deps: any) {
-		this._obaClient = deps.obaClient || makeObaClient(deps);
+	constructor(obaClient: IObaClient) {
+		this._obaClient = obaClient;
 	}
 
 	async findTrips(src: Point, dest: Point): Promise<Routing[]> {

@@ -19,11 +19,7 @@ describe("Server", function() {
 			OBA_API_KEY: "key",
 		};
 		this.router = jasmine.createSpyObj("router", ["findTrips"]);
-		this.subject = new Server({
-			app: this.app,
-			env: this.env,
-			router: this.router
-		});
+		this.subject = new Server(this.app, this.router, this.env);
 	});
 
 	it("listens on the specified port", function(this: Context) {

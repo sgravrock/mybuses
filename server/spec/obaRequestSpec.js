@@ -23,7 +23,7 @@ function verifyFails(promise, error) {
 describe("ObaRequest", function() {
 	beforeEach(function() {
 		this.get = jasmine.createSpy("get");
-		this.subject = new ObaRequest({ http: { get: this.get }, key: "thekey" });
+		this.subject = new ObaRequest({ get: this.get }, "thekey");
 
 		jasmine.addMatchers({
 			toHaveBeenCalledWithUrl: function(util, customEqualityTesters) {
