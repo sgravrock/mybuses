@@ -12,6 +12,7 @@ export type ArrDep = {
 	stopName: string,
 	stopSequence: number,
 	scheduledArrivalTime: Date,
+	predictedArrivalTime?: Date,
 	lat: number,
 	lon: number
 };
@@ -60,11 +61,14 @@ export class ObaClient implements IObaClient {
 			(s: any) => s.id === stopId);
 
 		return response.data.entry.arrivalsAndDepartures.map((arrDep: any) => {
+			let p = arrDep.predictedArrivalTime;
+			let pOut = p ? new Date(p) : undefined;
 			return {
 				tripId: arrDep.tripId,
 				stopSequence: arrDep.stopSequence,
 				stopName: stop.name,
 				scheduledArrivalTime: new Date(arrDep.scheduledArrivalTime),
+				predictedArrivalTime: pOut,
 				stopId: stopId,
 				lat: stop.lat,
 				lon: stop.lon,

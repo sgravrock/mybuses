@@ -1,7 +1,7 @@
 import * as express from "express";
 import Mustache = require("mustache");
 import * as fs from "fs";
-import { Router } from "./router";
+import { Router, TimeType } from "./router";
 import { Point } from "./obaClient";
 
 function require_env(env: any, name: string) {
@@ -76,7 +76,11 @@ export class Server {
 
 		return this._router.findTrips(src, dest).then(function(trips) {
 			trips.forEach(t => {
-				(t.destStop as any).arrivalTimestamp = t.destStop.scheduledArrivalTime.getTime();
+				let srcArrTime = t.srcStop.arrivalTime;
+				let destArrTime = t.destStop.arrivalTime;
+				(srcArrTime as any).isScheduled = srcArrTime.type === TimeType.Scheduled;
+				(destArrTime as any).isScheduled = destArrTime.type === TimeType.Scheduled;
+				(destArrTime as any).timestamp = destArrTime.date.getTime();
 			});
 
 			return {

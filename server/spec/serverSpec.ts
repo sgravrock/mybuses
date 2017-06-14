@@ -39,15 +39,18 @@ describe("Server", function() {
 		it("adds arrival timestamps", function(this: Context) {
 			const trips = [
 				{
+					srcStop: {
+						arrivalTime: {}
+					},
 					destStop: {
-						scheduledArrivalTime: new Date(12345)
+						arrivalTime: { date: new Date(12345) }
 					}
 				}
 			];
 			this.router.findTrips.and.returnValue(Promise.resolve(trips));
 			return this.subject.tripsBetweenPoints({})
 				.then(result => {
-					expect(result.object.trips[0].destStop.arrivalTimestamp)
+					expect(result.object.trips[0].destStop.arrivalTime.timestamp)
 						.toEqual(12345);
 				});
 					

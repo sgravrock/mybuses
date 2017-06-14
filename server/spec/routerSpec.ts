@@ -1,6 +1,6 @@
 /// <reference path="../../node_modules/@types/jasmine/index.d.ts" />
 const vcr = require("./helpers/http-vcr");
-import { Router, Routing } from "../lib/router";
+import { Router, Routing, TimeType } from "../lib/router";
 import { ObaClient } from "../lib/obaClient";
 import { ObaRequest } from "../lib/obaRequest";
 import { Point, ArrDep, TripDetails, IObaClient } from "../lib/obaClient";
@@ -209,9 +209,64 @@ describe("Router", function() {
 					id: "5679",
 					shortName: "Some route"
 				},
-				srcStop: { stopId: "src sid 2", name: "src stop 2", location: { lat: 1, lon: 2 }, metersFromEndpoint: 12403734, minutesUntil: 0, },
-				destStop: { stopId: "dest sid 2", name: "dest stop 2", location: { lat: 5, lon: 6 }, metersFromEndpoint: 12300786, scheduledArrivalTime: new Date(0), },
+				srcStop: {
+					stopId: "src sid 2",
+					name: "src stop 2",
+					location: { lat: 1, lon: 2 },
+					metersFromEndpoint: 12403734,
+					arrivalTime: {
+						minutesUntil: 0,
+						type: TimeType.Scheduled,
+					},
+				},
+				destStop: {
+					stopId: "dest sid 2",
+					name: "dest stop 2",
+					location: { lat: 5, lon: 6 },
+					metersFromEndpoint: 12300786,
+					arrivalTime: {
+						date: new Date(0),
+						type: TimeType.Scheduled,
+					},
+				},
 			}]);
+		});
+
+		it("provides predicted arrival times when available", async function(this: RouterSpecContext) {
+			jasmine.clock().mockDate(new Date(0));
+			const src = {lat: 47.663667, lon: -122.376109};
+			const dest = {lat: 47.609776, lon: -122.337830};
+			this.obaClient.stops.resolve(JSON.stringify(src),
+				makeStopsForLocationResponse(["src sid"]));
+			this.obaClient.stops.resolve(JSON.stringify(dest),
+				makeStopsForLocationResponse(["dest sid"]));
+
+			this.obaClient.arrDeps.resolve("src sid", [
+				{ tripId: "12345", stopId: "src sid", stopName: "src stop", stopSequence: 1, scheduledArrivalTime: new Date(0), predictedArrivalTime: new Date(2 * 1000 * 60), lat: 0, lon: 1 },
+			]);
+			let destArrDate = new Date(3 * 1000 * 60);
+			this.obaClient.arrDeps.resolve("dest sid", [
+				{ tripId: "12345", stopId: "dest sid", stopName: "dest stop", stopSequence: 3, scheduledArrivalTime: new Date(0), predictedArrivalTime: destArrDate, lat: 3, lon: 4 },
+			]);
+
+			this.obaClient.trips.resolve("12345", {
+				tripId: "12345",
+				route: {
+					id: "5679",
+					shortName: "Some route"
+				}
+			});
+
+			const result = await this.subject.findTrips(src, dest)
+			const trip = result[0];
+			expect(trip.srcStop.arrivalTime).toEqual({
+				type: TimeType.Predicted,
+				minutesUntil: 2
+			});
+			expect(trip.destStop.arrivalTime).toEqual({
+				type: TimeType.Predicted,
+				date: destArrDate,
+			});
 		});
 	});
 
@@ -239,14 +294,20 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							minutesUntil: -4.4,
+							arrivalTime: {
+								minutesUntil: -4.4,
+								type: TimeType.Scheduled,
+							},
 						},
 						destStop: {
 							stopId: "1_431",
 							name: "3rd Ave & Pike St",
 							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
-							scheduledArrivalTime: new Date(1494866937000),
+							arrivalTime: {
+								date: new Date(1494866937000),
+								type: TimeType.Scheduled,
+							},
 						},
 					},
 					{
@@ -260,14 +321,20 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							minutesUntil: -3,
+							arrivalTime: {
+								minutesUntil: -3,
+								type: TimeType.Scheduled,
+							},
 						},
 						destStop: {
 							stopId: "1_300",
 							name: "2nd Ave & Pike St",
 							location: { lat: 47.608646, lon: -122.338432 },
 							metersFromEndpoint: 134,
-							scheduledArrivalTime: new Date(1494867202000),
+							arrivalTime: {
+								date: new Date(1494867202000),
+								type: TimeType.Scheduled,
+							},
 						},
 					},
 					{
@@ -281,14 +348,20 @@ describe("Router", function() {
 							name: "NW Leary Way & 15th Ave NW",
 							location: { lat: 47.663593, lon: -122.375587 },
 							metersFromEndpoint: 40,
-							minutesUntil: 0,
+							arrivalTime: {
+								minutesUntil: 0,
+								type: TimeType.Scheduled,
+							},
 						},
 						destStop: {
 							stopId: '1_430',
 							name: "3rd Ave & Pine St",
 							location: { lat: 47.61079, lon: -122.338875 },
 							metersFromEndpoint: 137,
-							scheduledArrivalTime: new Date(1494867336000),
+							arrivalTime: {
+								date: new Date(1494867336000),
+								type: TimeType.Scheduled,
+							},
 						},
 					},
 					{
@@ -302,14 +375,20 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
-							minutesUntil: 5.6,
+							arrivalTime: {
+								minutesUntil: 5.6,
+								type: TimeType.Scheduled,
+							},
 						},
 						destStop: {
 							stopId: "1_431",
 							name: "3rd Ave & Pike St",
 							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
-							scheduledArrivalTime: new Date(1494867537000),
+							arrivalTime: {
+								date: new Date(1494867537000),
+								type: TimeType.Scheduled,
+							},
 						},
 					}
 				];

@@ -23,12 +23,31 @@ export interface Routing {
 	destStop: DestStop,
 }
 
+export enum TimeType {
+	Scheduled,
+	Predicted
+}
+
+export interface RelativeTime {
+	minutesUntil: number,
+	type: TimeType
+}
+
+export interface AbsoluteTime {
+	date: Date,
+	type: TimeType
+}
+
 export interface SourceStop {
 	stopId: string,
 	name: string,
 	location: Point,
 	metersFromEndpoint: number,
-	minutesUntil: number,
+
+	// Just using arrival time assumes that buses arrive and depart at
+	// the same time, which is true with the rare exception of layover
+	// stops (e.g. 1_18085 on the 44).
+	arrivalTime: RelativeTime,
 }
 
 export interface DestStop {
@@ -36,7 +55,7 @@ export interface DestStop {
 	name: string,
 	location: Point,
 	metersFromEndpoint: number,
-	scheduledArrivalTime: Date,
+	arrivalTime: AbsoluteTime,
 }
 
 export interface TripWithStops {
@@ -69,7 +88,7 @@ export class Router {
 						destStop: t.destStop,
 					};
 				});
-				sortBy(result, r => r.srcStop.minutesUntil);
+				sortBy(result, r => r.srcStop.arrivalTime.minutesUntil);
 				return result;
 			});
 	}
@@ -117,20 +136,34 @@ export class Router {
 
 function makeSourceStop(arrDep: ArrDep, endpoint: Point): SourceStop {
 	const distance = Math.round(distanceInMeters(arrDep, endpoint));
-	// This assumes that buses arrive and depart at the same time,
-	// which is true with the rare exception of layover stops
-	// (e.g. 1_18085 on the 44).
-	const now = new Date().getTime();
-	const millisUntil = arrDep.scheduledArrivalTime.getTime() - now;
-	const minutesUntil = Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
 
 	return {
 		stopId: arrDep.stopId,
 		name: arrDep.stopName,
 		location: { lat: arrDep.lat, lon: arrDep.lon },
 		metersFromEndpoint: distance,
-		minutesUntil: minutesUntil,
+		arrivalTime: relArrivalTime(arrDep),
 	};
+}
+
+function relArrivalTime(arrDep: ArrDep): RelativeTime {
+	if (arrDep.predictedArrivalTime) {
+		return {
+			minutesUntil: minutesUntilDate(arrDep.predictedArrivalTime),
+			type: TimeType.Predicted,
+		};
+	} else {
+		return {
+			minutesUntil: minutesUntilDate(arrDep.scheduledArrivalTime),
+			type: TimeType.Scheduled,
+		};
+	}
+}
+
+function minutesUntilDate(date: Date): number {
+	const now = new Date().getTime();
+	const millisUntil = date.getTime() - now;
+	return Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
 }
 
 function makeDestStop(arrDep: ArrDep, endpoint: Point): DestStop {
@@ -141,6 +174,20 @@ function makeDestStop(arrDep: ArrDep, endpoint: Point): DestStop {
 		name: arrDep.stopName,
 		location: { lat: arrDep.lat, lon: arrDep.lon },
 		metersFromEndpoint: distance,
-		scheduledArrivalTime: arrDep.scheduledArrivalTime
+		arrivalTime: absArrivalTime(arrDep),
 	};
+}
+
+function absArrivalTime(arrDep: ArrDep): AbsoluteTime {
+	if (arrDep.predictedArrivalTime) {
+		return {
+			date: arrDep.predictedArrivalTime,
+			type: TimeType.Predicted,
+		};
+	} else {
+		return {
+			date: arrDep.scheduledArrivalTime,
+			type: TimeType.Scheduled,
+		};
+	}
 }

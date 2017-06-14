@@ -55,11 +55,13 @@ describe("ObaClient", function() {
 				data: {
 					entry: {
 						arrivalsAndDepartures: arrDeps.map((arrDep) => {
+							var pred = arrDep.predictedArrivalTime ? arrDep.predictedArrivalTime.getTime() : 0;
 							return {
 								tripId: arrDep.tripId,
 								stopId: arrDep.stopId,
 								stopSequence: arrDep.stopSequence,
 								scheduledArrivalTime: arrDep.scheduledArrivalTime.getTime(),
+								predictedArrivalTime: pred,
 							};
 						}),
 					},
@@ -88,6 +90,7 @@ describe("ObaClient", function() {
 					stopName: "The Stop",
 					stopSequence: 3,
 					scheduledArrivalTime: new Date(1),
+					predictedArrivalTime: undefined,
 					lat: 0,
 					lon: 1,
 				},
@@ -97,6 +100,7 @@ describe("ObaClient", function() {
 					stopName: "The Stop",
 					stopSequence: 1,
 					scheduledArrivalTime: new Date(2),
+					predictedArrivalTime: undefined,
 					lat: 0,
 					lon: 1,
 				},
@@ -105,6 +109,43 @@ describe("ObaClient", function() {
 			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
 			expect(result).toEqual(arrDeps);
 		});
+
+		it("provides a predicted arrival time when nonzero",
+			async function(this: SpecContext) {
+				const arrDep = {
+					tripId: "a",
+					stopId: "1_234",
+					stopName: "The Stop",
+					stopSequence: 3,
+					scheduledArrivalTime: new Date(1),
+					predictedArrivalTime: new Date(2),
+					lat: 0,
+					lon: 1,
+				};
+				this.get.and.returnValue(Promise.resolve(
+					makePayload("1_234", "The Stop", 0, 1, [arrDep])));
+				const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
+				expect(result[0].predictedArrivalTime).toEqual(new Date(2));
+			}
+		);
+
+		it("provides an undefined predicted arrival time when zero",
+			async function(this: SpecContext) {
+				const arrDep = {
+					tripId: "a",
+					stopId: "1_234",
+					stopName: "The Stop",
+					stopSequence: 3,
+					scheduledArrivalTime: new Date(1),
+					lat: 0,
+					lon: 1,
+				};
+				this.get.and.returnValue(Promise.resolve(
+					makePayload("1_234", "The Stop", 0, 1, [arrDep])));
+				const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
+				expect(result[0].predictedArrivalTime).toBeUndefined();
+			}
+		);
 	});
 
 	describe("tripDetails", function() {

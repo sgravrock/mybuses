@@ -19,10 +19,10 @@
 			<li>
 				{{ route.shortName }} from {{ srcStop.name }}
 				<div class="time">
-					in {{ srcStop.minutesUntil }} minutes
+					in {{ srcStop.arrivalTime.minutesUntil }} minutes{{#srcStop.arrivalTime.isScheduled}}*{{/srcStop.arrivalTime.isScheduled}}
 				</div>
 				<div class="time">
-					Arrive at <span class="timestamp">{{ destStop.arrivalTimestamp }}</span>
+					Arrive at <span class="timestamp">{{ destStop.arrivalTime.timestamp }}</span>{{#destStop.arrivalTime.isScheduled}}*{{/destStop.arrivalTime.isScheduled}}
 				</div>
 				{{ #trace }}
 					Trip ID: <a href="http://api.pugetsound.onebusaway.org/api/where/trip-details/{{ tripId }}.xml?key=TEST">{{ tripId }}</a>
@@ -46,6 +46,8 @@
 	</script>
 
 	<p><a href="/where">Not what you wanted?</a></p>
+
+	<p>* Denotes a scheduled time for which no vehicle status is available.</p>
 
 	<p><b>The fine print</b>: Mybuses won't find options that arrive more than
 	two hours after departure or that involve more than one route. Results are
