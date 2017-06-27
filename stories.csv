@@ -1,0 +1,21 @@
+Id,Title,Labels,Iteration,Iteration Start,Iteration End,Type,Estimate,Current State,Created at,Accepted at,Deadline,Requested By,Description,URL,Owned By
+147893049,Start at 6f2922347d472a101a2c18999ad84d299adb3573,"",,,,feature,,unstarted,"Jun 26, 2017",,,Stephen Gravrock,,https://www.pivotaltracker.com/story/show/147893049,
+147893073,Show the nearest arrival and departure stop for each trip,"",,,,feature,,unstarted,"Jun 26, 2017",,,Stephen Gravrock,,https://www.pivotaltracker.com/story/show/147893073,
+147893099,Show scheduled arrival times,"",,,,feature,,unstarted,"Jun 26, 2017",,,Stephen Gravrock,"For each stop in each trip's srcStops and destStops, show when the bus is scheduled to arrive at that stop, e.g.:
+
+```
+[...]
+        ""srcStops"": [
+            {
+                ""stopId"": ""1_18165"",
+                ""location"": {
+                    ""lat"": 47.663593,
+                    ""lon"": -122.375587
+                },
+                ""scheduledArrivalTime"": ""some human readable time format""
+            },
+[...]
+```",https://www.pivotaltracker.com/story/show/147893099,
+147892887,Show predicted arrival times when available,"",,,,feature,,unstarted,"Jun 26, 2017",,,Stephen Gravrock,"`arrivals-and-departures-for-stop` sometimes provides predicted arrival times. When it does, include that information along with the scheduled arrival time.",https://www.pivotaltracker.com/story/show/147892887,
+147893117,Sort results by arrival time,"",,,,feature,,unstarted,"Jun 27, 2017",,,Stephen Gravrock,Display trips in order of when they arrive at the destination. Use predicted arrival times when available and scheduled arrival times the rest of the time.,https://www.pivotaltracker.com/story/show/147893117,
+147893917,Allow users to specify their maximum walking distance,"",,,,feature,,unstarted,"Jun 27, 2017",,,Stephen Gravrock,Allow users to specify how far they are willing to walk to/from their start and end points instead of just using the OneBusAway API defaults.,https://www.pivotaltracker.com/story/show/147893917,
