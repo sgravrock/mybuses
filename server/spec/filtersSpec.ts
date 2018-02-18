@@ -112,24 +112,22 @@ describe("filters", function() {
 				],
 			];
 			const expected = new Map();
-				expected.set("1", [
-					[
-						makeArrDep({ tripId: "1", stopId: "1" }),
-						makeArrDep({ tripId: "1", stopId: "2" }),
-					],
-					[
-						makeArrDep({ tripId: "1", stopId: "3" }),
-						makeArrDep({ tripId: "1", stopId: "4" }),
-					],
-				]);
-				expected.set("2", [
-					[
-						[
-							makeArrDep({ tripId: "2", stopId: "1" }),
-							makeArrDep({ tripId: "2", stopId: "4" }),
-						],
-					]
-				]);;
+			expected.set("1", [
+				[
+					makeArrDep({ tripId: "1", stopId: "1" }),
+					makeArrDep({ tripId: "1", stopId: "2" }),
+				],
+				[
+					makeArrDep({ tripId: "1", stopId: "3" }),
+					makeArrDep({ tripId: "1", stopId: "4" }),
+				],
+			]);
+			expected.set("2", [
+				[
+					makeArrDep({ tripId: "2", stopId: "1" }),
+					makeArrDep({ tripId: "2", stopId: "4" }),
+				]
+			]);
 			expect(filters.groupEndpointPairsByTrip(pairs)).toEqual(expected);
 		});
 	});

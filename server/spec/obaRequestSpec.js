@@ -119,13 +119,19 @@ describe("ObaRequest", function() {
 			});
 
 			describe("With code 429 in the payload", function() {
-				it("tries the request again after a delay", function(done) {
+				it("tries the request again after a delay", async function() {
 					const response = new MockResponse();
 					response.statusCode = 200;
 					spyOn(this.subject, "_getOnce").and.callThrough();
+					let once = false;
 					this.get.and.callFake(function(url, callback) {
+						const payload = {};
+						if (!once) {
+							payload.code = 429;
+						}
+						once = true;
+
 						setImmediate(function() {
-							var payload = { code: 429 };
 							response._handlers["data"](JSON.stringify(payload));
 							response._handlers["end"]();
 						});
@@ -133,15 +139,13 @@ describe("ObaRequest", function() {
 						callback(response);
 					});
 	
-					this.subject.get("/whatever", {}).catch(done.fail);
+					const resultPromise = this.subject.get("/whatever", {});
 
-					return this.subject._getOnce.calls.first().returnValue
-						.then(() => {
-							jasmine.clock().tick(500);
-						}).then(() => {
-							expect(this.get.calls.count()).toEqual(2);
-							done();
-						});
+					await this.subject._getOnce.calls.first().returnValue;
+					jasmine.clock().tick(500);
+
+					await resultPromise;
+					expect(this.get.calls.count()).toEqual(2);
 				});
 			});
 		});
