@@ -6,16 +6,16 @@
   "scripts": {
     "build": "cd server && tsc",
     "test": "cd server && tsc && jasmine",
-	 "bb": "cd client && tsc"
+    "bb": "cd client && tsc"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.0.35",
-    "@types/jasmine": "^2.5.47",
+    "@types/jasmine": "^2.8.6",
     "@types/mustache": "^0.8.29",
     "@types/node": "^7.0.21",
-    "jasmine": "git+https://github.com/sgravrock/jasmine-npm.git#promises-temp",
+    "jasmine": "^3.0.0",
     "mkdirp": "^0.5.1",
     "tmp": "0.0.31",
     "typescript": "^2.3.2"
