@@ -3,9 +3,9 @@ A highly specialized transit trip planning app. It probably won't work for you.
 
 ## Initial setup
 
-1. Make sure that you have Node 7.10 or later installed. 
+1. Make sure that you have Node 8.9.4 or later installed.
 [NVM](https://github.com/creationix/nvm) might be helpful if you have an older version.
-2. `$ npm install`
+2. `$ yarn install`
 3. Obtain a [OneBusAway API key](http://pugetsound.onebusaway.org/p/OneBusAwayApiService.action).
 4. Set the following environment variables. 
 [`direnv`](https://direnv.net/) is your friend here.
@@ -20,11 +20,11 @@ export PORT=3000
 
 ## Running the server tests
 
-`$ npm test`
+`$ yarn test`
 
 ## Running the client tests
 
-`$ npm run bb`
+`$ yarn run bb`
 Then open `client/spec/SpecRunner.html` in a browser.
 
 ## Running the app
@@ -32,7 +32,7 @@ Then open `client/spec/SpecRunner.html` in a browser.
 `cd server && node lib/main.js`
 
 Note that you'll have to rebuild after changing any TypeScript files. The 
-easiest way to do that is to run `npm test` for server changes and `npm run bb` 
+easiest way to do that is to run `yarn test` for server changes and `yarn run bb` 
 for client changes. You'll also have to restart the server if you changed any
 server code.
 
