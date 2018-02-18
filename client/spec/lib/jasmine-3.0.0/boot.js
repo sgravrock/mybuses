@@ -51,14 +51,17 @@
 
   var filterSpecs = !!queryString.getParam("spec");
 
-  var catchingExceptions = queryString.getParam("catch");
-  env.catchExceptions(typeof catchingExceptions === "undefined" ? true : catchingExceptions);
+  var stoppingOnSpecFailure = queryString.getParam("failFast");
+  env.stopOnSpecFailure(stoppingOnSpecFailure);
 
   var throwingExpectationFailures = queryString.getParam("throwFailures");
   env.throwOnExpectationFailure(throwingExpectationFailures);
 
   var random = queryString.getParam("random");
-  env.randomizeTests(random);
+
+  if (random !== undefined && random !== "") {
+    env.randomizeTests(random);
+  }
 
   var seed = queryString.getParam("seed");
   if (seed) {
@@ -71,9 +74,7 @@
    */
   var htmlReporter = new jasmine.HtmlReporter({
     env: env,
-    onRaiseExceptionsClick: function() { queryString.navigateWithNewParam("catch", !env.catchingExceptions()); },
-    onThrowExpectationsClick: function() { queryString.navigateWithNewParam("throwFailures", !env.throwingExpectationFailures()); },
-    onRandomClick: function() { queryString.navigateWithNewParam("random", !env.randomTests()); },
+    navigateWithNewParam: function(key, value) { return queryString.navigateWithNewParam(key, value); },
     addToExistingQueryString: function(key, value) { return queryString.fullStringWithNewParam(key, value); },
     getContainer: function() { return document.body; },
     createElement: function() { return document.createElement.apply(document, arguments); },
@@ -107,7 +108,17 @@
   window.clearTimeout = window.clearTimeout;
   window.clearInterval = window.clearInterval;
 
-  window.startJasmine = function() {
+  /**
+   * ## Execution
+   *
+   * Replace the browser window's `onload`, ensure it's called, and then run all of the loaded specs. This includes initializing the `HtmlReporter` instance and then executing the loaded Jasmine environment. All of this will happen after all of the specs are loaded.
+   */
+  var currentWindowOnload = window.onload;
+
+  window.onload = function() {
+    if (currentWindowOnload) {
+      currentWindowOnload();
+    }
     htmlReporter.initialize();
     env.execute();
   };
