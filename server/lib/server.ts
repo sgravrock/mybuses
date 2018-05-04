@@ -45,13 +45,16 @@ export class Server {
 		this._port = parseInt(this._env.PORT || "80", 10);
 		this._router = router;
 
-		this._app.get('/', (req: any, resp: any) => {
+		this._app.get('/trips', (req: any, resp: any) => {
+			// TODO: externalize this or otherwise only do it
+			// in development.
+			resp.set('Access-Control-Allow-Origin', 'http://localhost:3001');
 			this.tripsBetweenPoints(req.query)
-				.then(result => this._render(resp, result));
+				.then(result => this._renderJson(resp, result));
 		});
 
 		this._app.get('/where', (req: any, resp: any) => {
-			this._render(resp, this.where());
+			this._renderPage(resp, this.where());
 		});
 	}
 
@@ -62,7 +65,8 @@ export class Server {
 		});
 	}
 
-	tripsBetweenPoints(query: any): Promise<PageResult> {
+	// TODO: refine the return type
+	tripsBetweenPoints(query: any): Promise<any> {
 		const defaultSrc = {
 			lat: parseFloat(require_env(this._env, "SRC_LAT")),
 			lon: parseFloat(require_env(this._env, "SRC_LON")),
@@ -84,13 +88,10 @@ export class Server {
 			});
 
 			return {
-				template: "./lib/index.mst",
-				object: {
-					src: src,
-					dest: dest,
-					trips: trips,
-					trace: query.trace,
-				}
+				src: src,
+				dest: dest,
+				trips: trips,
+				trace: query.trace,
 			};
 		});
 	}
@@ -102,7 +103,7 @@ export class Server {
 		};
 	}
 
-	_render(response: any, result: PageResult) {
+	_renderPage(response: any, result: PageResult) {
 		fs.readFile(result.template, "utf8", function(err, template) {
 			if (err) {
 				console.error(err);
@@ -111,5 +112,9 @@ export class Server {
 				response.send(Mustache.render(template, result.object));
 			}
 		});
+	}
+
+	_renderJson(response: any, result: any) {
+		response.send(JSON.stringify(result));
 	}
 }

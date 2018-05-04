@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import {mount} from 'enzyme';
+import {App} from './App';
+import {DefaultTripPage} from './DefaultTripPage';
+import {stubMybusesApiClient} from './stubs';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+
+describe('App', () => {
+	it('shows the default trip', () => {
+		const subject = mount(<App mybusesApiClient={stubMybusesApiClient()} />);
+		expect(subject.find(DefaultTripPage)).toExist();
+	});
 });

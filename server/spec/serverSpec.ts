@@ -27,15 +27,7 @@ describe("Server", function() {
 		expect(this.app.listen).toHaveBeenCalledWith(1234, jasmine.any(Function));
 	});
 
-	describe("/", function(this: Context) {
-		it("renders the correct template", function(this: Context) {
-			this.router.findTrips.and.returnValue(Promise.resolve([]));
-			return this.subject.tripsBetweenPoints({})
-				.then(result => {
-					expect(result.template).toEqual("./lib/index.mst");
-				});
-		});
-	
+	describe("/trips", function(this: Context) {
 		it("adds arrival timestamps", function(this: Context) {
 			const trips = [
 				{
@@ -50,7 +42,7 @@ describe("Server", function() {
 			this.router.findTrips.and.returnValue(Promise.resolve(trips));
 			return this.subject.tripsBetweenPoints({})
 				.then(result => {
-					expect(result.object.trips[0].destStop.arrivalTime.timestamp)
+					expect(result.trips[0].destStop.arrivalTime.timestamp)
 						.toEqual(12345);
 				});
 					
@@ -58,7 +50,7 @@ describe("Server", function() {
 	
 		describe("When there are no query parameters", function() {
 			it("uses the configured endpoints", function(this: Context, done) {
-				const response = jasmine.createSpyObj("response", ["status", "send"]);
+				const response = jasmine.createSpyObj("response", ["status", "send", "set"]);
 				response.send.and.callFake(() => {
 					expect(this.router.findTrips).toHaveBeenCalledWith(
 						{ lat: 42, lon: -122 },
@@ -80,7 +72,7 @@ describe("Server", function() {
 					}
 				};
 	
-				const response = jasmine.createSpyObj("response", ["status", "send"]);
+				const response = jasmine.createSpyObj("response", ["status", "send", "set"]);
 				response.send.and.callFake(() => {
 					expect(this.router.findTrips).toHaveBeenCalledWith(
 						{ lat: 42.345, lon: -122.1 },
@@ -103,7 +95,7 @@ describe("Server", function() {
 					}
 				};
 	
-				const response = jasmine.createSpyObj("response", ["status", "send"]);
+				const response = jasmine.createSpyObj("response", ["status", "send", "set"]);
 				response.send.and.callFake(() => {
 					expect(this.router.findTrips).toHaveBeenCalledWith(
 						{ lat: 42, lon: -122 },
