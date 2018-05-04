@@ -13,14 +13,14 @@ export class TripsContainer_ extends React.Component {
 	componentWillMount() {
 		this.props.apiClient.trips(null, null)
 			.then(
-				trips => this.setState({trips}),
+				tripsResult => this.setState({tripsResult}),
 				error => this.setState({loadingFailed: true})
 			);
 	}
 
 	render() {
-		if (this.state.trips) {
-			return this.props.render(this.state.trips);
+		if (this.state.tripsResult) {
+			return this.props.render(this.state.tripsResult);
 		} else if (this.state.loadingFailed) {
 			return <div>Unable to find trips.</div>;
 		} else {

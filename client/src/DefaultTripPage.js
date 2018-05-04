@@ -6,7 +6,7 @@ export function DefaultTripPage(props) {
 	return (
 		<div className="DefaultTripPage">
 			<TripsContainer
-				render={trips => <TripsList trips={trips} /> }
+				render={tripsResult => <TripsList trips={tripsResult.trips} /> }
 			/>
 		</div>
 	);
