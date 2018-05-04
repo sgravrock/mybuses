@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {shallow} from 'enzyme';
-import {TripsContainer} from './TripsContainer';
+import {TripsContainer_} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './stubs';
+import {MybusesContext} from './mybuses';
+
 
 
 describe('TripsContainer', () => {
@@ -12,24 +14,24 @@ describe('TripsContainer', () => {
 	});
 
 	it('fetches trips', () => {
-		const mybusesApiClient = {
+		const apiClient = {
 			trips: jasmine.createSpy('trips').and.returnValue(dummyPromise())
 		};
-		const subject = shallowRender({mybusesApiClient});
-		expect(mybusesApiClient.trips).toHaveBeenCalledWith(null, null);
+		const subject = shallowRender({apiClient});
+		expect(apiClient.trips).toHaveBeenCalledWith(null, null);
 	});
 
 	describe('When fetching trips succeeds', () => {
 		it('renders the element returned by the render prop', async () => {
 			const trips = [arbitraryTrip()];
 			const promise = Promise.resolve(trips);
-			const mybusesApiClient = {
+			const apiClient = {
 				trips: () => promise
 			};
 			const render = jasmine.createSpy('render').and.returnValue(
 				<div className="foo" />
 			);
-			const subject = shallowRender({mybusesApiClient, render});
+			const subject = shallowRender({apiClient, render});
 			await promise;
 			subject.update();
 
@@ -41,10 +43,10 @@ describe('TripsContainer', () => {
 	describe('When fetching trips fails', () => {
 		it('shows an error message', async () => {
 			const promise = Promise.reject('nope');
-			const mybusesApiClient = {
+			const apiClient = {
 				trips: () => promise
 			};
-			const subject = shallowRender({mybusesApiClient});
+			const subject = shallowRender({apiClient});
 			await rejected(promise);
 			subject.update();
 
@@ -62,20 +64,12 @@ async function rejected(promise) {
 }
 
 function shallowRender(props) {
-	return shallow(
-		<TripsContainer {...makeProps(props)} />,
-		{ context: makeContext(props) }
-	);
+	return shallow(<TripsContainer_ {...makeProps(props)} />);
 }
 
 function makeProps(props) {
 	return {
-		render: props.render || (() => <div />)
-	};
-}
-
-function makeContext(props) {
-	return {
-		mybusesApiClient: props.mybusesApiClient || stubMybusesApiClient()
+		render: props.render || (() => <div />),
+		apiClient: props.apiClient || stubMybusesApiClient(),
 	};
 }

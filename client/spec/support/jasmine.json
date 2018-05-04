@@ -7,7 +7,7 @@
     "testSupport/babel.js",
      "testSupport/enzyme.js",
      "testSupport/jsdom.js",
-     "testSupport/**/*.js"
+     "testSupport/exclude.js"
   ],
   "stopSpecOnExpectationFailure": false,
   "random": true

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
 import {TripsList} from './TripsList';
+import {MybusesContext} from './mybuses';
 import {arbitraryTrip} from './stubs';
 
 describe('DefaultTripPage', () => {
@@ -25,14 +26,8 @@ describe('DefaultTripPage', () => {
 
 function mountRender(props) {
 	return mount(
-		<DefaultTripPage />,
-		{
-			context: {
-				mybusesApiClient: props.mybusesApiClient,
-			},
-			childContextTypes: {
-				mybusesApiClient: PropTypes.object.isRequired,
-			}
-		}
+		<MybusesContext.Provider value={props.mybusesApiClient}>
+			<DefaultTripPage />
+		</MybusesContext.Provider>
 	);
 }

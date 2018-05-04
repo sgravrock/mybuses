@@ -5,14 +5,6 @@ import {DefaultTripPage} from './DefaultTripPage';
 
 
 export class App extends Component {
-	static childContextTypes = {
-		mybusesApiClient: PropTypes.object.isRequired,
-	};
-
-	getChildContext() {
-		return {mybusesApiClient: this.props.mybusesApiClient};
-	}
-
 	render() {
 		return (
 			<div className="App">

@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {MybusesContext} from './mybuses';
 
-export class TripsContainer extends React.Component {
-	static contextTypes = {
-		mybusesApiClient: PropTypes.object.isRequired
-	};
-
+export class TripsContainer_ extends React.Component {
 	static propTypes = {
+		apiClient: PropTypes.object.isRequired,
 		render: PropTypes.func.isRequired
 	};
 
 	state = {};
 
 	componentWillMount() {
-		this.context.mybusesApiClient.trips(null, null)
+		this.props.apiClient.trips(null, null)
 			.then(
 				trips => this.setState({trips}),
 				error => this.setState({loadingFailed: true})
@@ -29,4 +27,17 @@ export class TripsContainer extends React.Component {
 			return <div>Searching for trips...</div>;
 		}
 	}
+}
+
+export function TripsContainer(props) {
+	return (
+		<MybusesContext.Consumer>
+			{apiClient => (
+				<TripsContainer_
+					apiClient={apiClient}
+					{...props}
+				/>
+			)}
+		</MybusesContext.Consumer>
+	);
 }

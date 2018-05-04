@@ -1,4 +1,8 @@
-export class MybusesApiClient {
+import React from 'react';
+
+export const MybusesContext = React.createContext('mybuses');
+
+export class ApiClient {
 	constructor(axios) {
 		this._axios = axios;
 	}
