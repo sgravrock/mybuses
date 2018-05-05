@@ -1,4 +1,5 @@
 import React from 'react';
+import {formatTime} from './date';
 import './TripsList.css';
 
 export function TripsList(props) {
@@ -17,17 +18,4 @@ export function TripsList(props) {
 			))}
 		</ol>
 	);
-}
-
-function formatTime(date) {
-	date = new Date(date);
-	return date.getHours() + ':' + pad(date.getMinutes());
-}
-
-function pad(s) {
-	if (s.length < 2) {
-		return '0' + s;
-	}
-
-	return s;
 }
