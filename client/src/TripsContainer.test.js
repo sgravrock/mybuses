@@ -5,6 +5,7 @@ import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient} from './stubs';
 import {configureStore} from './store';
+import {fetchDefaultTrips} from './trips/actions';
 
 describe('TripsContainer', () => {
 	it('shows a loading indicator', () => {
@@ -12,12 +13,31 @@ describe('TripsContainer', () => {
 		expect(subject.text()).toEqual('Searching for trips...');
 	});
 
-	it('fetches trips', () => {
-		const apiClient = {
-			trips: jasmine.createSpy('trips').and.returnValue(dummyPromise())
-		};
-		const subject = mountRender({apiClient});
-		expect(apiClient.trips).toHaveBeenCalledWith(null, null);
+	describe('When trips are not already being loaded', () => {
+		it('fetches trips', () => {
+			const apiClient = {
+				trips: jasmine.createSpy('trips').and.returnValue(
+					dummyPromise()
+				)
+			};
+			const subject = mountRender({apiClient});
+			expect(apiClient.trips).toHaveBeenCalledWith(null, null);
+		});
+	});
+
+	describe('When trips are already being loaded', () => {
+		it('does not fetch trips', () => {
+			const apiClient = {
+				trips: jasmine.createSpy('trips').and.returnValue(
+					dummyPromise()
+				)
+			};
+			const subject = mountRender(
+				{apiClient},
+				store => store.dispatch(fetchDefaultTrips())
+			);
+			expect(apiClient.trips).toHaveBeenCalledTimes(1);
+		});
 	});
 
 	describe('When fetching trips succeeds', () => {
@@ -62,12 +82,14 @@ async function rejected(promise) {
 	}
 }
 
-function mountRender(props) {
+function mountRender(props, prepareStore = (store) => {}) {
 	const apiClient = props.apiClient || stubMybusesApiClient();
 	const render = props.render || (() => <div />);
+	const store = configureStore(apiClient);
+	prepareStore(store);
 
 	return mount(
-		<Provider store={configureStore(apiClient)}>
+		<Provider store={store}>
 			<TripsContainer render={render} />
 		</Provider>
 	);

@@ -3,33 +3,31 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {fetchDefaultTrips} from './trips/actions';
 
-export class TripsContainer_ extends React.Component {
-	static propTypes = {
-		render: PropTypes.func.isRequired,
-		fetchTrips: PropTypes.func.isRequired,
-		loadingFailed: PropTypes.bool.isRequired,
-		trips: PropTypes.object
-	};
-
-	componentWillMount() {
-		this.props.fetchTrips();
+export function TripsContainer_(props) {
+	if (props.loadingState === 'not started') {
+		props.fetchTrips();
 	}
 
-	render() {
-		if (this.props.trips) {
-			return this.props.render(this.props.trips);
-		} else if (this.props.loadingFailed) {
-			return <div>Unable to find trips.</div>;
-		} else {
-			return <div>Searching for trips...</div>;
-		}
+	if (props.trips) {
+		return props.render(props.trips);
+	} else if (props.loadingState === 'failed') {
+		return <div>Unable to find trips.</div>;
+	} else {
+		return <div>Searching for trips...</div>;
 	}
 }
+
+TripsContainer_.propTypes = {
+	render: PropTypes.func.isRequired,
+	fetchTrips: PropTypes.func.isRequired,
+	loadingState: PropTypes.string.isRequired,
+	trips: PropTypes.object
+};
 
 function mapStateToProps(state) {
 	return {
 		trips: state.trips.trips,
-		loadingFailed: state.trips.loadingState === 'failed'
+		loadingState: state.trips.loadingState
 	};
 }
 
