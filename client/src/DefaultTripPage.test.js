@@ -4,7 +4,14 @@ import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
 import {TripsList} from './TripsList';
 import {MybusesContext} from './mybuses';
-import {arbitraryTrip, arbitraryRoute, arbitraryStop, arbitraryArrivalTime} from './stubs';
+import {
+	arbitraryTrip,
+	arbitraryRoute,
+	arbitrarySrcStop,
+	arbitrarySrcArrivalTime,
+	arbitraryDestStop,
+	arbitraryDestArrivalTime,
+} from './stubs';
 
 describe('DefaultTripPage', () => {
 	it('shows trips for the default route', async () => {
@@ -15,11 +22,18 @@ describe('DefaultTripPage', () => {
 				shortName: 'D Line'
 			},
 			srcStop: {
-				...arbitraryStop(),
+				...arbitrarySrcStop(),
 				name: '15th Ave NW & NW Leary Way',
 				arrivalTime: {
-					...arbitraryArrivalTime(),
+					...arbitrarySrcArrivalTime(),
 					minutesUntil: 1.8
+				}
+			},
+			destStop: {
+				...arbitraryDestStop(),
+				arrivalTime: {
+					...arbitraryDestArrivalTime,
+					date: "2018-01-01T04:38:14.000Z"
 				}
 			}
 		}];
@@ -40,6 +54,7 @@ describe('DefaultTripPage', () => {
 			/D Line from 15th Ave NW & NW Leary Way/
 		);
 		expect(tripsList.text()).toMatch(/in 1\.8 minutes/);
+		expect(tripsList.text()).toMatch(/Arrive at 20:38/);
 	});
 });
 

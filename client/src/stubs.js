@@ -15,7 +15,7 @@ export function arbitraryRoute() {
 	};
 }
 
-export function arbitraryArrivalTime() {
+export function arbitrarySrcArrivalTime() {
 	return {
 		minutesUntil: 0,
 		type: 1,
@@ -23,7 +23,7 @@ export function arbitraryArrivalTime() {
 	};
 }
 
-export function arbitraryStop() {
+export function arbitrarySrcStop() {
 	return {
 		stopId: "",
 		name: "",
@@ -32,11 +32,28 @@ export function arbitraryStop() {
 			lon: 0
 		},
 		metersFromEndpoint: 0,
-		arrivalTime: {
-			minutesUntil: 0,
-			type: 1,
-			isScheduled: false
-		}
+		arrivalTime: arbitrarySrcArrivalTime(),
+	};
+}
+
+export function arbitraryDestArrivalTime() {
+	return {
+		date: '1970-01-01T00:00:00.000Z',
+		type: 1,
+		isScheduled: false
+	};
+}
+
+export function arbitraryDestStop() {
+	return {
+		stopId: "",
+		name: "",
+		location: {
+			lat: 0,
+			lon: 0
+		},
+		metersFromEndpoint: 0,
+		arrivalTime: arbitraryDestArrivalTime(),
 	};
 }
 
@@ -44,8 +61,8 @@ export function arbitraryTrip() {
 	return {
 		tripId: "",
 		route: arbitraryRoute(),
-		srcStop: arbitraryStop(),
-		destStop: arbitraryStop(),
+		srcStop: arbitrarySrcStop(),
+		destStop: arbitraryDestStop(),
 	};
 }
 
