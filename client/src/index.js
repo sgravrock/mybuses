@@ -5,7 +5,6 @@ import './index.css';
 import {App} from './App';
 import {ApiClient} from './mybuses';
 import {configureStore} from './store';
-import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 
 const apiClient = new ApiClient(axios.create({
@@ -19,4 +18,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 );
-registerServiceWorker();
