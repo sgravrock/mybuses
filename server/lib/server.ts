@@ -45,6 +45,8 @@ export class Server {
 		this._port = parseInt(this._env.PORT || "80", 10);
 		this._router = router;
 
+		this._app.use(express.static('static'));
+
 		this._app.get('/trips', (req: any, resp: any) => {
 			// TODO: externalize this or otherwise only do it
 			// in development.

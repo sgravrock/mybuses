@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+cd server
+yarn test
+cd ../client
+yarn test
+yarn build
+cp -r build/* ../server/static
+echo ok

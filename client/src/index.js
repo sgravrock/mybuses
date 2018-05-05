@@ -7,9 +7,13 @@ import {ApiClient} from './mybuses';
 import {configureStore} from './store';
 import axios from 'axios';
 
-const apiClient = new ApiClient(axios.create({
-	baseURL: 'http://localhost:3000/'
-}));
+const axiosOptions = {};
+
+if (window.location.href.indexOf('http://localhost:3001/') === 0) {
+	axiosOptions.baseURL = 'http://localhost:3000/';
+}
+
+const apiClient = new ApiClient(axios.create(axiosOptions));
 const store = configureStore(apiClient);
 
 ReactDOM.render(

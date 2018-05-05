@@ -2,11 +2,10 @@
   "name": "mybuses3",
   "version": "0.0.1",
   "description": "",
-  "main": "server/lib/main.js",
+  "main": "lib/main.js",
   "scripts": {
-    "build": "cd server && tsc",
-    "test": "cd server && tsc && jasmine",
-    "bb": "cd client && tsc"
+    "build": "tsc",
+    "test": "tsc && jasmine"
   },
   "author": "",
   "license": "MIT",
@@ -26,6 +25,6 @@
     "mustache": "^2.3.0"
   },
   "engines": {
-    "node": "8.9.4"
+    "node": ">=8.9.4"
   }
 }
