@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
 import {TripsList} from './TripsList';
-import {MybusesContext} from './mybuses';
+import {configureStore} from './store';
 import {
 	arbitraryTrip,
 	arbitraryRoute,
@@ -60,10 +61,11 @@ describe('DefaultTripPage', () => {
 });
 
 function mountRender(props) {
+	const store = configureStore(props.mybusesApiClient);
 	return mount(
-		<MybusesContext.Provider value={props.mybusesApiClient}>
+		<Provider store={store}>
 			<DefaultTripPage />
-		</MybusesContext.Provider>
+		</Provider>
 	);
 }
 

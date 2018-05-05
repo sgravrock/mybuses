@@ -1,27 +1,24 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {MybusesContext} from './mybuses';
+import {fetchDefaultTrips} from './trips/actions';
 
 export class TripsContainer_ extends React.Component {
 	static propTypes = {
-		apiClient: PropTypes.object.isRequired,
-		render: PropTypes.func.isRequired
+		render: PropTypes.func.isRequired,
+		fetchTrips: PropTypes.func.isRequired,
+		loadingFailed: PropTypes.bool.isRequired,
+		trips: PropTypes.object
 	};
 
-	state = {};
-
 	componentWillMount() {
-		this.props.apiClient.trips(null, null)
-			.then(
-				tripsResult => this.setState({tripsResult}),
-				error => this.setState({loadingFailed: true})
-			);
+		this.props.fetchTrips();
 	}
 
 	render() {
-		if (this.state.tripsResult) {
-			return this.props.render(this.state.tripsResult);
-		} else if (this.state.loadingFailed) {
+		if (this.props.trips) {
+			return this.props.render(this.props.trips);
+		} else if (this.props.loadingFailed) {
 			return <div>Unable to find trips.</div>;
 		} else {
 			return <div>Searching for trips...</div>;
@@ -29,15 +26,21 @@ export class TripsContainer_ extends React.Component {
 	}
 }
 
-export function TripsContainer(props) {
-	return (
-		<MybusesContext.Consumer>
-			{apiClient => (
-				<TripsContainer_
-					apiClient={apiClient}
-					{...props}
-				/>
-			)}
-		</MybusesContext.Consumer>
-	);
+function mapStateToProps(state) {
+	return {
+		trips: state.trips.trips,
+		loadingFailed: state.trips.loadingState === 'failed'
+	};
 }
+
+function mapDispatchToProps(dispatch) {
+	return {
+		fetchTrips: () => {
+			dispatch(fetchDefaultTrips());
+		}
+	};
+}
+
+export const TripsContainer = connect(
+	mapStateToProps, mapDispatchToProps
+)(TripsContainer_);

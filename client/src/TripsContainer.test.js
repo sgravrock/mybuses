@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {shallow} from 'enzyme';
-import {TripsContainer_} from './TripsContainer';
-import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './stubs';
-import {MybusesContext} from './mybuses';
-
-
+import {Provider} from 'react-redux'
+import {mount} from 'enzyme';
+import {TripsContainer} from './TripsContainer';
+import {dummyPromise, stubMybusesApiClient} from './stubs';
+import {configureStore} from './store';
 
 describe('TripsContainer', () => {
 	it('shows a loading indicator', () => {
-		const subject = shallowRender({});
+		const subject = mountRender({});
 		expect(subject.text()).toEqual('Searching for trips...');
 	});
 
@@ -17,13 +16,13 @@ describe('TripsContainer', () => {
 		const apiClient = {
 			trips: jasmine.createSpy('trips').and.returnValue(dummyPromise())
 		};
-		const subject = shallowRender({apiClient});
+		const subject = mountRender({apiClient});
 		expect(apiClient.trips).toHaveBeenCalledWith(null, null);
 	});
 
 	describe('When fetching trips succeeds', () => {
 		it('renders the element returned by the render prop', async () => {
-			const trips = [arbitraryTrip()];
+			const trips = {};
 			const promise = Promise.resolve(trips);
 			const apiClient = {
 				trips: () => promise
@@ -31,7 +30,7 @@ describe('TripsContainer', () => {
 			const render = jasmine.createSpy('render').and.returnValue(
 				<div className="foo" />
 			);
-			const subject = shallowRender({apiClient, render});
+			const subject = mountRender({apiClient, render});
 			await promise;
 			subject.update();
 
@@ -46,7 +45,7 @@ describe('TripsContainer', () => {
 			const apiClient = {
 				trips: () => promise
 			};
-			const subject = shallowRender({apiClient});
+			const subject = mountRender({apiClient});
 			await rejected(promise);
 			subject.update();
 
@@ -63,13 +62,13 @@ async function rejected(promise) {
 	}
 }
 
-function shallowRender(props) {
-	return shallow(<TripsContainer_ {...makeProps(props)} />);
-}
+function mountRender(props) {
+	const apiClient = props.apiClient || stubMybusesApiClient();
+	const render = props.render || (() => <div />);
 
-function makeProps(props) {
-	return {
-		render: props.render || (() => <div />),
-		apiClient: props.apiClient || stubMybusesApiClient(),
-	};
+	return mount(
+		<Provider store={configureStore(apiClient)}>
+			<TripsContainer render={render} />
+		</Provider>
+	);
 }
