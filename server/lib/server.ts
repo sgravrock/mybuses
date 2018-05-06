@@ -34,12 +34,14 @@ interface PageResult {
 }
 
 export class Server {
+	logErrors: boolean;
 	_app: express.Application;
 	_port: number;
 	_env: any;
 	_router: Router;
 
 	constructor(app: express.Application, router: Router, env: any) {
+		this.logErrors = true;
 		this._app = app;
 		this._env = env;
 		this._port = parseInt(this._env.PORT || "80", 10);
@@ -52,7 +54,17 @@ export class Server {
 			// in development.
 			resp.set('Access-Control-Allow-Origin', 'http://localhost:3001');
 			this.tripsBetweenPoints(req.query)
-				.then(result => this._renderJson(resp, result));
+				.then(
+					result => this._renderJson(resp, result),
+					error => {
+						if (this.logErrors) {
+							console.error("tripsBetweenPoints failed", error);
+						}
+
+						resp.status(500);
+						resp.send();
+					}
+				);
 		});
 
 		this._app.get('/where', (req: any, resp: any) => {

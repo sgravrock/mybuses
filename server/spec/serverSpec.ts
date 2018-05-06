@@ -28,6 +28,24 @@ describe("Server", function() {
 	});
 
 	describe("/trips", function(this: Context) {
+		// TODO: Why does this produce an UnhandledPromiseRejectionWarning?
+		// The failure handling chain appears to be intact -- in fact, the
+		// behavior under test depends on it.
+		xit("returns an error response when routing fails", function(this: Context, done) {
+			const response = jasmine.createSpyObj("response", ["status", "send", "set"]);
+			response.send.and.callFake(() => {
+				expect(response.status).toHaveBeenCalledWith(500);
+				done();
+			});
+			this.router.findTrips.and.returnValue(
+				Promise.reject("trips returns an error response when routing fails")
+			);
+			this.subject.logErrors = false;
+
+			this.subject.tripsBetweenPoints({});
+			this.app.get.calls.argsFor(0)[1]({ query: {} }, response);
+		});
+
 		it("adds arrival timestamps", function(this: Context) {
 			const trips = [
 				{
