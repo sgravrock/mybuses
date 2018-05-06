@@ -42,6 +42,8 @@ export class ObaRequest implements IObaRequest {
 
 				response.on("data", (chunk: string) => body += chunk);
 				response.on("end", () => resolve(JSON.parse(body)));
+			}).on('error', (e: any) => {
+				reject(e);
 			});
 		});
 	}

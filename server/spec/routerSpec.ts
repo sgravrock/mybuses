@@ -272,16 +272,16 @@ describe("Router", function() {
 
 	describe("Integration", function() {
 		beforeEach(function(this: RouterSpecContext) {
-			const http = vcr.playback("spec/fixtures");
-			http.stripParam("key");
-			const obaClient = new ObaClient(new ObaRequest(http, "somekey"));
-			this.subject = new Router(obaClient);
-
 			jasmine.clock().mockDate(new Date(1494865686000));
 		});
 	
 		describe("findTrips", function() {
 			it("finds trips between the two locations", async function(this: RouterSpecContext) {
+				const http = vcr.playback("spec/fixtures");
+				http.stripParam("key");
+				const obaClient = new ObaClient(new ObaRequest(http, "somekey"));
+				this.subject = new Router(obaClient);
+
 				const expected: Routing[] = [
 					{
 						tripId: "1_33359811",
@@ -398,6 +398,29 @@ describe("Router", function() {
 					{lat: 47.609776, lon: -122.337830}
 				);
 				expect(trips).toEqual(expected);
+			});
+
+			it("fails when any request fails", async function(this: RouterSpecContext) {
+				const failureResponse = {
+					on: (eventName: string, handler: any) => {
+						if (eventName === "error") {
+							handler(new Error("nope"));
+						}
+					}
+				};
+				const http = {get: () => failureResponse}
+				const obaClient = new ObaClient(new ObaRequest(http, ""));
+				this.subject = new Router(obaClient);
+
+				try {
+					await this.subject.findTrips(
+						{lat: 47.663667, lon: -122.376109},
+						{lat: 47.609776, lon: -122.337830}
+					);
+					throw new Error("Expected a rejection");
+				} catch (e) {
+					expect(e.message).toEqual("nope");
+				}
 			});
 		});
 	});
