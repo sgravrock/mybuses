@@ -50,9 +50,7 @@ export class Server {
 		this._app.use(express.static('static'));
 
 		this._app.get('/trips', (req: any, resp: any) => {
-			// TODO: externalize this or otherwise only do it
-			// in development.
-			resp.set('Access-Control-Allow-Origin', 'http://localhost:3001');
+			resp.set('Access-Control-Allow-Origin', '*');
 			this.tripsBetweenPoints(req.query)
 				.then(
 					result => this._renderJson(resp, result),
