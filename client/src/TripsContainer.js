@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {fetchDefaultTrips} from './trips/actions';
+import {tripShape} from './trips';
 
 export function TripsContainer_(props) {
 	if (props.loadingState === 'not started') {
@@ -21,7 +22,7 @@ TripsContainer_.propTypes = {
 	render: PropTypes.func.isRequired,
 	fetchTrips: PropTypes.func.isRequired,
 	loadingState: PropTypes.string.isRequired,
-	trips: PropTypes.object
+	trips: PropTypes.arrayOf(tripShape)
 };
 
 function mapStateToProps(state) {

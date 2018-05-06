@@ -5,7 +5,7 @@ import {mount} from 'enzyme';
 import {App} from './App';
 import {DefaultTripPage} from './DefaultTripPage';
 import {configureStore} from './store';
-import {stubMybusesApiClient} from './stubs';
+import {stubMybusesApiClient} from './testSupport/stubs';
 
 
 describe('App', () => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
-import {dummyPromise, stubMybusesApiClient} from './stubs';
+import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
 import {configureStore} from './store';
 import {fetchDefaultTrips} from './trips/actions';
 
@@ -42,7 +42,7 @@ describe('TripsContainer', () => {
 
 	describe('When fetching trips succeeds', () => {
 		it('renders the element returned by the render prop', async () => {
-			const trips = {};
+			const trips = [arbitraryTrip()];
 			const promise = Promise.resolve(trips);
 			const apiClient = {
 				trips: () => promise

@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {formatTime} from './date';
+import {tripShape} from './trips';
 import './TripsList.css';
 
 export function TripsList(props) {
@@ -40,3 +42,7 @@ export function TripsList(props) {
 		</div>
 	);
 }
+
+TripsList.propTypes = {
+	trips: PropTypes.arrayOf(tripShape).isRequired
+};

@@ -12,7 +12,7 @@ import {
 	arbitrarySrcArrivalTime,
 	arbitraryDestStop,
 	arbitraryDestArrivalTime,
-} from './stubs';
+} from './testSupport/stubs';
 import {zpad} from './date';
 import {dateFromLocalTime} from './testSupport/date';
 
@@ -35,13 +35,13 @@ describe('DefaultTripPage', () => {
 			destStop: {
 				...arbitraryDestStop(),
 				arrivalTime: {
-					...arbitraryDestArrivalTime,
+					...arbitraryDestArrivalTime(),
 					date: dateFromLocalTime(20, 38)
 				}
 			}
 		}];
 
-		const tripsPromise = Promise.resolve({trips});
+		const tripsPromise = Promise.resolve(trips);
 		const mybusesApiClient = {
 			trips: jasmine.createSpy('trips').and.returnValue(tripsPromise)
 		};

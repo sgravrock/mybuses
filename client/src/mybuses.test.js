@@ -15,13 +15,13 @@ describe('mybuses', () => {
 			});
 	
 			describe('When the response is a 200 with JSON', () => {
-				it('resolves to the deserialized JSON', async () => {
-					const payload = {a: 42};
-					const response = {data: payload};
+				it('resolves to the trips', async () => {
+					const trips = [{a: 42}];
+					const response = {data: {trips}};
 					const axios = {get: () => Promise.resolve(response)};
 					const subject = new ApiClient(axios);
 					const result = await subject.trips();
-					expect(result).toEqual(payload);
+					expect(result).toEqual(trips);
 				});
 			});
 		});

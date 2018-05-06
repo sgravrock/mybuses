@@ -7,7 +7,7 @@ import {
 	arbitraryDestStop,
 	arbitrarySrcArrivalTime,
 	arbitraryDestArrivalTime,
-} from './stubs';
+} from './testSupport/stubs';
 import {dateFromLocalTime} from './testSupport/date';
 
 describe('TripsList', () => {

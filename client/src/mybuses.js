@@ -4,6 +4,6 @@ export class ApiClient {
 	}
 
 	trips() {
-		return this._axios.get('/trips').then(result => result.data);
+		return this._axios.get('/trips').then(result => result.data.trips);
 	}
 }

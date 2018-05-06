@@ -1,6 +1,6 @@
 import {configureStore} from '../store';
 import {fetchDefaultTrips} from './actions';
-import {stubMybusesApiClient} from '../stubs';
+import {stubMybusesApiClient} from '../testSupport/stubs';
 
 describe('Trips state', () => {
 	it('is initially not loaded', () => {
