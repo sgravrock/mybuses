@@ -73,6 +73,7 @@ Recorder.prototype.get = function(options, callback) {
 		outerResponse.statusCode = response.statusCode;
 		callback(outerResponse);
 	});
+	return outerResponse;
 };
 
 function record(dir) {
@@ -90,11 +91,10 @@ Player.prototype.stripParam = function(k) {
 Player.prototype.get = function(urlOrOptions, callback) {
 	var path = pathAndQueryFromUrl(urlOrOptions);
 	var filename = filePath(this._dir, path, this._paramToStrip);
+	var response = new Response();
 	var that = this;
 
 	fs.readFile(filename, "utf8", function(err, contents) {
-		var response = new Response();
-
 		if (err) {
 			that.logError(err);
 			setImmediate(function() {
@@ -110,6 +110,8 @@ Player.prototype.get = function(urlOrOptions, callback) {
 
 		callback(response);
 	});
+
+	return response;
 };
 
 Player.prototype.logError = function(error) {

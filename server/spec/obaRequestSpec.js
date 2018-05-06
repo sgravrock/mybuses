@@ -22,7 +22,10 @@ function verifyFails(promise, error) {
 
 describe("ObaRequest", function() {
 	beforeEach(function() {
-		this.get = jasmine.createSpy("get");
+		this.get = jasmine.createSpy("get")
+			.and.returnValue({
+				on: () => {}
+			});
 		this.subject = new ObaRequest({ get: this.get }, "thekey");
 
 		jasmine.addMatchers({
@@ -111,6 +114,7 @@ describe("ObaRequest", function() {
 					});
 
 					callback(response);
+					return {on: () => {}};
 				});
 
 				const result = await this.subject.get("/whatever", {});
@@ -137,6 +141,7 @@ describe("ObaRequest", function() {
 						});
 	
 						callback(response);
+						return {on: () => {}};
 					});
 	
 					const resultPromise = this.subject.get("/whatever", {});
@@ -147,6 +152,25 @@ describe("ObaRequest", function() {
 					await resultPromise;
 					expect(this.get.calls.count()).toEqual(2);
 				});
+			});
+		});
+
+		describe("When the request fails to receive a response", function() {
+			it("rejects the promise", async function() {
+				this.get.and.returnValue({
+					on: (eventName, handler) => {
+						if (eventName === "error") {
+							handler(new Error("nope"));
+						}
+					}
+				});
+
+				try {
+					await this.subject.get("/whatever", {});
+					throw new Error("promise was not rejected");
+				} catch (e) {
+					expect(e.message).toEqual("nope");
+				}
 			});
 		});
 	});
