@@ -1,5 +1,4 @@
 import * as express from "express";
-import Mustache = require("mustache");
 import * as fs from "fs";
 import { Router, TimeType } from "./router";
 import { Point } from "./obaClient";
@@ -64,10 +63,6 @@ export class Server {
 					}
 				);
 		});
-
-		this._app.get('/where', (req: any, resp: any) => {
-			this._renderPage(resp, this.where());
-		});
 	}
 
 	start() { 
@@ -105,24 +100,6 @@ export class Server {
 				trips: trips,
 				trace: query.trace,
 			};
-		});
-	}
-
-	where(): PageResult {
-		return {
-			template: "./lib/where.mst",
-			object: null
-		};
-	}
-
-	_renderPage(response: any, result: PageResult) {
-		fs.readFile(result.template, "utf8", function(err, template) {
-			if (err) {
-				console.error(err);
-				response.status(500).send(err);
-			} else {
-				response.send(Mustache.render(template, result.object));
-			}
 		});
 	}
 

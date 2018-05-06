@@ -21,8 +21,7 @@
   },
   "dependencies": {
     "express": "^4.15.3",
-    "lodash.find": "^4.6.0",
-    "mustache": "^2.3.0"
+    "lodash.find": "^4.6.0"
   },
   "engines": {
     "node": ">=8.9.4"
