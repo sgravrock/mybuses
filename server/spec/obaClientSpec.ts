@@ -1,4 +1,3 @@
-/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 import { ObaClient, ArrDep } from "../lib/obaClient";
 import { IObaRequest } from "../lib/obaRequest";
 

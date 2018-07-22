@@ -1,4 +1,3 @@
-/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 const vcr = require("./helpers/http-vcr");
 import { Router, Routing, TimeType } from "../lib/router";
 import { ObaClient } from "../lib/obaClient";

@@ -1,5 +1,6 @@
 "use strict";
-const stripParam = require("../lib/stripParam");
+
+import {stripParam} from "../lib/stripParam";
 
 describe("stripParam", function() {
 	it("removes the param when it is first", function() {

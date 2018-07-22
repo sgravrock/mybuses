@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const mkdirp = require("mkdirp");
 const parseUrl = require("url").parse;
-const stripParam = require("../../lib/stripParam");
+const stripParam = require("../../lib/stripParam").stripParam;
 
 
 function filePath(dir, requestPath, paramToStrip) {

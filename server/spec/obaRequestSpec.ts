@@ -1,18 +1,23 @@
-"use strict";
-const ObaRequest = require("../lib/obaRequest").ObaRequest;
+/// <reference path="./toHaveBeenCalledWithUrl.d.ts" />
+import {ObaRequest} from "../lib/obaRequest";
 const parseUrl = require("url").parse;
 
+type EventHandler = (...params: any[]) => void;
+
 class MockResponse {
+	statusCode?: number;
+	_handlers: {[key:string]: EventHandler};
+
 	constructor() {
 		this._handlers = {};
 	}
 
-	on(event, handler) {
+	on(event: string, handler: () => void) {
 		this._handlers[event] = handler;
 	}
 }
 
-function verifyFails(promise, error) {
+function verifyFails(promise: Promise<any>, error: any) {
 	return promise.then(function () {
 		throw new Error("Unexpected success");
 	}, function(e) {
@@ -20,8 +25,13 @@ function verifyFails(promise, error) {
 	});
 }
 
+interface Context {
+	get: any;
+	subject: ObaRequest;
+}
+
 describe("ObaRequest", function() {
-	beforeEach(function() {
+	beforeEach(function(this: Context) {
 		this.get = jasmine.createSpy("get")
 			.and.returnValue({
 				on: () => {}
@@ -31,7 +41,7 @@ describe("ObaRequest", function() {
 		jasmine.addMatchers({
 			toHaveBeenCalledWithUrl: function(util, customEqualityTesters) {
 				return {
-					compare: function(actual, expected) {
+					compare: function(actual: any, expected: any) {
 						if (actual.calls.count() === 0) {
 							return {
 								pass: false,
@@ -82,7 +92,7 @@ describe("ObaRequest", function() {
 	});
 
 	describe("get", function() {
-		it("requests the correct URL", function() {
+		it("requests the correct URL", function(this: Context) {
 			this.subject.get("/some/api.json", { foo: "bar" });
 			expect(this.get).toHaveBeenCalledWithUrl({
 				protocol: "http:",
@@ -92,7 +102,7 @@ describe("ObaRequest", function() {
 			});
 		});
 
-		it("encodes special characters in params", function() {
+		it("encodes special characters in params", function(this: Context) {
 			this.subject.get("/some/thing.json", { foo: "&? " });
 			expect(this.get).toHaveBeenCalledWithUrl({
 				protocol: "http:",
@@ -103,10 +113,10 @@ describe("ObaRequest", function() {
 		});
 
 		describe("When the request succeeds", function() {
-			it("resolves to the parsed JSON", async function() {
+			it("resolves to the parsed JSON", async function(this: Context) {
 				const response = new MockResponse();
 				response.statusCode = 200;
-				this.get.and.callFake(function(url, callback) {
+				this.get.and.callFake(function(url: any, callback: (response: MockResponse) => void) {
 					setImmediate(function() {
 						response._handlers["data"]('{"some"');
 						response._handlers["data"](': "json"}');
@@ -123,13 +133,13 @@ describe("ObaRequest", function() {
 			});
 
 			describe("With code 429 in the payload", function() {
-				it("tries the request again after a delay", async function() {
+				it("tries the request again after a delay", async function(this: Context) {
 					const response = new MockResponse();
 					response.statusCode = 200;
 					spyOn(this.subject, "_getOnce").and.callThrough();
 					let once = false;
-					this.get.and.callFake(function(url, callback) {
-						const payload = {};
+					this.get.and.callFake(function(url: any, callback: (response: MockResponse) => void) {
+						const payload: {code?: number} = {};
 						if (!once) {
 							payload.code = 429;
 						}
@@ -146,7 +156,7 @@ describe("ObaRequest", function() {
 	
 					const resultPromise = this.subject.get("/whatever", {});
 
-					await this.subject._getOnce.calls.first().returnValue;
+					await (this.subject._getOnce as jasmine.Spy).calls.first().returnValue;
 					jasmine.clock().tick(500);
 
 					await resultPromise;
@@ -156,9 +166,9 @@ describe("ObaRequest", function() {
 		});
 
 		describe("When the request fails to receive a response", function() {
-			it("rejects the promise", async function() {
+			it("rejects the promise", async function(this: Context) {
 				this.get.and.returnValue({
-					on: (eventName, handler) => {
+					on: (eventName: string, handler: EventHandler) => {
 						if (eventName === "error") {
 							handler(new Error("nope"));
 						}
