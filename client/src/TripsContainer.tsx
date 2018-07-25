@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import {fetchDefaultTrips} from './trips/actions';
 import {tripShape} from './trips';
 
-export function TripsContainer_(props) {
+const InnerTripsContainer: React.SFC<any> = (props) => {
 	if (props.loadingState === 'not started') {
 		props.fetchTrips();
 	}
@@ -18,21 +18,21 @@ export function TripsContainer_(props) {
 	}
 }
 
-TripsContainer_.propTypes = {
+InnerTripsContainer.propTypes = {
 	render: PropTypes.func.isRequired,
 	fetchTrips: PropTypes.func.isRequired,
 	loadingState: PropTypes.string.isRequired,
 	trips: PropTypes.arrayOf(tripShape)
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
 	return {
 		trips: state.trips.trips,
 		loadingState: state.trips.loadingState
 	};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
 	return {
 		fetchTrips: () => {
 			dispatch(fetchDefaultTrips());
@@ -42,4 +42,4 @@ function mapDispatchToProps(dispatch) {
 
 export const TripsContainer = connect(
 	mapStateToProps, mapDispatchToProps
-)(TripsContainer_);
+)(InnerTripsContainer);

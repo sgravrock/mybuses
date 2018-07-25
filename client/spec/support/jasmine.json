@@ -1,12 +1,12 @@
 {
   "spec_dir": "src",
   "spec_files": [
-    "**/*.test.js"
+    "**/*.test.*"
   ],
   "helpers": [
-    "testSupport/babel.js",
+    "testSupport/tsnode.js",
      "testSupport/enzyme.js",
-     "testSupport/jsdom.js",
+     "testSupport/jsdom.ts",
      "testSupport/promise.js",
      "testSupport/exclude.js"
   ],

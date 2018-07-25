@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {shallow} from 'enzyme';
 import {TripsList} from './TripsList';
 import {
@@ -52,7 +52,7 @@ describe('TripsList', () => {
 	});
 });
 
-function tripWithSrcArrivalTime(partialArrivalTime) {
+function tripWithSrcArrivalTime(partialArrivalTime: any) {
 	return {
 		...arbitraryTrip(),
 		srcStop: {
@@ -65,7 +65,7 @@ function tripWithSrcArrivalTime(partialArrivalTime) {
 	};
 }
 
-function tripWithDestArrivalTime(partialArrivalTime) {
+function tripWithDestArrivalTime(partialArrivalTime: any) {
 	return {
 		...arbitraryTrip(),
 		destStop: {

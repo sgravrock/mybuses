@@ -1,12 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import {TripsContainer} from './TripsContainer';
 import {TripsList} from './TripsList';
 
-export function DefaultTripPage(props) {
+export function DefaultTripPage(props: any) {
 	return (
 		<div className="DefaultTripPage">
 			<TripsContainer
-				render={trips => <TripsList trips={trips} /> }
+				render={(trips: any) => <TripsList trips={trips} /> }
 			/>
 		</div>
 	);

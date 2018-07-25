@@ -1,5 +1,9 @@
+import {AxiosInstance} from "axios";
+
 export class ApiClient {
-	constructor(axios) {
+	private _axios: AxiosInstance;
+
+	constructor(axios: AxiosInstance) {
 		this._axios = axios;
 	}
 

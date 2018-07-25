@@ -1,4 +1,4 @@
-export function dateFromLocalTime(hours, minutes) {
+export function dateFromLocalTime(hours: number, minutes: number): string {
 	// Attempt to construct an ISO 8601 date that will produce the correct time
 	// in the current time zone.
 	// Complications:

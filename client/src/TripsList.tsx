@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import {formatTime} from './date';
 import {tripShape} from './trips';
 import './TripsList.css';
 
-export function TripsList(props) {
+const TripsList: React.SFC<any> = (props) => {
 	return (
 		<div className="TripsList">
 			<ol>
-				{props.trips.map(trip => (
+				{props.trips.map((trip: any) => (
 					<li className="TripsList-item" key={trip.tripId}>
 						{trip.route.shortName} from {trip.srcStop.name}
 						<div className="TripsList-time">
@@ -41,8 +41,10 @@ export function TripsList(props) {
 		
 		</div>
 	);
-}
+};
 
 TripsList.propTypes = {
 	trips: PropTypes.arrayOf(tripShape).isRequired
 };
+
+export {TripsList};

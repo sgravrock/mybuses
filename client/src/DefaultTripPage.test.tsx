@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
@@ -13,7 +12,6 @@ import {
 	arbitraryDestStop,
 	arbitraryDestArrivalTime,
 } from './testSupport/stubs';
-import {zpad} from './date';
 import {dateFromLocalTime} from './testSupport/date';
 
 describe('DefaultTripPage', () => {
@@ -61,7 +59,7 @@ describe('DefaultTripPage', () => {
 	});
 });
 
-function mountRender(props) {
+function mountRender(props: any) {
 	const store = configureStore(props.mybusesApiClient);
 	return mount(
 		<Provider store={store}>

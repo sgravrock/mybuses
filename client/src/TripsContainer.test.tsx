@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
@@ -20,7 +19,7 @@ describe('TripsContainer', () => {
 					dummyPromise()
 				)
 			};
-			const subject = mountRender({apiClient});
+			mountRender({apiClient});
 			expect(apiClient.trips).toHaveBeenCalledWith(null, null);
 		});
 	});
@@ -32,7 +31,7 @@ describe('TripsContainer', () => {
 					dummyPromise()
 				)
 			};
-			const subject = mountRender(
+			mountRender(
 				{apiClient},
 				store => store.dispatch(fetchDefaultTrips())
 			);
@@ -74,7 +73,7 @@ describe('TripsContainer', () => {
 	});
 });
 
-async function rejected(promise) {
+async function rejected<T>(promise: Promise<T>) {
 	try {
 		await promise;
 		throw new Error('Expected a rejection but did not get one');
@@ -82,7 +81,7 @@ async function rejected(promise) {
 	}
 }
 
-function mountRender(props, prepareStore = (store) => {}) {
+function mountRender(props: any, prepareStore = (store: any) => {}) {
 	const apiClient = props.apiClient || stubMybusesApiClient();
 	const render = props.render || (() => <div />);
 	const store = configureStore(apiClient);

@@ -5,7 +5,7 @@ import {trips} from './trips/reducers';
 
 const rootReducer = combineReducers({trips});
 
-export function configureStore(mybusesApiClient) {
+export function configureStore(mybusesApiClient: any) {
 	return createStore(
 		rootReducer,
 		applyMiddleware(

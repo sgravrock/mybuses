@@ -1,5 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+/*
+TODO: do we need <reference types="jasmine-enzyme" />?
+or maybe <reference types="../../node_modules/@types/jasmine-enzyme" />
+or maybe <reference path="../typings/jasmine-enzyme/index.d.ts" />
+ */
+import * as React from 'react';
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {App} from './App';
@@ -16,6 +20,6 @@ describe('App', () => {
 				<App />
 			</Provider>
 		);
-		expect(subject.find(DefaultTripPage)).toExist();
+        expect(subject.find(DefaultTripPage)).toExist();
 	});
 });
