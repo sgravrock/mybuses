@@ -1,11 +1,12 @@
 import {configureStore} from '../store';
 import {fetchDefaultTrips} from './actions';
 import {stubMybusesApiClient} from '../testSupport/stubs';
+import {TripsLoadingState} from "./reducers";
 
 describe('Trips state', () => {
 	it('is initially not loaded', () => {
 		const store = configureStore(stubMybusesApiClient());
-		expect(store.getState().trips).toEqual({loadingState: 'not started'});
+		expect(store.getState().trips).toEqual({loadingState: TripsLoadingState.NotStarted});
 	});
 
 	describe('after a fetchDefaultTrips action', () => {
@@ -23,7 +24,7 @@ describe('Trips state', () => {
 		it('is in the loading state', () => {
 			const store = configureStore(stubMybusesApiClient());
 			store.dispatch(fetchDefaultTrips());
-			expect(store.getState().trips).toEqual({loadingState: 'loading'});
+			expect(store.getState().trips).toEqual({loadingState: TripsLoadingState.Loading});
 		});
 	});
 
@@ -37,7 +38,7 @@ describe('Trips state', () => {
 			await promise;
 
 			expect(store.getState().trips).toEqual({
-				loadingState: 'loaded',
+				loadingState: TripsLoadingState.Loaded,
 				trips
 			});
 		});
@@ -51,7 +52,7 @@ describe('Trips state', () => {
 			store.dispatch(fetchDefaultTrips());
 			try { await promise; } catch(e) {}
 
-			expect(store.getState().trips).toEqual({loadingState: 'failed'});
+			expect(store.getState().trips).toEqual({loadingState: TripsLoadingState.Failed});
 		});
 	});
 });
