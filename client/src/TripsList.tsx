@@ -1,14 +1,18 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {formatTime} from './date';
-import {tripShape} from './trips';
+import {Trip, tripShape} from './trips';
 import './TripsList.css';
 
-const TripsList: React.SFC<any> = (props) => {
+interface Props {
+	trips: Trip[];
+}
+
+const TripsList: React.SFC<Props> = (props: Props) => {
 	return (
 		<div className="TripsList">
 			<ol>
-				{props.trips.map((trip: any) => (
+				{props.trips.map((trip: Trip) => (
 					<li className="TripsList-item" key={trip.tripId}>
 						{trip.route.shortName} from {trip.srcStop.name}
 						<div className="TripsList-time">

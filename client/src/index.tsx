@@ -7,7 +7,7 @@ import {ApiClient} from './mybuses';
 import {configureStore} from './store';
 import axios from 'axios';
 
-const axiosOptions: any = {};
+const axiosOptions: {baseURL?: string} = {};
 
 if (window.location.href.indexOf('http://localhost:3001/') === 0) {
 	axiosOptions.baseURL = 'http://localhost:3000/';

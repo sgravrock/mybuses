@@ -1,5 +1,6 @@
 import {ApiClient} from './mybuses';
 import {AxiosResponse} from "axios";
+import {arbitraryTrip} from "./testSupport/stubs";
 
 describe('mybuses', () => {
 	describe('ApiClient', () => {
@@ -17,7 +18,7 @@ describe('mybuses', () => {
 	
 			describe('When the response is a 200 with JSON', () => {
 				it('resolves to the trips', async () => {
-					const trips = [{a: 42}];
+					const trips = [arbitraryTrip()];
 					const response = {data: {trips}};
 					const axios = {get: () => Promise.resolve(makeAxiosResponse(response))};
 					const subject = new ApiClient(axios);

@@ -2,9 +2,18 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import {fetchDefaultTrips} from './trips/actions';
-import {tripShape} from './trips';
+import {Trip, tripShape} from './trips';
+import {TripsLoadingState} from "./trips/reducers";
+import {AppState} from "./store";
 
-const InnerTripsContainer: React.SFC<any> = (props) => {
+interface Props {
+	render: (trips: Trip[]) => JSX.Element;
+	fetchTrips: () => void;
+	loadingState: TripsLoadingState;
+	trips?: Trip[]
+}
+
+const InnerTripsContainer: React.SFC<Props> = (props: Props) => {
 	if (props.loadingState === 'not started') {
 		props.fetchTrips();
 	}
@@ -16,7 +25,7 @@ const InnerTripsContainer: React.SFC<any> = (props) => {
 	} else {
 		return <div>Searching for trips...</div>;
 	}
-}
+};
 
 InnerTripsContainer.propTypes = {
 	render: PropTypes.func.isRequired,
@@ -25,14 +34,14 @@ InnerTripsContainer.propTypes = {
 	trips: PropTypes.arrayOf(tripShape)
 };
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: AppState) {
 	return {
 		trips: state.trips.trips,
 		loadingState: state.trips.loadingState
 	};
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: (a: any) => void) {
 	return {
 		fetchTrips: () => {
 			dispatch(fetchDefaultTrips());

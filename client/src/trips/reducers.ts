@@ -1,4 +1,5 @@
 import {REQUEST_TRIPS, RECEIVE_TRIPS, RECEIVE_TRIPS_FAILED} from './actions';
+import {Trip} from "./index";
 
 export enum TripsLoadingState {
 	NotStarted = 'not started',
@@ -10,10 +11,12 @@ export enum TripsLoadingState {
 
 export interface TripsState {
 	loadingState: TripsLoadingState;
-	trips?: any[];
+	trips?: Trip[];
 }
 
-export function trips(state: TripsState = {loadingState: TripsLoadingState.NotStarted}, action: any): TripsState {
+const defaultState = {loadingState: TripsLoadingState.NotStarted};
+
+export function trips(state: TripsState = defaultState, action: any): TripsState {
 	switch (action.type) {
 		case REQUEST_TRIPS:
 			return {

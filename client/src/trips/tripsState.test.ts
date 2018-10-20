@@ -1,6 +1,6 @@
 import {configureStore} from '../store';
 import {fetchDefaultTrips} from './actions';
-import {stubMybusesApiClient} from '../testSupport/stubs';
+import {arbitraryTrip, stubMybusesApiClient} from '../testSupport/stubs';
 import {TripsLoadingState} from "./reducers";
 
 describe('Trips state', () => {
@@ -30,7 +30,7 @@ describe('Trips state', () => {
 
 	describe('after a fetch succeeds', () => {
 		it('is in the loaded state', async () => {
-			const trips = ['some trips'];
+			const trips = [arbitraryTrip()];
 			const promise = Promise.resolve(trips);
 			const apiClient = {trips: () => promise};
 			const store = configureStore(apiClient);

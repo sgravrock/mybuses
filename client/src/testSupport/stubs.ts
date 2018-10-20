@@ -1,3 +1,5 @@
+import {AbsoluteTime, DestStop, RelativeTime, Route, SourceStop, Trip} from "../trips";
+
 export function dummyPromise() {
 	return new Promise(() => {});
 }
@@ -8,56 +10,43 @@ export function stubMybusesApiClient() {
 	};
 }
 
-export function arbitraryRoute() {
+export function arbitraryRoute(): Route {
 	return {
-		id: "",
 		shortName: ""
 	};
 }
 
-export function arbitrarySrcArrivalTime() {
+export function arbitrarySrcArrivalTime(): RelativeTime {
 	return {
 		minutesUntil: 0,
-		type: 1,
 		isScheduled: false
 	};
 }
 
-export function arbitrarySrcStop() {
+export function arbitrarySrcStop(): SourceStop {
 	return {
-		stopId: "",
 		name: "",
-		location: {
-			lat: 0,
-			lon: 0
-		},
 		metersFromEndpoint: 0,
 		arrivalTime: arbitrarySrcArrivalTime(),
 	};
 }
 
-export function arbitraryDestArrivalTime() {
+export function arbitraryDestArrivalTime(): AbsoluteTime {
 	return {
 		date: '1970-01-01T00:00:00.000Z',
-		type: 1,
 		isScheduled: false
 	};
 }
 
-export function arbitraryDestStop() {
+export function arbitraryDestStop(): DestStop {
 	return {
-		stopId: "",
 		name: "",
-		location: {
-			lat: 0,
-			lon: 0
-		},
 		metersFromEndpoint: 0,
 		arrivalTime: arbitraryDestArrivalTime(),
 	};
 }
 
-export function arbitraryTrip() {
+export function arbitraryTrip(): Trip {
 	return {
 		tripId: "",
 		route: arbitraryRoute(),

@@ -20,7 +20,7 @@ describe('TripsContainer', () => {
 				)
 			};
 			mountRender({apiClient});
-			expect(apiClient.trips).toHaveBeenCalledWith(null, null);
+			expect(apiClient.trips).toHaveBeenCalledWith();
 		});
 	});
 

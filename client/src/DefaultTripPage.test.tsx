@@ -44,7 +44,7 @@ describe('DefaultTripPage', () => {
 			trips: jasmine.createSpy('trips').and.returnValue(tripsPromise)
 		};
 		const subject = mountRender({mybusesApiClient});
-		expect(mybusesApiClient.trips).toHaveBeenCalledWith(null, null);
+		expect(mybusesApiClient.trips).toHaveBeenCalledWith();
 		await tripsPromise;
 
 		subject.update();
