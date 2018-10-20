@@ -29,7 +29,7 @@ describe('Trips state', () => {
 
 	describe('after a fetch succeeds', () => {
 		it('is in the loaded state', async () => {
-			const trips = 'some trips';
+			const trips = ['some trips'];
 			const promise = Promise.resolve(trips);
 			const apiClient = {trips: () => promise};
 			const store = configureStore(apiClient);

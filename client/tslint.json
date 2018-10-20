@@ -5,7 +5,17 @@
   },
   "rules": {
     "ordered-imports": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "jsx-no-lambda": false,
+    "variable-name": {
+      "options": ["allow-leading-underscore"]
+    },
+    "member-access": false,
+    "comment-format": false,
+    "only-arrow-functions": false,
+    "object-literal-shorthand": false,
+    "interface-name": false,
+    "variable-name": false
   },
   "linterOptions": {
     "exclude": [

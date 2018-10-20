@@ -1,4 +1,5 @@
 import {ApiClient} from './mybuses';
+import {AxiosResponse} from "axios";
 
 describe('mybuses', () => {
 	describe('ApiClient', () => {
@@ -18,7 +19,7 @@ describe('mybuses', () => {
 				it('resolves to the trips', async () => {
 					const trips = [{a: 42}];
 					const response = {data: {trips}};
-					const axios = {get: () => Promise.resolve(response)};
+					const axios = {get: () => Promise.resolve(makeAxiosResponse(response))};
 					const subject = new ApiClient(axios);
 					const result = await subject.trips();
 					expect(result).toEqual(trips);
@@ -27,3 +28,13 @@ describe('mybuses', () => {
 		});
 	});
 });
+
+function makeAxiosResponse<T>(partialResponse: {data: T}): AxiosResponse<T> {
+	return {
+		status: 200,
+		statusText: '',
+		headers: [],
+		config: {},
+		...partialResponse
+	};
+}

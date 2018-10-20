@@ -1,6 +1,11 @@
 import {REQUEST_TRIPS, RECEIVE_TRIPS, RECEIVE_TRIPS_FAILED} from './actions';
 
-export function trips(state = {loadingState: 'not started'}, action: any) {
+export interface TripsState {
+	loadingState: string;
+	trips?: any[];
+}
+
+export function trips(state: TripsState = {loadingState: 'not started'}, action: any): TripsState {
 	switch (action.type) {
 		case REQUEST_TRIPS:
 			return {

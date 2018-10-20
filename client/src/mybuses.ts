@@ -1,9 +1,13 @@
-import {AxiosInstance} from "axios";
+import {AxiosPromise, AxiosRequestConfig} from "axios";
+
+export interface IEnoughAxios {
+	get(url: string, config?: AxiosRequestConfig): AxiosPromise<any>;
+}
 
 export class ApiClient {
-	private _axios: AxiosInstance;
+	private _axios: IEnoughAxios;
 
-	constructor(axios: AxiosInstance) {
+	constructor(axios: IEnoughAxios) {
 		this._axios = axios;
 	}
 

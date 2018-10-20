@@ -78,10 +78,11 @@ async function rejected<T>(promise: Promise<T>) {
 		await promise;
 		throw new Error('Expected a rejection but did not get one');
 	} catch (e) {
+		// tslint:disable:no-empty
 	}
 }
 
-function mountRender(props: any, prepareStore = (store: any) => {}) {
+function mountRender(props: any, prepareStore = (s: any) => {}) {
 	const apiClient = props.apiClient || stubMybusesApiClient();
 	const render = props.render || (() => <div />);
 	const store = configureStore(apiClient);
