@@ -18,6 +18,6 @@ export async function rejected<T>(promise: Promise<T>) {
 		await promise;
 		throw new Error('Expected a rejection but did not get one');
 	} catch (e) {
-		// tslint:disable:no-empty
+		return e;
 	}
 }

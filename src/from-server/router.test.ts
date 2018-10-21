@@ -240,7 +240,7 @@ describe("Router", function() {
 			this.obaClient.arrDeps.resolve("src sid", [
 				{ tripId: "12345", stopId: "src sid", stopName: "src stop", stopSequence: 1, scheduledArrivalTime: new Date(0), predictedArrivalTime: new Date(2 * 1000 * 60), lat: 0, lon: 1 },
 			]);
-			let destArrDate = new Date(3 * 1000 * 60);
+			const destArrDate = new Date(3 * 1000 * 60);
 			this.obaClient.arrDeps.resolve("dest sid", [
 				{ tripId: "12345", stopId: "dest sid", stopName: "dest stop", stopSequence: 3, scheduledArrivalTime: new Date(0), predictedArrivalTime: destArrDate, lat: 3, lon: 4 },
 			]);

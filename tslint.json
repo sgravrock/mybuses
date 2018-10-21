@@ -17,7 +17,8 @@
     "interface-name": false,
     "variable-name": false,
     "array-type": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    "max-classes-per-file": false
   },
   "linterOptions": {
     "exclude": [
