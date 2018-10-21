@@ -1,4 +1,4 @@
-import {IHttpGetter} from "./from-server/obaRequest";
+import {IHttpGetter} from "./obaRequest";
 
 function appendParam(url: string, param: string) {
 	if (url.indexOf("?") === -1) {

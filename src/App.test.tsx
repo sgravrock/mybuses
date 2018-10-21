@@ -8,7 +8,7 @@ import {mount} from 'enzyme';
 import {App} from './App';
 import {DefaultTripPage} from './DefaultTripPage';
 import {stubMybusesApiClient} from './testSupport/stubs';
-import {DefaultRouterContext} from './default-router';
+import {DefaultRouterContext} from './routing/default-router';
 
 
 describe('App', () => {

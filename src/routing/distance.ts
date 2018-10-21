@@ -1,10 +1,10 @@
 interface Point {
 	lat: number,
 	lon: number
-};
+}
 
 // http://www.johndcook.com/python_longitude_latitude.html
-export function distanceOnUnitSphere(p1: Point, p2: Point): number {
+function distanceOnUnitSphere(p1: Point, p2: Point): number {
 	// Convert latitude and longitude to spherical coordinates in radians.
 	const degreesToRadians = Math.PI / 180.0;
 
@@ -29,7 +29,6 @@ export function distanceOnUnitSphere(p1: Point, p2: Point): number {
 	return Math.acos(cos);
 }
 
-//console.log(meanEarthRadiusInMiles * distanceOnUnitSphere(47.62, -122.351, 47.598, -122.33));
 const meanEarthRadiusInMeters = 6371000;
 
 export function distanceInMeters(p1: Point, p2: Point): number {

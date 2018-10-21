@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Trip} from './trips';
-import {IDefaultRouter, DefaultRouterContext} from "./default-router";
+import {IDefaultRouter, DefaultRouterContext} from "./routing/default-router";
 
 interface OuterProps {
     render: (trips: Trip[]) => JSX.Element;

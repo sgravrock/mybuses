@@ -1,7 +1,7 @@
 import {AbsoluteTime, DestStop, RelativeTime, Route, SourceStop, Trip} from "../trips";
-import {IDefaultRouter} from "../default-router";
+import {IDefaultRouter} from "../routing/default-router";
 import {TimeType} from "../trips";
-import {Point} from "../from-server/obaClient";
+import {Point} from "../OBA/obaClient";
 
 export function dummyPromise<T = any>(): Promise<T> {
 	return new Promise<T>(() => {});

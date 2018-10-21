@@ -1,4 +1,4 @@
-import { ArrDep } from "./obaClient";
+import { ArrDep } from "../OBA/obaClient";
 
 type EndpointPair = [ArrDep, ArrDep];
 type Indexer<T> = (thing: T) => any;
@@ -52,7 +52,7 @@ export function uniqueBy<T>(input: T[], indexer: Indexer<T>): T[] {
 
 interface HasDistance {
 	metersFromEndpoint: number
-};
+}
 
 export function nearest<T extends  HasDistance>(points: T[]): T {
 	let result = points[0];

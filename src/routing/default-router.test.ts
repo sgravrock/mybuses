@@ -1,6 +1,6 @@
 import {DefaultRouter} from './default-router';
-import {arbitraryPoint, arbitraryTrip, dummyPromise} from "./testSupport/stubs";
-import {IRouter} from "./from-server/router";
+import {arbitraryPoint, arbitraryTrip, dummyPromise} from "../testSupport/stubs";
+import {IRouter} from "./router";
 
 describe('default-router', () => {
 	describe('DefaultRouter', () => {

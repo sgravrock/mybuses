@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
-import {DefaultRouter, DefaultRouterContext} from './default-router';
-import {Router} from "./from-server/router";
-import {ObaClient} from "./from-server/obaClient";
-import {ObaRequest} from "./from-server/obaRequest";
-import {JsonpAdapter} from "./JsonpAdapter";
+import {DefaultRouter, DefaultRouterContext} from './routing/default-router';
+import {Router} from "./routing/router";
+import {ObaClient} from "./OBA/obaClient";
+import {ObaRequest} from "./OBA/obaRequest";
+import {JsonpAdapter} from "./OBA/JsonpAdapter";
 
 const jsonp = new JsonpAdapter(document.body, window);
 const obaClient = new ObaClient(new ObaRequest(jsonp, requireEnv('REACT_APP_OBA_API_KEY')));

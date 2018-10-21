@@ -1,5 +1,5 @@
 import {JsonpAdapter} from "./JsonpAdapter";
-import {rejected} from "./testSupport/promise";
+import {rejected} from "../testSupport/promise";
 
 interface Context {
 	dom: HTMLElement;

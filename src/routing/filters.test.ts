@@ -1,5 +1,5 @@
 import * as filters from "./filters";
-import { ArrDep } from "./obaClient";
+import { ArrDep } from "../OBA/obaClient";
 
 describe("filters", function() {
 	describe("groupEndpoints", function() {

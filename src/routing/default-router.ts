@@ -1,7 +1,7 @@
-import {Trip} from "./trips";
+import {Trip} from "../trips";
 import * as React from "react";
-import {Point} from "./from-server/obaClient";
-import {IRouter} from "./from-server/router";
+import {Point} from "../OBA/obaClient";
+import {IRouter} from "./router";
 
 export interface IDefaultRouter {
 	trips(): Promise<Trip[]>;

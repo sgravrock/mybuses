@@ -1,4 +1,4 @@
-import {stripParam} from "../from-server/stripParam";
+import {stripParam} from "../util/stripParam";
 import * as path from "path";
 import * as URL from 'url';
 import * as fs from 'fs';

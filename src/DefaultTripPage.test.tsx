@@ -2,7 +2,7 @@ import * as React from 'react';
 import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
 import {TripsList} from './TripsList';
-import {DefaultRouterContext} from "./default-router";
+import {DefaultRouterContext} from "./routing/default-router";
 import {
 	arbitraryTrip,
 	arbitraryRoute,

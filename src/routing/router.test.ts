@@ -1,8 +1,8 @@
 import * as vcr from '../testSupport/http-vcr';
 import { Router} from "./router";
-import { ObaClient } from "./obaClient";
-import { ObaRequest } from "./obaRequest";
-import { Point, ArrDep, TripDetails, IObaClient } from "./obaClient";
+import { ObaClient } from "../OBA/obaClient";
+import { ObaRequest } from "../OBA/obaRequest";
+import { Point, ArrDep, TripDetails, IObaClient } from "../OBA/obaClient";
 import {rejected} from "../testSupport/promise";
 import {TimeType, Trip} from "../trips";
 

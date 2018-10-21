@@ -2,7 +2,7 @@ import * as React from 'react';
 import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
-import {DefaultRouterContext} from "./default-router";
+import {DefaultRouterContext} from "./routing/default-router";
 import {rejected} from "./testSupport/promise";
 
 

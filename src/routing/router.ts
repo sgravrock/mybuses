@@ -1,7 +1,7 @@
-import {ArrDep, IObaClient, Point, TripDetails} from "./obaClient";
+import {ArrDep, IObaClient, Point, TripDetails} from "../OBA/obaClient";
 import * as filters from "./filters";
 import {distanceInMeters} from "./distance";
-import {sortBy} from "./sort";
+import {sortBy} from "../util/sort";
 import {AbsoluteTime, DestStop, RelativeTime, SourceStop, TimeType, Trip} from "../trips";
 
 
