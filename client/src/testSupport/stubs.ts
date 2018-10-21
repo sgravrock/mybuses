@@ -1,12 +1,13 @@
 import {AbsoluteTime, DestStop, RelativeTime, Route, SourceStop, Trip} from "../trips";
+import {IApiClient} from "../mybuses";
 
-export function dummyPromise() {
-	return new Promise(() => {});
+export function dummyPromise<T = any>(): Promise<T> {
+	return new Promise<T>(() => {});
 }
 
-export function stubMybusesApiClient() {
+export function stubMybusesApiClient(): IApiClient {
 	return {
-		trips: () => dummyPromise()
+		trips: () => dummyPromise<Trip[]>()
 	};
 }
 
