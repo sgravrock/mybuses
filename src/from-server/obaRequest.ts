@@ -1,23 +1,23 @@
-import {IEnoughAxios} from "../default-router";
-import {AxiosResponse} from "axios";
-
 export interface IObaRequest {
 	get(path: string, params: any): Promise<any>;
 }
 
+export interface IHttpGetter {
+	get(url: string): Promise<any>
+}
+
 export class ObaRequest implements IObaRequest {
-	_axios: IEnoughAxios;
+	_http: IHttpGetter;
 	_key: string;
 
-	constructor(axios: IEnoughAxios, apiKey: string) {
-		this._axios = axios;
+	constructor(http: IHttpGetter, apiKey: string) {
+		this._http = http;
 		this._key = apiKey;
 	}
 
 	get(path: string, params: any): Promise<any> {
 		const url = this._buildUrl(path, params);
-		return this._axios.get(url)
-			.then((response: AxiosResponse<any>) => response.data);
+		return this._http.get(url);
 	}
 
 	_buildUrl(path: string, params: any) {

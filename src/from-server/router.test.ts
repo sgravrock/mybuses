@@ -1,4 +1,4 @@
-import * as vcr from '../testSupport/axios-vcr';
+import * as vcr from '../testSupport/http-vcr';
 import { Router} from "./router";
 import { ObaClient } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
@@ -373,8 +373,8 @@ describe("Router", function() {
 			});
 
 			it("fails when any request fails", async function(this: RouterSpecContext) {
-				const axios = {get: () => Promise.reject(new Error('nope'))};
-				const obaClient = new ObaClient(new ObaRequest(axios, ""));
+				const http = {get: () => Promise.reject(new Error('nope'))};
+				const obaClient = new ObaClient(new ObaRequest(http, ""));
 				this.subject = new Router(obaClient);
 
 				const promise = this.subject.findTrips(

@@ -1,12 +1,7 @@
-import {AxiosPromise, AxiosRequestConfig} from "axios";
 import {Trip} from "./trips";
 import * as React from "react";
 import {Point} from "./from-server/obaClient";
 import {IRouter} from "./from-server/router";
-
-export interface IEnoughAxios {
-	get(url: string, config?: AxiosRequestConfig): AxiosPromise<any>;
-}
 
 export interface IDefaultRouter {
 	trips(): Promise<Trip[]>;

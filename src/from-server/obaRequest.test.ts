@@ -1,6 +1,5 @@
 /// <reference path="../testSupport/toHaveBeenCalledWithUrl.d.ts" />
 import {ObaRequest} from "./obaRequest";
-import {makeAxiosResponse} from "../testSupport/axios";
 import {dummyPromise} from "../testSupport/stubs";
 import {rejected} from "../testSupport/promise";
 
@@ -106,10 +105,10 @@ describe("ObaRequest", function() {
 		});
 
 		describe("When the request succeeds", function() {
-			it("resolves to the parsed JSON", async function(this: Context) {
+			it("resolves to the provided payload", async function(this: Context) {
 				const response = new MockResponse();
 				response.statusCode = 200;
-				this.get.and.returnValue(Promise.resolve(makeAxiosResponse({data: {some: "json"}})));
+				this.get.and.returnValue(Promise.resolve({some: "json"}));
 
 				const result = await this.subject.get("/whatever", {});
 
@@ -119,7 +118,7 @@ describe("ObaRequest", function() {
 
 		describe("When the request fails", function() {
 			it("rejects the promise", async function(this: Context) {
-				this.get.and.returnValue(Promise.reject(makeAxiosResponse({status: 500, data: null})));
+				this.get.and.returnValue(Promise.reject(new Error('nope')));
 				await rejected(this.subject.get("/whatever", {}));
 			});
 		});

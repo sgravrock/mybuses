@@ -1,5 +1,5 @@
 "use strict";
-import * as axiosVcr from './axios-vcr';
+import * as httpVcr from './http-vcr';
 import * as fs from "fs";
 import * as tmp from 'tmp';
 import * as path from "path";
@@ -10,7 +10,7 @@ interface Context {
 	tempDir: string;
 }
 
-describe("axios-vcr", function() {
+describe("http-vcr", function() {
 	beforeEach(function(this: Context) {
 		this.tempDir = tmp.dirSync({unsafeCleanup: true}).name;
 	});
@@ -52,29 +52,27 @@ describe("axios-vcr", function() {
 
 			await saveFile(filePath, body);
 
-			const subject = axiosVcr.playback(this.tempDir);
+			const subject = httpVcr.playback(this.tempDir);
 			const result = await subject.get('http://localhost' + requestPath);
 
-			expect(result.status).toEqual(200);
-			expect(result.data).toEqual({some: 'json'});
+			expect(result).toEqual({some: 'json'});
 		});
 
 		it("removes specified path components", async function(this: Context) {
 			const body = '{"some": "json"}';
 			const requestPath = "/foo/bar?baz=qux&key=asdf&grault=fred";
 			const filePath = path.join(this.tempDir, "/foo/bar?baz=qux&grault=fred");
-			const subject = axiosVcr.playback(this.tempDir);
+			const subject = httpVcr.playback(this.tempDir);
 			subject.stripParam("key");
 
 			await saveFile(filePath, body);
 			const result = await subject.get('http://localhost' + requestPath);
 
-			expect(result.status).toEqual(200);
-			expect(result.data).toEqual({some: 'json'});
+			expect(result).toEqual({some: 'json'});
 		});
 
 		it("rejects when the file does not exist", async function(this: Context) {
-			const subject = axiosVcr.playback(this.tempDir);
+			const subject = httpVcr.playback(this.tempDir);
 			await rejected(subject.get('http://locahost/whatever'));
 		});
 	});

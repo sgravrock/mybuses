@@ -35,14 +35,11 @@ describe("JsonpAdapter", function() {
 	});
 
 	describe("When the shim is called", function() {
-		it("resolves the promise to an Axios response containing the shim's argument", async function(this: Context) {
+		it("resolves the promise to the shim's argument", async function(this: Context) {
 			const promise = this.subject.get('http://localhost/some.url');
 			this._jsonpShim0('payload');
 			const result = await promise;
-			expect(result).toEqual(jasmine.objectContaining({
-				status: 200,
-				data: 'payload'
-			}));
+			expect(result).toEqual('payload');
 		});
 
 		it("removes the shim", function(this: Context) {
@@ -75,11 +72,11 @@ describe("JsonpAdapter", function() {
 		expect(this._jsonpShim1).toBeTruthy();
 
 		this._jsonpShim0('payload0');
-		expect((await promise0).data).toEqual('payload0');
+		expect((await promise0)).toEqual('payload0');
 		expect(this._jsonpShim0).toBeFalsy();
 
 		this._jsonpShim1('payload1');
-		expect((await promise1).data).toEqual('payload1');
+		expect((await promise1)).toEqual('payload1');
 		expect(this._jsonpShim1).toBeFalsy();
 	});
 });
