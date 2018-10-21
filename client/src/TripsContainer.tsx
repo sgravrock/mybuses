@@ -1,54 +1,56 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
-import {fetchDefaultTrips} from './trips/actions';
-import {Trip, tripShape} from './trips';
-import {TripsLoadingState} from "./trips/reducers";
-import {AppState} from "./store";
+import {Trip} from './trips';
+import {IApiClient, MybusesApiContext} from "./mybuses";
 
-interface Props {
-	render: (trips: Trip[]) => JSX.Element;
-	fetchTrips: () => void;
-	loadingState: TripsLoadingState;
+interface OuterProps {
+    render: (trips: Trip[]) => JSX.Element;
+}
+
+interface Props extends OuterProps {
+    apiClient: IApiClient;
+}
+
+interface State {
+	loadingFailed: boolean;
 	trips?: Trip[]
 }
 
-const InnerTripsContainer: React.SFC<Props> = (props: Props) => {
-	if (props.loadingState === 'not started') {
-		props.fetchTrips();
+class InnerTripsContainer extends React.Component<Props, State> {
+	static propTypes = {
+        render: PropTypes.func.isRequired,
+		apiClient: PropTypes.object.isRequired
+    };
+
+	constructor(props: Props) {
+		super(props);
+		this.state = {loadingFailed: false};
 	}
 
-	if (props.trips) {
-		return props.render(props.trips);
-	} else if (props.loadingState === 'failed') {
-		return <div>Unable to find trips.</div>;
-	} else {
-		return <div>Searching for trips...</div>;
+	componentDidMount() {
+		this.props.apiClient.trips()
+			.then(
+				(trips: Trip[]) => this.setState({trips}),
+				() => this.setState({loadingFailed: true})
+			)
 	}
-};
 
-InnerTripsContainer.propTypes = {
-	render: PropTypes.func.isRequired,
-	fetchTrips: PropTypes.func.isRequired,
-	loadingState: PropTypes.string.isRequired,
-	trips: PropTypes.arrayOf(tripShape)
-};
+	render() {
+        if (this.state.trips) {
+            return this.props.render(this.state.trips);
+        } else if (this.state.loadingFailed) {
+            return <div>Unable to find trips.</div>;
+        } else {
+            return <div>Searching for trips...</div>;
+        }
 
-function mapStateToProps(state: AppState) {
-	return {
-		trips: state.trips.trips,
-		loadingState: state.trips.loadingState
-	};
+    }
 }
 
-function mapDispatchToProps(dispatch: (a: any) => void) {
-	return {
-		fetchTrips: () => {
-			dispatch(fetchDefaultTrips());
-		}
-	};
-}
-
-export const TripsContainer = connect(
-	mapStateToProps, mapDispatchToProps
-)(InnerTripsContainer);
+export const TripsContainer: React.SFC<OuterProps> = (props) => {
+	return (
+		<MybusesApiContext.Consumer>
+			{apiClient => <InnerTripsContainer {...props} apiClient={apiClient} />}
+		</MybusesApiContext.Consumer>
+	)
+};

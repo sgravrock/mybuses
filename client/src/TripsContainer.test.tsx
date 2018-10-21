@@ -1,10 +1,9 @@
 import * as React from 'react';
-import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
-import {configureStore} from './store';
-import {fetchDefaultTrips} from './trips/actions';
+import {MybusesApiContext} from "./mybuses";
+
 
 describe('TripsContainer', () => {
 	it('shows a loading indicator', () => {
@@ -12,31 +11,14 @@ describe('TripsContainer', () => {
 		expect(subject.text()).toEqual('Searching for trips...');
 	});
 
-	describe('When trips are not already being loaded', () => {
-		it('fetches trips', () => {
-			const apiClient = {
-				trips: jasmine.createSpy('trips').and.returnValue(
-					dummyPromise()
-				)
-			};
-			mountRender({apiClient});
-			expect(apiClient.trips).toHaveBeenCalledWith();
-		});
-	});
-
-	describe('When trips are already being loaded', () => {
-		it('does not fetch trips', () => {
-			const apiClient = {
-				trips: jasmine.createSpy('trips').and.returnValue(
-					dummyPromise()
-				)
-			};
-			mountRender(
-				{apiClient},
-				store => store.dispatch(fetchDefaultTrips())
-			);
-			expect(apiClient.trips).toHaveBeenCalledTimes(1);
-		});
+	it('fetches trips', () => {
+		const apiClient = {
+			trips: jasmine.createSpy('trips').and.returnValue(
+				dummyPromise()
+			)
+		};
+		mountRender({apiClient});
+		expect(apiClient.trips).toHaveBeenCalledWith();
 	});
 
 	describe('When fetching trips succeeds', () => {
@@ -82,15 +64,13 @@ async function rejected<T>(promise: Promise<T>) {
 	}
 }
 
-function mountRender(props: any, prepareStore = (s: any) => {}) {
+function mountRender(props: any) {
 	const apiClient = props.apiClient || stubMybusesApiClient();
 	const render = props.render || (() => <div />);
-	const store = configureStore(apiClient);
-	prepareStore(store);
 
 	return mount(
-		<Provider store={store}>
+		<MybusesApiContext.Provider value={apiClient}>
 			<TripsContainer render={render} />
-		</Provider>
+		</MybusesApiContext.Provider>
 	);
 }

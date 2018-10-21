@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {Provider} from 'react-redux'
 import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
 import {TripsList} from './TripsList';
-import {configureStore} from './store';
+import {MybusesApiContext} from "./mybuses";
 import {
 	arbitraryTrip,
 	arbitraryRoute,
@@ -60,10 +59,9 @@ describe('DefaultTripPage', () => {
 });
 
 function mountRender(props: any) {
-	const store = configureStore(props.mybusesApiClient);
-	return mount(
-		<Provider store={store}>
-			<DefaultTripPage />
-		</Provider>
-	);
+    return mount(
+		<MybusesApiContext.Provider value={props.mybusesApiClient}>
+			<DefaultTripPage/>
+		</MybusesApiContext.Provider>
+    );
 }

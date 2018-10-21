@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Provider} from 'react-redux'
 import './index.css';
 import {App} from './App';
-import {ApiClient} from './mybuses';
-import {configureStore} from './store';
+import {ApiClient, MybusesApiContext} from './mybuses';
+
 import axios from 'axios';
 
 const axiosOptions: {baseURL?: string} = {};
@@ -14,11 +13,10 @@ if (window.location.href.indexOf('http://localhost:3001/') === 0) {
 }
 
 const apiClient = new ApiClient(axios.create(axiosOptions));
-const store = configureStore(apiClient);
 
 ReactDOM.render(
-	<Provider store={store}>
+	<MybusesApiContext.Provider value={apiClient}>
 		<App />
-	</Provider>,
+	</MybusesApiContext.Provider>,
 	document.getElementById('root')
 );

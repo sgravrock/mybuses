@@ -51,7 +51,7 @@ export const destStopShape = PropTypes.shape({
 
 export interface Trip {
 	tripId: string;
-	route: {shortName: string};
+	route: { shortName: string };
 	srcStop: SourceStop;
 	destStop: DestStop;
 }
