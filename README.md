@@ -24,3 +24,9 @@ export REACT_APP_DEST_LON=default destination longitude
 ## Running the app
 
 `$ yarn start`
+
+## Building and deploying for production
+
+1. To serve from a non-root path, set `"homepage"` in package.json to the path.
+2. `$ yarn build`
+3. Copy the ` build` directory to wherever it will be served from.
