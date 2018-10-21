@@ -6,7 +6,7 @@ type Indexer<T> = (thing: T) => any;
 
 export function groupEndpoints(srcArrDeps: ArrDep[],
 		destArrDeps: ArrDep[]): EndpointPair[] {
-	let result: EndpointPair[] = [];
+	const result: EndpointPair[] = [];
 
 	srcArrDeps.forEach(function(src) {
 		destArrDeps.forEach(function(dest) {

@@ -1,12 +1,11 @@
 import { IObaRequest } from "./obaRequest";
-const find = require("lodash.find");
 
-export type Point = {
+export interface Point {
 	lat: number,
 	lon: number
 };
 
-export type ArrDep = {
+export interface ArrDep {
 	tripId: string,
 	stopId: string,
 	stopName: string,
@@ -61,8 +60,8 @@ export class ObaClient implements IObaClient {
 			(s: any) => s.id === stopId);
 
 		return response.data.entry.arrivalsAndDepartures.map((arrDep: any) => {
-			let p = arrDep.predictedArrivalTime;
-			let pOut = p ? new Date(p) : undefined;
+			const p = arrDep.predictedArrivalTime;
+			const pOut = p ? new Date(p) : undefined;
 			return {
 				tripId: arrDep.tripId,
 				stopSequence: arrDep.stopSequence,
@@ -92,4 +91,14 @@ export class ObaClient implements IObaClient {
 			}
 		};
 	}
+}
+
+function find<T>(a: T[], predicate: (x: T) => boolean): T | null {
+	for (const x of a) {
+		if (predicate(x)) {
+			return x;
+		}
+	}
+
+	return null;
 }

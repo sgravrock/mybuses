@@ -1,4 +1,4 @@
-type Point = {
+interface Point {
 	lat: number,
 	lon: number
 };

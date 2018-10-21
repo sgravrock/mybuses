@@ -15,7 +15,9 @@
     "only-arrow-functions": false,
     "object-literal-shorthand": false,
     "interface-name": false,
-    "variable-name": false
+    "variable-name": false,
+    "array-type": false,
+    "no-shadowed-variable": false
   },
   "linterOptions": {
     "exclude": [
