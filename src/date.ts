@@ -1,6 +1,4 @@
-export function formatTime(timestamp: number | string): string {
-	// @ts-ignore
-	const date = new Date(timestamp);
+export function formatTime(date: Date): string {
 	return date.getHours() + ':' + zpad(date.getMinutes(), 2);
 }
 

@@ -1,5 +1,6 @@
 import {AbsoluteTime, DestStop, RelativeTime, Route, SourceStop, Trip} from "../trips";
 import {IApiClient} from "../mybuses";
+import {TimeType} from "../trips";
 
 export function dummyPromise<T = any>(): Promise<T> {
 	return new Promise<T>(() => {});
@@ -20,7 +21,7 @@ export function arbitraryRoute(): Route {
 export function arbitrarySrcArrivalTime(): RelativeTime {
 	return {
 		minutesUntil: 0,
-		isScheduled: false
+		type: TimeType.Predicted
 	};
 }
 
@@ -34,8 +35,8 @@ export function arbitrarySrcStop(): SourceStop {
 
 export function arbitraryDestArrivalTime(): AbsoluteTime {
 	return {
-		date: '1970-01-01T00:00:00.000Z',
-		isScheduled: false
+		date: new Date('1970-01-01T00:00:00.000Z'),
+		type: TimeType.Predicted
 	};
 }
 

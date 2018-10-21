@@ -1,56 +1,12 @@
-import { IObaClient, ArrDep, TripDetails, Point } from "./obaClient";
+import {ArrDep, IObaClient, Point, TripDetails} from "./obaClient";
 import * as filters from "./filters";
-import { distanceInMeters } from "./distance";
-import { sortBy } from "./sort";
+import {distanceInMeters} from "./distance";
+import {sortBy} from "./sort";
+import {AbsoluteTime, DestStop, RelativeTime, SourceStop, TimeType, Trip} from "../trips";
 
 
 function flatten<T>(arrays: T[][]): T[] {
 	return arrays.reduce((a, b) => a.concat(b), []);
-}
-
-export interface Routing {
-	tripId: string,
-	route: {
-		id: string,
-		shortName: string
-	},
-	srcStop: SourceStop,
-	destStop: DestStop,
-}
-
-export enum TimeType {
-	Scheduled,
-	Predicted
-}
-
-export interface RelativeTime {
-	minutesUntil: number,
-	type: TimeType
-}
-
-export interface AbsoluteTime {
-	date: Date,
-	type: TimeType
-}
-
-export interface SourceStop {
-	stopId: string,
-	name: string,
-	location: Point,
-	metersFromEndpoint: number,
-
-	// Just using arrival time assumes that buses arrive and depart at
-	// the same time, which is true with the rare exception of layover
-	// stops (e.g. 1_18085 on the 44).
-	arrivalTime: RelativeTime,
-}
-
-export interface DestStop {
-	stopId: string,
-	name: string,
-	location: Point,
-	metersFromEndpoint: number,
-	arrivalTime: AbsoluteTime,
 }
 
 export interface TripWithStops {
@@ -67,7 +23,7 @@ export class Router {
 		this._obaClient = obaClient;
 	}
 
-	async findTrips(src: Point, dest: Point): Promise<Routing[]> {
+	async findTrips(src: Point, dest: Point): Promise<Trip[]> {
 		const [srcStops, destStops] = await Promise.all([
 			this._obaClient.stopsForLocation(src),
 			this._obaClient.stopsForLocation(dest),
@@ -78,7 +34,7 @@ export class Router {
 				const result = trips.map((t) => {
 					return {
 						tripId: t.trip.tripId,
-						route: t.trip.route,
+						route: {shortName: t.trip.route.shortName},
 						srcStop: t.srcStop,
 						destStop: t.destStop,
 					};
@@ -133,9 +89,7 @@ function makeSourceStop(arrDep: ArrDep, endpoint: Point): SourceStop {
 	const distance = Math.round(distanceInMeters(arrDep, endpoint));
 
 	return {
-		stopId: arrDep.stopId,
 		name: arrDep.stopName,
-		location: { lat: arrDep.lat, lon: arrDep.lon },
 		metersFromEndpoint: distance,
 		arrivalTime: relArrivalTime(arrDep),
 	};
@@ -165,9 +119,7 @@ function makeDestStop(arrDep: ArrDep, endpoint: Point): DestStop {
 	const distance = Math.round(distanceInMeters(arrDep, endpoint));
 
 	return {
-		stopId: arrDep.stopId,
 		name: arrDep.stopName,
-		location: { lat: arrDep.lat, lon: arrDep.lon },
 		metersFromEndpoint: distance,
 		arrivalTime: absArrivalTime(arrDep),
 	};

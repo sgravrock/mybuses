@@ -4,29 +4,38 @@ export interface Route {
 	shortName: string;
 }
 
+export enum TimeType {
+	Scheduled,
+	Predicted
+}
+
 export interface RelativeTime {
 	minutesUntil: number;
-	isScheduled: boolean;
+	type: TimeType;
 }
 
 export const relativeTimeShape = PropTypes.shape({
 	minutesUntil: PropTypes.number.isRequired,
-	isScheduled: PropTypes.bool.isRequired
+	type: PropTypes.oneOf([TimeType.Predicted, TimeType.Scheduled])
 });
 
 export interface AbsoluteTime {
-	date: string;
-	isScheduled: boolean;
+	date: Date;
+	type: TimeType;
 }
 
 export const absoluteTimeShape = PropTypes.shape({
-	date: PropTypes.string.isRequired,
-	isScheduled: PropTypes.bool.isRequired
+	date: PropTypes.object.isRequired,
+	type: PropTypes.oneOf([TimeType.Predicted, TimeType.Scheduled])
 });
 
 export interface SourceStop {
 	name: string;
 	metersFromEndpoint: number;
+
+	// Just using arrival time assumes that buses arrive and depart at
+	// the same time, which is true with the rare exception of layover
+	// stops (e.g. 1_18085 on the 44).
 	arrivalTime: RelativeTime;
 }
 
@@ -51,7 +60,7 @@ export const destStopShape = PropTypes.shape({
 
 export interface Trip {
 	tripId: string;
-	route: { shortName: string };
+	route: Route;
 	srcStop: SourceStop;
 	destStop: DestStop;
 }

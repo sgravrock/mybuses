@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import {formatTime} from './date';
 import {Trip, tripShape} from './trips';
 import './TripsList.css';
+import {TimeType} from "./trips";
 
 interface Props {
 	trips: Trip[];
@@ -17,11 +18,11 @@ const TripsList: React.SFC<Props> = (props: Props) => {
 						{trip.route.shortName} from {trip.srcStop.name}
 						<div className="TripsList-time">
 							in {trip.srcStop.arrivalTime.minutesUntil} minutes
-							{trip.srcStop.arrivalTime.isScheduled ? '*' : ''}
+							{trip.srcStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
 						</div>
 						<div className="TripsList-time">
 							Arrive at {formatTime(trip.destStop.arrivalTime.date)}
-							{trip.destStop.arrivalTime.isScheduled ? '*' : ''}
+							{trip.destStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
 						</div>
 					</li>
 				))}

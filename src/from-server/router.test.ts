@@ -1,9 +1,10 @@
 import * as vcr from '../testSupport/axios-vcr';
-import { Router, Routing, TimeType } from "./router";
+import { Router} from "./router";
 import { ObaClient } from "./obaClient";
 import { ObaRequest } from "./obaRequest";
 import { Point, ArrDep, TripDetails, IObaClient } from "./obaClient";
 import {rejected} from "../testSupport/promise";
+import {TimeType, Trip} from "../trips";
 
 function makeStopsForLocationResponse(stopIds: string[]): string[] {
 	return stopIds;
@@ -200,15 +201,12 @@ describe("Router", function() {
 
 			const result = await this.subject.findTrips(src, dest)
 			expect(result).toEqual([{
-				tripId: "12345",
+				tripId: '12345',
 				route: {
-					id: "5679",
 					shortName: "Some route"
 				},
 				srcStop: {
-					stopId: "src sid 2",
 					name: "src stop 2",
-					location: { lat: 1, lon: 2 },
 					metersFromEndpoint: 12403734,
 					arrivalTime: {
 						minutesUntil: 0,
@@ -216,9 +214,7 @@ describe("Router", function() {
 					},
 				},
 				destStop: {
-					stopId: "dest sid 2",
 					name: "dest stop 2",
-					location: { lat: 5, lon: 6 },
 					metersFromEndpoint: 12300786,
 					arrivalTime: {
 						date: new Date(0),
@@ -278,17 +274,14 @@ describe("Router", function() {
 				const obaClient = new ObaClient(new ObaRequest(http, "somekey"));
 				this.subject = new Router(obaClient);
 
-				const expected: Routing[] = [
+				const expected: Trip[] = [
 					{
-						tripId: "1_33359811",
+						tripId: '1_33359811',
 						route: {
-							id: "1_102581",
 							shortName: "D Line"
 						},
 						srcStop: {
-							stopId: "1_13760",
 							name: "15th Ave NW & NW Leary Way",
-							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
 							arrivalTime: {
 								minutesUntil: -4.4,
@@ -296,9 +289,7 @@ describe("Router", function() {
 							},
 						},
 						destStop: {
-							stopId: "1_431",
 							name: "3rd Ave & Pike St",
-							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
 							arrivalTime: {
 								date: new Date(1494866937000),
@@ -307,15 +298,12 @@ describe("Router", function() {
 						},
 					},
 					{
-						tripId: "1_33350305", 
+						tripId: '1_33350305',
 						route: {
-							id: "1_102572",
 							shortName: "29"
 						},
 						srcStop: {
-							stopId: "1_13760",
 							name: "15th Ave NW & NW Leary Way",
-							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
 							arrivalTime: {
 								minutesUntil: -3,
@@ -323,9 +311,7 @@ describe("Router", function() {
 							},
 						},
 						destStop: {
-							stopId: "1_300",
 							name: "2nd Ave & Pike St",
-							location: { lat: 47.608646, lon: -122.338432 },
 							metersFromEndpoint: 134,
 							arrivalTime: {
 								date: new Date(1494867202000),
@@ -334,15 +320,12 @@ describe("Router", function() {
 						},
 					},
 					{
-						tripId: "1_33359163",
+						tripId: '1_33359163',
 						route: {
-							id: "1_102574",
 							shortName: "40"
 						},
 						srcStop: {
-							stopId: "1_18165",
 							name: "NW Leary Way & 15th Ave NW",
-							location: { lat: 47.663593, lon: -122.375587 },
 							metersFromEndpoint: 40,
 							arrivalTime: {
 								minutesUntil: 0,
@@ -350,9 +333,7 @@ describe("Router", function() {
 							},
 						},
 						destStop: {
-							stopId: '1_430',
 							name: "3rd Ave & Pine St",
-							location: { lat: 47.61079, lon: -122.338875 },
 							metersFromEndpoint: 137,
 							arrivalTime: {
 								date: new Date(1494867336000),
@@ -361,15 +342,12 @@ describe("Router", function() {
 						},
 					},
 					{
-						tripId: "1_33359653",
+						tripId: '1_33359653',
 						route: {
-							id: "1_102581",
 							shortName: "D Line"
 						},
 						srcStop: {
-							stopId: "1_13760",
 							name: "15th Ave NW & NW Leary Way",
-							location: { lat: 47.663143, lon: -122.37648 },
 							metersFromEndpoint: 65,
 							arrivalTime: {
 								minutesUntil: 5.6,
@@ -377,9 +355,7 @@ describe("Router", function() {
 							},
 						},
 						destStop: {
-							stopId: "1_431",
 							name: "3rd Ave & Pike St",
-							location: { lat: 47.609791, lon: -122.337959 },
 							metersFromEndpoint: 10,
 							arrivalTime: {
 								date: new Date(1494867537000),

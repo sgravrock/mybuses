@@ -1,5 +1,5 @@
-export function dateFromLocalTime(hours: number, minutes: number): string {
-	// Attempt to construct an ISO 8601 date that will produce the correct time
+export function dateFromLocalTime(hours: number, minutes: number): Date {
+	// Attempt to construct a date that will produce the correct time
 	// in the current time zone.
 	// Complications:
 	// * Our tests can't just specify a time zone. JS is going to use local.
@@ -19,7 +19,6 @@ export function dateFromLocalTime(hours: number, minutes: number): string {
 	// portion. It might break when run very close to a DST transition though.
 
 	const now = new Date();
-	const date = new Date(now.getFullYear(), now.getMonth(), now.getDate(),
+	return new Date(now.getFullYear(), now.getMonth(), now.getDate(),
 		hours, minutes);
-	return date.toISOString();
 }
