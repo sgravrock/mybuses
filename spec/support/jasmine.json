@@ -1,0 +1,15 @@
+{
+  "spec_dir": "src",
+  "spec_files": [
+    "**/*.test.*"
+  ],
+  "helpers": [
+    "testSupport/tsnode.js",
+     "testSupport/enzyme.js",
+     "testSupport/jsdom.ts",
+     "testSupport/promise.js",
+     "testSupport/exclude.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}
