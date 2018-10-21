@@ -3,6 +3,7 @@ import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
 import {MybusesApiContext} from "./mybuses";
+import {rejected} from "./testSupport/promise";
 
 
 describe('TripsContainer', () => {
@@ -54,15 +55,6 @@ describe('TripsContainer', () => {
 		});
 	});
 });
-
-async function rejected<T>(promise: Promise<T>) {
-	try {
-		await promise;
-		throw new Error('Expected a rejection but did not get one');
-	} catch (e) {
-		// tslint:disable:no-empty
-	}
-}
 
 function mountRender(props: any) {
 	const apiClient = props.apiClient || stubMybusesApiClient();

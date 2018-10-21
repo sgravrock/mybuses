@@ -1,6 +1,6 @@
 "use strict";
 
-import {stripParam} from "../lib/stripParam";
+import {stripParam} from "./stripParam";
 
 describe("stripParam", function() {
 	it("removes the param when it is first", function() {

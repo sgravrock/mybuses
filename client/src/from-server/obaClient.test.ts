@@ -1,5 +1,5 @@
-import { ObaClient, ArrDep } from "../lib/obaClient";
-import { IObaRequest } from "../lib/obaRequest";
+import { ObaClient, ArrDep } from "./obaClient";
+import { IObaRequest } from "./obaRequest";
 
 interface SpecContext {
 	get: jasmine.Spy,
@@ -73,7 +73,7 @@ describe("ObaClient", function() {
 
 		it("gets the correct URL", async function(this: SpecContext) {
 			this.get.and.returnValue(Promise.resolve(makePayload("1_234", "", 0, 0, [])));
-			const result = await this.subject.arrivalsAndDeparturesForStop("1_234");
+			await this.subject.arrivalsAndDeparturesForStop("1_234");
 			expect(this.get).toHaveBeenCalledWith(
 				"/api/where/arrivals-and-departures-for-stop/1_234.json", {
 					minutesBefore: 2,
@@ -176,7 +176,7 @@ describe("ObaClient", function() {
 			this.get.and.returnValue(Promise.resolve(
 				makePayload("abc", "route ID", "route name")));
 
-			const result = await this.subject.tripDetails("abc")
+			await this.subject.tripDetails("abc");
 
 			expect(this.get).toHaveBeenCalledWith(
 				"/api/where/trip-details/abc.json", {});

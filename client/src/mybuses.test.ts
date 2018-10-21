@@ -1,6 +1,6 @@
 import {ApiClient} from './mybuses';
-import {AxiosResponse} from "axios";
 import {arbitraryTrip} from "./testSupport/stubs";
+import {makeAxiosResponse} from './testSupport/axios';
 
 describe('mybuses', () => {
 	describe('ApiClient', () => {
@@ -29,13 +29,3 @@ describe('mybuses', () => {
 		});
 	});
 });
-
-function makeAxiosResponse<T>(partialResponse: {data: T}): AxiosResponse<T> {
-	return {
-		status: 200,
-		statusText: '',
-		headers: [],
-		config: {},
-		...partialResponse
-	};
-}

@@ -1,5 +1,4 @@
 import { IObaClient, ArrDep, TripDetails, Point } from "./obaClient";
-import { ObaRequest } from "./obaRequest";
 import * as filters from "./filters";
 import { distanceInMeters } from "./distance";
 import { sortBy } from "./sort";
@@ -7,10 +6,6 @@ import { sortBy } from "./sort";
 
 function flatten<T>(arrays: T[][]): T[] {
 	return arrays.reduce((a, b) => a.concat(b), []);
-}
-
-function unique(a: any[]): any[] {
-	return Array.from(new Set(a));
 }
 
 export interface Routing {

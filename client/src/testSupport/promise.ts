@@ -12,3 +12,12 @@ beforeAll(() => {
 		throw error;
 	});
 });
+
+export async function rejected<T>(promise: Promise<T>) {
+	try {
+		await promise;
+		throw new Error('Expected a rejection but did not get one');
+	} catch (e) {
+		// tslint:disable:no-empty
+	}
+}

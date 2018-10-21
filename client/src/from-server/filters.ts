@@ -1,6 +1,4 @@
-"use strict";
-
-import { ArrDep, TripDetails, Point } from "./obaClient";
+import { ArrDep } from "./obaClient";
 
 type EndpointPair = [ArrDep, ArrDep];
 type Indexer<T> = (thing: T) => any;

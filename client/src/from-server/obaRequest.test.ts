@@ -1,5 +1,9 @@
-/// <reference path="./toHaveBeenCalledWithUrl.d.ts" />
-import {ObaRequest} from "../lib/obaRequest";
+/// <reference path="../testSupport/toHaveBeenCalledWithUrl.d.ts" />
+import {ObaRequest} from "./obaRequest";
+import {makeAxiosResponse} from "../testSupport/axios";
+import {dummyPromise} from "../testSupport/stubs";
+import {rejected} from "../testSupport/promise";
+
 const parseUrl = require("url").parse;
 
 type EventHandler = (...params: any[]) => void;
@@ -17,26 +21,15 @@ class MockResponse {
 	}
 }
 
-function verifyFails(promise: Promise<any>, error: any) {
-	return promise.then(function () {
-		throw new Error("Unexpected success");
-	}, function(e) {
-		expect(e).toEqual(error);
-	});
-}
-
 interface Context {
-	get: any;
+	get: jasmine.Spy;
 	subject: ObaRequest;
 }
 
 describe("ObaRequest", function() {
 	beforeEach(function(this: Context) {
-		this.get = jasmine.createSpy("get")
-			.and.returnValue({
-				on: () => {}
-			});
-		this.subject = new ObaRequest({ get: this.get }, "thekey");
+		this.get = jasmine.createSpy('get').and.returnValue(dummyPromise());
+		this.subject = new ObaRequest({get: this.get}, "thekey");
 
 		jasmine.addMatchers({
 			toHaveBeenCalledWithUrl: function(util, customEqualityTesters) {
@@ -45,14 +38,14 @@ describe("ObaRequest", function() {
 						if (actual.calls.count() === 0) {
 							return {
 								pass: false,
-								message: "Expected spy " + actual.and.identity() +
+								message: "Expected spy " + actual.and.identity +
 									" to have been called with a URL like " +
 									jasmine.pp(expected) + " but it was never called."
 							};
 						} else if (actual.calls.count() !== 1) {
 							return {
 								pass: false,
-								message: "Expected spy " + actual.and.identity() +
+								message: "Expected spy " + actual.and.identity +
 									" to have been called with a URL like " +
 									jasmine.pp(expected) +
 									" but it was called more than once."
@@ -73,7 +66,7 @@ describe("ObaRequest", function() {
 						} else {
 							return {
 								pass: false,
-								message: "Expected spy " + actual.and.identity() +
+								message: "Expected spy " + actual.and.identity +
 									" to have been called with a URL like " +
 									jasmine.pp(expected) + " but it was called with " +
 									jasmine.pp(actualSpec)
@@ -116,16 +109,7 @@ describe("ObaRequest", function() {
 			it("resolves to the parsed JSON", async function(this: Context) {
 				const response = new MockResponse();
 				response.statusCode = 200;
-				this.get.and.callFake(function(url: any, callback: (response: MockResponse) => void) {
-					setImmediate(function() {
-						response._handlers["data"]('{"some"');
-						response._handlers["data"](': "json"}');
-						response._handlers["end"]();
-					});
-
-					callback(response);
-					return {on: () => {}};
-				});
+				this.get.and.returnValue(Promise.resolve(makeAxiosResponse({data: {some: "json"}})));
 
 				const result = await this.subject.get("/whatever", {});
 
@@ -136,27 +120,19 @@ describe("ObaRequest", function() {
 				it("tries the request again after a delay", async function(this: Context) {
 					const response = new MockResponse();
 					response.statusCode = 200;
-					spyOn(this.subject, "_getOnce").and.callThrough();
 					let once = false;
-					this.get.and.callFake(function(url: any, callback: (response: MockResponse) => void) {
-						const payload: {code?: number} = {};
-						if (!once) {
-							payload.code = 429;
+					this.get.and.callFake(function() {
+						if (once) {
+							return Promise.resolve(makeAxiosResponse({data: null}))
 						}
-						once = true;
 
-						setImmediate(function() {
-							response._handlers["data"](JSON.stringify(payload));
-							response._handlers["end"]();
-						});
-	
-						callback(response);
-						return {on: () => {}};
+						once = true;
+						return Promise.reject(makeAxiosResponse({status: 429, data: null}))
 					});
-	
+
 					const resultPromise = this.subject.get("/whatever", {});
 
-					await (this.subject._getOnce as jasmine.Spy).calls.first().returnValue;
+					await rejected(this.get.calls.first().returnValue);
 					jasmine.clock().tick(500);
 
 					await resultPromise;
@@ -165,21 +141,17 @@ describe("ObaRequest", function() {
 			});
 		});
 
-		describe("When the request fails to receive a response", function() {
+		describe("When the request fails with a non-429 error", function() {
 			it("rejects the promise", async function(this: Context) {
-				this.get.and.returnValue({
-					on: (eventName: string, handler: EventHandler) => {
-						if (eventName === "error") {
-							handler(new Error("nope"));
-						}
-					}
-				});
+				this.get.and.returnValue(Promise.reject(makeAxiosResponse({status: 500, data: null})));
 
 				try {
 					await this.subject.get("/whatever", {});
 					throw new Error("promise was not rejected");
 				} catch (e) {
-					expect(e.message).toEqual("nope");
+					expect(e.message).toEqual(
+						"Call to http://api.pugetsound.onebusaway.org/whatever?key=thekey failed with status 500"
+					);
 				}
 			});
 		});

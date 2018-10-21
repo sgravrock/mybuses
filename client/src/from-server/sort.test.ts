@@ -1,4 +1,4 @@
-import { sortBy } from "../lib/sort";
+import { sortBy } from "./sort";
 
 describe("sortBy", function() {
 	it("sorts by the return value of the selector", function() {

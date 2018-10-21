@@ -1,17 +1,14 @@
-const vcr = require("./helpers/http-vcr");
-import { Router, Routing, TimeType } from "../lib/router";
-import { ObaClient } from "../lib/obaClient";
-import { ObaRequest } from "../lib/obaRequest";
-import { Point, ArrDep, TripDetails, IObaClient } from "../lib/obaClient";
+import * as vcr from '../testSupport/axios-vcr';
+import { Router, Routing, TimeType } from "./router";
+import { ObaClient } from "./obaClient";
+import { ObaRequest } from "./obaRequest";
+import { Point, ArrDep, TripDetails, IObaClient } from "./obaClient";
+import {rejected} from "../testSupport/promise";
 
 function makeStopsForLocationResponse(stopIds: string[]): string[] {
 	return stopIds;
 }
 
-function makeArrDepResponse(tripIds: string[]) {
-	return tripIds.map((tripId) => ({tripId: tripId}));
-}
- 
 function verifyFails(promise: Promise<any>, error: any): Promise<void> {
 	return promise.then(function () {
 		throw new Error("Unexpected success");
@@ -400,26 +397,15 @@ describe("Router", function() {
 			});
 
 			it("fails when any request fails", async function(this: RouterSpecContext) {
-				const failureResponse = {
-					on: (eventName: string, handler: any) => {
-						if (eventName === "error") {
-							handler(new Error("nope"));
-						}
-					}
-				};
-				const http = {get: () => failureResponse}
-				const obaClient = new ObaClient(new ObaRequest(http, ""));
+				const axios = {get: () => Promise.reject(new Error('nope'))};
+				const obaClient = new ObaClient(new ObaRequest(axios, ""));
 				this.subject = new Router(obaClient);
 
-				try {
-					await this.subject.findTrips(
-						{lat: 47.663667, lon: -122.376109},
-						{lat: 47.609776, lon: -122.337830}
-					);
-					throw new Error("Expected a rejection");
-				} catch (e) {
-					expect(e.message).toEqual("nope");
-				}
+				const promise = this.subject.findTrips(
+					{lat: 47.663667, lon: -122.376109},
+					{lat: 47.609776, lon: -122.337830}
+				);
+				await rejected(promise);
 			});
 		});
 	});

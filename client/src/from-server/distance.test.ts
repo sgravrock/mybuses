@@ -1,4 +1,4 @@
-import { distanceInMeters } from "../lib/distance";
+import { distanceInMeters } from "./distance";
 
 describe("distanceInMeters", function() {
 	it("returns the distance in meters between two points", function() {

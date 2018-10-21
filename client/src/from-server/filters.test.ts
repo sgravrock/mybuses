@@ -1,6 +1,5 @@
-"use strict";
-import * as filters from "../lib/filters";
-import { ArrDep } from "../lib/obaClient";
+import * as filters from "./filters";
+import { ArrDep } from "./obaClient";
 
 describe("filters", function() {
 	describe("groupEndpoints", function() {
