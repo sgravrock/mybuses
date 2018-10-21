@@ -1,14 +1,6 @@
 import {IEnoughAxios} from "../default-router";
 import {AxiosResponse} from "axios";
 
-function delay(millis: number) {
-	return new Promise(function(resolve) {
-		setTimeout(function() {
-			resolve();
-		}, millis);
-	});
-}
-
 export interface IObaRequest {
 	get(path: string, params: any): Promise<any>;
 }
@@ -25,17 +17,7 @@ export class ObaRequest implements IObaRequest {
 	get(path: string, params: any): Promise<any> {
 		const url = this._buildUrl(path, params);
 		return this._axios.get(url)
-			.then(
-				(response: AxiosResponse<any>) => response.data,
-				(response: AxiosResponse<any>) => {
-					if (response.status === 429) {
-						return delay(500).then(() => this.get(path, params));
-					} else {
-						const msg = `Call to ${url} failed with status ${response.status}`;
-						return Promise.reject(new Error(msg));
-					}
-				}
-			);
+			.then((response: AxiosResponse<any>) => response.data);
 	}
 
 	_buildUrl(path: string, params: any) {

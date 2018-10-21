@@ -115,44 +115,12 @@ describe("ObaRequest", function() {
 
 				expect(result).toEqual({some: "json"});
 			});
-
-			describe("With code 429 in the payload", function() {
-				it("tries the request again after a delay", async function(this: Context) {
-					const response = new MockResponse();
-					response.statusCode = 200;
-					let once = false;
-					this.get.and.callFake(function() {
-						if (once) {
-							return Promise.resolve(makeAxiosResponse({data: null}))
-						}
-
-						once = true;
-						return Promise.reject(makeAxiosResponse({status: 429, data: null}))
-					});
-
-					const resultPromise = this.subject.get("/whatever", {});
-
-					await rejected(this.get.calls.first().returnValue);
-					jasmine.clock().tick(500);
-
-					await resultPromise;
-					expect(this.get.calls.count()).toEqual(2);
-				});
-			});
 		});
 
-		describe("When the request fails with a non-429 error", function() {
+		describe("When the request fails", function() {
 			it("rejects the promise", async function(this: Context) {
 				this.get.and.returnValue(Promise.reject(makeAxiosResponse({status: 500, data: null})));
-
-				try {
-					await this.subject.get("/whatever", {});
-					throw new Error("promise was not rejected");
-				} catch (e) {
-					expect(e.message).toEqual(
-						"Call to http://api.pugetsound.onebusaway.org/whatever?key=thekey failed with status 500"
-					);
-				}
+				await rejected(this.subject.get("/whatever", {}));
 			});
 		});
 	});
