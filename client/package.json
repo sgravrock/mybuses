@@ -2,8 +2,7 @@
   "name": "mybuses-client",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
@@ -35,9 +34,9 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "ts-node": "^7.0.0",
-    "typescript": "^2.9.2",
     "tslint": "5.11.0",
+    "tslint-config-prettier": "1.14.0",
     "tslint-react": "3.6.0",
-    "tslint-config-prettier": "1.14.0"
+    "typescript": "^3.1.3"
   }
 }
