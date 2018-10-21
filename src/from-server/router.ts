@@ -15,8 +15,11 @@ export interface TripWithStops {
 	destStop: DestStop,
 }
 
+export interface IRouter {
+	findTrips(src: Point, dest: Point): Promise<Trip[]>;
+}
 
-export class Router {
+export class Router implements IRouter {
 	_obaClient: IObaClient;
 
 	constructor(obaClient: IObaClient) {

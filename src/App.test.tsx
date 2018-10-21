@@ -8,15 +8,15 @@ import {mount} from 'enzyme';
 import {App} from './App';
 import {DefaultTripPage} from './DefaultTripPage';
 import {stubMybusesApiClient} from './testSupport/stubs';
-import {MybusesApiContext} from './mybuses';
+import {DefaultRouterContext} from './default-router';
 
 
 describe('App', () => {
 	it('shows the default trip', () => {
 		const subject = mount(
-			<MybusesApiContext.Provider value={stubMybusesApiClient()}>
+			<DefaultRouterContext.Provider value={stubMybusesApiClient()}>
 				<App />
-			</MybusesApiContext.Provider>
+			</DefaultRouterContext.Provider>
 		);
         expect(subject.find(DefaultTripPage)).toExist();
 	});

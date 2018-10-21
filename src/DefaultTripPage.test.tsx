@@ -2,7 +2,7 @@ import * as React from 'react';
 import {mount} from 'enzyme';
 import {DefaultTripPage} from './DefaultTripPage';
 import {TripsList} from './TripsList';
-import {MybusesApiContext} from "./mybuses";
+import {DefaultRouterContext} from "./default-router";
 import {
 	arbitraryTrip,
 	arbitraryRoute,
@@ -60,8 +60,8 @@ describe('DefaultTripPage', () => {
 
 function mountRender(props: any) {
     return mount(
-		<MybusesApiContext.Provider value={props.mybusesApiClient}>
+		<DefaultRouterContext.Provider value={props.mybusesApiClient}>
 			<DefaultTripPage/>
-		</MybusesApiContext.Provider>
+		</DefaultRouterContext.Provider>
     );
 }

@@ -11,12 +11,11 @@ A highly specialized transit trip planning app. It probably won't work for you.
 5. Set the following environment variables. 
 [`direnv`](https://direnv.net/) is your friend here.
 ```
-export OBA_API_KEY=your key from step 3
-export SRC_LAT=default source latitude
-export SRC_LON=default source longitude
-export DEST_LAT=default destination latitude
-export DEST_LON=default destination longitude
-export PORT=3000
+export REACT_APP_OBA_API_KEY=your key from step 3
+export REACT_APP_SRC_LAT=default source latitude
+export REACT_APP_SRC_LON=default source longitude
+export REACT_APP_DEST_LAT=default destination latitude
+export REACT_APP_DEST_LON=default destination longitude
 ```
 
 ## Running the server tests

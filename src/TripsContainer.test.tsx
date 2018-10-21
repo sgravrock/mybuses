@@ -2,7 +2,7 @@ import * as React from 'react';
 import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
-import {MybusesApiContext} from "./mybuses";
+import {DefaultRouterContext} from "./default-router";
 import {rejected} from "./testSupport/promise";
 
 
@@ -61,8 +61,8 @@ function mountRender(props: any) {
 	const render = props.render || (() => <div />);
 
 	return mount(
-		<MybusesApiContext.Provider value={apiClient}>
+		<DefaultRouterContext.Provider value={apiClient}>
 			<TripsContainer render={render} />
-		</MybusesApiContext.Provider>
+		</DefaultRouterContext.Provider>
 	);
 }

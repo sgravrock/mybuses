@@ -1,6 +1,5 @@
-import {IEnoughAxios} from "../mybuses";
+import {IEnoughAxios} from "../default-router";
 import {AxiosResponse} from "axios";
-import {URL} from 'url';
 
 function delay(millis: number) {
 	return new Promise(function(resolve) {

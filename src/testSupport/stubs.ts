@@ -1,12 +1,13 @@
 import {AbsoluteTime, DestStop, RelativeTime, Route, SourceStop, Trip} from "../trips";
-import {IApiClient} from "../mybuses";
+import {IDefaultRouter} from "../default-router";
 import {TimeType} from "../trips";
+import {Point} from "../from-server/obaClient";
 
 export function dummyPromise<T = any>(): Promise<T> {
 	return new Promise<T>(() => {});
 }
 
-export function stubMybusesApiClient(): IApiClient {
+export function stubMybusesApiClient(): IDefaultRouter {
 	return {
 		trips: () => dummyPromise<Trip[]>()
 	};
@@ -57,3 +58,9 @@ export function arbitraryTrip(): Trip {
 	};
 }
 
+export function arbitraryPoint(): Point {
+	return {
+		lat: 0,
+		lon: 0
+	};
+}

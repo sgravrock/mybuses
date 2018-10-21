@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Trip} from './trips';
-import {IApiClient, MybusesApiContext} from "./mybuses";
+import {IDefaultRouter, DefaultRouterContext} from "./default-router";
 
 interface OuterProps {
     render: (trips: Trip[]) => JSX.Element;
 }
 
 interface Props extends OuterProps {
-    apiClient: IApiClient;
+    apiClient: IDefaultRouter;
 }
 
 interface State {
@@ -49,8 +49,8 @@ class InnerTripsContainer extends React.Component<Props, State> {
 
 export const TripsContainer: React.SFC<OuterProps> = (props) => {
 	return (
-		<MybusesApiContext.Consumer>
+		<DefaultRouterContext.Consumer>
 			{apiClient => <InnerTripsContainer {...props} apiClient={apiClient} />}
-		</MybusesApiContext.Consumer>
+		</DefaultRouterContext.Consumer>
 	)
 };
