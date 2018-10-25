@@ -1,4 +1,4 @@
-export function dateFromLocalTime(hours: number, minutes: number): Date {
+export function dateFromLocalTime(hours: number, minutes: number, seconds = 0): Date {
 	// Attempt to construct a date that will produce the correct time
 	// in the current time zone.
 	// Complications:
@@ -20,5 +20,5 @@ export function dateFromLocalTime(hours: number, minutes: number): Date {
 
 	const now = new Date();
 	return new Date(now.getFullYear(), now.getMonth(), now.getDate(),
-		hours, minutes);
+		hours, minutes, seconds);
 }

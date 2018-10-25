@@ -2,7 +2,7 @@ import {ArrDep, IObaClient, Point, TripDetails} from "../OBA/obaClient";
 import * as filters from "./filters";
 import {distanceInMeters} from "./distance";
 import {sortBy} from "../util/sort";
-import {AbsoluteTime, DestStop, RelativeTime, SourceStop, TimeType, Trip} from "../trips";
+import {AbsoluteTime, DestStop, SourceStop, TimeType, Trip} from "../trips";
 
 
 function flatten<T>(arrays: T[][]): T[] {
@@ -42,7 +42,7 @@ export class Router implements IRouter {
 						destStop: t.destStop,
 					};
 				});
-				sortBy(result, r => r.srcStop.arrivalTime.minutesUntil);
+				sortBy(result, r => r.srcStop.arrivalTime.date);
 				return result;
 			});
 	}
@@ -94,28 +94,22 @@ function makeSourceStop(arrDep: ArrDep, endpoint: Point): SourceStop {
 	return {
 		name: arrDep.stopName,
 		metersFromEndpoint: distance,
-		arrivalTime: relArrivalTime(arrDep),
+		arrivalTime: arrivalTime(arrDep),
 	};
 }
 
-function relArrivalTime(arrDep: ArrDep): RelativeTime {
+function arrivalTime(arrDep: ArrDep): AbsoluteTime {
 	if (arrDep.predictedArrivalTime) {
 		return {
-			minutesUntil: minutesUntilDate(arrDep.predictedArrivalTime),
+			date: arrDep.predictedArrivalTime,
 			type: TimeType.Predicted,
 		};
 	} else {
 		return {
-			minutesUntil: minutesUntilDate(arrDep.scheduledArrivalTime),
+			date: arrDep.scheduledArrivalTime,
 			type: TimeType.Scheduled,
 		};
 	}
-}
-
-function minutesUntilDate(date: Date): number {
-	const now = new Date().getTime();
-	const millisUntil = date.getTime() - now;
-	return Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
 }
 
 function makeDestStop(arrDep: ArrDep, endpoint: Point): DestStop {

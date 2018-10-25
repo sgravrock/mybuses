@@ -226,7 +226,7 @@ describe("Router", function() {
 					name: "src stop 2",
 					metersFromEndpoint: 12403734,
 					arrivalTime: {
-						minutesUntil: 0,
+						date: new Date(0),
 						type: TimeType.Scheduled,
 					},
 				},
@@ -250,10 +250,11 @@ describe("Router", function() {
 			this.obaClient.stops.resolve(JSON.stringify(dest),
 				makeStopsForLocationResponse(["dest sid"]));
 
+			const srcArrDate = new Date(2 * 1000 * 60);
 			this.obaClient.arrDeps.resolve("src sid", [
 				{
 					tripId: "12345", stopId: "src sid", stopName: "src stop", stopSequence: 1,
-					scheduledArrivalTime: new Date(0), predictedArrivalTime: new Date(2 * 1000 * 60), lat: 0, lon: 1
+					scheduledArrivalTime: new Date(0), predictedArrivalTime: srcArrDate, lat: 0, lon: 1
 				},
 			]);
 			const destArrDate = new Date(3 * 1000 * 60);
@@ -276,7 +277,7 @@ describe("Router", function() {
 			const trip = result[0];
 			expect(trip.srcStop.arrivalTime).toEqual({
 				type: TimeType.Predicted,
-				minutesUntil: 2
+				date: srcArrDate,
 			});
 			expect(trip.destStop.arrivalTime).toEqual({
 				type: TimeType.Predicted,
@@ -307,7 +308,7 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							metersFromEndpoint: 65,
 							arrivalTime: {
-								minutesUntil: -4.4,
+								date: new Date(1494865419000),
 								type: TimeType.Scheduled,
 							},
 						},
@@ -329,7 +330,7 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							metersFromEndpoint: 65,
 							arrivalTime: {
-								minutesUntil: -3,
+								date: new Date(1494865506000),
 								type: TimeType.Scheduled,
 							},
 						},
@@ -351,7 +352,7 @@ describe("Router", function() {
 							name: "NW Leary Way & 15th Ave NW",
 							metersFromEndpoint: 40,
 							arrivalTime: {
-								minutesUntil: 0,
+								date: new Date(1494865686000),
 								type: TimeType.Scheduled,
 							},
 						},
@@ -373,7 +374,7 @@ describe("Router", function() {
 							name: "15th Ave NW & NW Leary Way",
 							metersFromEndpoint: 65,
 							arrivalTime: {
-								minutesUntil: 5.6,
+								date: new Date(1494866019000),
 								type: TimeType.Scheduled,
 							},
 						},

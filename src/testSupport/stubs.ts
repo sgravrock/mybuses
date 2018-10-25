@@ -1,4 +1,4 @@
-import {AbsoluteTime, DestStop, RelativeTime, Route, SourceStop, Trip} from "../trips";
+import {AbsoluteTime, DestStop, Route, SourceStop, Trip} from "../trips";
 import {IDefaultRouter} from "../routing/default-router";
 import {TimeType} from "../trips";
 import {Point} from "../OBA/obaClient";
@@ -19,9 +19,9 @@ export function arbitraryRoute(): Route {
 	};
 }
 
-export function arbitrarySrcArrivalTime(): RelativeTime {
+export function arbitrarySrcArrivalTime(): AbsoluteTime {
 	return {
-		minutesUntil: 0,
+		date: new Date(0),
 		type: TimeType.Predicted
 	};
 }

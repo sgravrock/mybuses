@@ -14,7 +14,17 @@ import {
 import {dateFromLocalTime} from './testSupport/date';
 
 describe('DefaultTripPage', () => {
-	it('shows trips for the default route', async () => {
+    beforeEach(() => {
+        jasmine.clock().install();
+    });
+
+    afterEach(() => {
+        jasmine.clock().uninstall();
+    });
+
+    it('shows trips for the default route', async () => {
+    	jasmine.clock().mockDate(dateFromLocalTime(20, 30));
+
 		const trips = [{
 			...arbitraryTrip(),
 			route: {
@@ -26,7 +36,7 @@ describe('DefaultTripPage', () => {
 				name: '15th Ave NW & NW Leary Way',
 				arrivalTime: {
 					...arbitrarySrcArrivalTime(),
-					minutesUntil: 1.8
+					date: dateFromLocalTime(20, 31, 48)
 				}
 			},
 			destStop: {

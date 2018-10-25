@@ -17,7 +17,8 @@ const TripsList: React.SFC<Props> = (props: Props) => {
 					<li className="TripsList-item" key={trip.tripId}>
 						{trip.route.shortName} from {trip.srcStop.name}
 						<div className="TripsList-time">
-							in {trip.srcStop.arrivalTime.minutesUntil} minutes
+							in {minutesUntil(trip.srcStop.arrivalTime.date)} minutes
+							({formatTime(trip.srcStop.arrivalTime.date)})
 							{trip.srcStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
 						</div>
 						<div className="TripsList-time">
@@ -53,3 +54,9 @@ TripsList.propTypes = {
 };
 
 export {TripsList};
+
+function minutesUntil(date: Date): number {
+	const now = new Date().getTime();
+	const millisUntil = date.getTime() - now;
+	return Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
+}
