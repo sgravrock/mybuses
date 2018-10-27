@@ -42,6 +42,19 @@ describe('TripsListItem', () => {
 		expect(timeField.text()).toEqual('in 2.8 minutes (12:02)');
 	});
 
+	it('updates the relative departure time each minute', function() {
+        jasmine.clock().mockDate(dateFromLocalTime(12, 0, 0));
+        const trip = tripWithSrcArrivalTime({
+            date: dateFromLocalTime(12, 2, 48),
+            type: TimeType.Predicted
+        });
+        const subject = shallow(<TripsListItem trip={trip} />);
+        jasmine.clock().tick(1000 * 60);
+        subject.update();
+        const timeField = subject.find('.TripsListItem-time').at(0);
+        expect(timeField.text()).toEqual('in 1.8 minutes (12:02)');
+    });
+
 	it('shows an asterisk next to scheduled arrival times', () => {
 		const trip = tripWithDestArrivalTime({
 			date: dateFromLocalTime(20, 38),

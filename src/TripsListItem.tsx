@@ -2,15 +2,37 @@ import * as React from 'react';
 import {TimeType, Trip, tripShape} from "./trips";
 import {formatTime} from "./date";
 import './TripsListItem.css';
+import Timeout = NodeJS.Timeout;
 
 interface Props {
     trip: Trip;
 }
 
-export class TripsListItem extends React.Component<Props, {}> {
+interface State {
+    currentTime: Date;
+}
+
+export class TripsListItem extends React.Component<Props, State> {
     static propTypes = {
         trip: tripShape.isRequired,
     };
+
+    intervalId?: Timeout; // An unavoidable lie.
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {currentTime: new Date()};
+    }
+
+    componentDidMount() {
+        this.intervalId = setInterval(() => {
+            this.setState({currentTime: new Date()})
+        }, 1000 * 10);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId!);
+    }
 
     render() {
         const trip = this.props.trip;
@@ -19,7 +41,7 @@ export class TripsListItem extends React.Component<Props, {}> {
             <li className="TripsListItem" key={trip.tripId}>
                 {trip.route.shortName} from {trip.srcStop.name}
                 <div className="TripsListItem-time">
-                    in {minutesUntil(trip.srcStop.arrivalTime.date)} minutes
+                    in {minutesBetween(this.state.currentTime, trip.srcStop.arrivalTime.date)} minutes
                     ({formatTime(trip.srcStop.arrivalTime.date)})
                     {trip.srcStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
                 </div>
@@ -34,8 +56,7 @@ export class TripsListItem extends React.Component<Props, {}> {
 }
 
 
-function minutesUntil(date: Date): number {
-    const now = new Date().getTime();
-    const millisUntil = date.getTime() - now;
-    return Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
+function minutesBetween(date1: Date, date2: Date): number {
+    const millisBetween = date2.getTime() - date1.getTime();
+    return Math.round((millisBetween / 1000.0 / 60.0) * 10) / 10;
 }
