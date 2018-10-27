@@ -15,8 +15,8 @@ export interface AbsoluteTime {
 }
 
 export const absoluteTimeShape = PropTypes.shape({
-	date: PropTypes.object.isRequired,
-	type: PropTypes.oneOf([TimeType.Predicted, TimeType.Scheduled])
+	date: PropTypes.instanceOf(Date).isRequired,
+	type: PropTypes.oneOf([TimeType.Predicted, TimeType.Scheduled]).isRequired
 });
 
 export interface SourceStop {

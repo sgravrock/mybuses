@@ -50,7 +50,7 @@ const TripsList: React.SFC<Props> = (props: Props) => {
 };
 
 TripsList.propTypes = {
-	trips: PropTypes.arrayOf(tripShape).isRequired
+	trips: PropTypes.arrayOf(tripShape.isRequired).isRequired
 };
 
 export {TripsList};
