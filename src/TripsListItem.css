@@ -1,0 +1,7 @@
+.TripsListItem {
+	margin-bottom: 1em;
+}
+
+.TripsListItem-time {
+	font-weight: bold;
+}

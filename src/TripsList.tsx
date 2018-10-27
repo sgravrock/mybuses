@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {formatTime} from './date';
 import {Trip, tripShape} from './trips';
-import './TripsList.css';
-import {TimeType} from "./trips";
+import {TripsListItem} from "./TripsListItem";
 
 interface Props {
 	trips: Trip[];
@@ -13,20 +11,7 @@ const TripsList: React.SFC<Props> = (props: Props) => {
 	return (
 		<div className="TripsList">
 			<ol>
-				{props.trips.map((trip: Trip) => (
-					<li className="TripsList-item" key={trip.tripId}>
-						{trip.route.shortName} from {trip.srcStop.name}
-						<div className="TripsList-time">
-							in {minutesUntil(trip.srcStop.arrivalTime.date)} minutes
-							({formatTime(trip.srcStop.arrivalTime.date)})
-							{trip.srcStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
-						</div>
-						<div className="TripsList-time">
-							Arrive at {formatTime(trip.destStop.arrivalTime.date)}
-							{trip.destStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
-						</div>
-					</li>
-				))}
+				{props.trips.map((trip: Trip) => <TripsListItem trip={trip} key={trip.tripId} /> )}
 			</ol>
 			<p>
 				* Denotes a scheduled time for which no vehicle status is
@@ -54,9 +39,3 @@ TripsList.propTypes = {
 };
 
 export {TripsList};
-
-function minutesUntil(date: Date): number {
-	const now = new Date().getTime();
-	const millisUntil = date.getTime() - now;
-	return Math.round((millisUntil / 1000.0 / 60.0) * 10) / 10;
-}

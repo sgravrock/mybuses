@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {shallow} from 'enzyme';
-import {TripsList} from './TripsList';
 import {
 	arbitraryTrip,
 	arbitrarySrcStop,
@@ -10,8 +9,9 @@ import {
 } from './testSupport/stubs';
 import {dateFromLocalTime} from './testSupport/date';
 import {TimeType} from "./trips";
+import {TripsListItem} from "./TripsListItem";
 
-describe('TripsList', () => {
+describe('TripsListItem', () => {
     beforeEach(function() {
         jasmine.clock().install();
     });
@@ -26,8 +26,8 @@ describe('TripsList', () => {
 			date: dateFromLocalTime(12, 2, 48),
 			type: TimeType.Scheduled
 		});
-		const subject = shallow(<TripsList trips={[trip]} />);
-		const timeField = subject.find('.TripsList-time').at(0);
+		const subject = shallow(<TripsListItem trip={trip} />);
+		const timeField = subject.find('.TripsListItem-time').at(0);
 		expect(timeField.text()).toEqual('in 2.8 minutes (12:02)*');
 	});
 
@@ -37,8 +37,8 @@ describe('TripsList', () => {
             date: dateFromLocalTime(12, 2, 48),
 			type: TimeType.Predicted
 		});
-		const subject = shallow(<TripsList trips={[trip]} />);
-		const timeField = subject.find('.TripsList-time').at(0);
+        const subject = shallow(<TripsListItem trip={trip} />);
+		const timeField = subject.find('.TripsListItem-time').at(0);
 		expect(timeField.text()).toEqual('in 2.8 minutes (12:02)');
 	});
 
@@ -47,8 +47,8 @@ describe('TripsList', () => {
 			date: dateFromLocalTime(20, 38),
             type: TimeType.Scheduled
 		});
-		const subject = shallow(<TripsList trips={[trip]} />);
-		const timeField = subject.find('.TripsList-time').at(1);
+        const subject = shallow(<TripsListItem trip={trip} />);
+		const timeField = subject.find('.TripsListItem-time').at(1);
 		expect(timeField.text()).toEqual('Arrive at 20:38*');
 	});
 
@@ -57,8 +57,8 @@ describe('TripsList', () => {
 			date: dateFromLocalTime(20, 38),
             type: TimeType.Predicted
 		});
-		const subject = shallow(<TripsList trips={[trip]} />);
-		const timeField = subject.find('.TripsList-time').at(1);
+        const subject = shallow(<TripsListItem trip={trip} />);
+		const timeField = subject.find('.TripsListItem-time').at(1);
 		expect(timeField.text()).toEqual('Arrive at 20:38');
 	});
 });
