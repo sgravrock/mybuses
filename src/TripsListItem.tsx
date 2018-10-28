@@ -2,59 +2,38 @@ import * as React from 'react';
 import {TimeType, Trip, tripShape} from "./trips";
 import {formatTime} from "./date";
 import './TripsListItem.css';
-import Timeout = NodeJS.Timeout;
+import {useCurrentTime} from "./useCurrentTime";
 
 interface Props {
 	trip: Trip;
 }
 
-interface State {
-	currentTime: Date;
-}
+const TripsListItem: React.SFC<Props> = (props) => {
+	const now = useCurrentTime(1000 * 10);
+	const trip = props.trip;
 
-export class TripsListItem extends React.Component<Props, State> {
-	static propTypes = {
-		trip: tripShape.isRequired,
-	};
+	return (
+		<li className="TripsListItem" key={trip.tripId}>
+			{trip.route.shortName} from {trip.srcStop.name}
+			<div className="TripsListItem-time">
+				in {minutesBetween(now, trip.srcStop.arrivalTime.date)} minutes
+				({formatTime(trip.srcStop.arrivalTime.date)})
+				{trip.srcStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
+			</div>
+			<div className="TripsListItem-time">
+				Arrive at {formatTime(trip.destStop.arrivalTime.date)}
+				{trip.destStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
+			</div>
+		</li>
 
-	intervalId?: Timeout; // An unavoidable lie.
+	)
+};
 
-	constructor(props: Props) {
-		super(props);
-		this.state = {currentTime: new Date()};
-	}
+TripsListItem.propTypes = {
+	trip: tripShape.isRequired,
+};
 
-	componentDidMount() {
-		this.intervalId = setInterval(() => {
-			this.setState({currentTime: new Date()})
-		}, 1000 * 10);
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.intervalId!);
-	}
-
-	render() {
-		const trip = this.props.trip;
-
-		return (
-			<li className="TripsListItem" key={trip.tripId}>
-				{trip.route.shortName} from {trip.srcStop.name}
-				<div className="TripsListItem-time">
-					in {minutesBetween(this.state.currentTime, trip.srcStop.arrivalTime.date)} minutes
-					({formatTime(trip.srcStop.arrivalTime.date)})
-					{trip.srcStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
-				</div>
-				<div className="TripsListItem-time">
-					Arrive at {formatTime(trip.destStop.arrivalTime.date)}
-					{trip.destStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
-				</div>
-			</li>
-
-		)
-	}
-}
-
+export {TripsListItem};
 
 function minutesBetween(date1: Date, date2: Date): number {
 	const millisBetween = date2.getTime() - date1.getTime();
