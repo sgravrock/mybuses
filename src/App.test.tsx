@@ -19,7 +19,7 @@ import {dateFromLocalTime} from "./testSupport/date";
 import {TripsList} from "./TripsList";
 
 
-describe('App', () => {
+xdescribe('App', () => {
 	beforeEach(() => {
 		jasmine.clock().install();
 	});

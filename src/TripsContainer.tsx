@@ -1,7 +1,9 @@
 import * as React from 'react';
+// @ts-ignore
+import {useState, useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import {Trip} from './trips';
-import {IDefaultRouter, DefaultRouterContext} from "./routing/default-router";
+import {IDefaultRouter, DefaultRouterContext, DefaultRouter} from "./routing/default-router";
 
 interface OuterProps {
 	render: (trips: Trip[]) => JSX.Element;
@@ -11,41 +13,34 @@ interface Props extends OuterProps {
 	apiClient: IDefaultRouter;
 }
 
-interface State {
-	loadingFailed: boolean;
-	trips?: Trip[]
-}
+const InnerTripsContainer: React.SFC<Props> = (props) => {
+	const [loadingFailed, setLoadingFailed] = useState(false);
+	const [trips, setTrips] = useState(null);
 
-class InnerTripsContainer extends React.Component<Props, State> {
-	static propTypes = {
-		render: PropTypes.func.isRequired,
-		apiClient: PropTypes.object.isRequired
-	};
-
-	constructor(props: Props) {
-		super(props);
-		this.state = {loadingFailed: false};
-	}
-
-	componentDidMount() {
-		this.props.apiClient.trips()
+	useEffect(() => {
+		props.apiClient.trips()
 			.then(
-				(trips: Trip[]) => this.setState({trips}),
-				() => this.setState({loadingFailed: true})
-			)
+				setTrips,
+				() => setLoadingFailed(true)
+			);
+	}, []);
+
+	if (trips) {
+		return props.render(trips);
+	} else if (loadingFailed) {
+		return <div>Unable to find trips.</div>;
+	} else {
+		return <div>Searching for trips...</div>;
 	}
 
-	render() {
-		if (this.state.trips) {
-			return this.props.render(this.state.trips);
-		} else if (this.state.loadingFailed) {
-			return <div>Unable to find trips.</div>;
-		} else {
-			return <div>Searching for trips...</div>;
-		}
 
-	}
-}
+};
+
+InnerTripsContainer.propTypes = {
+	render: PropTypes.func.isRequired,
+	// TODO this is wrong, but at least it compiles.
+	apiClient: PropTypes.instanceOf(DefaultRouter).isRequired
+};
 
 export const TripsContainer: React.SFC<OuterProps> = (props) => {
 	return (

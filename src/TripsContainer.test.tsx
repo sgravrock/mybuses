@@ -6,7 +6,7 @@ import {DefaultRouterContext} from "./routing/default-router";
 import {rejected} from "./testSupport/promise";
 
 
-describe('TripsContainer', () => {
+xdescribe('TripsContainer', () => {
 	it('shows a loading indicator', () => {
 		const subject = mountRender({});
 		expect(subject.text()).toEqual('Searching for trips...');
