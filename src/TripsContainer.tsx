@@ -1,56 +1,37 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Trip} from './trips';
-import {IDefaultRouter, DefaultRouterContext} from "./routing/default-router";
+import {DefaultRouterContext} from "./routing/default-router";
+import {useContext, useEffect, useState} from "react";
 
-interface OuterProps {
+interface Props {
 	render: (trips: Trip[]) => JSX.Element;
 }
 
-interface Props extends OuterProps {
-	apiClient: IDefaultRouter;
-}
+const TripsContainer: React.FunctionComponent<Props> = props => {
+	const [trips, setTrips] = useState<Trip[] | null>(null);
+	const [loadingFailed, setLoadingFailed] = useState(false);
+	const apiClient = useContext(DefaultRouterContext);
 
-interface State {
-	loadingFailed: boolean;
-	trips?: Trip[]
-}
-
-class InnerTripsContainer extends React.Component<Props, State> {
-	static propTypes = {
-		render: PropTypes.func.isRequired,
-		apiClient: PropTypes.object.isRequired
-	};
-
-	constructor(props: Props) {
-		super(props);
-		this.state = {loadingFailed: false};
-	}
-
-	componentDidMount() {
-		this.props.apiClient.trips()
+	useEffect(() => {
+		apiClient.trips()
 			.then(
-				(trips: Trip[]) => this.setState({trips}),
-				() => this.setState({loadingFailed: true})
-			)
+				(trips: Trip[]) => setTrips(trips),
+				() => setLoadingFailed(true)
+			);
+	}, []);
+
+	if (trips) {
+		return props.render(trips);
+	} else if (loadingFailed) {
+		return <div>Unable to find trips.</div>;
+	} else {
+		return <div>Searching for trips...</div>;
 	}
-
-	render() {
-		if (this.state.trips) {
-			return this.props.render(this.state.trips);
-		} else if (this.state.loadingFailed) {
-			return <div>Unable to find trips.</div>;
-		} else {
-			return <div>Searching for trips...</div>;
-		}
-
-	}
-}
-
-export const TripsContainer: React.SFC<OuterProps> = (props) => {
-	return (
-		<DefaultRouterContext.Consumer>
-			{apiClient => <InnerTripsContainer {...props} apiClient={apiClient}/>}
-		</DefaultRouterContext.Consumer>
-	)
 };
+
+TripsContainer.propTypes = {
+	render: PropTypes.func.isRequired,
+};
+
+export {TripsContainer};
