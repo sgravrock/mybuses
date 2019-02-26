@@ -3,7 +3,7 @@ import * as httpVcr from './http-vcr';
 import * as fs from "fs";
 import * as tmp from 'tmp';
 import * as path from "path";
-import * as mkdirp from 'mkdirp';
+import mkdirp from 'mkdirp';
 import {rejected} from "./promise";
 
 interface Context {

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {TimeType, Trip, tripShape} from "./trips";
 import {formatTime} from "./date";
 import './TripsListItem.css';
-import Timeout = NodeJS.Timeout;
 
 interface Props {
 	trip: Trip;
@@ -17,7 +16,7 @@ export class TripsListItem extends React.Component<Props, State> {
 		trip: tripShape.isRequired,
 	};
 
-	intervalId?: Timeout; // An unavoidable lie.
+	intervalId?: any;
 
 	constructor(props: Props) {
 		super(props);

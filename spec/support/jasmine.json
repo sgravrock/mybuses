@@ -4,11 +4,11 @@
     "**/*.test.*"
   ],
   "helpers": [
-    "testSupport/tsnode.js",
-     "testSupport/enzyme.js",
+    "../spec/support/babel.js",
+     "testSupport/enzyme.ts",
      "testSupport/jsdom.ts",
      "testSupport/promise.js",
-     "testSupport/exclude.js"
+     "testSupport/exclude.ts"
   ],
   "stopSpecOnExpectationFailure": false,
   "random": true
