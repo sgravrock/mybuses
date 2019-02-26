@@ -5,10 +5,11 @@
   ],
   "helpers": [
     "../spec/support/babel.js",
-     "testSupport/enzyme.ts",
-     "testSupport/jsdom.ts",
-     "testSupport/promise.js",
-     "testSupport/exclude.ts"
+    "testSupport/tsnode.js",
+    "testSupport/jsdom.ts",
+    "testSupport/promise.js",
+    "testSupport/exclude.ts",
+    "testSupport/rtl.ts"
   ],
   "stopSpecOnExpectationFailure": false,
   "random": true

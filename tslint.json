@@ -19,7 +19,8 @@
     "array-type": false,
     "no-shadowed-variable": false,
     "max-classes-per-file": false,
-    "no-debugger": false
+    "no-debugger": false,
+    "no-console": false
   },
   "linterOptions": {
     "exclude": [

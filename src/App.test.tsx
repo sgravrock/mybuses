@@ -1,10 +1,5 @@
-/*
-TODO: do we need <reference types="jasmine-enzyme" />?
-or maybe <reference types="../../node_modules/@types/jasmine-enzyme" />
-or maybe <reference path="../typings/jasmine-enzyme/index.d.ts" />
- */
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {render} from 'react-testing-library'
 import {App} from './App';
 import {
 	arbitraryDestArrivalTime,
@@ -16,7 +11,7 @@ import {
 } from './testSupport/stubs';
 import {DefaultRouterContext} from './routing/default-router';
 import {dateFromLocalTime} from "./testSupport/date";
-import {TripsList} from "./TripsList";
+import * as tripsListModule from "./TripsList";
 
 
 describe('App', () => {
@@ -30,6 +25,7 @@ describe('App', () => {
 
 	it('shows trips for the default route', async () => {
 		jasmine.clock().mockDate(dateFromLocalTime(20, 30));
+		spyOn(tripsListModule, 'TripsList').and.callThrough();
 
 		const trips = [{
 			...arbitraryTrip(),
@@ -58,24 +54,25 @@ describe('App', () => {
 		const mybusesApiClient = {
 			trips: jasmine.createSpy('trips').and.returnValue(tripsPromise)
 		};
-		const subject = mountRender({mybusesApiClient});
+		const {container} = mountRender({mybusesApiClient});
 		expect(mybusesApiClient.trips).toHaveBeenCalledWith();
 		await tripsPromise;
 
-		subject.update();
-		const tripsList = subject.find(TripsList);
-		expect(tripsList).toExist();
-		expect(tripsList.prop('trips')).toEqual(trips);
-		expect(tripsList.text()).toMatch(
+		// TODO: maybe don't do this?
+		expect((tripsListModule.TripsList as jasmine.Spy).calls.first().args[0].trips).toEqual(trips);
+
+		const tripsList = container.querySelector('.TripsList');
+		expect(tripsList).toBeTruthy();
+		expect(tripsList!!.textContent).toMatch(
 			/D Line from 15th Ave NW & NW Leary Way/
 		);
-		expect(tripsList.text()).toMatch(/in 1\.8 minutes/);
-		expect(tripsList.text()).toMatch(/Arrive at 20:38/);
+		expect(tripsList!!.textContent).toMatch(/in 1\.8 minutes/);
+		expect(tripsList!!.textContent).toMatch(/Arrive at 20:38/);
 	});
 });
 
 function mountRender(props: any) {
-	return mount(
+	return render(
 		<DefaultRouterContext.Provider value={props.mybusesApiClient}>
 			<App/>
 		</DefaultRouterContext.Provider>

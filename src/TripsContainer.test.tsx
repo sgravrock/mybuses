@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {render} from 'react-testing-library'
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
 import {DefaultRouterContext} from "./routing/default-router";
@@ -8,8 +8,8 @@ import {rejected} from "./testSupport/promise";
 
 describe('TripsContainer', () => {
 	it('shows a loading indicator', () => {
-		const subject = mountRender({});
-		expect(subject.text()).toEqual('Searching for trips...');
+		const {container} = mountRender({});
+		expect(container.textContent).toEqual('Searching for trips...');
 	});
 
 	it('fetches trips', () => {
@@ -29,15 +29,14 @@ describe('TripsContainer', () => {
 			const apiClient = {
 				trips: () => promise
 			};
-			const render = jasmine.createSpy('render').and.returnValue(
+			const renderProp = jasmine.createSpy('render').and.returnValue(
 				<div className="foo" />
 			);
-			const subject = mountRender({apiClient, render});
+			const {container} = mountRender({apiClient, render: renderProp});
 			await promise;
-			subject.update();
 
-			expect(render).toHaveBeenCalledWith(trips);
-			expect(subject.find('.foo')).toExist();
+			expect(renderProp).toHaveBeenCalledWith(trips);
+			expect(container.querySelector('.foo')).toBeTruthy();
 		});
 	});
 
@@ -47,22 +46,21 @@ describe('TripsContainer', () => {
 			const apiClient = {
 				trips: () => promise
 			};
-			const subject = mountRender({apiClient});
+			const {container} = mountRender({apiClient});
 			await rejected(promise);
-			subject.update();
 
-			expect(subject.text()).toEqual('Unable to find trips.');
+			expect(container.textContent).toEqual('Unable to find trips.');
 		});
 	});
 });
 
 function mountRender(props: any) {
 	const apiClient = props.apiClient || stubMybusesApiClient();
-	const render = props.render || (() => <div />);
+	const renderProp = props.render || (() => <div />);
 
-	return mount(
+	return render(
 		<DefaultRouterContext.Provider value={apiClient}>
-			<TripsContainer render={render} />
+			<TripsContainer render={renderProp} />
 		</DefaultRouterContext.Provider>
 	);
 }

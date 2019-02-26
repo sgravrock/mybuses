@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {shallow} from 'enzyme';
+import {render} from 'react-testing-library'
 import {
 	arbitraryTrip,
 	arbitrarySrcStop,
@@ -26,9 +26,9 @@ describe('TripsListItem', () => {
 			date: dateFromLocalTime(12, 2, 48),
 			type: TimeType.Scheduled
 		});
-		const subject = shallow(<TripsListItem trip={trip}/>);
-		const timeField = subject.find('.TripsListItem-time').at(0);
-		expect(timeField.text()).toEqual('in 2.8 minutes (12:02)*');
+		const {container} = render(<TripsListItem trip={trip}/>);
+		const timeField = container.querySelector('.TripsListItem-time');
+		expect(timeField!!.textContent).toEqual('in 2.8 minutes (12:02)*');
 	});
 
 	it('does not show an asterisk next to predicted departure times', () => {
@@ -37,9 +37,9 @@ describe('TripsListItem', () => {
 			date: dateFromLocalTime(12, 2, 48),
 			type: TimeType.Predicted
 		});
-		const subject = shallow(<TripsListItem trip={trip}/>);
-		const timeField = subject.find('.TripsListItem-time').at(0);
-		expect(timeField.text()).toEqual('in 2.8 minutes (12:02)');
+		const {container} = render(<TripsListItem trip={trip}/>);
+		const timeField = container.querySelector('.TripsListItem-time');
+		expect(timeField!!.textContent).toEqual('in 2.8 minutes (12:02)');
 	});
 
 	it('updates the relative departure time each minute', function() {
@@ -48,11 +48,10 @@ describe('TripsListItem', () => {
 			date: dateFromLocalTime(12, 2, 48),
 			type: TimeType.Predicted
 		});
-		const subject = shallow(<TripsListItem trip={trip}/>);
+		const {container} = render(<TripsListItem trip={trip}/>);
 		jasmine.clock().tick(1000 * 60);
-		subject.update();
-		const timeField = subject.find('.TripsListItem-time').at(0);
-		expect(timeField.text()).toEqual('in 1.8 minutes (12:02)');
+		const timeField = container.querySelector('.TripsListItem-time');
+		expect(timeField!!.textContent).toEqual('in 1.8 minutes (12:02)');
 	});
 
 	it('shows an asterisk next to scheduled arrival times', () => {
@@ -60,9 +59,9 @@ describe('TripsListItem', () => {
 			date: dateFromLocalTime(20, 38),
 			type: TimeType.Scheduled
 		});
-		const subject = shallow(<TripsListItem trip={trip}/>);
-		const timeField = subject.find('.TripsListItem-time').at(1);
-		expect(timeField.text()).toEqual('Arrive at 20:38*');
+		const {container} = render(<TripsListItem trip={trip}/>);
+		const timeField = container.querySelectorAll('.TripsListItem-time')[1];
+		expect(timeField.textContent).toEqual('Arrive at 20:38*');
 	});
 
 	it('does not show an asterisk next to predicted arrival times', () => {
@@ -70,9 +69,9 @@ describe('TripsListItem', () => {
 			date: dateFromLocalTime(20, 38),
 			type: TimeType.Predicted
 		});
-		const subject = shallow(<TripsListItem trip={trip}/>);
-		const timeField = subject.find('.TripsListItem-time').at(1);
-		expect(timeField.text()).toEqual('Arrive at 20:38');
+		const {container} = render(<TripsListItem trip={trip}/>);
+		const timeField = container.querySelectorAll('.TripsListItem-time')[1];
+		expect(timeField.textContent).toEqual('Arrive at 20:38');
 	});
 });
 
