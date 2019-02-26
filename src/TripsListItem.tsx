@@ -2,7 +2,7 @@ import * as React from 'react';
 import {TimeType, Trip, tripShape} from "./trips";
 import {formatTime} from "./date";
 import './TripsListItem.css';
-import {useEffect, useState} from "react";
+import {useTime} from "./useTime";
 
 interface Props {
 	trip: Trip;
@@ -10,16 +10,7 @@ interface Props {
 
 const TripsListItem: React.FunctionComponent<Props> = props =>  {
 	const trip = props.trip;
-	// TODO: a useTime hook would be nice
-	const [currentTime, setCurrentTime] = useState(new Date());
-
-	useEffect(() => {
-		const intervalId = setInterval(
-			() => setCurrentTime(new Date())
-			, 1000 * 10
-		);
-		return () => clearInterval(intervalId);
-	}, []);
+	const currentTime = useTime(10 * 1000);
 
 	return (
 		<li className="TripsListItem" key={trip.tripId}>
@@ -34,7 +25,6 @@ const TripsListItem: React.FunctionComponent<Props> = props =>  {
 				{trip.destStop.arrivalTime.type === TimeType.Scheduled ? '*' : ''}
 			</div>
 		</li>
-
 	);
 };
 
