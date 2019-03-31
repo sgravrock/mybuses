@@ -9,7 +9,7 @@
     "testSupport/jsdom.ts",
     "testSupport/promise.js",
     "testSupport/exclude.ts",
-    "testSupport/rtl.ts"
+    "testSupport/enzyme.ts"
   ],
   "stopSpecOnExpectationFailure": false,
   "random": true

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render} from 'react-testing-library'
+import {mount} from 'enzyme'
 import {App} from './App';
 import {
 	arbitraryDestArrivalTime,
@@ -11,7 +11,7 @@ import {
 } from './testSupport/stubs';
 import {DefaultRouterContext} from './routing/default-router';
 import {dateFromLocalTime} from "./testSupport/date";
-import * as tripsListModule from "./TripsList";
+import {TripsList} from "./TripsList";
 
 
 describe('App', () => {
@@ -25,7 +25,6 @@ describe('App', () => {
 
 	it('shows trips for the default route', async () => {
 		jasmine.clock().mockDate(dateFromLocalTime(20, 30));
-		spyOn(tripsListModule, 'TripsList').and.callThrough();
 
 		const trips = [{
 			...arbitraryTrip(),
@@ -54,25 +53,24 @@ describe('App', () => {
 		const mybusesApiClient = {
 			trips: jasmine.createSpy('trips').and.returnValue(tripsPromise)
 		};
-		const {container} = mountRender({mybusesApiClient});
+		const subject = mountRender({mybusesApiClient});
 		expect(mybusesApiClient.trips).toHaveBeenCalledWith();
 		await tripsPromise;
+		subject.update();
 
-		// TODO: maybe don't do this?
-		expect((tripsListModule.TripsList as jasmine.Spy).calls.first().args[0].trips).toEqual(trips);
-
-		const tripsList = container.querySelector('.TripsList');
-		expect(tripsList).toBeTruthy();
-		expect(tripsList!!.textContent).toMatch(
+		const tripsList = subject.find(TripsList);
+		expect(tripsList).toExist();
+		expect(tripsList).toHaveProp('trips', trips);
+		expect(tripsList.text()).toMatch(
 			/D Line from 15th Ave NW & NW Leary Way/
 		);
-		expect(tripsList!!.textContent).toMatch(/in 1\.8 minutes/);
-		expect(tripsList!!.textContent).toMatch(/Arrive at 20:38/);
+		expect(tripsList.text()).toMatch(/in 1\.8 minutes/);
+		expect(tripsList.text()).toMatch(/Arrive at 20:38/);
 	});
 });
 
 function mountRender(props: any) {
-	return render(
+	return mount(
 		<DefaultRouterContext.Provider value={props.mybusesApiClient}>
 			<App/>
 		</DefaultRouterContext.Provider>

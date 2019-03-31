@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render} from 'react-testing-library'
+import {mount} from 'enzyme';
 import {TripsContainer} from './TripsContainer';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
 import {DefaultRouterContext} from "./routing/default-router";
@@ -8,8 +8,8 @@ import {rejected} from "./testSupport/promise";
 
 describe('TripsContainer', () => {
 	it('shows a loading indicator', () => {
-		const {container} = mountRender({});
-		expect(container.textContent).toEqual('Searching for trips...');
+		const subject = mountRender({});
+		expect(subject.text()).toEqual('Searching for trips...');
 	});
 
 	it('fetches trips', () => {
@@ -32,11 +32,12 @@ describe('TripsContainer', () => {
 			const renderProp = jasmine.createSpy('render').and.returnValue(
 				<div className="foo" />
 			);
-			const {container} = mountRender({apiClient, render: renderProp});
+			const subject = mountRender({apiClient, render: renderProp});
 			await promise;
+			subject.update();
 
 			expect(renderProp).toHaveBeenCalledWith(trips);
-			expect(container.querySelector('.foo')).toBeTruthy();
+			expect(subject.find('.foo')).toExist();
 		});
 	});
 
@@ -46,10 +47,10 @@ describe('TripsContainer', () => {
 			const apiClient = {
 				trips: () => promise
 			};
-			const {container} = mountRender({apiClient});
+			const subject = mountRender({apiClient});
 			await rejected(promise);
 
-			expect(container.textContent).toEqual('Unable to find trips.');
+			expect(subject.text()).toEqual('Unable to find trips.');
 		});
 	});
 });
@@ -58,7 +59,7 @@ function mountRender(props: any) {
 	const apiClient = props.apiClient || stubMybusesApiClient();
 	const renderProp = props.render || (() => <div />);
 
-	return render(
+	return mount(
 		<DefaultRouterContext.Provider value={apiClient}>
 			<TripsContainer render={renderProp} />
 		</DefaultRouterContext.Provider>
