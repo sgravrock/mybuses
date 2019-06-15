@@ -8,7 +8,7 @@ interface Props {
 	render: (trips: Trip[]) => JSX.Element;
 }
 
-const TripsContainer: React.FunctionComponent<Props> = props => {
+const TripsLoader: React.FunctionComponent<Props> = props => {
 	const [trips, setTrips] = useState<Trip[] | null>(null);
 	const [loadingFailed, setLoadingFailed] = useState(false);
 	const apiClient = useContext(DefaultRouterContext);
@@ -30,8 +30,8 @@ const TripsContainer: React.FunctionComponent<Props> = props => {
 	}
 };
 
-TripsContainer.propTypes = {
+TripsLoader.propTypes = {
 	render: PropTypes.func.isRequired,
 };
 
-export {TripsContainer};
+export {TripsLoader};

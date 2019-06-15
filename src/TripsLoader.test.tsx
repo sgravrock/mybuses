@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import {TripsContainer} from './TripsContainer';
+import {TripsLoader} from './TripsLoader';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
 import {DefaultRouterContext} from "./routing/default-router";
 import {rejected} from "./testSupport/promise";
 
 
-describe('TripsContainer', () => {
+describe('TripsLoader', () => {
 	it('shows a loading indicator', () => {
 		const subject = mountRender({});
 		expect(subject.text()).toEqual('Searching for trips...');
@@ -61,7 +61,7 @@ function mountRender(props: any) {
 
 	return mount(
 		<DefaultRouterContext.Provider value={apiClient}>
-			<TripsContainer render={renderProp} />
+			<TripsLoader render={renderProp} />
 		</DefaultRouterContext.Provider>
 	);
 }
