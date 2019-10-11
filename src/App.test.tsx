@@ -67,6 +67,27 @@ describe('App', () => {
 		expect(tripsList.text()).toMatch(/in 1\.8 minutes/);
 		expect(tripsList.text()).toMatch(/Arrive at 20:38/);
 	});
+
+	it('reloads trips when the user clicks reload', async () => {
+		jasmine.clock().mockDate(dateFromLocalTime(20, 30));
+
+		const tripsPromise = Promise.resolve([]);
+		const mybusesApiClient = {
+			trips: jasmine.createSpy('trips').and.returnValue(tripsPromise)
+		};
+		const subject = mountRender({mybusesApiClient});
+		expect(mybusesApiClient.trips).toHaveBeenCalledWith();
+		mybusesApiClient.trips.calls.reset();
+		await tripsPromise;
+		subject.update();
+
+		subject.find('button[data-testid="reload"]').simulate('click');
+		subject.update();
+
+		expect(mybusesApiClient.trips).toHaveBeenCalledWith();
+		expect(subject.find(TripsList)).not.toExist();
+		expect(subject.text()).toContain('Searching for trips');
+	});
 });
 
 function mountRender(props: any) {

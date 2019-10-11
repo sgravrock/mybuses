@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import {TripsLoader} from './TripsLoader';
+import {TripsLoader, TripsLoaderChildProps} from './TripsLoader';
 import {dummyPromise, stubMybusesApiClient, arbitraryTrip} from './testSupport/stubs';
 import {DefaultRouterContext} from "./routing/default-router";
 import {rejected} from "./testSupport/promise";
@@ -36,7 +36,10 @@ describe('TripsLoader', () => {
 			await promise;
 			subject.update();
 
-			expect(renderProp).toHaveBeenCalledWith(trips);
+			expect(renderProp).toHaveBeenCalledWith({
+				trips,
+				reload: jasmine.any(Function)
+			});
 			expect(subject.find('.foo')).toExist();
 		});
 	});
@@ -51,6 +54,29 @@ describe('TripsLoader', () => {
 			await rejected(promise);
 
 			expect(subject.text()).toEqual('Unable to find trips.');
+		});
+	});
+
+	describe('When the reload callback is called', () => {
+		it('reloads trips', async function() {
+			const promise = Promise.resolve([]);
+			const apiClient = {
+				trips: jasmine.createSpy('trips').and.returnValue(promise)
+			};
+			let reload: () => void;
+			const renderProp = (props: TripsLoaderChildProps) => {
+				reload = props.reload;
+				return 'some text';
+			};
+			const subject = mountRender({apiClient, render: renderProp});
+			await promise;
+
+			apiClient.trips.calls.reset();
+			reload();
+			subject.update();
+
+			expect(apiClient.trips).toHaveBeenCalledWith();
+			expect(subject.text()).toEqual('Searching for trips...');
 		});
 	});
 });
