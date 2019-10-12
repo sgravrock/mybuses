@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {TripsLoader} from "./TripsLoader";
 import {TripsList} from "./TripsList";
+import './App.css';
 
 const App: React.FunctionComponent<{}> = props => {
 	return (
@@ -8,10 +9,14 @@ const App: React.FunctionComponent<{}> = props => {
 			<TripsLoader
 				render={({trips, reload}) => (
 					<>
-						<button data-testid="reload" onClick={reload}>
-							Reload
-						</button>
-						<TripsList trips={trips}/>
+						<header>
+							<button data-testid="reload" onClick={reload}>
+								Reload
+							</button>
+						</header>
+						<main>
+							<TripsList trips={trips}/>
+						</main>
 					</>
 				)}
 			/>
