@@ -23,7 +23,7 @@
     "@types/react": "^16.8.3",
     "@types/react-dom": "^16.0.6",
     "@types/tmp": "^0.0.33",
-    "enzyme": "^3.9.0",
+    "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "ignore-styles": "^5.0.1",
     "jasmine": "^3.5.0",

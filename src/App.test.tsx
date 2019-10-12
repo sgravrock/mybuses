@@ -12,6 +12,7 @@ import {
 import {DefaultRouterContext} from './routing/default-router';
 import {dateFromLocalTime} from "./testSupport/date";
 import {TripsList} from "./TripsList";
+import {findByText} from "./testSupport/queries";
 
 
 describe('App', () => {
@@ -81,7 +82,7 @@ describe('App', () => {
 		await tripsPromise;
 		subject.update();
 
-		subject.find('button[data-testid="reload"]').simulate('click');
+		findByText(subject, 'button', 'Reload').simulate('click');
 		subject.update();
 
 		expect(mybusesApiClient.trips).toHaveBeenCalledWith();

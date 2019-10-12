@@ -1,14 +1,14 @@
-.App {
+.LoadedTripsView {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 }
 
-.App > header {
+.LoadedTripsView > header {
 	padding: 1em;
 }
 
-.App > main {
+.LoadedTripsView > main {
 	flex: 1;
 	padding: 0 1em 1em 1em;
 	overflow-y: auto;
