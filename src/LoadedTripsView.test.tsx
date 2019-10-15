@@ -5,6 +5,7 @@ import {findByLabelText} from "./testSupport/queries";
 import {TripsList} from "./TripsList";
 import {mount} from "enzyme";
 import {LoadedTripsView} from "./LoadedTripsView";
+import {DisplayFilterProvider} from "./DisplayFilter";
 
 describe('LoadedTripsView', () => {
 	it('filters and unfliters routes', () => {
@@ -45,9 +46,11 @@ interface OptionalProps {
 
 function mountRender(props: OptionalProps) {
 	return mount(
-		<LoadedTripsView
-			trips={props.trips || []}
-			reload={props.reload || (() => {})}
-		/>
+		<DisplayFilterProvider>
+			<LoadedTripsView
+				trips={props.trips || []}
+				reload={props.reload || (() => {})}
+			/>
+		</DisplayFilterProvider>
 	);
 }

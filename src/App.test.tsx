@@ -12,7 +12,8 @@ import {
 import {DefaultRouterContext} from './routing/default-router';
 import {dateFromLocalTime} from "./testSupport/date";
 import {TripsList} from "./TripsList";
-import {findByText} from "./testSupport/queries";
+import {findByLabelText, findByText} from "./testSupport/queries";
+import {Trip} from "./trips";
 
 
 describe('App', () => {
@@ -70,8 +71,6 @@ describe('App', () => {
 	});
 
 	it('reloads trips when the user clicks reload', async () => {
-		jasmine.clock().mockDate(dateFromLocalTime(20, 30));
-
 		const tripsPromise = Promise.resolve([]);
 		const mybusesApiClient = {
 			trips: jasmine.createSpy('trips').and.returnValue(tripsPromise)
@@ -88,6 +87,45 @@ describe('App', () => {
 		expect(mybusesApiClient.trips).toHaveBeenCalledWith();
 		expect(subject.find(TripsList)).not.toExist();
 		expect(subject.text()).toContain('Searching for trips');
+	});
+
+	it('preserves filter settngs across reloads', async () => {
+		const trips: Trip[] = [
+			{
+				...arbitraryTrip(),
+				tripId: '1',
+				route: {
+					...arbitraryRoute(),
+					shortName: '15'
+				}
+			},
+			{
+				...arbitraryTrip(),
+				tripId: '2',
+				route: {
+					...arbitraryRoute(),
+					shortName: 'Not the 15'
+				}
+			},
+		];
+		const tripsPromise = Promise.resolve(trips);
+		const mybusesApiClient = {
+			trips: () => tripsPromise
+		};
+		const subject = mountRender({mybusesApiClient});
+		const checkbox = () => findByLabelText(subject, 'Show only the 15');
+		const tripsList = () => subject.find(TripsList);
+
+		await tripsPromise;
+		subject.update();
+
+		checkbox().simulate('change', {target: {checked: true}});
+
+		findByText(subject, 'button', 'Reload').simulate('click');
+		await tripsPromise;
+		subject.update();
+		expect(checkbox()).toHaveProp('checked', true);
+		expect(tripsList()).toHaveProp('trips', [trips[0]]);
 	});
 });
 
